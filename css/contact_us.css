@@ -1,0 +1,62 @@
+.than-website {
+    margin-top: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 350px;
+    color: #3D464D;
+}
+
+.dieu-huong-va-tieu-de {
+    margin: auto;
+    /* background-color: aqua; */
+    width: 1140px;
+    height: 105px;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 0px 15px 32px;
+}
+
+.dieu-huong-lien-he {
+    margin: 16px 0px 0px;
+    font-size: 14px;
+}
+
+.tieu-de-lien-he {
+    font-size: 20px;
+    padding: 6px 0px 0px;
+}
+
+#sang-phai {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.thong-tin-lien-he {
+    width: 1000px;
+    height: 250px;
+    /* background-color: bisque; */
+    margin: auto;
+    margin-top: 0;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: -5px 0px 8px rgba(0, 0, 0, 0.08), 5px 0px 8px rgba(0, 0, 0, 0.08), 0px 5px 8px rgba(0, 0, 0, 0.08), 0px -5px 8px rgba(0, 0, 0, 0.08);
+}
+
+.PTIT {
+    font-size: 24px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+}
+
+.bang-dia-chi {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0px 15px 24px;
+}
+
+.dia-chi {
+    margin-bottom: 24px;
+}

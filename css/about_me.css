@@ -1,0 +1,109 @@
+.than-website {
+    width: 100%;
+    height: 1227px;
+    margin-top: 0;
+    position: relative;
+    display: flex;
+}
+
+.anh-nen {
+    position: absolute;
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    height: 500px;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.noi-dung-thong-tin {
+    width: 920px;
+    height: 1080px;
+    background-color: #fff;
+    position: relative;
+    margin: auto;
+    padding: 72px 92px 45px;
+    color: #3D464D;
+    text-align: center;
+    box-shadow: -5px 0px 8px rgba(0, 0, 0, 0.1), 5px 0px 8px rgba(0, 0, 0, 0.1), 0px 5px 8px rgba(0, 0, 0, 0.1), 0px -5px 8px rgba(0, 0, 0, 0.1);
+}
+
+.ve-chung-toi {
+    font-size: 36px;
+    margin-bottom: 50px;
+}
+
+.ket-thuc-website {
+    margin-top: 0;
+}
+
+.su-menh {
+    margin-bottom: 50px;
+}
+
+.doi-tac-cua-cong-ty {
+    margin-top: 75px;
+}
+
+.doi-tac-cua-cong-ty-tieu-de {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.slide-show-doi-tac {
+    margin-top: 42px;
+    /* background-color: aqua; */
+    height: 387px;
+    width: 100%;
+}
+
+.slide-show-doi-tac {
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.bang-thanh-phan-slide-show {
+    display: flex;
+    /* height: 380px; */
+    overflow-x: hidden;
+}
+
+.thanh-phan-slide-show {
+    display: flex;
+    flex: 1 0 100%;
+    justify-content: space-around;
+    /* background-color: violet; */
+    /* height: 350px; */
+    /* animation: truotTuPhaiQua ease-in 0.9s forwards; */
+}
+
+.ten-doi-tac {
+    margin-top: 16px;
+}
+
+.bang-nut-chuyen-slide {
+    width: 100px;
+    /* background-color: red; */
+    height: 20px;
+    margin: auto;
+    display: flex;
+    justify-content: space-around;
+}
+
+.nut-chuyen-slide {
+    width: 20px;
+    height: 20px;
+    background-color: #e0e0e0;
+    border-radius: 50%;
+}
+
+@keyframes truotTuPhaiQua {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
