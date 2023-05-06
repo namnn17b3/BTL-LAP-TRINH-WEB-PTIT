@@ -1,0 +1,59 @@
+.than-website {
+    width: 100%;
+    margin-top: 0;
+    position: relative;
+    display: flex;
+    color: #3D464D;
+}
+
+.ket-thuc-website {
+    margin-top: 0px;
+}
+
+.tin-tuc-trai-cay {
+    width: 755px;
+    margin: 0px auto 0px auto;
+}
+
+.mo-dau-tin-tuc-trai-cay {
+    font-size: 20px;
+    margin:  0px 0px 8px;
+}
+
+.ngay-dang-tin-tuc-trai-cay {
+    font-size: 14px;
+    color: #B2B2B2;
+    margin: 0px 0px 30px;
+}
+
+.anh-demo {
+    display: flex;
+    margin: 0px 0px 40px;
+}
+
+img:hover {
+    opacity: 0.8;
+}
+
+p {
+    margin: 0px 0px 24px;
+    line-height: 25px;
+}
+
+.tieu-de-tin-tuc-trai-cay {
+    font-size: 36px;
+    margin: 0px 0px 8px;
+    margin-top: 20px;
+}
+
+ul {
+    margin-top: 16px;
+    padding-left: 40px;
+    width: 690px;
+    margin-bottom: 70px;
+}
+
+li {
+    line-height: 25px;
+    margin: 0px 0px 12px;
+}

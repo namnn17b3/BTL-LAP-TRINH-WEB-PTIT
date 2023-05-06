@@ -1,0 +1,48 @@
+.than-website {
+    width: 100%;
+    height: 400px;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    color: #3D464D;
+}
+
+.not-found-404 {
+    font-size: 80px;
+    padding: 40px 0px 20px;
+    font-weight: 700;
+    color: #ebebeb;
+}
+
+.page-not-found {
+    font-size: 36px;
+    font-weight: 700;
+    margin: 0px 0px 30px;
+}
+
+.chi-tiet-loi-404 {
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.nut-tro-lai-trang-chu {
+    background-color: #ffd333;
+    width: 146px;
+    margin-left: auto;
+    margin-right: auto;
+    text-decoration: none;
+    color: #3D464D;
+    height: 50px;
+    margin-top: 40px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 20px;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.nut-tro-lai-trang-chu:hover {
+    color: #fff;
+    background-color: #3D464D;
+}

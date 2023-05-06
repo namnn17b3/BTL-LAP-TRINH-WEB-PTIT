@@ -1,0 +1,111 @@
+.anh-truot {
+    position: relative;
+    /* background-color: #f0f2f5; */
+    height: 410px;
+    border-radius: 8px;
+    box-shadow: -5px 0px 8px rgba(0, 0, 0, 0.3), 0px -5px 8px rgba(0, 0, 0, 0.3), 5px 0px 8px rgba(0, 0, 0, 0.3), 0px 5px 8px rgba(0, 0, 0, 0.3);
+}
+
+.dai-anh-truot {
+    display: flex;
+    overflow: hidden;
+    transition: all 1s;
+}
+
+.anh-truot-hien-tai {
+    /* flex-grow: 1; */
+    /* display: flex;
+    position: absolute;
+    height: 410px;
+    width: 1110px;
+    z-index: 0; */
+    width: 100%;
+    height: 100%;
+    flex: 1 0 100%;
+    border-radius: 8px;
+    object-fit: cover;
+    object-position: center;
+    /* animation: truotTuTraiQua ease-in 0.9s forwards; */
+}
+
+@keyframes truotTuPhaiQua {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes truotTuTraiQua {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0%);
+    }
+}
+
+.nut-chuyen-slide {
+    position: absolute;
+    color: transparent;
+    width: 48px;
+    height: 48px;
+    font-size: 48px;
+    background-color: transparent;
+    top: 181px;
+    cursor: pointer;
+    background-color: transparent;
+    text-align: center;
+    z-index: 1;
+}
+
+.hien-nut-chuyen-slide {
+    color: #fffac2;
+    opacity: 0.4;
+}
+
+.nut-truoc {
+    left: 0px;
+}
+
+.nut-sau {
+    right: 0px;
+}
+
+.danh-sach-nut-nho {
+    position: absolute;
+    /* background-color: #ffffff; */
+    height: 20px;
+    display: flex;
+    width: 70px;
+    z-index: 1;
+    bottom: 15px;
+    left: 46.85%;
+    border-radius: 8px;
+    justify-content: space-around;
+}
+
+.nut-nho + .nut-nho {
+    margin-left: 4px;
+}
+
+.nut-nho {
+    flex-grow: 1;
+    background-color: #e0e0e0;
+    /* background-color: #ffd333; */
+    border: none;
+    border-radius: 50%;
+    opacity: 0.5;
+    /* cursor: pointer; */
+    transition: all 0.2s;
+}
+
+.ban-chay-nhat {
+ 	display: flex;
+ 	flex-direction: column;
+}
+
+.co-the-ban-thich {
+    display: flex;
+}
