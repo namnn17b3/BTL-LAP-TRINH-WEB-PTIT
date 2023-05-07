@@ -22,16 +22,16 @@
 			<h3 class="thong-tin-muc-con-ket-thuc tieu-de-muc-con-ket-thuc">Thông
 				tin</h3>
 			<div class="thong-tin-muc-con-ket-thuc">
-				<a href="./about_me.html"
+				<a href="./about-me"
 					style="text-decoration: none; color: #212529;">Về chúng tôi</a>
 			</div>
 			<div class="thong-tin-muc-con-ket-thuc">
-				<a href="./dieu_khoan_su_dung.html"
+				<a href="./dieu-khoan-su-dung"
 					style="text-decoration: none; color: #212529;">Điều khoản sử
 					dụng</a>
 			</div>
 			<div class="thong-tin-muc-con-ket-thuc">
-				<a href="./contact_us.html"
+				<a href="./contact-us"
 					style="text-decoration: none; color: #212529;">Liên hệ</a>
 			</div>
 		</div>
@@ -39,17 +39,17 @@
 			<h3 class="thong-tin-muc-con-ket-thuc tieu-de-muc-con-ket-thuc">Hợp
 				tác</h3>
 			<div class="thong-tin-muc-con-ket-thuc">
-				<a href="./chinh_sach_doi_tac.html"
+				<a href="./chinh-sach-doi-tac"
 					style="text-decoration: none; color: #212529;">Chính sách đối
 					tác</a>
 			</div>
 			<div class="thong-tin-muc-con-ket-thuc">
-				<a href="./chinh_sach_chi_nhanh.html"
+				<a href="./chinh-sach-chi-nhanh"
 					style="text-decoration: none; color: #212529;">Chính sách chi
 					nhánh</a>
 			</div>
 			<div class="thong-tin-muc-con-ket-thuc">
-				<a href="./chinh_sach_cong_tac_vien.html"
+				<a href="./chinh-sach-cong-tac-vien"
 					style="text-decoration: none; color: #212529;">Chính sách cộng
 					tác viên</a>
 			</div>

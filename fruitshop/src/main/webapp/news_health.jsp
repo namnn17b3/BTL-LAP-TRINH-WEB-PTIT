@@ -60,5 +60,11 @@
     <jsp:include page="footer.jsp"/>
     
     <script src="./js/common.js"></script>
+    <script type="text/javascript">
+    	setTimeout(() => {
+			document.querySelector('.load-truoc-khi-vao-trang').style.display = 'none';
+			document.querySelector('.phan-duoc-hien-thi').style.display = 'block';
+		}, 1200);
+    </script>
 </body>
 </html>

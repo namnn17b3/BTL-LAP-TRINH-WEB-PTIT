@@ -1,0 +1,48 @@
+.than-website {
+    margin-top: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 415px;
+    color: #3D464D;
+}
+
+.dieu-huong-va-tieu-de {
+    margin-left: auto;
+    margin-right: auto;
+    width: 1140px;
+    padding: 0px 15px 32px;
+}
+
+.dieu-huong-cua-hang {
+    padding: 16px 0px 0px;
+}
+
+.tieu-de-cua-hang {
+    padding: 6px 0px 0px;
+}
+
+#sang-phai {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.thong-tin-cua-hang {
+    margin-left: auto;
+    margin-right: auto;
+    width: 1140px;
+    padding: 32px;
+    box-shadow: -5px 0px 8px rgba(0, 0, 0, 0.08), 5px 0px 8px rgba(0, 0, 0, 0.08), 0px 5px 8px rgba(0, 0, 0, 0.08), 0px -5px 8px rgba(0, 0, 0, 0.08);
+}
+
+.tieu-de-cua-hang {
+    font-size: 24px;
+}
+
+.thong-tin-chi-tiet-cua-hang {
+    margin: 0px 0px 16px;
+}
+
+.chi-tiet-cua-hang  + .chi-tiet-cua-hang{
+    margin-top: 4px;
+}

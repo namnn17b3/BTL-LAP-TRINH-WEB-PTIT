@@ -86,8 +86,8 @@
 					</div>
 				</div>
 				<a href="./about_me.html" class="lua-chon-chinh gioi-thieu">Giới
-					thiệu</a> <a href="./shop_detail.html" class="lua-chon-chinh cua-hang">Cửa
-					hàng</a> <a href="./contact_us.html" class="lua-chon-chinh lien-he">Liên
+					thiệu</a> <a href="./shop-detail" class="lua-chon-chinh cua-hang">Cửa
+					hàng</a> <a href="./contact-us" class="lua-chon-chinh lien-he">Liên
 					hệ</a>
 			</div>
 			<div class="thanh-lua-chon-khac">

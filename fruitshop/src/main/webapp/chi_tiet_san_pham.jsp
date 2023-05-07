@@ -47,7 +47,7 @@
 			
 			int choose = (Integer) request.getAttribute("choose");
 			int trang = (Integer) request.getAttribute("page");
-			int soLuongPage = soLuongDanhGiaTheoPhanLoai / 5 + 1;
+			int soLuongPage = (soLuongDanhGiaTheoPhanLoai % 5 != 0) ? soLuongDanhGiaTheoPhanLoai / 5 + 1 : soLuongDanhGiaTheoPhanLoai / 5;
 			
 			int pageBegin = trang - (trang - 1) % 5;
 			int pageEnd = (pageBegin + 4 > soLuongPage) ? soLuongPage : (pageBegin + 4);
@@ -319,12 +319,16 @@
     			document.querySelector('.phan-duoc-hien-thi').style.display = 'block';
     			setTimeout(() => {        			
 	    			window.scrollTo(0, 780.7999877929688);
+	    			thanhGachChan.style.animation = 'sangPhai 0s ease forwards';
+	        		moTaChiTietSanPham.style.display = 'none';
+	        		moTaChiTietSanPham.style.animation = '';
+	        		danhGiaSanPham.style.display = 'block';
+	        		xetGiaTriChoKeyframes(danhGiaSanPham, 'keoDai2');
+	        		danhGiaSanPham.style.animation = 'keoDai2 1.2s ease';
+	        		hienTaiDuocClick = 1;
         		}, 0);
     		}, 1200);
-    		danhGiaSanPham.style.display = 'block';
-    		moTaChiTietSanPham.style.display = 'none';
-    		thanhGachChan.style.animation = 'sangPhai 0.2s ease forwards';
-    		hienTaiDuocClick = 1;
+    		
     	</script>
     </c:if>
     <c:if test="${forcusDanhGia == 0}">
