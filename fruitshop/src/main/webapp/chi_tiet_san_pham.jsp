@@ -4,7 +4,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix='c'%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,32 +22,50 @@
 	<jsp:include page="header.jsp"/>
     <!-- than website -->
     <div class="than-website">
-		<c:if test="${loadPage == 1}">	
-			<jsp:include page="load_page.jsp"/>
-		</c:if>
+		<jsp:include page="load_page.jsp"/>
 		<%
 			SanPham sanPham = (SanPham) request.getAttribute("sanPham");
 			String tinhTrang = (sanPham.getSoLuongNhap() > sanPham.getSoLuongBan()) ? "Còn hàng" : "Hết hàng";
 			
-			int soLuongDanhGia = (Integer) request.getAttribute("soLuongDanhGia");
+			int soLuongTatCa = (Integer) request.getAttribute("soLuongTatCa");
 			int soLuongNamSao = (Integer) request.getAttribute("soLuongNamSao");
 			int soLuongBonSao = (Integer) request.getAttribute("soLuongBonSao");
 			int soLuongBaSao = (Integer) request.getAttribute("soLuongBaSao");
 			int soLuongHaiSao = (Integer) request.getAttribute("soLuongHaiSao");
 			int soLuongMotSao = (Integer) request.getAttribute("soLuongMotSao");
 			int soLuongKhongSao = (Integer) request.getAttribute("soLuongKhongSao");
+			int soLuongDanhGiaTheoPhanLoai = (Integer) request.getAttribute("soLuongDanhGiaTheoPhanLoai");
 			
-			float phanTramNamSao = (float)soLuongNamSao / soLuongDanhGia * 100;
-			float phanTramBonSao = (float)soLuongBonSao / soLuongDanhGia * 100;
-			float phanTramBaSao = (float)soLuongBaSao / soLuongDanhGia * 100;
-			float phanTramHaiSao = (float)soLuongHaiSao / soLuongDanhGia * 100;
-			float phanTramMotSao = (float)soLuongMotSao / soLuongDanhGia * 100;
-			float phanTramKhongSao = (float)soLuongKhongSao / soLuongDanhGia * 100;
+			float phanTramNamSao = (float)soLuongNamSao / soLuongTatCa * 100;
+			float phanTramBonSao = (float)soLuongBonSao / soLuongTatCa * 100;
+			float phanTramBaSao = (float)soLuongBaSao / soLuongTatCa * 100;
+			float phanTramHaiSao = (float)soLuongHaiSao / soLuongTatCa * 100;
+			float phanTramMotSao = (float)soLuongMotSao / soLuongTatCa * 100;
+			float phanTramKhongSao = (float)soLuongKhongSao / soLuongTatCa * 100;
 			
 			List<DonHang> currentListDanhGia = (List<DonHang>) request.getAttribute("currentListDanhGia");
 			
+			int choose = (Integer) request.getAttribute("choose");
 			int trang = (Integer) request.getAttribute("page");
+			int soLuongPage = soLuongDanhGiaTheoPhanLoai / 5 + 1;
+			
+			int pageBegin = trang - (trang - 1) % 5;
+			int pageEnd = (pageBegin + 4 > soLuongPage) ? soLuongPage : (pageBegin + 4);
+			int prePage = (trang - 1 >= 1) ? (trang - 1) : trang;
+			int nextPage = (trang + 1 <= soLuongPage) ? (trang + 1) : trang;
+			String currentPhanLoai = (choose == -1) ? "phan-loai-tat-ca" : ("phan-loai-"+choose+"-sao");
 		%>
+		<style>
+			#<%=currentPhanLoai%> {
+				background-color: #f0f8ff;
+				border: 1px solid #1a94ff;
+				color: #0b74e5;
+			}
+			
+			.sao-phan-loai {
+				color: #fdd836;
+			}
+		</style>
     	<div class="phan-duoc-hien-thi">
     		<div class="phan-1">
 			    <div class="thong-tin-chung-cua-san-pham anh-san-pham"">
@@ -55,7 +73,7 @@
 			    </div>
 			    <div class="thong-tin-chung-cua-san-pham">
 				    <h1 class="ten-san-pham"><%=sanPham.getTen()%></h1>
-				    <div class="so-sao-va-luot-ban"><%=sanPham.getSoSaoVote()%><i class="fa-solid fa-star" id="sao"></i>(<%=soLuongDanhGia%> đánh giá) | Đã bán <%=sanPham.getSoLuongBan() %></div>
+				    <div class="so-sao-va-luot-ban"><%=sanPham.getSoSaoVote()%><i class="fa-solid fa-star" id="sao"></i>(<%=soLuongTatCa%> đánh giá) | Đã bán <%=sanPham.getSoLuongBan() %></div>
 				    <div class="mo-ta-ngan-gon-san-pham">
 				    	<div class="thong-tin-ngan-gon" style="flex: 2">Đơn vị:<p style="color: #28a745; display: inline;"><%=sanPham.getDonVi()%></p></div>
 				    	<div class="thong-tin-ngan-gon" style="flex: 3">Nguồn gốc:<p style="color: #28a745; display: inline;"><%=sanPham.getNguonGoc()%></p></div>
@@ -119,14 +137,14 @@
     				<div class="boc-ben-ngoai-danh-gia-san-pham">
 	    				<h3 id="danh-gia-nhan-xet-title">Đánh Giá - Nhận Xét Từ Khách Hàng</h3>
 	    				<c:choose>
-		    				<c:when test="<%=soLuongDanhGia > 0%>">
+		    				<c:when test="<%=soLuongTatCa > 0%>">
 		    					<div class="thong-ke-danh-gia-va-cac-danh-gia">
 			    					<div class="thong-ke-danh-gia">
 			    						<div class="thong-ke-sao-co-ban">
 				    						<h1 class="trung-binh-so-sao"><%=sanPham.getSoSaoVote()%></h1>
 				    						<div class="sao-icon-va-tong-so-luong-danh-gia">
 				    							<i class="fa-solid fa-star" id="sao-icon"></i>
-				    							<p id="tong-so-luong-danh-gia"><%=soLuongDanhGia%> đánh giá</p>
+				    							<p id="tong-so-luong-danh-gia"><%=soLuongTatCa%> đánh giá</p>
 				    						</div>
 			    						</div>
 				    					<div class="thong-ke-chi-tiet">
@@ -201,33 +219,33 @@
 			    					<div class="cac-danh-gia">
 			    						<div class="phan-loai-danh-gia-theo-sao">
 			    							<div class="label-phan-loai-danh-gia">Phân loại theo:</div>
-			    							<div class="nut-phan-loai">
+			    							<div class="nut-phan-loai" id="phan-loai-tat-ca">
 			    								<a href="./chi-tiet-san-pham?id=<%=sanPham.getId()%>&choose=-1&page=1"></a>
 			    								Tất cả
 			    							</div>
-			    							<div class="nut-phan-loai">
+			    							<div class="nut-phan-loai" id="phan-loai-5-sao">
 			    								<a href="./chi-tiet-san-pham?id=<%=sanPham.getId()%>&choose=5&page=1"></a>
-			    								5 <i class="fa-solid fa-star"></i>
+			    								5 <i class="fa-solid fa-star sao-phan-loai"></i>
 			    							</div>
-			    							<div class="nut-phan-loai">
+			    							<div class="nut-phan-loai" id="phan-loai-4-sao">
 			    								<a href="./chi-tiet-san-pham?id=<%=sanPham.getId()%>&choose=4&page=1"></a>
-			    								4 <i class="fa-solid fa-star"></i>
+			    								4 <i class="fa-solid fa-star sao-phan-loai"></i>
 			    							</div>
-			    							<div class="nut-phan-loai">
+			    							<div class="nut-phan-loai" id="phan-loai-3-sao">
 			    								<a href="./chi-tiet-san-pham?id=<%=sanPham.getId()%>&choose=3&page=1"></a>
-			    								3 <i class="fa-solid fa-star"></i>
+			    								3 <i class="fa-solid fa-star sao-phan-loai"></i>
 			    							</div>
-			    							<div class="nut-phan-loai">
+			    							<div class="nut-phan-loai" id="phan-loai-2-sao">
 			    								<a href="./chi-tiet-san-pham?id=<%=sanPham.getId()%>&choose=2&page=1"></a>
-			    								2 <i class="fa-solid fa-star"></i>
+			    								2 <i class="fa-solid fa-star sao-phan-loai"></i>
 			    							</div>
-			    							<div class="nut-phan-loai">
+			    							<div class="nut-phan-loai" id="phan-loai-1-sao">
 			    								<a href="./chi-tiet-san-pham?id=<%=sanPham.getId()%>&choose=1&page=1"></a>
-			    								1 <i class="fa-solid fa-star"></i>
+			    								1 <i class="fa-solid fa-star sao-phan-loai"></i>
 			    							</div>
-			    							<div class="nut-phan-loai">
+			    							<div class="nut-phan-loai" id="phan-loai-0-sao">
 			    								<a href="./chi-tiet-san-pham?id=<%=sanPham.getId()%>&choose=0&page=1"></a>
-			    								0 <i class="fa-solid fa-star"></i>
+			    								0 <i class="fa-solid fa-star sao-phan-loai"></i>
 			    							</div>
 			    						</div>
 			    						<div class="danh-sach-danh-gia-trong-trang">
@@ -252,6 +270,32 @@
 			    								</div>   							
 			    							</c:forEach>
 			    						</div>
+			    						<div class="boc-ben-ngoai-phan-trang-danh-gia">
+				    						<div class="phan-trang-danh-gia">
+				    							<div class="nut-thao-tac-voi-trang thanh-phan-phan-trang-danh-gia">
+				    								<a href="./chi-tiet-san-pham?id=<%=sanPham.getId()%>&choose=<%=choose%>&page=<%=prePage%>"></a>
+				    								<i class="fa-solid fa-chevron-left" style="margin: auto"></i>
+				    							</div>
+				    							<c:forEach begin="<%=pageBegin%>" end="<%=pageEnd%>" var="index">
+				    								<c:if test="${index == page}">
+					    								<div class="trang-hien-tai thanh-phan-phan-trang-danh-gia">
+					    									<a href="./chi-tiet-san-pham?id=<%=sanPham.getId()%>&choose=<%=choose%>&page=${index}"></a>
+					    									<p style="margin: auto; font-weight: 600">${index}</p>
+					    								</div>
+				    								</c:if>
+				    								<c:if test="${index != page}">
+					    								<div class="khong-phai-trang-hien-tai thanh-phan-phan-trang-danh-gia">
+					    									<a href="./chi-tiet-san-pham?id=<%=sanPham.getId()%>&choose=<%=choose%>&page=${index}"></a>
+					    									<p style="margin: auto; font-weight: 600">${index}</p>
+					    								</div>
+				    								</c:if>
+				    							</c:forEach>
+				    							<div class="nut-thao-tac-voi-trang thanh-phan-phan-trang-danh-gia">
+													<a href="./chi-tiet-san-pham?id=<%=sanPham.getId()%>&choose=<%=choose%>&page=<%=nextPage%>"></a>
+					    							<i class="fa-solid fa-chevron-right" style="margin: auto"></i>
+				    							</div>
+				    						</div>
+			    						</div>
 			    					</div>
 		    					</div>
 		    				</c:when>
@@ -268,5 +312,28 @@
 	<jsp:include page="footer.jsp"/>
     <script src="./js/common.js"></script>
     <script src="./js/chi_tiet_san_pham.js"></script>
+    <c:if test="${forcusDanhGia == 1}">
+    	<script type="text/javascript">
+    		setTimeout(() => {
+    			document.querySelector('.load-truoc-khi-vao-trang').style.display = 'none';
+    			document.querySelector('.phan-duoc-hien-thi').style.display = 'block';
+    			setTimeout(() => {        			
+	    			window.scrollTo(0, 780.7999877929688);
+        		}, 0);
+    		}, 1200);
+    		danhGiaSanPham.style.display = 'block';
+    		moTaChiTietSanPham.style.display = 'none';
+    		thanhGachChan.style.animation = 'sangPhai 0.2s ease forwards';
+    		hienTaiDuocClick = 1;
+    	</script>
+    </c:if>
+    <c:if test="${forcusDanhGia == 0}">
+    	<script type="text/javascript">
+    	setTimeout(() => {
+			document.querySelector('.load-truoc-khi-vao-trang').style.display = 'none';
+			document.querySelector('.phan-duoc-hien-thi').style.display = 'block';
+		}, 1200);
+    	</script>
+    </c:if>
 </body>
 </html>

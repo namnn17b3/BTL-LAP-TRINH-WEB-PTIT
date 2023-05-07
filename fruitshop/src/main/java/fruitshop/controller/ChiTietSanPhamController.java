@@ -31,7 +31,7 @@ public class ChiTietSanPhamController extends HttpServlet {
 			SanPham sanPham = sanPhamService.getSanPhamById(id);
 			req.setAttribute("sanPham", sanPham);
 			
-			int soLuongDanhGia = donHangService.getAllSoLuongDanhGiaChoSanPhamByIdAndStar(id, -1);
+			int soLuongTatCa = donHangService.getAllSoLuongDanhGiaChoSanPhamByIdAndStar(id, -1);
 			int soLuongNamSao = donHangService.getAllSoLuongDanhGiaChoSanPhamByIdAndStar(id, 5);
 			int soLuongBonSao = donHangService.getAllSoLuongDanhGiaChoSanPhamByIdAndStar(id, 4);
 			int soLuongBaSao = donHangService.getAllSoLuongDanhGiaChoSanPhamByIdAndStar(id, 3);
@@ -46,12 +46,37 @@ public class ChiTietSanPhamController extends HttpServlet {
 			if (req.getParameter("page") != null) {
 				page = Integer.parseInt(req.getParameter("page"));
 			}
+			if (req.getParameter("choose") != null && req.getParameter("page") != null) {
+				req.setAttribute("forcusDanhGia", 1);
+			}
+			else {
+				req.setAttribute("forcusDanhGia", 0);
+			}
 			List<DonHang> currentListDanhGia = donHangService.getDanhGiaChoSanPhamByIdAndPageChoose(id, choose, page);
+			int soLuongDanhGiaTheoPhanLoai = soLuongTatCa;
+			if (choose == 5) {
+				soLuongDanhGiaTheoPhanLoai = soLuongNamSao;
+			}
+			else if (choose == 4) {
+				soLuongDanhGiaTheoPhanLoai = soLuongBonSao;
+			}
+			else if (choose == 3) {
+				soLuongDanhGiaTheoPhanLoai = soLuongBaSao;
+			}
+			else if (choose == 2) {
+				soLuongDanhGiaTheoPhanLoai = soLuongHaiSao;
+			}
+			else if (choose == 1) {
+				soLuongDanhGiaTheoPhanLoai = soLuongMotSao;
+			}
+			else if (choose == 0) {
+				soLuongDanhGiaTheoPhanLoai = soLuongKhongSao;
+			}
 			if (currentListDanhGia.size() == 0) {
 				req.getRequestDispatcher("./khong_tim_thay_san_pham.jsp").forward(req, resp);
 			}
 			else {
-				req.setAttribute("soLuongDanhGia", soLuongDanhGia);
+				req.setAttribute("soLuongTatCa", soLuongTatCa);
 				req.setAttribute("soLuongNamSao", soLuongNamSao);
 				req.setAttribute("soLuongBonSao", soLuongBonSao);
 				req.setAttribute("soLuongBaSao", soLuongBaSao);
@@ -59,8 +84,8 @@ public class ChiTietSanPhamController extends HttpServlet {
 				req.setAttribute("soLuongMotSao", soLuongMotSao);
 				req.setAttribute("soLuongKhongSao", soLuongKhongSao);
 				req.setAttribute("page", page);
-				
-				req.setAttribute("loadPage", 1);
+				req.setAttribute("choose", choose);
+				req.setAttribute("soLuongDanhGiaTheoPhanLoai", soLuongDanhGiaTheoPhanLoai);
 				req.setAttribute("currentListDanhGia", currentListDanhGia);
 				
 				req.getRequestDispatcher("./chi_tiet_san_pham.jsp").forward(req, resp);

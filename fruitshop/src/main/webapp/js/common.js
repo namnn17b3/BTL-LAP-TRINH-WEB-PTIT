@@ -174,9 +174,3 @@ catch(exception) {}
 //         document.querySelector('.buoc-phai-dang-nhap').style.display = 'none';
 //     }, 500);
 // }
-
-// Xu ly load truoc khi vao trang
-setTimeout(() => {
-	document.querySelector('.load-truoc-khi-vao-trang').style.display = 'none';
-	document.querySelector('.phan-duoc-hien-thi').style.display = 'block';
-}, 2000);

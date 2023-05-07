@@ -82,3 +82,9 @@ setInterval(() => {
         daiAnhTruot.appendChild(anhtruot);
     }, 900);
 }, 5000);
+
+// Xu ly load truoc khi vao trang
+setTimeout(() => {
+	document.querySelector('.load-truoc-khi-vao-trang').style.display = 'none';
+	document.querySelector('.phan-duoc-hien-thi').style.display = 'block';
+}, 1200);

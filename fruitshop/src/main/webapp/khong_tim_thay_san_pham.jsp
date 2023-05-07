@@ -34,5 +34,11 @@
     <script src="./js/common.js"></script>
     <script src="./js/home.js"></script>
     <script src="./js/san_pham.js"></script>
+    <script type="text/javascript">
+	   	setTimeout(() => {
+			document.querySelector('.load-truoc-khi-vao-trang').style.display = 'none';
+			document.querySelector('.phan-duoc-hien-thi').style.display = 'block';
+		}, 1200);
+    </script>
 </body>
 </html>
