@@ -270,40 +270,49 @@
 			    								</div>   							
 			    							</c:forEach>
 			    						</div>
-			    						<div class="boc-ben-ngoai-phan-trang-danh-gia">
-				    						<div class="phan-trang-danh-gia">
-				    							<div class="nut-thao-tac-voi-trang thanh-phan-phan-trang-danh-gia">
-				    								<a href="./chi-tiet-san-pham?id=<%=sanPham.getId()%>&choose=<%=choose%>&page=<%=prePage%>"></a>
-				    								<i class="fa-solid fa-chevron-left" style="margin: auto"></i>
-				    							</div>
-				    							<c:forEach begin="<%=pageBegin%>" end="<%=pageEnd%>" var="index">
-				    								<c:if test="${index == page}">
-					    								<div class="trang-hien-tai thanh-phan-phan-trang-danh-gia">
-					    									<a href="./chi-tiet-san-pham?id=<%=sanPham.getId()%>&choose=<%=choose%>&page=${index}"></a>
-					    									<p style="margin: auto; font-weight: 600">${index}</p>
-					    								</div>
-				    								</c:if>
-				    								<c:if test="${index != page}">
-					    								<div class="khong-phai-trang-hien-tai thanh-phan-phan-trang-danh-gia">
-					    									<a href="./chi-tiet-san-pham?id=<%=sanPham.getId()%>&choose=<%=choose%>&page=${index}"></a>
-					    									<p style="margin: auto; font-weight: 600">${index}</p>
-					    								</div>
-				    								</c:if>
-				    							</c:forEach>
-				    							<div class="nut-thao-tac-voi-trang thanh-phan-phan-trang-danh-gia">
-													<a href="./chi-tiet-san-pham?id=<%=sanPham.getId()%>&choose=<%=choose%>&page=<%=nextPage%>"></a>
-					    							<i class="fa-solid fa-chevron-right" style="margin: auto"></i>
-				    							</div>
+			    						<c:if test="<%=soLuongDanhGiaTheoPhanLoai > 0%>">
+				    						<div class="boc-ben-ngoai-phan-trang-danh-gia">
+					    						<div class="phan-trang-danh-gia">
+					    							<div class="nut-thao-tac-voi-trang thanh-phan-phan-trang-danh-gia">
+					    								<a href="./chi-tiet-san-pham?id=<%=sanPham.getId()%>&choose=<%=choose%>&page=<%=prePage%>"></a>
+					    								<i class="fa-solid fa-chevron-left" style="margin: auto"></i>
+					    							</div>
+					    							<c:forEach begin="<%=pageBegin%>" end="<%=pageEnd%>" var="index">
+					    								<c:if test="${index == page}">
+						    								<div class="trang-hien-tai thanh-phan-phan-trang-danh-gia">
+						    									<a href="./chi-tiet-san-pham?id=<%=sanPham.getId()%>&choose=<%=choose%>&page=${index}"></a>
+						    									<p style="margin: auto; font-weight: 600">${index}</p>
+						    								</div>
+					    								</c:if>
+					    								<c:if test="${index != page}">
+						    								<div class="khong-phai-trang-hien-tai thanh-phan-phan-trang-danh-gia">
+						    									<a href="./chi-tiet-san-pham?id=<%=sanPham.getId()%>&choose=<%=choose%>&page=${index}"></a>
+						    									<p style="margin: auto; font-weight: 600">${index}</p>
+						    								</div>
+					    								</c:if>
+					    							</c:forEach>
+					    							<div class="nut-thao-tac-voi-trang thanh-phan-phan-trang-danh-gia">
+														<a href="./chi-tiet-san-pham?id=<%=sanPham.getId()%>&choose=<%=choose%>&page=<%=nextPage%>"></a>
+						    							<i class="fa-solid fa-chevron-right" style="margin: auto"></i>
+					    							</div>
+					    						</div>
 				    						</div>
-			    						</div>
+			    						</c:if>
 			    					</div>
 		    					</div>
 		    				</c:when>
 		    				
 		    				<c:otherwise>
 		    					<jsp:include page="khong_co_danh_gia.jsp"/>
+		    					<script type="text/javascript">
+		    						document.querySelector('.chua-co-danh-gia-nao-cho-san-pham-nay').innerText = 'Chưa có đánh giá nào cho sản phẩm này';
+		    					</script>
 		    				</c:otherwise>
 	    				</c:choose>
+	    				
+	    				<c:if test="<%=soLuongDanhGiaTheoPhanLoai == 0 && soLuongTatCa > 0%>">
+	    					<jsp:include page="khong_co_danh_gia.jsp"/>
+	    				</c:if>
 	    			</div>
     			</div>
     		</div>

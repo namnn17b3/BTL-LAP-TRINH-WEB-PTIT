@@ -92,7 +92,9 @@ public class SanPhamService implements ISanPhamService {
 			);
 			ppst.setInt(1, id);
 			ResultSet res = ppst.executeQuery();
+			boolean tonTaiSanPham = false;
 			while (res.next()) {
+				tonTaiSanPham = true;
 				sanPham.setId(id);
 				sanPham.setTen(res.getString("ten"));
 				sanPham.setDonVi(res.getString("don_vi"));
@@ -107,6 +109,9 @@ public class SanPhamService implements ISanPhamService {
 				sanPham.setAnh(res.getString("anh"));
 				sanPham.setSoLuongBan(res.getInt("so_luong_ban"));
 				sanPham.setSoSaoVote(res.getFloat("so_sao_vote"));
+			}
+			if (tonTaiSanPham == false) {
+				return null;
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

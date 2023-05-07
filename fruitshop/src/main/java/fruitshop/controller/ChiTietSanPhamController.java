@@ -29,6 +29,10 @@ public class ChiTietSanPhamController extends HttpServlet {
 		else {
 			int id = Integer.parseInt(req.getParameter("id"));
 			SanPham sanPham = sanPhamService.getSanPhamById(id);
+			if (sanPham == null) {
+				req.getRequestDispatcher("./khong_tim_thay_san_pham.jsp").forward(req, resp);
+				return;
+			}
 			req.setAttribute("sanPham", sanPham);
 			
 			int soLuongTatCa = donHangService.getAllSoLuongDanhGiaChoSanPhamByIdAndStar(id, -1);
@@ -72,24 +76,19 @@ public class ChiTietSanPhamController extends HttpServlet {
 			else if (choose == 0) {
 				soLuongDanhGiaTheoPhanLoai = soLuongKhongSao;
 			}
-			if (currentListDanhGia.size() == 0) {
-				req.getRequestDispatcher("./khong_tim_thay_san_pham.jsp").forward(req, resp);
-			}
-			else {
-				req.setAttribute("soLuongTatCa", soLuongTatCa);
-				req.setAttribute("soLuongNamSao", soLuongNamSao);
-				req.setAttribute("soLuongBonSao", soLuongBonSao);
-				req.setAttribute("soLuongBaSao", soLuongBaSao);
-				req.setAttribute("soLuongHaiSao", soLuongHaiSao);
-				req.setAttribute("soLuongMotSao", soLuongMotSao);
-				req.setAttribute("soLuongKhongSao", soLuongKhongSao);
-				req.setAttribute("page", page);
-				req.setAttribute("choose", choose);
-				req.setAttribute("soLuongDanhGiaTheoPhanLoai", soLuongDanhGiaTheoPhanLoai);
-				req.setAttribute("currentListDanhGia", currentListDanhGia);
-				
-				req.getRequestDispatcher("./chi_tiet_san_pham.jsp").forward(req, resp);
-			}
+			req.setAttribute("soLuongTatCa", soLuongTatCa);
+			req.setAttribute("soLuongNamSao", soLuongNamSao);
+			req.setAttribute("soLuongBonSao", soLuongBonSao);
+			req.setAttribute("soLuongBaSao", soLuongBaSao);
+			req.setAttribute("soLuongHaiSao", soLuongHaiSao);
+			req.setAttribute("soLuongMotSao", soLuongMotSao);
+			req.setAttribute("soLuongKhongSao", soLuongKhongSao);
+			req.setAttribute("page", page);
+			req.setAttribute("choose", choose);
+			req.setAttribute("soLuongDanhGiaTheoPhanLoai", soLuongDanhGiaTheoPhanLoai);
+			req.setAttribute("currentListDanhGia", currentListDanhGia);
+			
+			req.getRequestDispatcher("./chi_tiet_san_pham.jsp").forward(req, resp);
 		}
 	}
 }
