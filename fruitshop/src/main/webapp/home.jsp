@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="fruitshop.model.SanPham"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -52,67 +53,27 @@
 	                <div class="nut-nho"></div>
 	            </div>
 	        </div>
+	        <%
+	        	List<SanPham> listSanPham = new ArrayList<>();
+	        	int soLuongDongSanPham = 0;
+	        %>
 	        <h2 class="than-website tieu-de-ban-chay-nhat">Bán chạy nhất</h2>
 	        <div class="than-website ban-chay-nhat">
-	        	<%List<SanPham> listSanPhamOderBySoLuongBan = (List<SanPham>) request.getAttribute("listSanPhamOderBySoLuongBan");%>
-	        	<div class="dong-san-pham">
-		        	<c:forEach items="<%=listSanPhamOderBySoLuongBan%>" var="sp" begin="0" end="3">
-		        		<div class="san-pham" title="${sp.ten}">
-		        			<a href="./chi-tiet-san-pham?id=${sp.id}" class="link-to-chi-tiet-san-pham"></a>
-			        		<img alt="" src="${sp.anh}" class="anh-san-pham"/>
-			        		<h3 class="ten-san-pham">${sp.ten}</h3>
-			        		<div class="so-sao-va-so-luong-da-ban">${sp.soSaoVote}<i class="fa-solid fa-star" id="sao"></i> | Đã bán ${sp.soLuongBan}</div>
-			        		<h3 class="gia-san-pham">${sp.tienTrenDonVi} VNĐ<p style="color: #3d464d; display: inline">/${sp.donVi}</p></h3>
-				        	<div class="tuy-chon-san-pham">
-				        		<form action="./them-vao-gio-hang?id=${sp.id}" method="post" style="display: flex; margin-left: auto; margin-right: auto;">
-				        			<input type="hidden" name="so-luong" value="1">
-				        			<button class="them-vao-gio-hang"><p style="margin: auto">Thêm vào giỏ</p></button>
-				        		</form>
-				        		<a class="mua-ngay" href="./mua-ngay"><p style="margin: auto">Mua ngay</p></a>
-				        	</div>
-		        		</div>
-		        	</c:forEach>
-	        	</div>
-	        	<div class="dong-san-pham">
-		        	<c:forEach items="<%=listSanPhamOderBySoLuongBan%>" var="sp" begin="4" end="7">
-		        		<div class="san-pham" title="${sp.ten}">
-		        			<a href="./chi-tiet-san-pham?id=${sp.id}" class="link-to-chi-tiet-san-pham"></a>
-			        		<img alt="" src="${sp.anh}" class="anh-san-pham"/>
-			        		<h3 class="ten-san-pham">${sp.ten}</h3>
-			        		<div class="so-sao-va-so-luong-da-ban">${sp.soSaoVote}<i class="fa-solid fa-star" id="sao"></i> | Đã bán ${sp.soLuongBan}</div>
-			        		<h3 class="gia-san-pham">${sp.tienTrenDonVi} VNĐ<p style="color: #3d464d; display: inline">/${sp.donVi}</p></h3>
-			        		<div class="tuy-chon-san-pham">
-				        		<form action="./them-vao-gio-hang?id=${sp.id}" method="post" style="display: flex; margin-left: auto; margin-right: auto;">
-				        			<input type="hidden" name="so-luong" value="1">
-				        			<button class="them-vao-gio-hang"><p style="margin: auto">Thêm vào giỏ</p></button>
-				        		</form>
-				        		<a class="mua-ngay" href="./mua-ngay"><p style="margin: auto">Mua ngay</p></a>
-				        	</div>
-		        		</div>
-		        	</c:forEach>
-	        	</div>
+	        	<%
+	        		listSanPham = (List<SanPham>) request.getAttribute("listSanPhamOderBySoLuongBan");
+	        		soLuongDongSanPham = (listSanPham.size() % 4 == 0) ? listSanPham.size() / 4 : listSanPham.size() / 4 + 1;
+	        		pageContext.setAttribute("listSanPham", listSanPham, PageContext.REQUEST_SCOPE);
+	        	%>
+	        	<jsp:include page="./single_page_san_pham.jsp"/>
 	        </div>
 	        <h2 class="than-website tieu-de-co-the-ban-thich">Có thể bạn thích</h2>
 	        <div class="than-website co-the-ban-thich">
-	        	<%List<SanPham> listSanPhamOrderBySoSao = (List<SanPham>) request.getAttribute("listSanPhamOrderBySoSao");%>
-	        	<div class="dong-san-pham">
-		        	<c:forEach items="<%=listSanPhamOrderBySoSao%>" var="sp" begin="0" end="3">
-		        		<div class="san-pham" title="${sp.ten}">
-		        			<a href="./chi-tiet-san-pham?id=${sp.id}" class="link-to-chi-tiet-san-pham"></a>
-			        		<img alt="" src="${sp.anh}" class="anh-san-pham"/>
-			        		<h3 class="ten-san-pham">${sp.ten}</h3>
-			        		<div class="so-sao-va-so-luong-da-ban">${sp.soSaoVote}<i class="fa-solid fa-star" id="sao"></i> | Đã bán ${sp.soLuongBan}</div>
-			        		<h3 class="gia-san-pham">${sp.tienTrenDonVi} VNĐ<p style="color: #3d464d; display: inline">/${sp.donVi}</p></h3>
-				        	<div class="tuy-chon-san-pham">
-				        		<form action="./them-vao-gio-hang?id=${sp.id}" method="post" style="display: flex; margin-left: auto; margin-right: auto;">
-				        			<input type="hidden" name="so-luong" value="1">
-				        			<button class="them-vao-gio-hang"><p style="margin: auto">Thêm vào giỏ</p></button>
-				        		</form>
-				        		<a class="mua-ngay" href="./mua-ngay"><p style="margin: auto">Mua ngay</p></a>
-				        	</div>
-		        		</div>
-		        	</c:forEach>
-	        	</div>
+	        	<%
+	        		listSanPham = (List<SanPham>) request.getAttribute("listSanPhamOrderBySoSao");
+	        		soLuongDongSanPham = (listSanPham.size() % 4 == 0) ? listSanPham.size() / 4 : listSanPham.size() / 4 + 1;
+	        		pageContext.setAttribute("listSanPham", listSanPham, PageContext.REQUEST_SCOPE);
+	        	%>
+	        	<jsp:include page="./single_page_san_pham.jsp"/>
 	        </div>
 	        <h2 class="than-website tieu-de-tin-tuc">Tin tức và sức khỏe</h2>
 	        <div class="than-website tin-tuc">

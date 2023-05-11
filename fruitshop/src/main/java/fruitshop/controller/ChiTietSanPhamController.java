@@ -30,6 +30,8 @@ public class ChiTietSanPhamController extends HttpServlet {
 			int id = Integer.parseInt(req.getParameter("id"));
 			SanPham sanPham = sanPhamService.getSanPhamById(id);
 			if (sanPham == null) {
+				System.out.println(id);
+				System.out.println("ok san pham null");
 				req.getRequestDispatcher("./khong_tim_thay_san_pham.jsp").forward(req, resp);
 				return;
 			}

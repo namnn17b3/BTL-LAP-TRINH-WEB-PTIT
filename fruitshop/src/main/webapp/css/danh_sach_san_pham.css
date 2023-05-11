@@ -1,0 +1,58 @@
+.than-website {
+	margin-bottom: 50px;
+}
+
+.boc-ben-ngoai-danh-sach-san-pham {
+	margin-bottom: 40px;
+}
+
+#danh-sach-san-pham {
+	margin-top: 10px;
+	margin-bottom: 50px;
+	font-size: 25.6px;
+}
+
+.boc-ben-ngoai-phan-trang-san-pham {
+	display: flex;
+	flex-direction: row-reverse;
+}
+
+.phan-trang-san-pham {
+	display: flex;
+}
+
+.thanh-phan-phan-trang-san-pham + .thanh-phan-phan-trang-san-pham {
+	margin-left: 10px;
+}
+
+.thanh-phan-phan-trang-san-pham {
+	width: 36px;
+	height: 36px;
+	display: flex;
+	cursor: pointer;
+}
+
+.trang-hien-tai {
+	border-radius: 50%;
+	background-color: orange;
+	color: #fff;
+	display: flex;
+}
+
+.nut-thao-tac-voi-trang {
+	color: #c4c4cf;
+}
+
+.nut-thao-tac-voi-trang:hover {
+	color: #3d464d;
+}
+
+.khong-phai-trang-hien-tai {
+	border-radius: 50%;
+	display: flex;
+	background-color: #f5f5fa;
+}
+
+.khong-phai-trang-hien-tai:hover {
+	background-color: rgba(255, 211, 51, 0.3);
+}

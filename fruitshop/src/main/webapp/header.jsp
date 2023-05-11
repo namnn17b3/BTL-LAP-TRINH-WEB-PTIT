@@ -23,7 +23,7 @@
 						style="font-size: 14px;"></i>
 					<div class="bang-danh-muc-con">
 						<div class="danh-muc-con tat-ca">
-							<a href="#" style="text-decoration: none; color: #212529;">Tất
+							<a href="./danh-sach-san-pham?loai=tat-ca" style="text-decoration: none; color: #212529;">Tất
 								cả</a>
 						</div>
 						<div class="danh-muc-con qua-tang-cao-cap">
@@ -31,64 +31,69 @@
 								style="font-size: 14px;"></i>
 							<div class="bang-qua-tang-cao-cap">
 								<div class="muc-con-qua-tang-cap-cap">
-									<a href="#" style="text-decoration: none; color: #212529;">GIỎ
+									<a href="./danh-sach-san-pham?loai=gio-qua-tang" style="text-decoration: none; color: #212529;">GIỎ
 										QUÀ TẶNG TRÁI CÂY</a>
 								</div>
-								<div class="muc-con-qua-tang-cap-cap">MUA NGUYÊN THÙNG</div>
+								<div class="muc-con-qua-tang-cap-cap">
+									<a href="./danh-sach-san-pham?loai=mua-nguyen-thung" style="text-decoration: none; color: #212529;">
+										MUA NGUYÊN THÙNG
+									</a>
+								</div>
 							</div>
 						</div>
 						<div class="danh-muc-con trai-cay-tuoi">
 							Trái cây tươi <i class="fa-sharp fa-solid fa-chevron-right"
 								style="font-size: 14px;"></i>
 							<div class="bang-trai-cay-tuoi">
-								<div class="muc-con-trai-cay-tuoi trai-cay-nam-phi">
-									<a href="#" style="text-decoration: none; color: #212529;">Trái
+								<!-- <div class="muc-con-trai-cay-tuoi trai-cay-nam-phi">
+									<a href="./danh-sach-san-pham?loai=trai-cay-nam-phi" style="text-decoration: none; color: #212529;">Trái
 										cây Nam Phi</a>
-								</div>
+								</div> -->
 								<div class="muc-con-trai-cay-tuoi mua-le">
-									<a href="#" style="text-decoration: none; color: #212529;">MUA
+									<a href="./danh-sach-san-pham?loai=mua-le" style="text-decoration: none; color: #212529;">MUA
 										LẺ</a>
 								</div>
 								<div class="muc-con-trai-cay-tuoi combo">
-									<a href="#" style="text-decoration: none; color: #212529;">COMBO</a>
+									<a href="./danh-sach-san-pham?loai=combo" style="text-decoration: none; color: #212529;">COMBO</a>
 								</div>
-								<div class="muc-con-trai-cay-tuoi trai-cay-nhat">
-									<a href="#" style="text-decoration: none; color: #212529;">Trái
-										cây Nhật</a>
+								<div class="muc-con-trai-cay-tuoi trai-cay-nam-phi">
+									<a href="./danh-sach-san-pham?loai=trai-cay-nam-phi" style="text-decoration: none; color: #212529;">Trái
+										cây Nam Phi</a>
 								</div>
 								<div class="muc-con-trai-cay-tuoi trai-cay-han-quoc">
-									<a href="#" style="text-decoration: none; color: #212529;">Trái
+									<a href="./danh-sach-san-pham?loai=trai-cay-han-quoc" style="text-decoration: none; color: #212529;">Trái
 										cây Hàn Quốc</a>
 								</div>
 								<div class="muc-con-trai-cay-tuoi trai-cay-uc">
-									<a href="#" style="text-decoration: none; color: #212529;">Trái
+									<a href="./danh-sach-san-pham?loai=trai-cay-uc" style="text-decoration: none; color: #212529;">Trái
 										cây Úc</a>
 								</div>
 								<div class="muc-con-trai-cay-tuoi trai-cay-new-zealand">
-									<a href="#" style="text-decoration: none; color: #212529;">Trái
+									<a href="./danh-sach-san-pham?loai=trai-cay-newzealand" style="text-decoration: none; color: #212529;">Trái
 										cây New Zealand</a>
 								</div>
 								<div class="muc-con-trai-cay-tuoi trai-cay-my">
-									<a href="#" style="text-decoration: none; color: #212529;">Trái
+									<a href="./danh-sach-san-pham?loai=trai-cay-my" style="text-decoration: none; color: #212529;">Trái
 										cây Mỹ</a>
 								</div>
-								<div class="muc-con-trai-cay-tuoi trai-cay-cac-nuoc-khac">
-									<a href="#" style="text-decoration: none; color: #212529;">Trái
-										cây các nước khác</a>
+								<div class="muc-con-trai-cay-tuoi trai-cay-chile">
+									<a href="./danh-sach-san-pham?loai=trai-cay-chile" style="text-decoration: none; color: #212529;">Trái
+										cây Chile</a>
 								</div>
-								<div class="muc-con-trai-cay-tuoi trai-cay-ai-cap">
-									<a href="#" style="text-decoration: none; color: #212529;">Trái
-										cây Ai Cập</a>
+								<div class="muc-con-trai-cay-tuoi trai-cay-cac-nuoc-khac">
+									<a href="./danh-sach-san-pham?loai=trai-cay-nuoc-khac" style="text-decoration: none; color: #212529;">Trái
+										cây các nước khác</a>
 								</div>
 							</div>
 						</div>
-						<div class="danh-muc-con do-kho">Đồ khô</div>
+						<div class="danh-muc-con do-kho">
+							<a href="./danh-sach-san-pham?loai=do-kho" style="text-decoration: none; color: #212529;">Đồ khô</a>
+						</div>
 					</div>
 				</div>
-				<a href="./about_me.html" class="lua-chon-chinh gioi-thieu">Giới
-					thiệu</a> <a href="./shop-detail" class="lua-chon-chinh cua-hang">Cửa
-					hàng</a> <a href="./contact-us" class="lua-chon-chinh lien-he">Liên
-					hệ</a>
+				<a href="./about-me" class="lua-chon-chinh gioi-thieu">Giới thiệu</a>
+				<a href="./shop-detail" class="lua-chon-chinh cua-hang">Cửa hàng</a>
+				<a href="./contact-us" class="lua-chon-chinh lien-he">Liên hệ</a>
 			</div>
 			<div class="thanh-lua-chon-khac">
 				<div class="lua-chon-khac dang-nhap">
@@ -120,16 +125,25 @@
 						<i class="fa-solid fa-cart-shopping"></i>
 					</div>
 				</div>
-				<form action="#" method="post" class="nhap-ten-san-pham">
-					<input type="text" placeholder="Tên sản phẩm..."
-						class="o-nhap-ten-san-pham">
+				<form action="./search" method="post" class="nhap-ten-san-pham">
+					<input type="text" placeholder="Tên sản phẩm..." class="o-nhap-ten-san-pham" name="ten-san-pham" value="${tenSanPham}">
 					<div id="tim-kiem-icon">
 						<i class="fa-solid fa-magnifying-glass" style="margin: auto;"></i>
-						<button
-							style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; bottom: 0; right: 0; opacity: 0;">1</button>
+						<button style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; bottom: 0; right: 0; opacity: 0;">1</button>
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+	[...document.querySelectorAll('.muc-con-qua-tang-cap-cap')]
+	.concat([...document.querySelectorAll('.muc-con-trai-cay-tuoi')])
+	.concat([...document.querySelectorAll('.tat-ca')])
+	.concat([...document.querySelectorAll('.do-kho')])
+	.forEach(item => {
+		item.onclick = () => {
+			item.firstElementChild.click();
+		}
+	});
+</script>

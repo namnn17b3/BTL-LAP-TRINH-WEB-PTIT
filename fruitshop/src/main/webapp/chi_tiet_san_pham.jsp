@@ -51,8 +51,8 @@
 			
 			int pageBegin = trang - (trang - 1) % 5;
 			int pageEnd = (pageBegin + 4 > soLuongPage) ? soLuongPage : (pageBegin + 4);
-			int prePage = (trang - 1 >= 1) ? (trang - 1) : trang;
-			int nextPage = (trang + 1 <= soLuongPage) ? (trang + 1) : trang;
+			int prePage = trang - 1;
+			int nextPage = trang + 1;
 			String currentPhanLoai = (choose == -1) ? "phan-loai-tat-ca" : ("phan-loai-"+choose+"-sao");
 		%>
 		<style>
@@ -73,7 +73,12 @@
 			    </div>
 			    <div class="thong-tin-chung-cua-san-pham">
 				    <h1 class="ten-san-pham"><%=sanPham.getTen()%></h1>
-				    <div class="so-sao-va-luot-ban"><%=sanPham.getSoSaoVote()%><i class="fa-solid fa-star" id="sao"></i>(<%=soLuongTatCa%> đánh giá) | Đã bán <%=sanPham.getSoLuongBan() %></div>
+				    <c:if test="<%=soLuongTatCa > 0%>">
+					    <div class="so-sao-va-luot-ban"><%=sanPham.getSoSaoVote()%><i class="fa-solid fa-star" id="sao"></i>(<%=soLuongTatCa%> đánh giá) | Đã bán <%=sanPham.getSoLuongBan() %></div>
+				    </c:if>
+				    <c:if test="<%=soLuongTatCa == 0%>">
+					    <div class="so-sao-va-luot-ban">Chưa có đánh giá | Đã bán <%=sanPham.getSoLuongBan() %></div>
+				    </c:if>
 				    <div class="mo-ta-ngan-gon-san-pham">
 				    	<div class="thong-tin-ngan-gon" style="flex: 2">Đơn vị:<p style="color: #28a745; display: inline;"><%=sanPham.getDonVi()%></p></div>
 				    	<div class="thong-tin-ngan-gon" style="flex: 3">Nguồn gốc:<p style="color: #28a745; display: inline;"><%=sanPham.getNguonGoc()%></p></div>
@@ -273,10 +278,12 @@
 			    						<c:if test="<%=soLuongDanhGiaTheoPhanLoai > 0%>">
 				    						<div class="boc-ben-ngoai-phan-trang-danh-gia">
 					    						<div class="phan-trang-danh-gia">
-					    							<div class="nut-thao-tac-voi-trang thanh-phan-phan-trang-danh-gia">
-					    								<a href="./chi-tiet-san-pham?id=<%=sanPham.getId()%>&choose=<%=choose%>&page=<%=prePage%>"></a>
-					    								<i class="fa-solid fa-chevron-left" style="margin: auto"></i>
-					    							</div>
+					    							<c:if test="<%=prePage > 0%>">
+						    							<div class="nut-thao-tac-voi-trang thanh-phan-phan-trang-danh-gia">
+						    								<a href="./chi-tiet-san-pham?id=<%=sanPham.getId()%>&choose=<%=choose%>&page=<%=prePage%>"></a>
+						    								<i class="fa-solid fa-chevron-left" style="margin: auto"></i>
+						    							</div>
+					    							</c:if>
 					    							<c:forEach begin="<%=pageBegin%>" end="<%=pageEnd%>" var="index">
 					    								<c:if test="${index == page}">
 						    								<div class="trang-hien-tai thanh-phan-phan-trang-danh-gia">
@@ -291,10 +298,12 @@
 						    								</div>
 					    								</c:if>
 					    							</c:forEach>
-					    							<div class="nut-thao-tac-voi-trang thanh-phan-phan-trang-danh-gia">
-														<a href="./chi-tiet-san-pham?id=<%=sanPham.getId()%>&choose=<%=choose%>&page=<%=nextPage%>"></a>
-						    							<i class="fa-solid fa-chevron-right" style="margin: auto"></i>
-					    							</div>
+					    							<c:if test="<%=nextPage <= soLuongPage%>">
+						    							<div class="nut-thao-tac-voi-trang thanh-phan-phan-trang-danh-gia">
+															<a href="./chi-tiet-san-pham?id=<%=sanPham.getId()%>&choose=<%=choose%>&page=<%=nextPage%>"></a>
+							    							<i class="fa-solid fa-chevron-right" style="margin: auto"></i>
+						    							</div>
+					    							</c:if>
 					    						</div>
 				    						</div>
 			    						</c:if>

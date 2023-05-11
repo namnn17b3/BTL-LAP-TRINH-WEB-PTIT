@@ -24,9 +24,9 @@
 		<jsp:include page="load_page.jsp"/>
     	<div class="phan-duoc-hien-thi">
 			<div class="not-found-404">Oop! Thao tác thất bại</div>
-			<div class="page-not-found">Không tìm thấy sản phẩm nào</div>
-			<p class="chi-tiet-loi-404">Chúng tôi không thể tìm thấy sản phẩm mà bạn yêu cầu</p>
-			<p class="chi-tiet-loi-404">Trở lại trang chủ và thử yêu cầu một sản phẩm khác</p>
+			<div class="page-not-found">Không tìm thấy sản phẩm hoặc yêu cầu</div>
+			<p class="chi-tiet-loi-404">Chúng tôi không thể tìm thấy sản phẩm hoặc xử lý yêu cầu của bạn</p>
+			<p class="chi-tiet-loi-404">Trở lại trang chủ và thử một sản phẩm khác hoặc một yêu cầu khác</p>
 			<a href="./home" class="nut-tro-lai-trang-chu">Trở lại trang chủ</a>
 		</div>
     </div>

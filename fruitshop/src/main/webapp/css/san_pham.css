@@ -1,5 +1,5 @@
 .dong-san-pham + .dong-san-pham {
-	margin-top: 20px;
+	margin-top: 30px;
 }
 
 .dong-san-pham {
@@ -11,8 +11,7 @@
 }
 
 .san-pham {
-	flex-direction: column;
-	width: 268px;
+	width: 262.5px;
 	background-color: #fff;
 	border-radius: 8px;
 	box-shadow: -5px 0px 5px rgba(0, 0, 0, 0.1), 5px 0px 5px rgba(0, 0, 0, 0.1), 0px 5px 5px rgba(0, 0, 0, 0.1), 0px -5px 5px rgba(0, 0, 0, 0.1);
