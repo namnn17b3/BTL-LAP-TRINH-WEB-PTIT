@@ -48,37 +48,39 @@
        	<div class="boc-ben-ngoai-danh-sach-san-pham">       	
        		<jsp:include page="./single_page_san_pham.jsp"/>
        	</div>
-       	<c:set var="currentPage" value="<%=currentPage%>"></c:set>
-       	<div class="boc-ben-ngoai-phan-trang-san-pham">
-			<div class="phan-trang-san-pham">
-				<c:if test="<%=prePage > 0%>">
-					<div class="nut-thao-tac-voi-trang thanh-phan-phan-trang-san-pham">
-						<a href="./danh-sach-san-pham?loai=${loaiSanPham}&page=<%=prePage%>"></a>
-						<i class="fa-solid fa-chevron-left" style="margin: auto"></i>
-					</div>
-				</c:if>
-				<c:forEach begin="<%=pageBegin%>" end="<%=pageEnd%>" var="index">
-					<c:if test="${index == currentPage}">
-						<div class="trang-hien-tai thanh-phan-phan-trang-san-pham">
-							<a href="./danh-sach-san-pham?loai=${loaiSanPham}&page=${index}"></a>
-							<p style="margin: auto; font-weight: 600">${index}</p>
+       	<c:if test="<%=soLuongPage > 1%>">
+	       	<c:set var="currentPage" value="<%=currentPage%>"></c:set>
+	       	<div class="boc-ben-ngoai-phan-trang-san-pham">
+				<div class="phan-trang-san-pham">
+					<c:if test="<%=prePage > 0%>">
+						<div class="nut-thao-tac-voi-trang thanh-phan-phan-trang-san-pham">
+							<a href="./danh-sach-san-pham?loai=${loaiSanPham}&page=<%=prePage%>"></a>
+							<i class="fa-solid fa-chevron-left" style="margin: auto"></i>
 						</div>
 					</c:if>
-					<c:if test="${index != currentPage}">
-						<div class="khong-phai-trang-hien-tai thanh-phan-phan-trang-san-pham">
-							<a href="./danh-sach-san-pham?loai=${loaiSanPham}&page=${index}"></a>
-							<p style="margin: auto; font-weight: 600">${index}</p>
+					<c:forEach begin="<%=pageBegin%>" end="<%=pageEnd%>" var="index">
+						<c:if test="${index == currentPage}">
+							<div class="trang-hien-tai thanh-phan-phan-trang-san-pham">
+								<a href="./danh-sach-san-pham?loai=${loaiSanPham}&page=${index}"></a>
+								<p style="margin: auto; font-weight: 600">${index}</p>
+							</div>
+						</c:if>
+						<c:if test="${index != currentPage}">
+							<div class="khong-phai-trang-hien-tai thanh-phan-phan-trang-san-pham">
+								<a href="./danh-sach-san-pham?loai=${loaiSanPham}&page=${index}"></a>
+								<p style="margin: auto; font-weight: 600">${index}</p>
+							</div>
+						</c:if>
+					</c:forEach>
+					<c:if test="<%=nextPage <= soLuongPage%>">
+						<div class="nut-thao-tac-voi-trang thanh-phan-phan-trang-san-pham">
+							<a href="./danh-sach-san-pham?loai=${loaiSanPham}&page=<%=nextPage%>"></a>
+							<i class="fa-solid fa-chevron-right" style="margin: auto"></i>
 						</div>
 					</c:if>
-				</c:forEach>
-				<c:if test="<%=nextPage <= soLuongPage%>">
-					<div class="nut-thao-tac-voi-trang thanh-phan-phan-trang-san-pham">
-						<a href="./danh-sach-san-pham?loai=${loaiSanPham}&page=<%=nextPage%>"></a>
-						<i class="fa-solid fa-chevron-right" style="margin: auto"></i>
-					</div>
-				</c:if>
+				</div>
 			</div>
-		</div>
+       	</c:if>
     </div>
     
 	<jsp:include page="./footer.jsp"/>

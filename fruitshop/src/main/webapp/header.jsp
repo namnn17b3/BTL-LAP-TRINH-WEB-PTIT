@@ -102,10 +102,8 @@
 					</div>
 					<div class="bang-dang-nhap">
 						<div class="dn">
-							<a href="./login.html"
-								style="text-decoration: none; color: #212529; width: 80%;">Đăng
-								nhập</a> <i class="fa-solid fa-right-to-bracket"
-								style="color: #3D464D; font-size: 20px; paddng-top: 0;"></i>
+							<a href="./login" style="text-decoration: none; color: #212529; width: 80%;">Đăng nhập</a>
+							<i class="fa-solid fa-right-to-bracket" style="color: #3D464D; font-size: 20px; paddng-top: 0;"></i>
 						</div>
 					</div>
 				</div>
@@ -129,7 +127,7 @@
 					<input type="text" placeholder="Tên sản phẩm..." class="o-nhap-ten-san-pham" name="ten-san-pham" value="${tenSanPham}">
 					<div id="tim-kiem-icon">
 						<i class="fa-solid fa-magnifying-glass" style="margin: auto;"></i>
-						<button style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; bottom: 0; right: 0; opacity: 0;">1</button>
+						<button style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; bottom: 0; right: 0; opacity: 0; cursor: pointer">1</button>
 					</div>
 				</form>
 			</div>

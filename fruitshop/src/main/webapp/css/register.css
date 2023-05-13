@@ -1,0 +1,385 @@
+body {
+    background-color: #fff;
+}
+
+.thong-bao {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 3;
+    display: flex;
+    animation: truotTuTrenXuong linear 0.5s;
+    will-change: opacity, transform;
+}
+
+@keyframes truotTuTrenXuong {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes truotTuDuoiLen {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-100%);
+    }
+}
+
+.thong-bao-ve-viec {
+    width: 550px;
+    height: 360px;
+    background-color: #fff;
+    margin: auto;
+    border-radius: 8px;
+    transform-origin: center;
+    animation: xuatHienTuTamRa ease 0.5s;
+    display: none;
+    flex-direction: column;
+}
+
+@keyframes xuatHienTuTamRa {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+.tieu-de-thong-bao {
+    width: 100%;
+    height: 80px;
+    background-color: #3D464D;
+    border-radius: 8px 8px 0px 0px;
+    color: #fff;
+    display: flex;
+}
+
+#info-icon {
+    color: #00d0ea;
+    background-color: #fff;
+    border-radius: 50%;
+}
+
+.noi-dung-thong-bao {
+    width: 100%;
+    height: 220px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.doan-van-thong-bao {
+    margin-top: 30px;
+}
+
+.thoi-gian {
+	margin-bottom: 20px;
+	color: #f61d1d;
+}
+
+#code {
+	width: 300px;
+	height: 35px;
+	margin-left: auto;
+	margin-right: auto;
+	border: 3px solid #ffd333;
+	outline-style: none;
+	border-radius: 5px;
+	font-size: 20px;
+	text-align: center;
+	margin-bottom: 25px;
+}
+
+.chi-tiet-doan-van-thong-bao {
+    padding-bottom: 8px;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.bang-nut-thao-tac {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#nut-huy-bo {
+    margin-left: 20px;
+    outline: none;
+    background-color: #ffd333;
+    width: 110px;
+    height: 40px;
+    display: flex;
+    border-radius: 6px;
+    color: #3D464D;
+    cursor: pointer;
+}
+
+#huy-bo- {
+    margin: auto;
+}
+
+#nut-huy-bo:hover {
+    background-color: #3D464D;
+    color: #fff;
+}
+
+#nut-ok {
+    text-decoration: none;
+    color: #3D464D;
+    background-color: #ffd333;
+    width: 110px;
+    height: 40px;
+    display: flex;
+    border-radius: 6px;
+    outline-style: none;
+    border: none;
+    cursor: pointer;
+}
+
+#nut-ok:hover {
+    background-color: #3D464D;
+    color: #fff;
+}
+
+.than-website {
+    width: 100%;
+    height: 650px;
+    display: flex;
+    background-image: url(./../img/background.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+}
+
+.form-dang-ki {
+    width: 850px;
+    height: 600px;
+    background-color: #f6e4e4;
+    margin: auto;
+    padding: 32px;
+    border-radius: 6px;
+    box-shadow: 0px -5px 8px rgba(0, 0, 0, 0.1), 5px 0px 8px rgba(0, 0, 0, 0.1), 0px 5px 8px rgba(0, 0, 0, 0.1), -5px 0px 8px rgba(0, 0, 0, 0.1);
+}
+
+.ten-form {
+    color: #3D464D;
+    margin-bottom: 28px;
+    font-size: 28px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.thong-tin-dang-ki {
+	display: flex;
+}
+
+.phan-thong-tin {
+	flex: 7;
+	margin-right: 25px;
+}
+
+.ten {
+    width: 100%;
+    height: 66px;
+    margin-bottom: 24px;
+    position: relative;
+}
+
+.email {
+    width: 100%;
+    height: 66px;
+    margin-bottom: 24px;
+    position: relative;
+}
+
+.mat-khau {
+    width: 100%;
+    height: 89.2px;
+    margin-bottom: 24px;
+    position: relative;
+}
+
+.nhap-lai-mat-khau {
+    width: 100%;
+    height: 66px;
+    margin-bottom: 24px;
+    position: relative;
+}
+
+input[type=password]::-ms-reveal,
+input[type=password]::-ms-clear
+{
+    display: none;
+}
+
+.fa-eye, .fa-eye-slash {
+    position: absolute;
+    top: 39%;
+    right: 17px;
+    color: lightgrey;
+    cursor: pointer;
+}
+
+.ten-input {
+    color: #3D464D;
+    margin-bottom: 4px;
+    font-size: 16px;
+}
+
+input[id="ten"],
+input[id="email"],
+input[id="mat-khau"],
+input[id="nhap-lai-mat-khau"]
+{
+    padding: 6px 12px;
+    width: 100%;
+    height: 38px;
+    outline-style: none;
+    font-size: 15px;
+}
+
+input[id="ten"]:hover,
+input[id="email"]:hover,
+input[id="mat-khau"]:hover,
+input[id="nhap-lai-mat-khau"]:hover
+{
+    border: 3px solid rgba(26, 102, 255, 0.5);
+    border-radius: 5px;
+}
+
+.nut-dang-ki {
+    background-color: #ffd333;
+    color: #3D464D;
+    outline-style: none;
+    border: none;
+    text-align: center;
+    font-size: 16px;
+    width: 118.35px;
+    height: 38px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.nut-dang-ki:hover {
+    color: #fff;
+    background-color: #3D464D;
+}
+
+.nut-dang-ki:hover {
+    color: #fff;
+    background-color: #3D464D;
+}
+
+.ket-thuc-website {
+    margin-top: 0;
+}
+
+.canh-bao-invalid {
+    position: absolute;
+    left: 10%;
+    top: calc(93% + 10px);
+    z-index: 1;
+    will-change: opacity, transform;
+    animation: moDan ease-in 3s 1s forwards;
+}
+
+@keyframes moDan {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+.canh-bao-invalid::before {
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 0;
+    border: 10px solid;
+    border-color: transparent transparent #fff transparent;
+    top: -19px;
+    left: 5%;
+}
+
+.canh-bao {
+    display: flex;
+    width: 150px;
+    height: 50px;
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: -5px 0px 8px rgba(0, 0, 0, 0.1), 0px 5px 8px rgba(0, 0, 0, 0.1), 5px 0px 8px rgba(0, 0, 0, 0.1);
+}
+
+.doan-van-canh-bao {
+    margin-left: 10px;  
+    margin-top: auto;
+    margin-right: auto;
+    margin-bottom: auto;
+    color: rgb(246, 29, 29)
+}
+
+.fa-circle-exclamation {
+    font-size: 20px;
+    margin-top: auto;
+    margin-right: 0;
+    margin-bottom: auto;
+    margin-left: 10px;
+    color: orange;
+}
+
+.phan-anh {
+	flex: 3;
+	display: flex;
+	flex-direction: column;
+}
+
+.anh-dai-dien {	
+	width: 100%;
+	border-radius: 50%;
+	position: relative;
+	cursor: pointer;
+	border: 3px solid #ffd333;
+}
+
+#anh-upload {
+	width: 100%;
+	height: 100%;
+	border-radius: 50%
+}
+
+.doi-anh-dai-dien {
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	background: #efece8;
+	font-size: 16px;
+	position: absolute;
+	display: flex;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	color: black;
+	opacity: 0;
+	will-change: opacity;
+}
+
+.doi-anh-dai-dien:hover {
+	opacity: 0.8;
+}
