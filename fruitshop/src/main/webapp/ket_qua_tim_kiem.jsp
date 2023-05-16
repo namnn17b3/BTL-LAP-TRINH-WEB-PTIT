@@ -34,12 +34,12 @@
         <%
         	List<SanPham> listSanPham = new ArrayList<>();
         	int soLuongDongSanPham = 0;
-       		listSanPham = (List<SanPham>) request.getAttribute("listSanPham");
+       		listSanPham = (List<SanPham>) session.getAttribute("listSanPham");
        		soLuongDongSanPham = (listSanPham.size() % 4 == 0) ? listSanPham.size() / 4 : listSanPham.size() / 4 + 1;
        		pageContext.setAttribute("listSanPham", listSanPham, PageContext.REQUEST_SCOPE);
-       		int soLuongSanPhamAll = (int) request.getAttribute("soLuongSanPhamAll");
+       		int soLuongSanPhamAll = (int) session.getAttribute("soLuongSanPhamAll");
        		int soLuongPage = (soLuongSanPhamAll % 12 == 0) ? soLuongSanPhamAll / 12 : soLuongSanPhamAll / 12 + 1;
-       		int currentPage = (int) request.getAttribute("page");
+       		int currentPage = (int) session.getAttribute("page");
        		int prePage = currentPage - 1;
        		int nextPage = currentPage + 1;
        		int pageBegin = currentPage - (currentPage - 1) % 5;

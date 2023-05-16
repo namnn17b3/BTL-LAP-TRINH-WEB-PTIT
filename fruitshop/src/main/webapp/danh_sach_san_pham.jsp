@@ -22,9 +22,7 @@
 	</style>
 </head>
 <body>
-	<%
-		
-	%>
+	
 	<jsp:include page="./header.jsp"/>
 	<jsp:include page="./load_page.jsp"/>
 	

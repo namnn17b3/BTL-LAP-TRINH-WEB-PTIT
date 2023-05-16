@@ -248,6 +248,7 @@ input[id="nhap-lai-mat-khau"]
     height: 38px;
     outline-style: none;
     font-size: 15px;
+    border-radius: 6px;
 }
 
 input[id="ten"]:hover,
@@ -256,7 +257,7 @@ input[id="mat-khau"]:hover,
 input[id="nhap-lai-mat-khau"]:hover
 {
     border: 3px solid rgba(26, 102, 255, 0.5);
-    border-radius: 5px;
+    border-radius: 6px;
 }
 
 .nut-dang-ki {
@@ -279,7 +280,24 @@ input[id="nhap-lai-mat-khau"]:hover
     background-color: #3D464D;
 }
 
-.nut-dang-ki:hover {
+.quay-lai-trang-chu {
+	background-color: #ffd333;
+    color: #3D464D;
+    outline-style: none;
+    border: none;
+    text-align: center;
+    font-size: 16px;
+    width: 118.35px;
+    height: 38px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    cursor: pointer;
+    border-radius: 5px;
+    display: flex;
+    margin-left: 15px;
+}
+
+.quay-lai-trang-chu:hover {
     color: #fff;
     background-color: #3D464D;
 }
@@ -382,4 +400,20 @@ input[id="nhap-lai-mat-khau"]:hover
 
 .doi-anh-dai-dien:hover {
 	opacity: 0.8;
+}
+
+.go-anh-dai-dien {
+	margin: 40px auto 0px auto;
+	width: 135px;
+	height: 40px;
+	font-weight: 600;
+	background-color: #ffd333;
+	display: flex;
+	border-radius: 6px;
+	cursor: pointer; 
+}
+
+.go-anh-dai-dien:hover {
+	background-color: #3d464d;
+	color: #fff;
 }

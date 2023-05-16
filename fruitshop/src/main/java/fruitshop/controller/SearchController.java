@@ -8,9 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import fruitshop.dao.SanPhamDao;
+import fruitshop.dao.impl.SanPhamDaoImpl;
 import fruitshop.model.SanPham;
-import fruitshop.service.SanPhamService;
 
 @WebServlet("/search")
 public class SearchController extends HttpServlet {
@@ -18,7 +20,17 @@ public class SearchController extends HttpServlet {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private SanPhamService sanPhamService = new SanPhamService();
+	private static final SanPhamDao sanPhamDao = new SanPhamDaoImpl();
+	
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		HttpSession session = req.getSession();
+		if (session.getAttribute("listSanPham") == null) {
+			req.getRequestDispatcher("./khong_tim_thay_san_pham.jsp").forward(req, resp);
+			return;
+		}
+		req.getRequestDispatcher("./ket_qua_tim_kiem.jsp").forward(req, resp);
+	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -34,17 +46,18 @@ public class SearchController extends HttpServlet {
 				return;
 			}
 		}
-		List<SanPham> listSanPham = sanPhamService.searchSanPhamByName(tenSanPham, page);
+		List<SanPham> listSanPham = sanPhamDao.searchSanPhamByName(tenSanPham, page);
 		if (listSanPham.size() == 0) {
 			req.getRequestDispatcher("./khong_tim_thay_san_pham.jsp").forward(req, resp);
 			return;
 		}
-		int soLuongSanPhamAll = sanPhamService.getSoLuongSanPhamByName(tenSanPham);
-		req.setAttribute("listSanPham", listSanPham);
-		req.setAttribute("page", page);
-		req.setAttribute("soLuongSanPhamAll", soLuongSanPhamAll);
-		req.setAttribute("tenSanPham", tenSanPham);
-		req.getSession().setAttribute("tenSanPham", tenSanPham);
+		HttpSession session = req.getSession();
+		int soLuongSanPhamAll = sanPhamDao.getSoLuongSanPhamByName(tenSanPham);
+		session.setAttribute("listSanPham", listSanPham);
+		session.setAttribute("page", page);
+		session.setAttribute("soLuongSanPhamAll", soLuongSanPhamAll);
+		session.setAttribute("tenSanPham", tenSanPham);
+		session.setAttribute("tenSanPham", tenSanPham);
 		req.getRequestDispatcher("./ket_qua_tim_kiem.jsp").forward(req, resp);
 	}
 }

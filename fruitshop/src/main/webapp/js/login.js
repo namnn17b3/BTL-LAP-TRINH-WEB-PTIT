@@ -47,6 +47,7 @@ var listInput = [document.querySelector('#email'), document.querySelector('#mat-
 var nutDangNhap = document.querySelector('.nut-dang-nhap').onclick = (e) => {
     for (var i = 0; i < 2; i++) {
         if (hasUnicode(listInput[i].value) == true) {
+			e.preventDefault();
             listItem[i].insertAdjacentHTML('beforeend', 
                 `<div class="canh-bao-invalid">
                     <div class="canh-bao">

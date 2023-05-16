@@ -1,4 +1,4 @@
-package fruitshop.service;
+package fruitshop.dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,16 +8,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import fruitshop.dao.Dao;
-import fruitshop.iservice.ISanPhamService;
+import fruitshop.dao.SanPhamDao;
 import fruitshop.model.SanPham;
 
-public class SanPhamService implements ISanPhamService {
-	private static Connection conn = Dao.getConnection();
+public class SanPhamDaoImpl implements SanPhamDao {
+	private Connection conn = JDBCConnection.getConnection();
 	private static String[] tmp = {"Nam Phi", "Chile", "Hàn Quốc", "Úc", "New Zealand", "Mỹ", "Nhiều nước"};
 	private static List<String> loaiTraiCayTheoNguonGoc = Arrays.asList(tmp);
 	
-	public SanPhamService() {}
+	public SanPhamDaoImpl() {}
 
 	@Override
 	public List<SanPham> getSanPhamOrderBySoLuongBan(int limit) {
@@ -40,8 +39,9 @@ public class SanPhamService implements ISanPhamService {
 			    + ") as a2\r\n"
 			    + "on a1.id = a2.id\r\n"
 			    + "order by so_luong_ban desc\r\n"
-			    + "limit "+limit+";"
+			    + "limit ?;"
 			);
+			ppstm.setInt(1, limit);
 			ResultSet res = ppstm.executeQuery();
 			while (res.next()) {
 				SanPham sanPham = new SanPham();
@@ -80,11 +80,12 @@ public class SanPhamService implements ISanPhamService {
 			    + "	where dh.id_sp = sp.id and dh.so_sao_vote is not null\r\n"
 			    + "	group by dh.id_sp\r\n"
 			    + "	order by so_sao_vote desc\r\n"
-			    + "	limit 4\r\n"
+			    + "	limit ?\r\n"
 			    + ") as tmp, donhang dh\r\n"
 			    + "where tmp.id = dh.id_sp\r\n"
 			    + "group by dh.id_sp;"
 			);
+			ppstm.setInt(1, limit);
 			ResultSet res = ppstm.executeQuery();
 			while (res.next()) {
 				SanPham sanPham = new SanPham();
@@ -95,10 +96,10 @@ public class SanPhamService implements ISanPhamService {
 				sanPham.setSoLuongBan(res.getInt("so_luong_ban"));
 				float soSaoVote = res.getFloat("so_sao_vote");
 				if (res.wasNull()) {
-					sanPham.setSoSaoVote(soSaoVote);
+					sanPham.setSoSaoVote(-1);
 				}
 				else {
-					sanPham.setSoSaoVote(-1);
+					sanPham.setSoSaoVote(soSaoVote);
 				}
 				sanPham.setDonVi(res.getString("don_vi"));
 				
@@ -196,7 +197,7 @@ public class SanPhamService implements ISanPhamService {
 					+ "order by so_luong_ban desc, so_sao_vote desc\r\n"
 					+ "limit ?, 12;"
 				);
-				ppst.setInt(1, (page - 1) * 5);
+				ppst.setInt(1, (page - 1) * 12);
 			}
 			else if (loai.equals("Giỏ quà tặng trái cây") || loai.equals("Mua nguyên thùng")
 					|| loai.equals("Đồ khô") || loai.equals("Combo") || loai.equals("Mua lẻ")) {
@@ -225,7 +226,6 @@ public class SanPhamService implements ISanPhamService {
 				ppst.setInt(2, (page - 1) * 12);
 			}
 			else if (loaiTraiCayTheoNguonGoc.contains(loai) == true) {
-				System.out.println(loai);
 				tonTaiLoaiSanPham = true;
 				ppst = conn.prepareStatement(
 					"select a1.id, a1.ten, a1.tien_tren_don_vi, a1.anh, a1.don_vi, a1.so_luong_ban, a1.nguon_goc, a2.so_sao_vote\r\n"

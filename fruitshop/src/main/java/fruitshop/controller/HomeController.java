@@ -9,19 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fruitshop.dao.SanPhamDao;
+import fruitshop.dao.impl.SanPhamDaoImpl;
 import fruitshop.model.SanPham;
-import fruitshop.service.SanPhamService;
 
 @WebServlet("/home")
 public class HomeController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	private static SanPhamService sanPhamService =  new SanPhamService();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		List<SanPham> listSanPhamOderBySoLuongBan = sanPhamService.getSanPhamOrderBySoLuongBan(8);
-		List<SanPham> listSanPhamOrderBySoSao = sanPhamService.getSanPhamOrderBySoSao(4);
+		SanPhamDao sanPhamDao =  new SanPhamDaoImpl();
+		List<SanPham> listSanPhamOderBySoLuongBan = sanPhamDao.getSanPhamOrderBySoLuongBan(8);
+		List<SanPham> listSanPhamOrderBySoSao = sanPhamDao.getSanPhamOrderBySoSao(4);
 		req.setAttribute("listSanPhamOderBySoLuongBan", listSanPhamOderBySoLuongBan);
 		req.setAttribute("listSanPhamOrderBySoSao", listSanPhamOrderBySoSao);
 		req.getRequestDispatcher("/home.jsp").forward(req, resp);

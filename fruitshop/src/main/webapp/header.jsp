@@ -1,5 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@page import="fruitshop.model.User"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<%
+	User currentUser = (User) session.getAttribute("currentUser");
+%>
 <div class="tieu-de-chung">
 	<div class="top">
 		<div class="khau-hieu-goi">
@@ -96,17 +101,42 @@
 				<a href="./contact-us" class="lua-chon-chinh lien-he">Liên hệ</a>
 			</div>
 			<div class="thanh-lua-chon-khac">
-				<div class="lua-chon-khac dang-nhap">
-					<div style="width: 48px;">
-						<div class="dang-nhap-khong-anh"></div>
-					</div>
-					<div class="bang-dang-nhap">
-						<div class="dn">
-							<a href="./login" style="text-decoration: none; color: #212529; width: 80%;">Đăng nhập</a>
-							<i class="fa-solid fa-right-to-bracket" style="color: #3D464D; font-size: 20px; paddng-top: 0;"></i>
+				<c:if test="<%=currentUser == null%>">				
+					<div class="lua-chon-khac dang-nhap">
+						<div style="width: 48px;">
+							<div class="dang-nhap-khong-anh"></div>
+						</div>
+						<div class="bang-dang-nhap">
+							<div class="dn">
+								<a href="./login" style="text-decoration: none; color: #212529; width: 80%;">Đăng nhập</a>
+								<i class="fa-solid fa-right-to-bracket" style="color: #3D464D; font-size: 20px; paddng-top: 0;"></i>
+							</div>
 						</div>
 					</div>
-				</div>
+				</c:if>
+				
+				<c:if test="<%=currentUser != null%>">				
+					<div class="lua-chon-khac chuc-nang-cua-user">
+						<div style="width: 48px; display: flex;">
+							<img class="anh-dai-dien-cua-user" src="${currentUser.anh}"/>
+						</div>
+						<div class="bang-chuc-nang-cua-user">
+							<div class="thanh-phan-bang-chuc-nang-user ho-so-user">
+								<a href="./profile" style="text-decoration: none; color: #212529; width: 50%; margin: auto 0px auto auto">Hồ sơ</a>
+								<i class="fa-solid fa-user" style="color: #3D464D; font-size: 20px; paddng-top: 0; margin: auto"></i>
+							</div>
+							<div class="thanh-phan-bang-chuc-nang-user don-hang-user">
+								<a href="./don-hang" style="text-decoration: none; color: #212529; width: 50%; margin: auto 0px auto auto">Đơn hàng</a>
+								<i class="fa-solid fa-list" style="color: #3D464D; font-size: 20px; paddng-top: 0; margin: auto"></i>
+							</div>
+							<div class="thanh-phan-bang-chuc-nang-user logout">
+								<a href="./logout" style="text-decoration: none; color: #212529; width: 50%; margin: auto 0px auto auto">Đăng xuất</a>
+								<i class="fa-solid fa-right-from-bracket" style="color: #3D464D; font-size: 20px; paddng-top: 0; margin: auto"></i>
+							</div>
+						</div>
+					</div>
+				</c:if>
+				
 				<div class="lua-chon-khac tim-kiem">
 					<div class="tim-kiem-hieu-ung-mo"></div>
 					<div class="tim-kiem-icon">

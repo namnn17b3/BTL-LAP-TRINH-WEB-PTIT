@@ -9,8 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fruitshop.dao.SanPhamDao;
+import fruitshop.dao.impl.SanPhamDaoImpl;
 import fruitshop.model.SanPham;
-import fruitshop.service.SanPhamService;
 
 @WebServlet("/danh-sach-san-pham")
 public class DanhSachSanPhamTheoLoaiController extends HttpServlet {
@@ -18,7 +19,7 @@ public class DanhSachSanPhamTheoLoaiController extends HttpServlet {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static SanPhamService sanPhamService = new SanPhamService();
+	private static final SanPhamDao sanPhamDao = new SanPhamDaoImpl();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -76,12 +77,12 @@ public class DanhSachSanPhamTheoLoaiController extends HttpServlet {
 			req.getRequestDispatcher("./khong_tim_thay_san_pham.jsp").forward(req, resp);
 			return;
 		}
-		List<SanPham> listSanPham = sanPhamService.getListSanPhamByLoai(loaiSanPham, page);
+		List<SanPham> listSanPham = sanPhamDao.getListSanPhamByLoai(loaiSanPham, page);
 		if (listSanPham.size() == 0) {
 			req.getRequestDispatcher("./khong_tim_thay_san_pham.jsp").forward(req, resp);
 			return;
 		}
-		int soLuongSanPhamAll = sanPhamService.getSoLuongSanPhamByLoai(loaiSanPham);
+		int soLuongSanPhamAll = sanPhamDao.getSoLuongSanPhamByLoai(loaiSanPham);
 		req.setAttribute("listSanPham", listSanPham);
 		req.setAttribute("soLuongSanPhamAll", soLuongSanPhamAll);
 		req.setAttribute("page", page);

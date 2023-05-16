@@ -99,7 +99,19 @@ inputFileUpLoad.onchange = () => {
 			document.querySelector('#anh-upload').src = src;
 		}
 	}
-	fileReader.readAsDataURL(fileDauTienDuocUpLoad);	
+	fileReader.readAsDataURL(fileDauTienDuocUpLoad);
+}
+
+document.querySelector('.go-anh-dai-dien').onclick = () => {
+	inputFileUpLoad.value = '';
+	document.querySelector('#anh-upload').src = './img_user/fb-no-img.png';
+	try {
+	    document.querySelector('#co-yeu-cau-xoa-anh').value = '1';
+	    console.log('co yeu cau xoa anh');
+	}
+	catch(exception) {
+		console.log('loi co yeu cau xoa anh');
+	}
 }
 
 // Vô hiệu hóa khi có thông báo
@@ -151,3 +163,33 @@ function voHieuHoaCuonChuot(e) {
 //        document.querySelector('.thong-bao').style.display = 'none';
 //    }, 500);
 //}
+
+function themCookie(name, value, time, defaultValue = 60, path='/fruitshop/register') {
+	if (document.cookie == '' && name == 'time') {
+		document.cookie = `${name}=${defaultValue}; expires=${new Date(new Date().getTime() + time).toUTCString()}; path=${path}`;
+		return;
+	}
+	document.cookie = `${name}=${value}; expires=${new Date(new Date().getTime() + time).toUTCString()}; path=${path}`;
+}
+
+function layCookie(name, defaultValue) {
+	if (document.cookie == '') {
+		return defaultValue;
+	}
+	var cookies = document.cookie.split(';').map(item => {
+		return item.trim().split('=');
+	});
+	for (var item of cookies) {
+		if (item[0] == name) {
+			return parseInt(item[1]);
+		}
+	}
+	return defaultValue;
+}
+
+var done = layCookie('done', 0);
+document.querySelector('.nut-dang-ki').onclick = () => {
+	themCookie('done', 0, 3600000 * 24);
+	// cho trường hợp update profile
+	themCookie('update_success', 0, 3600000 * 24, 60, '/fruitshop/profile');
+}

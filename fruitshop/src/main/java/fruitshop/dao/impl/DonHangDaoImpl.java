@@ -1,4 +1,4 @@
-package fruitshop.service;
+package fruitshop.dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,13 +7,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import fruitshop.dao.Dao;
-import fruitshop.iservice.IDonHangService;
+import fruitshop.dao.DonHangDao;
 import fruitshop.model.DonHang;
 
-public class DonHangService implements IDonHangService {
-
-	private static Connection conn = Dao.getConnection();
+public class DonHangDaoImpl implements DonHangDao {
+	private Connection conn = JDBCConnection.getConnection();
+	
+	public DonHangDaoImpl() {}
 	
 	@Override
 	public List<DonHang> getAllDanhGiaChoSanPhamById(int idSanPham, int choose) {

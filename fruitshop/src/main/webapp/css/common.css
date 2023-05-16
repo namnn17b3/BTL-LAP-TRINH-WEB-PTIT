@@ -519,6 +519,44 @@ html {
     margin: auto;
 }
 
+.chuc-nang-cua-user {
+	position: relative;
+}
+
+.anh-dai-dien-cua-user {
+	width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: auto;
+}
+
+.bang-chuc-nang-cua-user {
+	width: 170px;
+    position: absolute;
+    background-color: #fff;
+    top: 49px;
+    right: 0;
+    font-weight: 600;
+    box-shadow: -5px 5px 8px rgba(0, 0, 0, 0.3), 5px 5px 8px rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    display: none;
+    transform-origin: 90% top;
+    will-change: opacity, transform;
+    animation: hieuUngXuatHien ease-in 0.25s;
+    z-index: 2;
+}
+
+.thanh-phan-bang-chuc-nang-user {
+	height: 45px;
+	display: flex;
+	border-radius: 8px;
+	cursor: pointer;
+}
+
+.thanh-phan-bang-chuc-nang-user:hover {
+	background-color: #f7f7f7;
+}
+
 .gio-hang {
     width: 48px;
     height: 48px;

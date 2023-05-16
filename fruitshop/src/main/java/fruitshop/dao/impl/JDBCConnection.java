@@ -1,15 +1,15 @@
-package fruitshop.dao;
+package fruitshop.dao.impl;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class Dao {
+public class JDBCConnection {
 	private static Connection connection = getConnectionUtil("jdbc:mysql://localhost:3306/fruitshop", "root", "17195802");
 	
-	public Dao() {}
+	public JDBCConnection() {}
 	
 	public static Connection getConnection() {
-		return Dao.connection;
+		return connection;
 	}
 	
 	public static Connection getConnectionUtil(String dbURL, String userName, String password) {

@@ -9,17 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fruitshop.dao.DonHangDao;
+import fruitshop.dao.SanPhamDao;
+import fruitshop.dao.impl.DonHangDaoImpl;
+import fruitshop.dao.impl.SanPhamDaoImpl;
 import fruitshop.model.DonHang;
 import fruitshop.model.SanPham;
-import fruitshop.service.DonHangService;
-import fruitshop.service.SanPhamService;
 
 @WebServlet("/chi-tiet-san-pham")
 public class ChiTietSanPhamController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	private static SanPhamService sanPhamService =  new SanPhamService();
-	private static DonHangService donHangService = new DonHangService();
+	private static final SanPhamDao sanPhamDao =  new SanPhamDaoImpl();
+	private static final DonHangDao donHangDao = new DonHangDaoImpl();
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -28,7 +30,7 @@ public class ChiTietSanPhamController extends HttpServlet {
 		}
 		else {
 			int id = Integer.parseInt(req.getParameter("id"));
-			SanPham sanPham = sanPhamService.getSanPhamById(id);
+			SanPham sanPham = sanPhamDao.getSanPhamById(id);
 			if (sanPham == null) {
 				System.out.println(id);
 				System.out.println("ok san pham null");
@@ -37,13 +39,13 @@ public class ChiTietSanPhamController extends HttpServlet {
 			}
 			req.setAttribute("sanPham", sanPham);
 			
-			int soLuongTatCa = donHangService.getAllSoLuongDanhGiaChoSanPhamByIdAndStar(id, -1);
-			int soLuongNamSao = donHangService.getAllSoLuongDanhGiaChoSanPhamByIdAndStar(id, 5);
-			int soLuongBonSao = donHangService.getAllSoLuongDanhGiaChoSanPhamByIdAndStar(id, 4);
-			int soLuongBaSao = donHangService.getAllSoLuongDanhGiaChoSanPhamByIdAndStar(id, 3);
-			int soLuongHaiSao = donHangService.getAllSoLuongDanhGiaChoSanPhamByIdAndStar(id, 2);
-			int soLuongMotSao = donHangService.getAllSoLuongDanhGiaChoSanPhamByIdAndStar(id, 1);
-			int soLuongKhongSao = donHangService.getAllSoLuongDanhGiaChoSanPhamByIdAndStar(id, 0);
+			int soLuongTatCa = donHangDao.getAllSoLuongDanhGiaChoSanPhamByIdAndStar(id, -1);
+			int soLuongNamSao = donHangDao.getAllSoLuongDanhGiaChoSanPhamByIdAndStar(id, 5);
+			int soLuongBonSao = donHangDao.getAllSoLuongDanhGiaChoSanPhamByIdAndStar(id, 4);
+			int soLuongBaSao = donHangDao.getAllSoLuongDanhGiaChoSanPhamByIdAndStar(id, 3);
+			int soLuongHaiSao = donHangDao.getAllSoLuongDanhGiaChoSanPhamByIdAndStar(id, 2);
+			int soLuongMotSao = donHangDao.getAllSoLuongDanhGiaChoSanPhamByIdAndStar(id, 1);
+			int soLuongKhongSao = donHangDao.getAllSoLuongDanhGiaChoSanPhamByIdAndStar(id, 0);
 			int choose = -1;
 			int page = 1;
 			if (req.getParameter("choose") != null) {
@@ -58,7 +60,7 @@ public class ChiTietSanPhamController extends HttpServlet {
 			else {
 				req.setAttribute("forcusDanhGia", 0);
 			}
-			List<DonHang> currentListDanhGia = donHangService.getDanhGiaChoSanPhamByIdAndPageChoose(id, choose, page);
+			List<DonHang> currentListDanhGia = donHangDao.getDanhGiaChoSanPhamByIdAndPageChoose(id, choose, page);
 			int soLuongDanhGiaTheoPhanLoai = soLuongTatCa;
 			if (choose == 5) {
 				soLuongDanhGiaTheoPhanLoai = soLuongNamSao;

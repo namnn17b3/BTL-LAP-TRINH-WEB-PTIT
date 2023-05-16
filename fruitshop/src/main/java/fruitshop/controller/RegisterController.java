@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
+import javax.mail.Session;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,8 +17,9 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import fruitshop.dao.UserDao;
+import fruitshop.dao.impl.UserDaoImpl;
 import fruitshop.model.User;
-import fruitshop.service.UserService;
 import fruitshop.utils.Email;
 import fruitshop.utils.RanDomCode;
 
@@ -27,9 +29,7 @@ public class RegisterController extends HttpServlet {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static UserService userService = new UserService();
-	private static User user = new User();
-	private static FileItem fileItem = null;
+	private static final UserDao userDao = new UserDaoImpl();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -57,9 +57,14 @@ public class RegisterController extends HttpServlet {
 		String daHuyBo = req.getParameter("da-huy-bo");
 		String daDongYDangKiLai = req.getParameter("dong-y-dang-nhap-lai");
 		String coGuiCode = req.getParameter("sent");
+		int thongBaoDangKiLai = session.getAttribute("thongBaoDangKiLai") != null ? 1 : 0;
 		if ((daHuyBo != null && daHuyBo.equals("1")) || (daDongYDangKiLai != null && daDongYDangKiLai.equals("1"))) {
 			// System.out.println("da huy bo");
 			session.invalidate();
+			req.getRequestDispatcher("./register.jsp").forward(req, resp);
+			return;
+		}
+		if (thongBaoDangKiLai == 1) {
 			req.getRequestDispatcher("./register.jsp").forward(req, resp);
 			return;
 		}
@@ -69,11 +74,7 @@ public class RegisterController extends HttpServlet {
 			String code = (String) session.getAttribute("code");
 			Date currentTime = new Date();
 			Date thoiDiemTaoCode = (Date) session.getAttribute("thoiDiemTaoCode");
-			// Bắt lỗi 500 error code
-			if (thoiDiemTaoCode == null) {
-				req.getRequestDispatcher("./khong_tim_thay_san_pham.jsp").forward(req, resp);
-				return;
-			}
+			// System.out.println(thoiDiemTaoCode + " line 70");
 			int soLanXacNhan = (int) session.getAttribute("soLanXacNhan");
 			soLanXacNhan++;
 			session.setAttribute("soLanXacNhan", soLanXacNhan);
@@ -88,7 +89,9 @@ public class RegisterController extends HttpServlet {
 			// hết thời gian
 			if (timeOut > 60) {
 				session.invalidate();
-				req.setAttribute("thongBaoDangKiLai", 1);
+				session = req.getSession();
+				session.setAttribute("thongBaoDangKiLai", 1);
+				session.setAttribute("coThongBao", 1);
 				req.getRequestDispatcher("./register.jsp").forward(req, resp);
 				return;
 			}
@@ -102,8 +105,12 @@ public class RegisterController extends HttpServlet {
 			
 			// nhập sai code nhưng số lần > 3
 			if (code.equals(clientCode) == false && soLanXacNhan > 3) {
+				// System.out.println(session.getId());
 				session.invalidate();
-				req.setAttribute("thongBaoDangKiLai", 1);
+				session = req.getSession();
+				// System.out.println(session.getId());
+				session.setAttribute("thongBaoDangKiLai", 1);
+				session.setAttribute("coThongBao", 1);
 				req.getRequestDispatcher("./register.jsp").forward(req, resp);
 				return;
 			}
@@ -111,7 +118,9 @@ public class RegisterController extends HttpServlet {
 			// nếu nhập đúng
 			if (code.equals(clientCode) == true) {
 				// System.out.println("code dung");
-				userService.addUser(user);
+				User user = (User) session.getAttribute("user");
+				FileItem fileItem = (FileItem) session.getAttribute("fileItem");
+				userDao.addUser(user);
 				// có tồn tại ảnh upload
 				if (fileItem != null) {
 					try {
@@ -127,6 +136,7 @@ public class RegisterController extends HttpServlet {
 			}
 		}
 		session.setMaxInactiveInterval(3600 * 24);
+		User user = new User();
 		user.setAnh("./img_user/fb-no-img.png");
 		user.setVaiTro("u");
 		try {
@@ -151,7 +161,8 @@ public class RegisterController extends HttpServlet {
 					}
 					else if (item.getFieldName().equals("email")) {
 						user.setEmail(item.getString());
-						if (userService.tonTaiUser(user.getEmail())) {
+						if (userDao.tonTaiUser(user.getEmail())) {
+							req.setAttribute("emailDaTonTai", 1);
 							req.getRequestDispatcher("./register.jsp").forward(req, resp);
 							return;
 						}
@@ -164,13 +175,13 @@ public class RegisterController extends HttpServlet {
 					// tồn tại file upload
 					if (item.getSize() > 0) {
 						// item.getName() -> lấy ra tên của file upload
-						String fileName = item.getName();
-						String extendFile = fileName.substring(fileName.lastIndexOf("."));
-						String anh = "user" + userService.getNextUserId() + extendFile;
+						// String fileName = item.getName();
+						// String extendFile = fileName.substring(fileName.lastIndexOf("."));
+						String anh = "user" + userDao.getNextUserId() + ".jpg";
 						user.setAnh("./img_user/" + anh);
 						// ghi file vào đường dẫn vật lý của server
 						// item.write(new File(pathGoc + File.separator + anh));
-						fileItem = item;
+						session.setAttribute("fileItem", item);
 					}
 				}
 			}
@@ -184,12 +195,11 @@ public class RegisterController extends HttpServlet {
 				session.setAttribute("thongBaoXacNhan", "1");
 				session.setAttribute("soLanXacNhan", 0);
 				session.setAttribute("code", code);
-				session.setAttribute("fileItem", fileItem);
 				session.setAttribute("soLanXacThuc", 0);
 			}
 			// Từ lần thứ hai trở đi nếu refresh với phương thức post
 			else {
-				System.out.println("ok else post");
+				// System.out.println("ok else post");
 				Date currentTime = new Date();
 				Date thoiDiemTaoCode = (Date) session.getAttribute("thoiDiemTaoCode");
 				long timeOut = (currentTime.getTime() - thoiDiemTaoCode.getTime()) / 1000;
@@ -200,8 +210,10 @@ public class RegisterController extends HttpServlet {
 					session.setAttribute("timeOut", 59 - timeOut);
 				}
 			}
-			Email.sendMail(user.getEmail(), (String) session.getAttribute("code"));
-			// System.out.println("add session success " + session.getAttribute("code"));
+			session.setAttribute("coThongBao", 1);
+			session.setAttribute("user", user);
+			// Email.sendMail(user.getEmail(), (String) session.getAttribute("code"));
+			System.out.println("add session success " + session.getAttribute("code"));
 			req.getRequestDispatcher("./register.jsp").forward(req, resp);
 		} catch (Exception e) {
 			// TODO: handle exception

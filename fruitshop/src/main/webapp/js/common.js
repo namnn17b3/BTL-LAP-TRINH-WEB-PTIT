@@ -54,10 +54,10 @@ timKiem.onclick = () => {
     soLanClick = (soLanClick + 1) % 2;
 }
 
-nhapTenSanPham.oninput = () => {
-    // Xu ly sau
-    console.log(nhapTenSanPham.value);
-}
+//nhapTenSanPham.oninput = () => {
+//    // Xu ly sau
+//    console.log(nhapTenSanPham.value);
+//}
 
 function xuatHienDangNhap(tenClassCha, tenBangMenuCon) {
     var mucCha = document.querySelector(tenClassCha);
@@ -98,10 +98,19 @@ function xuatHienMenuChon(tenClassCha, tenBangMenuCon) {
     }
 }
 
-xuatHienDangNhap('.dang-nhap', '.bang-dang-nhap');
+try {	
+	xuatHienDangNhap('.dang-nhap', '.bang-dang-nhap');
+}
+catch (e) {}
+
 xuatHienMenuChon('.danh-muc-san-pham', '.bang-danh-muc-con');
 xuatHienMenuChon('.qua-tang-cao-cap', '.bang-qua-tang-cao-cap');
 xuatHienMenuChon('.trai-cay-tuoi', '.bang-trai-cay-tuoi');
+
+try {	
+	xuatHienDangNhap('.chuc-nang-cua-user', '.bang-chuc-nang-cua-user');
+}
+catch(e) {}
 
 document.querySelectorAll('.bang-dang-nhap').forEach(item => {
     item.onclick = () => {
@@ -159,18 +168,27 @@ try {
 }
 catch(exception) {}
 
-// Xu ly buoc phai dang nhap truoc khi thao tac voi san pham 
-// window.addEventListener('wheel', voHieuHoaCuonChuot, { passive: false });
-// setTimeout(() => {
-//     document.querySelector('.thong-bao-buoc-phai-dang-nhap').style.display = 'block';
-// }, 600);
+//Xu ly buoc phai dang nhap truoc khi thao tac voi san pham 
+//window.addEventListener('wheel', voHieuHoaCuonChuot, { passive: false });
+//setTimeout(() => {
+//    document.querySelector('.thong-bao-buoc-phai-dang-nhap').style.display = 'block';
+//}, 600);
+//
+//document.querySelector('#nut-huy-bo').onclick = () => {
+//    document.querySelector('.buoc-phai-dang-nhap').style.animation = 'truotTuDuoiLen linear 0.5s forwards';
+//    document.querySelector('html').style.scrollBehavior = 'smooth';
+//    window.removeEventListener('wheel', voHieuHoaCuonChuot, { passive: false });
+//    document.querySelector('body').style.setProperty('--scrollbar-width', '15px');
+//    setTimeout(() => {
+//        document.querySelector('.buoc-phai-dang-nhap').style.display = 'none';
+//    }, 500);
+//}
 
-// document.querySelector('#nut-huy-bo').onclick = () => {
-//     document.querySelector('.buoc-phai-dang-nhap').style.animation = 'truotTuDuoiLen linear 0.5s forwards';
-//     document.querySelector('html').style.scrollBehavior = 'smooth';
-//     window.removeEventListener('wheel', voHieuHoaCuonChuot, { passive: false });
-//     document.querySelector('body').style.setProperty('--scrollbar-width', '15px');
-//     setTimeout(() => {
-//         document.querySelector('.buoc-phai-dang-nhap').style.display = 'none';
-//     }, 500);
-// }
+try {
+	document.querySelectorAll('.thanh-phan-bang-chuc-nang-user').forEach(item => {
+		item.onclick = () => {
+			item.firstElementChild.click();
+		}
+	});
+}
+catch(e) {}

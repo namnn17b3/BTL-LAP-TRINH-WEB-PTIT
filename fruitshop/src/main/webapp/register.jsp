@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,6 +11,13 @@
     <link rel="stylesheet" href="./css/register.css">
     <link rel="icon" type="image/x-icon" href="./img/shop_icon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<c:if test="${coThongBao == 1}">
+		<style type="text/css">
+			body {
+    			--scrollbar-width: 0px;
+			}
+		</style>
+	</c:if>
 </head>
 <body>
 	<!-- Thong bao dang ki thanh cong -->
@@ -35,7 +42,7 @@
 	    </form>
 	    
 	    <form method="post" action="./register" class="xac-nhan-huy-bo" style="display: none">
-	    	<button></button>	    	
+	    	<button></button>
 			<input type="hidden" name="da-huy-bo" id="da-huy-bo" value="1"/>
 	    </form>
 	</c:if>
@@ -58,7 +65,7 @@
 	    </div>
 	    
 	    <form method="post" action="./register" class="dong-y-dang-nhap-lai" style="display: none">
-	    	<button></button>	    	
+	    	<button></button>
 			<input type="hidden" name="dong-y-dang-nhap-lai" id="dong-y-dang-nhap-lai" value="1"/>
 	    </form>
     </c:if>
@@ -73,7 +80,7 @@
                 	<h3 class="ten-form">Đăng kí</h3>
                 </div>
                 <div class="thong-tin-dang-ki">
-                	<div class="phan-thong-tin">                		
+                	<div class="phan-thong-tin">		
 		                <div class="ten">
 		                    <div class="ten-input">Tên <span style="color: #f61d1d">(*)</span></div>
 		                    <input placeholder="Tên" type="text" name="ten" id="ten"/>
@@ -87,7 +94,9 @@
 		                <div class="email">
 		                    <div class="ten-input">Email <span style="color: #f61d1d">(*)</span></div>
 		                    <input placeholder="Email" type="text" name="email" id="email"/>
-		                    <div style="color: #f61d1d; display: none">Email đã tồn tại!</div>
+		                    <c:if test="${emailDaTonTai == 1}">
+		                    	<div style="color: #f61d1d;">Email đã tồn tại!</div>
+		                    </c:if>
 		                </div>
 		                <div class="mat-khau">
 		                    <div class="ten-input">Mật khẩu <span style="color: #f61d1d">(*)</span></div>
@@ -104,15 +113,15 @@
                 	<div class="phan-anh">
                 		<div class="anh-dai-dien">
 	                		<input type="file" name="anh" style="display: none" id="upload-file" accept="image/*"/>
-	                		<img alt="" src="./img/fb-no-img.png" id="anh-upload"/>
+	                		<img alt="" src="./img_user/fb-no-img.png" id="anh-upload"/>
 	                		<div class="doi-anh-dai-dien"><span style="margin: auto">Đổi ảnh đại diện</span></div>
                 		</div>
-                		<div style="margin: 20px auto 0px auto">Cập nhật ảnh đại diện của bạn</div>
+                		<div class="go-anh-dai-dien"><span style="margin: auto">Gỡ ảnh đại diện</span></div>
                 	</div>
                 </div>
                 <button class="nut-dang-ki">Đăng kí</button>
                 <div style="font-size: 16px; color: #3D464D">Đã có tài khoản?</div>
-                <div style="margin-top: 12px;"><a href="./login.html" style="width: 100%; text-decoration: none; color: #1A66FF; font-size: 12.8px;">Đăng nhập</a></div>
+                <div style="margin-top: 12px;"><a href="./login" style="width: 100%; text-decoration: none; color: #1A66FF; font-size: 12.8px;">Đăng nhập</a></div>
             </div>
         </form>
     </div>
@@ -122,42 +131,20 @@
     <script src="./js/register.js"></script>
     <c:if test="${thongBaoXacNhan == 1}">
     	<script type="text/javascript">
-	    	var time = <%=session.getAttribute("timeOut")%>;
-	    	var timeCounter = document.querySelector('.thoi-gian')
-	    	var nutOk = document.querySelector('#nut-ok');
-			if (time >= 0 && time <= 59) {
-				phut = parseInt(time / 60).toString();
-    			giay = parseInt(time % 60).toString();
-    			if (phut.length < 2) {
-    				phut = '0' + phut;
-    			}
-    			if (giay.length < 2) {
-    				giay = '0' + giay;
-    			}
-    			timeString = 'Thời gian còn lại: ' + phut + ':' + giay;
-    			timeCounter.innerText = timeString;
-    			time--;
-			}
-			if (time < 0) {
-				timeCounter.innerText = 'Hết thời gian! Vui lòng đăng kí lại tài khoản';
-				nutOk.style.opacity = '0.5';
-			}
-	    	var interval = setInterval(() => {
-	    		if (time < 0) {
-	    			timeCounter.innerText = 'Hết thời gian! Vui lòng đăng kí lại tài khoản';
-	    			clearInterval(interval);
-	    			nutOk.style.cursor = 'not-allowed';
-	    			nutOk.onclick = (e) => {
-	    				e.preventDefault();
-	    			}
-	    			nutOk.onmousemove = () => {
-	    				nutOk.style.backgroundColor = '#ffd333';
-	    				nutOk.style.color = '#3d464d';
-	    			}
-	    			nutOk.style.opacity = '0.5';
-	    		}
-	    		else {
-	    			phut = parseInt(time / 60).toString();
+    		var interval;
+    		if (done == 0) {
+    			window.addEventListener('wheel', voHieuHoaCuonChuot, { passive: false });
+    	    	setTimeout(() => {
+    	    	    document.querySelector('.thong-bao-ve-viec').style.display = 'flex';
+    	    	}, 600);
+    	    	
+		    	var time = layCookie('time', 60);
+		    	themCookie('time', time, 3600000 * 24);
+		    	console.log('them tim line 142');
+		    	var timeCounter = document.querySelector('.thoi-gian')
+		    	var nutOk = document.querySelector('#nut-ok');
+				if (time >= 0 && time <= 60) {
+					phut = parseInt(time / 60).toString();
 	    			giay = parseInt(time % 60).toString();
 	    			if (phut.length < 2) {
 	    				phut = '0' + phut;
@@ -168,15 +155,60 @@
 	    			timeString = 'Thời gian còn lại: ' + phut + ':' + giay;
 	    			timeCounter.innerText = timeString;
 	    			time--;
-	    		}
-	    	}, 1000);
-	    	
-	    	window.addEventListener('wheel', voHieuHoaCuonChuot, { passive: false });
-	    	setTimeout(() => {
-	    	    document.querySelector('.thong-bao-ve-viec').style.display = 'flex';
-	    	}, 600);
+	    			themCookie('time', time, 3600000 * 24);
+	    			console.log('them tim line 158');
+	    			console.log('ok');
+				}
+				if (time < 0) {
+					timeCounter.innerText = 'Hết thời gian! Vui lòng đăng kí lại tài khoản';
+	    			nutOk.style.cursor = 'not-allowed';
+	    			nutOk.style.backgroundColor = '#ffd333';
+	    			nutOk.style.color = '#3d464d';
+	    			nutOk.style.opacity = '0.5';
+	    			nutOk.onclick = (e) => {
+	    				e.preventDefault();
+	    			}
+				}
+		    	interval = setInterval(() => {
+		    		if (time < 0) {
+		    			clearInterval(interval);
+		    			timeCounter.innerText = 'Hết thời gian! Vui lòng đăng kí lại tài khoản';
+		    			nutOk.style.cursor = 'not-allowed';
+		    			nutOk.style.backgroundColor = '#ffd333';
+		    			nutOk.style.color = '#3d464d';
+		    			nutOk.style.opacity = '0.5';
+		    			nutOk.onclick = (e) => {
+		    				e.preventDefault();
+		    			}
+		    		}
+		    		else {
+		    			phut = parseInt(time / 60).toString();
+		    			giay = parseInt(time % 60).toString();
+		    			if (phut.length < 2) {
+		    				phut = '0' + phut;
+		    			}
+		    			if (giay.length < 2) {
+		    				giay = '0' + giay;
+		    			}
+		    			timeString = 'Thời gian còn lại: ' + phut + ':' + giay;
+		    			timeCounter.innerText = timeString;
+		    			time--;
+		    			themCookie('time', time, 3600000 * 24);
+		    			console.log('them tim line 196');
+		    		}
+		    	}, 1000);
+    		}
+    		else {
+    			document.querySelector('.thong-bao').style.display = 'none';
+    			window.removeEventListener('wheel', voHieuHoaCuonChuot, { passive: false });
+    			document.querySelector('body').style.setProperty('--scrollbar-width', '15px');
+    		}
 	    	
 	    	document.querySelector('#nut-huy-bo').onclick = () => {
+	    		clearInterval(interval);
+	    		themCookie('done', 1, 3600 * 24 * 1000);
+	    		themCookie('time', 0, 0);
+	    		console.log('them tim line 209');
 	    	    document.querySelector('.thong-bao').style.animation = 'truotTuDuoiLen linear 0.5s forwards';
 	    	    document.querySelector('html').style.scrollBehavior = 'smooth';
 	    	    window.removeEventListener('wheel', voHieuHoaCuonChuot, { passive: false });
@@ -191,12 +223,21 @@
     
     <c:if test="${thongBaoDangKiLai == 1}">
     	<script type="text/javascript">
-	    	window.addEventListener('wheel', voHieuHoaCuonChuot, { passive: false });
-	    	setTimeout(() => {
-	    	    document.querySelector('.thong-bao-ve-viec').style.display = 'flex';
-	    	}, 600);
-	
+    		if (done == 0) {
+	    		window.addEventListener('wheel', voHieuHoaCuonChuot, { passive: false });
+		    	setTimeout(() => {
+		    	    document.querySelector('.thong-bao-ve-viec').style.display = 'flex';
+		    	}, 600);
+    		}
+    		else {
+    			document.querySelector('.thong-bao').style.display = 'none';
+    			window.removeEventListener('wheel', voHieuHoaCuonChuot, { passive: false });
+    			document.querySelector('body').style.setProperty('--scrollbar-width', '15px');
+    		}
+			
 	    	document.querySelector('#nut-ok').onclick = () => {
+	    		themCookie('done', 1, 3600 * 24 * 1000);
+	    		themCookie('time', 0, 0);
 	    	    document.querySelector('.thong-bao').style.animation = 'truotTuDuoiLen linear 0.5s forwards';
 	    	    document.querySelector('html').style.scrollBehavior = 'smooth';
 	    	    window.removeEventListener('wheel', voHieuHoaCuonChuot, { passive: false });
