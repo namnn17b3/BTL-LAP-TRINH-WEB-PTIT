@@ -1,0 +1,53 @@
+.thong-bao-mini {
+	background-color: #fff;
+	position: fixed;
+	top: 170px;
+ 	right: 32px;
+	z-index: 2;
+	font-size: 20px;
+	border-left: 5px solid #07bc0c;
+	box-shadow: -5px 0px 5px rgba(0, 0, 0, 0.1), 5px 0px 5px rgba(0, 0, 0, 0.1), 0px 5px 5px rgba(0, 0, 0, 0.1), 0px -5px 5px rgba(0, 0, 0, 0.1);
+	border-radius: 5px;
+	display: none;
+}
+
+.thanh-phan-thong-bao-mini {
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+.icon-thong-bao-mini {
+	margin-left: 10px;
+	color: #07bc0c;
+}
+
+#infomini-icon {
+	color: #07bc0c;
+	font-size: 24px;
+}
+
+.noi-dung-thong-bao-mini {
+	margin-left: 12px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.noi-dung-thong-bao-mini-1 {
+	font-weight: 600;
+	margin-bottom: 4px;
+}
+
+.noi-dung-thong-bao-mini-2 {
+	font-size: 16px;
+}
+
+.nut-huy-thong-bao-mini {
+	margin-left: 12px;
+	margin-right: 12px;
+	color: #d8dee2;
+}
+
+.nut-huy-thong-bao-mini:hover {
+	color: #3d464d;
+	cursor: pointer;
+}

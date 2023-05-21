@@ -1,3 +1,5 @@
+<%@page import="fruitshop.model.DonHang"%>
+<%@page import="java.util.HashMap"%>
 <%@page import="fruitshop.model.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -146,8 +148,14 @@
 						<i class="fa-solid fa-xmark"></i>
 					</div>
 				</div>
+
+				<%
+					int soLuongSanPhamTrongGioHang = (int) session.getAttribute("soLuongSanPhamTrongGioHang");
+					String soLuongSanPhamTrongGioHangString = (soLuongSanPhamTrongGioHang == 0) ? "0" : (soLuongSanPhamTrongGioHang > 99 ? "99+" : String.valueOf(soLuongSanPhamTrongGioHang));
+				%>
 				<div class="lua-chon-khac gio-hang">
-					<div class="vong-tron-so-luong">99+</div>
+					<a href="./gio-hang"></a>
+					<div class="vong-tron-so-luong"><%=soLuongSanPhamTrongGioHangString%></div>
 					<div class="gio-hang-hieu-ung-mo"></div>
 					<div class="gio-hang-icon">
 						<i class="fa-solid fa-cart-shopping"></i>
@@ -164,6 +172,8 @@
 		</div>
 	</div>
 </div>
+
+<script src="./js/utils.js"></script>
 <script type="text/javascript">
 	[...document.querySelectorAll('.muc-con-qua-tang-cap-cap')]
 	.concat([...document.querySelectorAll('.muc-con-trai-cay-tuoi')])
@@ -174,4 +184,10 @@
 			item.firstElementChild.click();
 		}
 	});
+	
+	var gioHang = document.querySelector('.gio-hang');
+	gioHang.onclick = () => {
+		themCookie('clickGioHang', 1, 3600000 * 24, 60, '/fruitshop/gio-hang');
+		gioHang.firstElementChild.click();
+	}
 </script>

@@ -27,7 +27,6 @@ public class ProfileFilter implements Filter {
 			resp.sendRedirect("./home");
 			return;
 		}
-		System.out.println("ok");
 		chain.doFilter(request, response);
 	}
 }

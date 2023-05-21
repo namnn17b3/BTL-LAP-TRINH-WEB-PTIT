@@ -25,7 +25,7 @@
     <div class="than-website">
         <div class="dieu-huong-va-tieu-de">
             <div class="dieu-huong-lien-he"><a href="./home" id="link-to-trang-chu">Trang chủ</a><i class="fa-solid fa-chevron-right" id="sang-phai" style="font-size: 12px;"></i><div style="color: #a1a1a1; display: inline-block;">Liên hệ</div></div>
-            <div class="tieu-de-lien-he"><h2>Liên hệ<h2></div>
+            <div class="tieu-de-lien-he"><h2>Liên hệ</h2></div>
         </div>
         <div class="thong-tin-lien-he">
             <h4 class="PTIT">Học viện Công Nghệ Bưu chính Viễn thông PTIT</h4>
@@ -48,6 +48,7 @@
     	setTimeout(() => {
 			document.querySelector('.load-truoc-khi-vao-trang').remove();
 			document.querySelector('.than-website').style.display = 'flex';
+			window.scrollTo(0, 0);
 		}, 1200);
     </script>
 </body>

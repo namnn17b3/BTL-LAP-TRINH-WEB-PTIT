@@ -36,12 +36,6 @@ public class ProfileController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
-		String xacNhanCapNhatThanhCong = req.getParameter("xac-nhan-cap-nhat-thanh-cong");
-		if (xacNhanCapNhatThanhCong != null) {
-			session.removeAttribute("thongBaoCapNhatThanhCong");
-			req.getRequestDispatcher("./profile_user.jsp").forward(req, resp);
-			return;
-		}
 		User currentUser = (User) session.getAttribute("currentUser");
 		DiskFileItemFactory diskFileItemFactory = new DiskFileItemFactory();
 		String pathGoc = super.getServletContext().getRealPath("./img_user");
@@ -94,7 +88,8 @@ public class ProfileController extends HttpServlet {
 		}
 		// System.out.println("profile controller line 88 " + currentUser.getAnh());
 		userDao.upDateUserByEmail(currentUser);
-		session.setAttribute("thongBaoCapNhatThanhCong", 1);
+		session.setAttribute("currentUser", currentUser);
+		req.setAttribute("thongBaoCapNhatThanhCong", 1);
 		req.getRequestDispatcher("./profile_user.jsp").forward(req, resp);
 	}
 }

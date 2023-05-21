@@ -1,0 +1,233 @@
+.dieu-huong-va-tieu-de {
+	padding: 0px 15px 32px;
+	font-size: 14px;
+}
+
+.tieu-de-cua-hang {
+	padding-top: 10px;
+	font-size: 25.6px;
+}
+
+.thong-tin-gio-hang {
+	display: flex;
+	flex-direction: column;
+	padding: 18px 0px 60px;
+}
+
+.tieu-de-gio-hang {
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 17px;
+}
+
+.thong-tin-chi-tiet-gio-hang {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.ket-thuc-website {
+	margin-top: 50px;
+}
+
+.nut-quay-lai-trang-chu_gio-hang {
+	display: flex;
+	text-decoration: none;
+	cursor: pointer;
+	width: 85px;
+	height: 32px;
+	margin-top: 24px;
+	background: #ffd333;
+	color: #3d464d;
+	border-radius: 6px;
+}
+
+.nut-quay-lai-trang-chu_gio-hang:hover {
+	background: #3d464d;
+	color: #fff;
+}
+
+.bang-gio-hang {
+	margin: auto;
+	margin-bottom: 40px;
+}
+
+.danh-sach-de-muc-gio-hang {
+	display: flex;
+}
+
+.de-muc-gio-hang {
+	font-weight: 600;
+	font-size: 15px;
+	padding: 12px 18px;
+	display: flex;
+	background-color: #f7f7f7;
+	border-top: 1px solid #ebebeb;
+	border-bottom: 1px solid #ebebeb;
+}
+
+.de-muc-gio-hang span {
+	margin: auto;
+}
+
+.hinh-anh-san-pham__gio-hang {
+	width: 116.8px;
+	height: 47.3px;
+	border-left: 1px solid #ebebeb;
+}
+
+.ten-san-pham__gio-hang {
+	width: 300px;
+	height: 47.3px;
+}
+
+.gia-san-pham__gio-hang {
+	width: 130px;
+	height: 47.3px;
+}
+
+.so-luong-san-pham__gio-hang {
+	width: 117.6px;
+	height: 47.3px;
+}
+
+.trang-thai-san-pham__gio-hang {
+	width: 130px;
+	height: 47.3px;
+}
+
+.tong-tien-san-pham__gio-hang {
+	width: 130px;
+	height: 47.3px;
+}
+
+.thoi-gian-them-san-pham__gio-hang {
+	width: 120px;
+	height: 47.3px;
+}
+
+.loai-bo-san-pham__gio-hang {
+	width: 65.6px;
+	height: 47.3px;
+	border-right: 1px solid #ebebeb;
+}
+
+.dong-gio-hang {
+	font-size: 14px;
+	display: flex;
+	margin: auto;
+	border-bottom: 1px solid #ebebeb;
+}
+
+.dong-gio-hang:hover {
+	border: 1px solid #ffd333;
+}
+
+.chung-cua-cac-thong-tin-san-pham__gio-hang {
+	height: 116.8px;
+	display: flex;
+	line-height: 20px;
+}
+
+.hinh-anh-san-pham {
+	padding: 18px;
+}
+
+.o-nhap-so-luong {
+	width: 88px;
+	height: 38px;
+	background-color: #e9ecef;
+	display: flex;
+	margin: auto;
+	border-radius: 6px; 
+}
+
+.thanh-phan-o-nhap-so-luong {
+	margin-top: auto;
+	margin-bottom: auto;
+	display: flex;
+	font-weight: 600;
+	color: #b5babe;
+}
+
+.nut-tang-giam-so-luong {
+	cursor: pointer;
+}
+
+.nut-tang-giam-so-luong:hover {
+	color: #3d446d;
+}
+
+.nut-loai-bo-san-pham {
+	display: flex;
+	font-size: 18px;
+	margin: auto;
+	color: #b5babe;
+	cursor: pointer;
+	width: 32px;
+	height: 32px;
+	border-radius: 6px;
+}
+
+.nut-loai-bo-san-pham:hover {
+	color: #3d464d;
+	background-color: #e9ecef;
+}
+
+.ket-thuc-website {
+	margin-top: 30px;
+}
+
+.nut-thao-tac-dieu-huong__gio-hang {
+	display: flex;
+}
+
+.chuyen-huong__gio-hang + .chuyen-huong__gio-hang {
+	margin-left: 10px;
+}
+
+.chuyen-huong__gio-hang {
+	width: 175px;
+	height: 38px;
+	display: flex;
+	text-decoration: none;
+	background-color: #ffd333;
+	font-weight: 600;
+	font-size: 16px;
+	color: #3d464d;
+	border-radius: 6px;
+}
+
+.chuyen-huong__gio-hang:hover {
+	background-color: #3d464d;
+	color: #fff;
+}
+
+.don-hang__gio-hang {
+	width: 441.8px;
+	margin-top: 48px;
+	border: 2px solid #ebebeb;
+	padding: 32px;
+	border-radius: 3px;
+}
+
+.don-hang__gio-hang:hover {
+	border: 2px solid #ffd333;
+}
+
+.thanh-toan__gio-hang {
+	display: flex;
+	width: 377.8px;
+	height: 60px;
+	margin-top: 15px;
+	text-decoration: none;
+	font-size: 22px;
+	background-color: #ffd333;
+	font-weight: 600;
+	border-radius: 6px;
+	color: #3d464d;
+}
+
+.thanh-toan__gio-hang:hover {
+	background-color: #3d464d;
+	color: #fff;
+}

@@ -25,10 +25,12 @@
         		</c:if>
         		<h3 class="gia-san-pham">${sp.tienTrenDonVi} VNĐ<p style="color: #3d464d; display: inline">/${sp.donVi}</p></h3>
 	        	<div class="tuy-chon-san-pham">
-	        		<form action="./them-vao-gio-hang?id=${sp.id}" method="post" style="display: flex; margin-left: auto; margin-right: auto;">
+	        		<!-- <form action="./them-vao-gio-hang?id=${sp.id}" method="post" style="display: flex; margin-left: auto; margin-right: auto;">
 	        			<input type="hidden" name="so-luong" value="1">
 	        			<button class="them-vao-gio-hang"><p style="margin: auto">Thêm vào giỏ</p></button>
-	        		</form>
+	        		</form>-->
+	        		<div class="them-vao-gio-hang"><p style="margin: auto">Thêm vào giỏ</p></div>
+	        		<a href="./xu-ly-gio-hang?id=${sp.id}" style="display: none"></a>
 	        		<a class="mua-ngay" href="./mua-ngay"><p style="margin: auto">Mua ngay</p></a>
 	        	</div>
        		</div>

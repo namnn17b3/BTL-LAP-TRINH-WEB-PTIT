@@ -404,7 +404,7 @@
 	line-height: 25px;
 }
 
-.boc-ben-ngoai-phan-trang-danh-gia {
+/*.boc-ben-ngoai-phan-trang-danh-gia {
 	display: flex;
 	flex-direction: row-reverse;
 }
@@ -447,4 +447,4 @@
 
 .khong-phai-trang-hien-tai:hover {
 	background-color: rgba(255, 211, 51, 0.3);
-}
+}*/

@@ -9,6 +9,7 @@
     <title>Đăng kí | Fruit Shop</title>
     <link rel="stylesheet" href="./css/common.css">
     <link rel="stylesheet" href="./css/register.css">
+    <link rel="stylesheet" href="./css/thong_bao.css">
     <link rel="icon" type="image/x-icon" href="./img/shop_icon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<c:if test="${coThongBao == 1}">
@@ -127,8 +128,10 @@
     </div>
 
     <jsp:include page="./footer.jsp"/>
+    <script src="./js/utils.js"></script>
     <script src="./js/common.js"></script>
     <script src="./js/register.js"></script>
+    
     <c:if test="${thongBaoXacNhan == 1}">
     	<script type="text/javascript">
     		var interval;
@@ -140,7 +143,7 @@
     	    	
 		    	var time = layCookie('time', 60);
 		    	themCookie('time', time, 3600000 * 24);
-		    	console.log('them tim line 142');
+		    	// console.log('them time line 142');
 		    	var timeCounter = document.querySelector('.thoi-gian')
 		    	var nutOk = document.querySelector('#nut-ok');
 				if (time >= 0 && time <= 60) {
@@ -156,8 +159,8 @@
 	    			timeCounter.innerText = timeString;
 	    			time--;
 	    			themCookie('time', time, 3600000 * 24);
-	    			console.log('them tim line 158');
-	    			console.log('ok');
+	    			// console.log('them time line 158');
+	    			// console.log('ok');
 				}
 				if (time < 0) {
 					timeCounter.innerText = 'Hết thời gian! Vui lòng đăng kí lại tài khoản';
@@ -194,7 +197,7 @@
 		    			timeCounter.innerText = timeString;
 		    			time--;
 		    			themCookie('time', time, 3600000 * 24);
-		    			console.log('them tim line 196');
+		    			// console.log('them time line 196');
 		    		}
 		    	}, 1000);
     		}
@@ -204,11 +207,23 @@
     			document.querySelector('body').style.setProperty('--scrollbar-width', '15px');
     		}
 	    	
+    		nutOk.onclick = () => {
+    			clearInterval(interval);
+	    		themCookie('done', 1, 3600 * 24 * 1000);
+	    		themCookie('time', 0, 0);
+	    		themCookie('updateSuccessPress', 0, 3600000 * 24, 60, '/fruitshop/home');
+	    		document.querySelector('.thong-bao').style.animation = 'truotTuDuoiLen linear 0.5s forwards';
+	    	    document.querySelector('html').style.scrollBehavior = 'smooth';
+	    	    window.removeEventListener('wheel', voHieuHoaCuonChuot, { passive: false });
+	    	    document.querySelector('body').style.setProperty('--scrollbar-width', '15px');
+		    	document.querySelector('.xac-nhan-huy-bo').firstElementChild.click();
+    		}
+    		
 	    	document.querySelector('#nut-huy-bo').onclick = () => {
 	    		clearInterval(interval);
 	    		themCookie('done', 1, 3600 * 24 * 1000);
 	    		themCookie('time', 0, 0);
-	    		console.log('them tim line 209');
+	    		// console.log('them time line 209');
 	    	    document.querySelector('.thong-bao').style.animation = 'truotTuDuoiLen linear 0.5s forwards';
 	    	    document.querySelector('html').style.scrollBehavior = 'smooth';
 	    	    window.removeEventListener('wheel', voHieuHoaCuonChuot, { passive: false });

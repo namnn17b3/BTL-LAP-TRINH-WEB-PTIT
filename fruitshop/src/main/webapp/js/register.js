@@ -3,6 +3,7 @@ var ten = document.querySelector('#ten');
 var email = document.querySelector('#email');
 var matKhau = document.querySelector('#mat-khau');
 var nhapLaiMatKhau = document.querySelector('#nhap-lai-mat-khau');
+
 var conMat = [document.querySelector('#con-mat-1'), document.querySelector('#con-mat-2')];
 conMat.forEach((item) => {
     item.addEventListener('click', () => {
@@ -60,6 +61,11 @@ function hasUnicode (str) {
 
 var button = document.querySelector('.nut-dang-ki');
 button.onclick = (e) => {
+	// console.log('line 64');
+	themCookie('done', 0, 3600000 * 24);
+	// cho trường hợp update profile
+	themCookie('update_success', 0, 3600000 * 24, 60, '/fruitshop/profile');
+	// e.preventDefault();
     var listItem = [document.querySelector('.ten'), document.querySelector('.email'), document.querySelector('.mat-khau'), document.querySelector('.nhap-lai-mat-khau')];
     var listString = [ten.value, email.value, matKhau.value, nhapLaiMatKhau.value];
     var listRegex = [/[a-zA-Z0-9]/, /([a-zA-Z0-9\.]+)@([a-zA-H0-9\.].+)/, /.{6,}/, new RegExp(matKhau.value)];
@@ -114,11 +120,6 @@ document.querySelector('.go-anh-dai-dien').onclick = () => {
 	}
 }
 
-// Vô hiệu hóa khi có thông báo
-function voHieuHoaCuonChuot(e) {
-    e.preventDefault();
-}
-
 //window.addEventListener('wheel', voHieuHoaCuonChuot, { passive: false });
 //setTimeout(() => {
 //    document.querySelector('.thong-bao-ve-viec').style.display = 'flex';
@@ -164,32 +165,32 @@ function voHieuHoaCuonChuot(e) {
 //    }, 500);
 //}
 
-function themCookie(name, value, time, defaultValue = 60, path='/fruitshop/register') {
-	if (document.cookie == '' && name == 'time') {
-		document.cookie = `${name}=${defaultValue}; expires=${new Date(new Date().getTime() + time).toUTCString()}; path=${path}`;
-		return;
-	}
-	document.cookie = `${name}=${value}; expires=${new Date(new Date().getTime() + time).toUTCString()}; path=${path}`;
-}
-
-function layCookie(name, defaultValue) {
-	if (document.cookie == '') {
-		return defaultValue;
-	}
-	var cookies = document.cookie.split(';').map(item => {
-		return item.trim().split('=');
-	});
-	for (var item of cookies) {
-		if (item[0] == name) {
-			return parseInt(item[1]);
-		}
-	}
-	return defaultValue;
-}
+//function themCookie(name, value, time, defaultValue = 60, path='/fruitshop/register') {
+//	if (document.cookie == '' && name == 'time') {
+//		document.cookie = `${name}=${defaultValue}; expires=${new Date(new Date().getTime() + time).toUTCString()}; path=${path}`;
+//		return;
+//	}
+//	document.cookie = `${name}=${value}; expires=${new Date(new Date().getTime() + time).toUTCString()}; path=${path}`;
+//}
+//
+//function layCookie(name, defaultValue) {
+//	if (document.cookie == '') {
+//		return defaultValue;
+//	}
+//	var cookies = document.cookie.split(';').map(item => {
+//		return item.trim().split('=');
+//	});
+//	for (var item of cookies) {
+//		if (item[0] == name) {
+//			return parseInt(item[1]);
+//		}
+//	}
+//	return defaultValue;
+//}
 
 var done = layCookie('done', 0);
-document.querySelector('.nut-dang-ki').onclick = () => {
-	themCookie('done', 0, 3600000 * 24);
+//document.querySelector('.nut-dang-ki').onclick = () => {
+	// themCookie('done', 0, 3600000 * 24);
 	// cho trường hợp update profile
-	themCookie('update_success', 0, 3600000 * 24, 60, '/fruitshop/profile');
-}
+	// themCookie('update_success', 0, 3600000 * 24, 60, '/fruitshop/profile');
+//}

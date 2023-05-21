@@ -41,7 +41,7 @@
                     <div class="ten-input">Mật khẩu</div>
                     <input placeholder="Mật khẩu" type="password" name="mat-khau" id="mat-khau" />
                     <i class="fa-solid fa-eye" id="con-mat"></i>
-                    <div style="margin-top: 4px;"><a href="./missing_password" style="width: 100%; text-decoration: none; color: #1A66FF; font-size: 12.8px;">Quên mật khẩu</a></div>
+                    <div style="margin-top: 4px;"><a href="./missing-password" style="width: 100%; text-decoration: none; color: #1A66FF; font-size: 12.8px;">Quên mật khẩu</a></div>
                 </div>
                 
                 <c:if test="${dangNhapKhongThanhCong == 1}">
@@ -62,6 +62,7 @@
 	    setTimeout(() => {
 			document.querySelector('.load-truoc-khi-vao-trang').remove();
 			document.querySelector('.than-website').style.display = 'flex';
+			window.scrollTo(0, 0);
 		}, 1200);
     </script>
 </body>

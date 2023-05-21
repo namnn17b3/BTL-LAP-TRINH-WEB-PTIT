@@ -22,6 +22,7 @@ import fruitshop.dao.impl.UserDaoImpl;
 import fruitshop.model.User;
 import fruitshop.utils.Email;
 import fruitshop.utils.RanDomCode;
+import fruitshop.utils.Sha1;
 
 @WebServlet("/register")
 public class RegisterController extends HttpServlet {
@@ -131,6 +132,9 @@ public class RegisterController extends HttpServlet {
 					}
 				}
 				session.invalidate();
+				session = req.getSession();
+				session.setAttribute("currentUser", user);
+				session.setAttribute("thongBaoDangKiThanhCong", 1);
 				resp.sendRedirect("./home");
 				return;
 			}
@@ -177,7 +181,7 @@ public class RegisterController extends HttpServlet {
 						// item.getName() -> lấy ra tên của file upload
 						// String fileName = item.getName();
 						// String extendFile = fileName.substring(fileName.lastIndexOf("."));
-						String anh = "user" + userDao.getNextUserId() + ".jpg";
+						String anh = "user" + Sha1.encryptThisString(user.getEmail()) + ".jpg";
 						user.setAnh("./img_user/" + anh);
 						// ghi file vào đường dẫn vật lý của server
 						// item.write(new File(pathGoc + File.separator + anh));
@@ -213,7 +217,7 @@ public class RegisterController extends HttpServlet {
 			session.setAttribute("coThongBao", 1);
 			session.setAttribute("user", user);
 			// Email.sendMail(user.getEmail(), (String) session.getAttribute("code"));
-			System.out.println("add session success " + session.getAttribute("code"));
+			System.out.println("add session success " + session.getAttribute("code") + " " + user.getEmail());
 			req.getRequestDispatcher("./register.jsp").forward(req, resp);
 		} catch (Exception e) {
 			// TODO: handle exception

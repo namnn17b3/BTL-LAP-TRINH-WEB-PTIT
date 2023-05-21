@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>Về chúng tôi | Fruit Shop</title>
     <link rel="stylesheet" href="./css/common.css">
     <link rel="stylesheet" href="./css/about_me.css">
@@ -101,6 +102,7 @@
     	setTimeout(() => {
 			document.querySelector('.load-truoc-khi-vao-trang').remove();
 			document.querySelector('.than-website').style.display = 'flex';
+			window.scrollTo(0, 0);
 		}, 1200);
     </script>
 </body>

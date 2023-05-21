@@ -52,7 +52,7 @@ itemDanhGia.onclick = () => {
 	hienTaiDuocClick = 1;
 }
 
-document.querySelectorAll('.thanh-phan-phan-trang-danh-gia').forEach(item => {
+document.querySelectorAll('.thanh-phan-phan-trang').forEach(item => {
 	item.onclick = () => {
 		item.firstElementChild.click();
 	}

@@ -7,12 +7,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hồ sơ người dùng| Fruit Shop</title>
+    <title>Hồ sơ người dùng | Fruit Shop</title>
     <link rel="stylesheet" href="./css/common.css">
     <link rel="stylesheet" href="./css/register.css">
+    <link rel="stylesheet" href="./css/thong_bao.css">
     <link rel="icon" type="image/x-icon" href="./img/shop_icon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-	<c:if test="${coThongBao == 1}">
+	<c:if test="${thongBaoCapNhatThanhCong == 1}">
 		<style type="text/css">
 			body {
     			--scrollbar-width: 0px;
@@ -39,11 +40,6 @@
 	            </div>
 	        </div>
 	    </div>
-	    
-		<form method="post" action="./profile" class="xac-nhan-cap-nhat-thanh-cong" style="display: none">
-	    	<button></button>	    	
-			<input type="hidden" name="xac-nhan-cap-nhat-thanh-cong" id="xac-nhan-cap-nhat-thanh-cong" value="1"/>
-	    </form>
 	</c:if>
 
 	<jsp:include page="./header.jsp"/>
@@ -107,22 +103,33 @@
     </div>
 
     <jsp:include page="./footer.jsp"/>
+    <script src="./js/utils.js"></script>
     <script src="./js/common.js"></script>
     <script src="./js/register.js"></script>
+    
     <script type="text/javascript">
     	var updateSuccess = layCookie('update_success', 0);
 	    document.querySelector('.quay-lai-trang-chu').onclick = () => {
 	    	themCookie('update_success', 0, 0, 60, '/fruitshop/profile');
 	    	document.querySelector('.quay-lai-trang-chu').firstElementChild.click();
 	    }
+		document.querySelector('.than-website').style.display = 'flex';
+		anhUpload.style.height = document.querySelector('.anh-dai-dien').offsetWidth.toString() + 'px';
+		try {
+			document.querySelector('.thong-bao').style.display = 'flex';
+			if (done == 0) {
+				setTimeout(() => {
+    	    	    document.querySelector('.thong-bao-ve-viec').style.display = 'flex';
+    	    	}, 600);
+			}
+		}
+		catch (exception) {}
     </script>
+    
     <c:if test="${thongBaoCapNhatThanhCong == 1}">
     	<script type="text/javascript">
     		if (updateSuccess == 0) {
 		    	window.addEventListener('wheel', voHieuHoaCuonChuot, { passive: false });
-		    	setTimeout(() => {
-		    	    document.querySelector('.thong-bao-ve-viec').style.display = 'flex';
-		    	}, 600);
     		}
     		else {
     			document.querySelector('.thong-bao').style.display = 'none';
@@ -137,7 +144,6 @@
 	    	    document.querySelector('body').style.setProperty('--scrollbar-width', '15px');
 	    	    setTimeout(() => {
 	    	        document.querySelector('.thong-bao').style.display = 'none';
-	    	        document.querySelector('.xac-nhan-cap-nhat-thanh-cong').firstElementChild.click();
 	    	    }, 500);
 	    	}
     	</script>

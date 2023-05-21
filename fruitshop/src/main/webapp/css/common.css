@@ -33,10 +33,6 @@ html {
     scroll-behavior: smooth;
 }
 
-.phan-duoc-hien-thi {
-	display: none;
-}
-
 /*load truoc khi vao trang*/
 .load-truoc-khi-vao-trang {
 	margin: auto;

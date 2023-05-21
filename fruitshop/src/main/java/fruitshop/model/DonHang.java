@@ -16,15 +16,21 @@ public class DonHang {
 	private Date ngayXuat;
 	private String noiDungBinhLuan;
 	private Date ngayBinhLuan;
-	private int soSaoVote;
+	private int soSaoVote = -1;
 	private String tenUser;
 	private String anhUser;
+	private String tenSanPham;
+	private int tienTrenDonVi;
+	private String thanhToan;
+	private String anh;
+	private int soLuongSanPhamConLai;
 	
 	public DonHang() {}
 
 	public DonHang(int id, int idSanPham, int idUser, String tenNguoiNhan, int soLuong, String diaChiNguoiNhan,
 			String soDienThoaiNguoiNhan, String trangThai, String ghiChu, Date ngayXuat, String noiDungBinhLuan,
-			Date ngayBinhLuan, int soSaoVote, String tenUser, String anhUser) {
+			Date ngayBinhLuan, int soSaoVote, String tenUser, String anhUser, String tenSanPham, int TienTrenDonVi, int tienTrenDonVi,
+			String thanhToan, String anh, int soLuongSanPhamConLai) {
 		this.id = id;
 		this.idSanPham = idSanPham;
 		this.idUser = idUser;
@@ -40,6 +46,11 @@ public class DonHang {
 		this.soSaoVote = soSaoVote;
 		this.tenUser = tenUser;
 		this.anhUser = anhUser;
+		this.tenSanPham = tenSanPham;
+		this.tienTrenDonVi = tienTrenDonVi;
+		this.thanhToan = thanhToan;
+		this.anh = anh;
+		this.soLuongSanPhamConLai = soLuongSanPhamConLai;
 	}
 
 	public String getTenUser() {
@@ -160,5 +171,45 @@ public class DonHang {
 
 	public void setSoSaoVote(int soSaoVote) {
 		this.soSaoVote = soSaoVote;
+	}
+
+	public String getTenSanPham() {
+		return tenSanPham;
+	}
+
+	public void setTenSanPham(String tenSanPham) {
+		this.tenSanPham = tenSanPham;
+	}
+
+	public int getTienTrenDonVi() {
+		return tienTrenDonVi;
+	}
+
+	public void setTienTrenDonVi(int tienTrenDonVi) {
+		this.tienTrenDonVi = tienTrenDonVi;
+	}
+
+	public String getThanhToan() {
+		return thanhToan;
+	}
+
+	public void setThanhToan(String thanhToan) {
+		this.thanhToan = thanhToan;
+	}
+
+	public String getAnh() {
+		return anh;
+	}
+
+	public void setAnh(String anh) {
+		this.anh = anh;
+	}
+
+	public int getSoLuongSanPhamConLai() {
+		return soLuongSanPhamConLai;
+	}
+
+	public void setSoLuongSanPhamConLai(int soLuongSanPhamConLai) {
+		this.soLuongSanPhamConLai = soLuongSanPhamConLai;
 	}
 }

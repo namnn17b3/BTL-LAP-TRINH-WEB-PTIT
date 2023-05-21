@@ -23,7 +23,12 @@ public class UserDaoImpl implements UserDao {
 			ppst.setString(1, user.getTen());
 			ppst.setString(2, user.getEmail());
 			ppst.setString(3, user.getMatKhau());
-			ppst.setString(4, user.getAnh());
+			if (user.getAnh().equals("./img_user/fb-no-img.png")) {
+				ppst.setNull(4, java.sql.Types.VARCHAR);
+			}
+			else {
+				ppst.setString(4, user.getAnh());
+			}
 			ppst.setString(5, user.getVaiTro());
 			ppst.execute();
 		} catch (SQLException e) {
@@ -97,6 +102,7 @@ public class UserDaoImpl implements UserDao {
 			ResultSet res = ppst.executeQuery();
 			if (res.next()) {
 				user = new User();
+				user.setId(res.getInt("id"));
 				user.setTen(res.getString("ten"));
 				user.setEmail(res.getString("email"));
 				user.setMatKhau(res.getString("mat_khau"));

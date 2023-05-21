@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="./css/common.css">
     <link rel="stylesheet" href="./css/san_pham.css">
     <link rel="stylesheet" href="./css/danh_sach_san_pham.css">
+    <link rel="stylesheet" href="./css/phan_trang.css">
     <link rel="icon" type="image/x-icon" href="./img/shop_icon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<style type="text/css">
@@ -48,12 +49,14 @@
        	<div class="boc-ben-ngoai-danh-sach-san-pham">       	
        		<jsp:include page="./single_page_san_pham.jsp"/>
        	</div>
+       	
+       	<!-- phan trang -->
        	<c:if test="<%=soLuongPage > 1%>">
 	       	<c:set var="currentPage" value="<%=currentPage%>"></c:set>
-	       	<div class="boc-ben-ngoai-phan-trang-san-pham">
-				<div class="phan-trang-san-pham">
+	       	<div class="boc-ben-ngoai-phan-trang">
+				<div class="phan-trang">
 					<c:if test="<%=prePage > 0%>">
-						<form action="./search" method="post" class="nut-thao-tac-voi-trang thanh-phan-phan-trang-san-pham">
+						<form action="./search" method="post" class="nut-thao-tac-voi-trang thanh-phan-phan-trang">
 							<button style="display: none;"></button>
 							<i class="fa-solid fa-chevron-left" style="margin: auto"></i>
 							<input type="hidden" name="ten-san-pham" value="${tenSanPham}">
@@ -62,7 +65,7 @@
 					</c:if>
 					<c:forEach begin="<%=pageBegin%>" end="<%=pageEnd%>" var="index">
 						<c:if test="${index == currentPage}">
-							<form action="./search" method="post" class="trang-hien-tai thanh-phan-phan-trang-san-pham">
+							<form action="./search" method="post" class="trang-hien-tai thanh-phan-phan-trang">
 								<button style="display: none;"></button>
 								<input type="hidden" name="ten-san-pham" value="${tenSanPham}">
 								<input type="hidden" name="page" value="${index}">
@@ -70,7 +73,7 @@
 							</form>
 						</c:if>
 						<c:if test="${index != currentPage}">
-							<form action="./search" method="post" class="khong-phai-trang-hien-tai thanh-phan-phan-trang-san-pham">								
+							<form action="./search" method="post" class="khong-phai-trang-hien-tai thanh-phan-phan-trang">								
 								<button style="display: none;"></button>
 								<input type="hidden" name="ten-san-pham" value="${tenSanPham}">
 								<input type="hidden" name="page" value="${index}">
@@ -79,7 +82,7 @@
 						</c:if>
 					</c:forEach>
 					<c:if test="<%=nextPage <= soLuongPage%>">
-						<form action="./search" method="post" class="nut-thao-tac-voi-trang thanh-phan-phan-trang-san-pham">
+						<form action="./search" method="post" class="nut-thao-tac-voi-trang thanh-phan-phan-trang">
 							<button style="display: none;"></button>
 							<i class="fa-solid fa-chevron-right" style="margin: auto"></i>
 							<input type="hidden" name="ten-san-pham" value="${tenSanPham}">

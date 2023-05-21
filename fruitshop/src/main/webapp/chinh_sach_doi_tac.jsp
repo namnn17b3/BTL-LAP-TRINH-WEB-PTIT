@@ -48,6 +48,7 @@
     	setTimeout(() => {
 			document.querySelector('.load-truoc-khi-vao-trang').remove();
 			document.querySelector('.than-website').style.display = 'flex';
+			window.scrollTo(0, 0);
 		}, 1200);
     </script>
 </body>

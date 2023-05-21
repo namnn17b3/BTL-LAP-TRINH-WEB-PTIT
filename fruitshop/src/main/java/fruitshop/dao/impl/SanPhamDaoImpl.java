@@ -136,9 +136,11 @@ public class SanPhamDaoImpl implements SanPhamDao {
 			ppst.setInt(1, id);
 			ppst.setInt(2, id);
 			ResultSet res = ppst.executeQuery();
-			boolean tonTaiSanPham = false;
 			while (res.next()) {
-				tonTaiSanPham = true;
+				res.getInt("id");
+				if (res.wasNull()) {
+					return null;
+				}
 				sanPham.setId(id);
 				sanPham.setTen(res.getString("ten"));
 				sanPham.setDonVi(res.getString("don_vi"));
@@ -159,9 +161,6 @@ public class SanPhamDaoImpl implements SanPhamDao {
 				else {
 					sanPham.setSoSaoVote(soSaoVote);
 				}
-			}
-			if (tonTaiSanPham == false) {
-				return null;
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
