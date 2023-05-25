@@ -113,8 +113,8 @@
 	    	themCookie('update_success', 0, 0, 60, '/fruitshop/profile');
 	    	document.querySelector('.quay-lai-trang-chu').firstElementChild.click();
 	    }
-		document.querySelector('.than-website').style.display = 'flex';
-		anhUpload.style.height = document.querySelector('.anh-dai-dien').offsetWidth.toString() + 'px';
+		//document.querySelector('.than-website').style.display = 'flex';
+		//anhUpload.style.height = document.querySelector('.anh-dai-dien').offsetWidth.toString() + 'px';
 		try {
 			document.querySelector('.thong-bao').style.display = 'flex';
 			if (done == 0) {

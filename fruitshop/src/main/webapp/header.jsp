@@ -150,8 +150,11 @@
 				</div>
 
 				<%
-					int soLuongSanPhamTrongGioHang = (int) session.getAttribute("soLuongSanPhamTrongGioHang");
-					String soLuongSanPhamTrongGioHangString = (soLuongSanPhamTrongGioHang == 0) ? "0" : (soLuongSanPhamTrongGioHang > 99 ? "99+" : String.valueOf(soLuongSanPhamTrongGioHang));
+					String soLuongSanPhamTrongGioHangString = "0";
+					if (session.getAttribute("soLuongSanPhamTrongGioHang") != null) {						
+						int soLuongSanPhamTrongGioHang = (int) session.getAttribute("soLuongSanPhamTrongGioHang");
+						soLuongSanPhamTrongGioHangString = (soLuongSanPhamTrongGioHang == 0) ? "0" : (soLuongSanPhamTrongGioHang > 99 ? "99+" : String.valueOf(soLuongSanPhamTrongGioHang));
+					}
 				%>
 				<div class="lua-chon-khac gio-hang">
 					<a href="./gio-hang"></a>

@@ -9,11 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import fruitshop.dao.DonHangDao;
+import fruitshop.dao.DanhGiaDao;
 import fruitshop.dao.SanPhamDao;
-import fruitshop.dao.impl.DonHangDaoImpl;
+import fruitshop.dao.impl.DanhGiaDaoImpl;
 import fruitshop.dao.impl.SanPhamDaoImpl;
-import fruitshop.model.DonHang;
+import fruitshop.model.DanhGia;
 import fruitshop.model.SanPham;
 
 @WebServlet("/chi-tiet-san-pham")
@@ -21,7 +21,7 @@ public class ChiTietSanPhamController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private static final SanPhamDao sanPhamDao =  new SanPhamDaoImpl();
-	private static final DonHangDao donHangDao = new DonHangDaoImpl();
+	private static final DanhGiaDao danhGiaDao = new DanhGiaDaoImpl();
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -49,13 +49,13 @@ public class ChiTietSanPhamController extends HttpServlet {
 			return;
 		}
 		int page = 1;
-		int soLuongTatCa = donHangDao.getAllSoLuongDanhGiaChoSanPhamByIdAndStar(id, -1);
-		int soLuongNamSao = donHangDao.getAllSoLuongDanhGiaChoSanPhamByIdAndStar(id, 5);
-		int soLuongBonSao = donHangDao.getAllSoLuongDanhGiaChoSanPhamByIdAndStar(id, 4);
-		int soLuongBaSao = donHangDao.getAllSoLuongDanhGiaChoSanPhamByIdAndStar(id, 3);
-		int soLuongHaiSao = donHangDao.getAllSoLuongDanhGiaChoSanPhamByIdAndStar(id, 2);
-		int soLuongMotSao = donHangDao.getAllSoLuongDanhGiaChoSanPhamByIdAndStar(id, 1);
-		int soLuongKhongSao = donHangDao.getAllSoLuongDanhGiaChoSanPhamByIdAndStar(id, 0);
+		int soLuongTatCa = danhGiaDao.getAllSoLuongDanhGiaChoSanPhamByIdAndStar(id, -1);
+		int soLuongNamSao = danhGiaDao.getAllSoLuongDanhGiaChoSanPhamByIdAndStar(id, 5);
+		int soLuongBonSao = danhGiaDao.getAllSoLuongDanhGiaChoSanPhamByIdAndStar(id, 4);
+		int soLuongBaSao = danhGiaDao.getAllSoLuongDanhGiaChoSanPhamByIdAndStar(id, 3);
+		int soLuongHaiSao = danhGiaDao.getAllSoLuongDanhGiaChoSanPhamByIdAndStar(id, 2);
+		int soLuongMotSao = danhGiaDao.getAllSoLuongDanhGiaChoSanPhamByIdAndStar(id, 1);
+		int soLuongKhongSao = danhGiaDao.getAllSoLuongDanhGiaChoSanPhamByIdAndStar(id, 0);
 		int soLuongDanhGiaTheoPhanLoai = soLuongTatCa;
 		if (choose == 5) {
 			soLuongDanhGiaTheoPhanLoai = soLuongNamSao;
@@ -97,7 +97,7 @@ public class ChiTietSanPhamController extends HttpServlet {
 		}
 		
 		req.setAttribute("sanPham", sanPham);		
-		List<DonHang> currentListDanhGia = donHangDao.getDanhGiaChoSanPhamByIdAndPageChoose(id, choose, page);
+		List<DanhGia> currentListDanhGia = danhGiaDao.getDanhGiaChoSanPhamByIdAndPageChoose(id, choose, page);
 		req.setAttribute("soLuongTatCa", soLuongTatCa);
 		req.setAttribute("soLuongNamSao", soLuongNamSao);
 		req.setAttribute("soLuongBonSao", soLuongBonSao);

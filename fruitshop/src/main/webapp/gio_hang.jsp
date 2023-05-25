@@ -1,7 +1,7 @@
 <%@page import="java.util.Map"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
-<%@page import="fruitshop.model.DonHang"%>
+<%@page import="fruitshop.model.SanPhamTrongGioHang"%>
 <%@page import="java.util.HashMap"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -73,7 +73,7 @@
 	        			<div class="loai-bo-san-pham__gio-hang de-muc-gio-hang"><span>   </span></div>
         			</div>
         			<%
-        				List<DonHang> listSanPhamTrongGioHang = (List<DonHang>) session.getAttribute("listSanPhamTrongGioHang");
+        				List<SanPhamTrongGioHang> listSanPhamTrongGioHang = (List<SanPhamTrongGioHang>) session.getAttribute("listSanPhamTrongGioHang");
         			%>
         			<c:set var="listDonHang" value="<%=listSanPhamTrongGioHang%>"/>
         			
@@ -117,7 +117,7 @@
 		        			
 		        			<div class="tong-tien-san-pham tong-tien-san-pham__gio-hang chung-cua-cac-thong-tin-san-pham__gio-hang"><span style="margin: auto; font-weight: 600"><span style="color: #ff2626;">${item.tienTrenDonVi * item.soLuong}</span> VNĐ</span></div>
 		        			
-		        			<div class="thoi-gian-them-san-pham thoi-gian-them-san-pham__gio-hang chung-cua-cac-thong-tin-san-pham__gio-hang"><span style="margin: auto; text-align: center;"><fmt:formatDate pattern="dd/MM/yyyy HH:mm:ss" value="${item.ngayXuat}"/></span></div>
+		        			<div class="thoi-gian-them-san-pham thoi-gian-them-san-pham__gio-hang chung-cua-cac-thong-tin-san-pham__gio-hang"><span style="margin: auto; text-align: center;"><fmt:formatDate pattern="dd/MM/yyyy HH:mm:ss" value="${item.ngayThem}"/></span></div>
 		        			
 		        			<div class="loai-bo-san-pham loai-bo-san-pham__gio-hang chung-cua-cac-thong-tin-san-pham__gio-hang">
 		        				<div class="nut-loai-bo-san-pham"><i class="fa-solid fa-xmark" style="margin: auto;"></i></div>
@@ -126,58 +126,60 @@
         			</c:forEach>
         		</div>
         		
-        		<!-- phan trang -->
-				<c:if test="<%=soLuongSanPhamTrongGioHang > 0%>">
-				    <c:if test="<%=soLuongPage > 1%>">
-				        <div class="boc-ben-ngoai-phan-trang">
-				            <div class="phan-trang">
-				                <c:if test="<%=prePage > 0%>">
-				                    <div class="nut-thao-tac-voi-trang thanh-phan-phan-trang">
-				                        <a href="./gio-hang?page=<%=prePage%>"></a>
-				                        <i class="fa-solid fa-chevron-left" style="margin: auto"></i>
-				                    </div>
-				                </c:if>
-				                <c:forEach begin="<%=pageBegin%>" end="<%=pageEnd%>" var="index">
-				                    <c:if test="${index == page}">
-				                        <div class="trang-hien-tai thanh-phan-phan-trang">
-				                            <a href="./gio-hang&page=${index}"></a>
-				                            <p style="margin: auto; font-weight: 600">${index}</p>
-				                        </div>
-				                    </c:if>
-				                    <c:if test="${index != page}">
-				                        <div class="khong-phai-trang-hien-tai thanh-phan-phan-trang">
-				                            <a href="./gio-hang?page=${index}"></a>
-				                            <p style="margin: auto; font-weight: 600">${index}</p>
-				                        </div>
-				                    </c:if>
-				                </c:forEach>
-				                <c:if test="<%=nextPage <= soLuongPage%>">
-				                    <div class="nut-thao-tac-voi-trang thanh-phan-phan-trang">
-				                        <a href="./gio-hang?&page=<%=nextPage%>"></a>
-				                        <i class="fa-solid fa-chevron-right" style="margin: auto"></i>
-				                    </div>
-				                </c:if>
-				            </div>
-				        </div>
-				    </c:if>
-				</c:if>
-				
-				<div style="margin-bottom: 18px; font-size: 14px; font-weight: 600"><i><span style="color: #f61d1d;">(*)</span> Lưu ý: Cập nhật giỏ hàng của bạn để lưu lại mọi thay đổi</i></div>
-
-				<div class="nut-thao-tac-dieu-huong__gio-hang">
-					<a href="./home" class="quay-lai-trang-chu__gio-hang chuyen-huong__gio-hang"><span style="margin: auto;">Trở lại trang chủ</span></a>
-					<a href="./gio-hang" class="cap-nhat-gio-hang__gio-hang chuyen-huong__gio-hang"><span style="margin: auto;">Cập nhật giỏ hàng</span></a>
-				</div>
-								
-				<div class="don-hang__gio-hang">
-					<div style="font-size: 28px; font-weight: 600; margin-bottom: 28px;">Đơn hàng</div>
-					<div style="display: flex; justify-content: space-between; margin-bottom: 48px;">				
-						<div style="font-size: 24px; font-weight: 600;">Thành tiền</div>
-						<div style="font-size: 24px; font-weight: 600;"><span style="color: #ff2626;" id="thanh-tien">${tongTien}</span> VNĐ</div>
+        		<div class="phantrang-donhang">
+	        		<!-- phan trang -->
+					<c:if test="<%=soLuongSanPhamTrongGioHang > 0%>">
+					    <c:if test="<%=soLuongPage > 1%>">
+					        <div class="boc-ben-ngoai-phan-trang">
+					            <div class="phan-trang">
+					                <c:if test="<%=prePage > 0%>">
+					                    <div class="nut-thao-tac-voi-trang thanh-phan-phan-trang">
+					                        <a href="./gio-hang?page=<%=prePage%>"></a>
+					                        <i class="fa-solid fa-chevron-left" style="margin: auto"></i>
+					                    </div>
+					                </c:if>
+					                <c:forEach begin="<%=pageBegin%>" end="<%=pageEnd%>" var="index">
+					                    <c:if test="${index == page}">
+					                        <div class="trang-hien-tai thanh-phan-phan-trang">
+					                            <a href="./gio-hang?page=${index}"></a>
+					                            <p style="margin: auto; font-weight: 600">${index}</p>
+					                        </div>
+					                    </c:if>
+					                    <c:if test="${index != page}">
+					                        <div class="khong-phai-trang-hien-tai thanh-phan-phan-trang">
+					                            <a href="./gio-hang?page=${index}"></a>
+					                            <p style="margin: auto; font-weight: 600">${index}</p>
+					                        </div>
+					                    </c:if>
+					                </c:forEach>
+					                <c:if test="<%=nextPage <= soLuongPage%>">
+					                    <div class="nut-thao-tac-voi-trang thanh-phan-phan-trang">
+					                        <a href="./gio-hang?page=<%=nextPage%>"></a>
+					                        <i class="fa-solid fa-chevron-right" style="margin: auto"></i>
+					                    </div>
+					                </c:if>
+					            </div>
+					        </div>
+					    </c:if>
+					</c:if>
+					
+					<div style="margin-bottom: 18px; font-size: 14px; font-weight: 600"><i><span style="color: #f61d1d;">(*)</span> Lưu ý: Cập nhật giỏ hàng của bạn để lưu lại mọi thay đổi</i></div>
+	
+					<div class="nut-thao-tac-dieu-huong__gio-hang">
+						<a href="./home" class="quay-lai-trang-chu__gio-hang chuyen-huong__gio-hang"><span style="margin: auto;">Trở lại trang chủ</span></a>
+						<a href="./gio-hang?cap-nhat-gio-hang=1" class="cap-nhat-gio-hang__gio-hang chuyen-huong__gio-hang"><span style="margin: auto;">Cập nhật giỏ hàng</span></a>
 					</div>
-					<div>Phí trên bao gồm 5% VAT</div>
-					<a href="./thanh-toan" class="thanh-toan__gio-hang"><span style="margin: auto;">Tiến hành thanh toán</span></a>
-				</div>
+									
+					<div class="don-hang__gio-hang">
+						<div style="font-size: 28px; font-weight: 600; margin-bottom: 28px;">Đơn hàng</div>
+						<div style="display: flex; justify-content: space-between; margin-bottom: 48px;">				
+							<div style="font-size: 24px; font-weight: 600;">Thành tiền</div>
+							<div style="font-size: 24px; font-weight: 600;"><span style="color: #ff2626;" id="thanh-tien">${tongTien}</span> VNĐ</div>
+						</div>
+						<div>Phí trên bao gồm 5% VAT</div>
+						<a href="./thanh-toan" class="thanh-toan__gio-hang"><span style="margin: auto;">Tiến hành thanh toán</span></a>
+					</div>
+        		</div>
 				
         	</c:if>
         </div>

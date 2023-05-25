@@ -48,8 +48,12 @@ public class GioHangFilter implements Filter {
 			}
 			else if (c.getName().equals("clickGioHang")) {
 				session.setAttribute("clickGioHang", 1);
+				c.setPath("/fruitshop/xu-ly-gio-hang");
+				c.setMaxAge(0);
+				resp.addCookie(c);
 			}
 		}
+		
 		// đã đăng nhập
 		if (session.getAttribute("clickThemVaoGioHang") != null || session.getAttribute("clickGioHang") != null) {
 			if (session.getAttribute("currentUser") == null) {

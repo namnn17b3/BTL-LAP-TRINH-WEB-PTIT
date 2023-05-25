@@ -23,19 +23,19 @@ public class DonHangDaoImpl implements DonHangDao {
 			PreparedStatement ppst = null;
 			if (choose == -1) {
 				ppst = conn.prepareStatement(
-					"select u.ten, dh.so_sao_vote, dh.noi_dung_binh_luan, dh.ngay_binh_luan, u.anh\r\n"
-					+ "from donhang dh, user u\r\n"
-					+ "where dh.id_sp = ? and dh.id_user = u.id and dh.trang_thai = 'đã vote'\r\n"
-					+ "order by dh.so_sao_vote desc, dh.ngay_binh_luan desc;"
+					"select dg.*, u.ten\r\n"
+					+ "from danhgia dg, user u\r\n"
+					+ "where id_sp = ? and dg.id_user = u.id"
+					+ "order by dg.so_sao_vote desc, dg.ngay_binh_luan desc;"
 				);
 				ppst.setInt(1, idSanPham);
 			}
 			else {
 				ppst = conn.prepareStatement(
-					"select u.ten, dh.noi_dung_binh_luan, dh.ngay_binh_luan, u.anh\r\n"
-					+ "from donhang dh, user u\r\n"
-					+ "where dh.id_sp = ? and dh.id_user = u.id and dh.so_sao_vote = ?\r\n"
-					+ "order by dh.ngay_binh_luan desc;"
+					"select dg.*, u.ten\r\n"
+					+ "from danhgia dg, user u\r\n"
+					+ "where id_sp = ? and dg.id_user = u.id and dg.so_sao_vote = ?\r\n"
+					+ "order by dg.so_sao_vote desc, dg.ngay_binh_luan desc;"
 				);
 				ppst.setInt(1, idSanPham);
 				ppst.setInt(1, choose);
@@ -74,24 +74,18 @@ public class DonHangDaoImpl implements DonHangDao {
 			if (choose == -1) {
 				ppst = conn.prepareStatement(
 					"select count(*) as so_luong\r\n"
-					+ "from (\r\n"
-					+ "	select u.ten, dh.so_sao_vote, dh.noi_dung_binh_luan, dh.ngay_binh_luan\r\n"
-					+ "	from donhang dh, user u\r\n"
-					+ "	where dh.id_sp = ? and dh.id_user = u.id and dh.trang_thai = 'đã vote'\r\n"
-					+ " order by dh.so_sao_vote desc, dh.ngay_binh_luan desc\r\n"
-					+ ") as tmp;"
+					+ "from danhgia dg, user u\r\n"
+					+ "where id_sp = ? and dg.id_user = u.id\r\n"
+					+ "order by dg.so_sao_vote desc, dg.ngay_binh_luan desc;"
 				);
 				ppst.setInt(1, idSanPham);
 			}
 			else {
 				ppst = conn.prepareStatement(
 					"select count(*) as so_luong\r\n"
-					+ "from (\r\n"
-					+ "	select u.ten, dh.noi_dung_binh_luan, dh.ngay_binh_luan\r\n"
-					+ "	from donhang dh, user u\r\n"
-					+ "	where dh.id_sp = ? and dh.id_user = u.id and dh.so_sao_vote = ?\r\n"
-					+ " order by dh.so_sao_vote desc, dh.ngay_binh_luan desc\r\n"
-					+ ") as tmp;"
+					+ "from danhgia dg, user u\r\n"
+					+ "where id_sp = ? and dg.id_user = u.id and dg.so_sao_vote = ?\r\n"
+					+ "order by dg.so_sao_vote desc, dg.ngay_binh_luan desc;"
 				);
 				ppst.setInt(1, idSanPham);
 				ppst.setInt(2, choose);
@@ -114,10 +108,10 @@ public class DonHangDaoImpl implements DonHangDao {
 			PreparedStatement ppst = null;
 			if (choose == -1) {
 				ppst = conn.prepareStatement(
-					"select u.ten, dh.so_sao_vote, dh.noi_dung_binh_luan, dh.ngay_binh_luan, u.anh\r\n"
-					+ "from donhang dh, user u\r\n"
-					+ "where dh.id_sp = ? and dh.id_user = u.id and dh.trang_thai = 'đã vote'\r\n"
-					+ "order by dh.so_sao_vote desc, dh.ngay_binh_luan desc\r\n"
+					"select dg.*, u.ten\r\n"
+					+ "from danhgia dg, user u\r\n"
+					+ "where dg.id_sp = ? and dg.id_user = u.id\r\n"
+					+ "order by dg.so_sao_vote desc, dg.ngay_binh_luan desc\r\n"
 					+ "limit ?, 5;"
 				);
 				ppst.setInt(1, idSanPham);
@@ -125,10 +119,10 @@ public class DonHangDaoImpl implements DonHangDao {
 			}
 			else {
 				ppst = conn.prepareStatement(
-					"select u.ten, dh.noi_dung_binh_luan, dh.ngay_binh_luan, u.anh\r\n"
-					+ "from donhang dh, user u\r\n"
-					+ "where dh.id_sp = ? and dh.id_user = u.id and dh.so_sao_vote = ?\r\n"
-					+ "order by dh.ngay_binh_luan desc\r\n"
+					"select dg.*, u.ten\r\n"
+					+ "from danhgia dg, user u\r\n"
+					+ "where dg.id_sp = ? and dg.id_user = u.id and dg.so_sao_vote = ?\r\n"
+					+ "order by dg.so_sao_vote desc, dg.ngay_binh_luan desc\r\n"
 					+ "limit ?, 5;"
 				);
 				ppst.setInt(1, idSanPham);

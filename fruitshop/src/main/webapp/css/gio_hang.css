@@ -49,6 +49,7 @@
 .bang-gio-hang {
 	margin: auto;
 	margin-bottom: 40px;
+	overflow: hidden;
 }
 
 .danh-sach-de-muc-gio-hang {
@@ -230,4 +231,31 @@
 .thanh-toan__gio-hang:hover {
 	background-color: #3d464d;
 	color: #fff;
+}
+
+.hieu-ung-dong-gio-hang {
+	animation: hieuUngDongGioHang ease 0.8s forwards;
+}
+
+@keyframes hieuUngDongGioHang {
+	from {
+		transform: translateX(0);
+	}
+	to {
+		transform: translateX(1200px);
+	}
+}
+
+.hieu-ung-danh-sach-gio-hang {
+	animation: hieuUngDanhSachGioHang ease 0.8s forwards;
+/* 	border-top: 1px solid #ebebeb; */
+}
+
+@keyframes hieuUngDanhSachGioHang {
+	from {
+		transform: translateY(0px);
+	}
+	to {
+		transform: translateY(-117.6px);
+	}
 }

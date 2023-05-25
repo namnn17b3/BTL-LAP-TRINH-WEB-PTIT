@@ -10,12 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import fruitshop.dao.DonHangDao;
 import fruitshop.dao.SanPhamDao;
-import fruitshop.dao.impl.DonHangDaoImpl;
+import fruitshop.dao.SanPhamTrongGioHangDao;
 import fruitshop.dao.impl.SanPhamDaoImpl;
-import fruitshop.model.DonHang;
+import fruitshop.dao.impl.SanPhamTrongGioHangDaoImpl;
 import fruitshop.model.SanPham;
+import fruitshop.model.SanPhamTrongGioHang;
 import fruitshop.model.User;
 
 @WebServlet("/xu-ly-gio-hang")
@@ -25,7 +25,7 @@ public class XuLyGioHang extends HttpServlet {
 	 */
 	private static final long serialVersionUID = 1L;
 	private static final SanPhamDao sanPhamDao = new SanPhamDaoImpl();
-	private static final DonHangDao donHangDao = new DonHangDaoImpl(); 
+	private static final SanPhamTrongGioHangDao sanPhamTrongGioHangDao = new SanPhamTrongGioHangDaoImpl(); 
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -44,23 +44,21 @@ public class XuLyGioHang extends HttpServlet {
 		session.setAttribute("tenSanPham", sanPham.getTen());
 		session.setAttribute("themGioHangStatus", 2);
 		// Cập nhật số lượng 1 sản phẩm cụ thể có trong giỏ hàng
-		DonHang donHang = donHangDao.getDonHangByIdUserAndIdSanPham(currentUser.getId(), idSanPham);
-		if (donHang == null) {
-			donHang = new DonHang();
-			donHang.setIdSanPham(idSanPham);
-			donHang.setIdUser(currentUser.getId());
-			donHang.setTenSanPham(sanPham.getTen());
-			donHang.setTienTrenDonVi(sanPham.getTienTrenDonVi());
-			donHang.setSoLuong(1);
-			donHang.setNgayXuat(new Date());
-			donHang.setTrangThai("giỏ hàng");
-			donHangDao.themDonHang(donHang);
+		SanPhamTrongGioHang sanPhamTrongGioHang = sanPhamTrongGioHangDao.getSanPhamTrongGioHangByIdUserAndIdSanPham(currentUser.getId(), idSanPham);
+		if (sanPhamTrongGioHang == null) {
+			sanPhamTrongGioHang = new SanPhamTrongGioHang();
+			sanPhamTrongGioHang.setIdSanPham(idSanPham);
+			sanPhamTrongGioHang.setIdUser(currentUser.getId());
+			sanPhamTrongGioHang.setTenSanPham(sanPham.getTen());
+			sanPhamTrongGioHang.setTienTrenDonVi(sanPham.getTienTrenDonVi());
+			sanPhamTrongGioHang.setSoLuong(1);
+			sanPhamTrongGioHang.setNgayThem(new Date());
+			sanPhamTrongGioHangDao.themSanPhamTrongGioHang(sanPhamTrongGioHang);
 		}
 		else {
-			donHang.setNgayXuat(new Date());
-			donHang.setTrangThai("giỏ hàng");
-			donHang.setSoLuong(donHang.getSoLuong() + soLuong);
-			donHangDao.capNhatDonHang(donHang);
+			sanPhamTrongGioHang.setNgayThem(new Date());
+			sanPhamTrongGioHang.setSoLuong(sanPhamTrongGioHang.getSoLuong() + soLuong);
+			sanPhamTrongGioHangDao.capNhatSanPhamTrongGioHang(sanPhamTrongGioHang);
 		}
 		resp.sendRedirect(url);
 		return;
