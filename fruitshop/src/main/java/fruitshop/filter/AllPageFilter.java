@@ -28,10 +28,20 @@ public class AllPageFilter implements Filter {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse resp = (HttpServletResponse) response;
 		HttpSession session = req.getSession();
-		session.setAttribute("soLuongSanPhamTrongGioHang", 0);		
+		session.setAttribute("soLuongSanPhamTrongGioHang", 0);
 		if (session.getAttribute("currentUser") != null) {
 			User currentUser = (User) session.getAttribute("currentUser");
 			session.setAttribute("soLuongSanPhamTrongGioHang", sanPhamTrongGioHangDao.getSoLuongSanPhamTrongGioHangByIdUser(currentUser.getId()));
+		}
+		if (req.getServletPath().indexOf("/gio-hang") < 0
+				&& req.getServletPath().indexOf("/login") < 0
+				&& req.getServletPath().indexOf("/img") < 0
+				&& req.getServletPath().indexOf("/img_user") < 0
+				&& req.getServletPath().indexOf("/img_sp") < 0
+				&& req.getServletPath().indexOf("/css") < 0
+				&& req.getServletPath().indexOf("/js") < 0
+				&& session.getAttribute("clickGioHang") != null) {
+			session.removeAttribute("clickGioHang");
 		}
 		chain.doFilter(req, resp);
 	}

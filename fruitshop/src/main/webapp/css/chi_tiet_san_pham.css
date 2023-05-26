@@ -83,7 +83,7 @@
 	border-radius: 8px;
 }
 
-#so-luong {
+#so-luong-hien-thi {
 	flex: 6;
 	height: 46px;
 	color: #3d464d;
@@ -115,6 +115,9 @@
 	font-weight: 600;
 	border-radius: 8px;
 	cursor: pointer;
+	margin-left: auto;
+	margin-right: auto;
+	text-decoration: none;
 }
 
 .them-vao-gio-hang:hover {

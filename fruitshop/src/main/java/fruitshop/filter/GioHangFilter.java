@@ -31,11 +31,11 @@ public class GioHangFilter implements Filter {
 			if (c.getName().equals("clickThemVaoGioHang")) {
 				String[] data = c.getValue().split("_");
 				System.out.println(c.getValue());
-				double x = Double.parseDouble(data[0].split("=")[1]);
-				double y = Double.parseDouble(data[1].split("=")[1]);
-				int soLuong = Integer.parseInt(data[2].split("=")[1]);
-				String url = data[3].split("=")[1];
-				int id = Integer.parseInt(data[4].split("=")[1]);
+				double x = Double.parseDouble(data[0].split("==")[1]);
+				double y = Double.parseDouble(data[1].split("==")[1]);
+				int soLuong = Integer.parseInt(data[2].split("==")[1]);
+				String url = data[3].split("==")[1];
+				int id = Integer.parseInt(data[4].split("==")[1]);
 				session.setAttribute("x", x);
 				session.setAttribute("y", y);
 				session.setAttribute("url", url);
@@ -48,7 +48,7 @@ public class GioHangFilter implements Filter {
 			}
 			else if (c.getName().equals("clickGioHang")) {
 				session.setAttribute("clickGioHang", 1);
-				c.setPath("/fruitshop/xu-ly-gio-hang");
+				c.setPath("/fruitshop/gio-hang");
 				c.setMaxAge(0);
 				resp.addCookie(c);
 			}
@@ -65,7 +65,7 @@ public class GioHangFilter implements Filter {
 			else {
 				System.out.println("line 60 giohang filter");
 				session.removeAttribute("clickThemVaoGioHang");
-				session.removeAttribute("clickGioHang");
+				// session.removeAttribute("clickGioHang");
 				chain.doFilter(req, resp);
 				return;
 			}

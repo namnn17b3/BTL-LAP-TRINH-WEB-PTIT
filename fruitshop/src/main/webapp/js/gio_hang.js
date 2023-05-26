@@ -5,6 +5,10 @@ document.querySelectorAll('.thanh-phan-phan-trang').forEach(item => {
 	}
 });
 
+document.querySelector('.cap-nhat-gio-hang__gio-hang').onclick = () => {
+	themCookie('clickCapNhatGioHang', 1, 3600000 * 24, 60, '/fruitshop/gio-hang');
+};
+
 var listDongGioHang = document.querySelectorAll('.dong-gio-hang');
 var listNutTru = document.querySelectorAll('.nut-tru');
 var listNutCong = document.querySelectorAll('.nut-cong');
@@ -15,7 +19,7 @@ var listSoLuongSanPhamConLai = document.querySelectorAll('.so-luong-san-pham-con
 var listTrangThaiSanPham = document.querySelectorAll('.trang-thai-san-pham span');
 var listIdSanPham = document.querySelectorAll('.id-san-pham');
 var listNutLoaiBoSanPham = document.querySelectorAll('.nut-loai-bo-san-pham');
-var listGiaSanPham = document.querySelectorAll('.gia-san-pham');
+var listGiaSanPham = document.querySelectorAll('span.gia-san-pham');
 var thanhTien = parseInt(document.querySelector('#thanh-tien').innerText);
 var vongTronSoLuong = document.querySelector('.vong-tron-so-luong');
 var phanTrangVaDonHang = document.querySelector('.phantrang-donhang');
@@ -33,33 +37,33 @@ listNutTru.forEach((item, index) => {
 	}
 });
 
-listNutCong.forEach((item, index) => {
-	item.onmousemove = () => {
-		var soLuongPre = parseInt(listSoLuongSanPham[index].innerText);
-		var soLuong = soLuongPre + 1;
-		var soLuongSanPhamConLai = parseInt(listSoLuongSanPhamConLai[index].innerText);
-		if (soLuong > soLuongSanPhamConLai) {
-			listNutCong[index].style.cursor = 'not-allowed';
-		}
-		else {
-			listNutCong[index].style.cursor = 'pointer';
-		}
-	}
-});
+//listNutCong.forEach((item, index) => {
+//	item.onmousemove = () => {
+//		var soLuongPre = parseInt(listSoLuongSanPham[index].innerText);
+//		var soLuong = soLuongPre + 1;
+//		var soLuongSanPhamConLai = parseInt(listSoLuongSanPhamConLai[index].innerText);
+//		if (soLuong > soLuongSanPhamConLai) {
+//			listNutCong[index].style.cursor = 'not-allowed';
+//		}
+//		else {
+//			listNutCong[index].style.cursor = 'pointer';
+//		}
+//	}
+//});
 
 listNutTru.forEach((item, index) => {
 	item.onclick = () => {
 		var soLuongPre = parseInt(listSoLuongSanPham[index].innerText);
 		var soLuong = soLuongPre - 1;
-		// var soLuongSanPhamConLai = parseInt(listSoLuongSanPhamConLai[index].innerText);
+		var soLuongSanPhamConLai = parseInt(listSoLuongSanPhamConLai[index].innerText);
 		if (soLuong > 0) {
 			listSoLuongSanPham[index].innerText = soLuong.toString();
 			listNutTru[index].style.cursor = 'pointer';
-			/*if (soLuong <= soLuongSanPhamConLai) {
+			if (soLuong <= soLuongSanPhamConLai) {
 				listTrangThaiSanPham[index].innerText = 'Còn hàng';
 				listTrangThaiSanPham[index].style.color = '#28a745';
-				listNutCong[index].style.cursor = 'pointer';
-			}*/
+				// listNutCong[index].style.cursor = 'pointer';
+			}
 			if (soLuong <= 99) {
 				listHienThiSoLuong[index].innerText = soLuong.toString();
 			}
@@ -71,7 +75,7 @@ listNutTru.forEach((item, index) => {
 			soLuong = 1;
 			listHienThiSoLuong[index].innerText = '1';
 			listSoLuongSanPham[index].innerText = '1';
-			// listNutTru[index].style.cursor = 'not-allowed';
+			listNutTru[index].style.cursor = 'not-allowed';
 		}
 		thanhTien = thanhTien + (soLuong - soLuongPre) * parseInt(listGiaSanPham[index].innerText);
 		document.querySelector('#thanh-tien').innerText = thanhTien.toString();
@@ -85,14 +89,18 @@ listNutCong.forEach((item, index) => {
 		var soLuongPre = parseInt(listSoLuongSanPham[index].innerText);
 		var soLuong = soLuongPre + 1;
 		var soLuongSanPhamConLai = parseInt(listSoLuongSanPhamConLai[index].innerText);
-		console.log(index);
-		/*if (soLuong > 0) {
+		if (soLuong > 0) {
 			listNutTru[index].style.cursor = 'pointer';
-		}*/
+		}
 		if (soLuong > soLuongSanPhamConLai) {
-			soLuong = soLuongSanPhamConLai;
-			// listTrangThaiSanPham[index].innerText = 'Hết hàng';
-			// listTrangThaiSanPham[index].style.color = '#dc3545';
+			// soLuong = soLuongSanPhamConLai;
+			if (soLuongSanPhamConLai == 0) {
+				listTrangThaiSanPham[index].innerText = 'Hết hàng';
+			}
+			else {
+				listTrangThaiSanPham[index].innerText = 'Vượt quá số lượng trong kho';
+			}
+			listTrangThaiSanPham[index].style.color = '#dc3545';
 			// listNutCong[index].style.cursor = 'not-allowed';
 		}
 		if (soLuong < 99) {
@@ -101,6 +109,7 @@ listNutCong.forEach((item, index) => {
 		else {
 			listHienThiSoLuong[index].innerText = '99+';
 		}
+		
 		thanhTien = thanhTien + (soLuong - soLuongPre) * parseInt(listGiaSanPham[index].innerText);
 		document.querySelector('#thanh-tien').innerText = thanhTien.toString();
 		listSoLuongSanPham[index].innerText = soLuong.toString();

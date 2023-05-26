@@ -38,26 +38,54 @@ public class GioHangController extends HttpServlet {
 		HttpSession session = req.getSession();
 		User currentUser = (User) session.getAttribute("currentUser");
 		
-		if (req.getParameter("cap-nhat-gio-hang") != null) {
-			Cookie[] cookies = req.getCookies();
+		Cookie[] cookies = req.getCookies();
+		boolean clickCapNhatGioHang = false;
+		for (Cookie c : cookies) {
+			if (c.getName().equals("clickCapNhatGioHang")) {
+				clickCapNhatGioHang = true;
+				c.setMaxAge(0);
+				c.setPath("/fruitshop/gio-hang");
+				resp.addCookie(c);
+				break;
+			}
+		}
+		if (clickCapNhatGioHang == true) {
 			for (Cookie c : cookies) {
-				System.out.println(c.getName());
 				try {
 					int idSanPham = Integer.parseInt(c.getName());
 					int soLuong = Integer.parseInt(c.getValue());
+					// System.out.println(c.getName());
 					c.setMaxAge(0);
 					c.setPath("/fruitshop/gio-hang");
 					resp.addCookie(c);
 					SanPhamTrongGioHang sanPhamTrongGioHang = sanPhamTrongGioHangDao.getSanPhamTrongGioHangByIdUserAndIdSanPham(currentUser.getId(), idSanPham);
+					/*if (sanPhamTrongGioHang == null) {
+						System.out.println("null line 53 gio hang controller");
+					}*/
 					sanPhamTrongGioHang.setSoLuong(soLuong);
 					sanPhamTrongGioHang.setNgayThem(new Date());
+					// System.out.println(sanPhamTrongGioHang.getIdSanPham() + " line 54 gio hang controller");
 					if (soLuong > 0) {
+						System.out.println("line 55 gio hang controller");
 						sanPhamTrongGioHangDao.capNhatSanPhamTrongGioHang(sanPhamTrongGioHang);
 					}
 					else {
 						sanPhamTrongGioHangDao.xoaSanPhamTrongGioHangByIdUserAndIdSanPham(currentUser.getId(), idSanPham);
 						session.setAttribute("soLuongSanPhamTrongGioHang", (int) session.getAttribute("soLuongSanPhamTrongGioHang") - 1);
 					}
+					// System.out.println(sanPhamTrongGioHang.getIdSanPham() + " line 61 gio hang controller");
+				} catch (Exception e) {
+					continue;
+				}
+			}
+		}
+		else {
+			for (Cookie c : cookies) {
+				try {
+					Integer.parseInt(c.getName());
+					c.setMaxAge(0);
+					c.setPath("/fruitshop/gio-hang");
+					resp.addCookie(c);
 				} catch (Exception e) {
 					continue;
 				}

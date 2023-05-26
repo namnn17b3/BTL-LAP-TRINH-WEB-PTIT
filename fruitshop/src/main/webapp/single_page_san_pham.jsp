@@ -29,8 +29,7 @@
 	        			<input type="hidden" name="so-luong" value="1">
 	        			<button class="them-vao-gio-hang"><p style="margin: auto">Thêm vào giỏ</p></button>
 	        		</form>-->
-	        		<div class="them-vao-gio-hang"><p style="margin: auto">Thêm vào giỏ</p></div>
-	        		<a href="./xu-ly-gio-hang?id=${sp.id}" style="display: none"></a>
+	        		<a class="them-vao-gio-hang" href="./xu-ly-gio-hang?id=${sp.id}"><p style="margin: auto">Thêm vào giỏ</p></a>
 	        		<a class="mua-ngay" href="./mua-ngay"><p style="margin: auto">Mua ngay</p></a>
 	        	</div>
        		</div>

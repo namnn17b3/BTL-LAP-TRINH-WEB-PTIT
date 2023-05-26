@@ -1,7 +1,7 @@
+<%@page import="fruitshop.model.SanPhamTrongGioHang"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
-<%@page import="fruitshop.model.SanPhamTrongGioHang"%>
 <%@page import="java.util.HashMap"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -37,6 +37,10 @@
 	%>
    	<jsp:include page="./header.jsp"/>
 	<jsp:include page="./load_page.jsp"/>
+	
+	<c:if test="${loiGioHang == 1}">	
+	   	<jsp:include page="thong_bao_mini.jsp"/>
+	</c:if>
 	
     <!-- Than website -->
     <div class="than-website">
@@ -90,7 +94,7 @@
 		        			<div class="so-luong-san-pham so-luong-san-pham__gio-hang chung-cua-cac-thong-tin-san-pham__gio-hang">
 		        				<div class="o-nhap-so-luong">
 		        					<div class="nut-tru thanh-phan-o-nhap-so-luong nut-tang-giam-so-luong" style="flex: 2; padding-left: 6px;"><span style="margin: auto">-</span></div>
-		        							        					
+		        					
 		        					<div class="hien-thi-so-luong thanh-phan-o-nhap-so-luong" style="flex: 6" title="${item.soLuong}">
 		        						<c:if test="${item.soLuong <= 99}">
 		        							<span style="margin: auto; color: #3d464d;">${item.soLuong}</span>
@@ -107,11 +111,15 @@
 		        			<div class="trang-thai-san-pham trang-thai-san-pham__gio-hang chung-cua-cac-thong-tin-san-pham__gio-hang">
 			        			<c:if test="${item.soLuongSanPhamConLai >= item.soLuong}">
 			        				<c:set var="trangThai" value='<%="Còn hàng"%>'/>
-			        				<span style="margin: auto; color: #28a745;">${trangThai}</span>
+			        				<span style="margin: auto; color: #28a745; text-align: center;">${trangThai}</span>
 			        			</c:if>
-			        			<c:if test="${item.soLuongSanPhamConLai < item.soLuong}">
+			        			<c:if test="${item.soLuongSanPhamConLai < item.soLuong && item.soLuongSanPhamConLai > 0}">
 			        				<c:set var="trangThai" value='<%="Hết hàng"%>'/>
-			        				<span style="margin: auto; color: #dc3545;">${trangThai}</span>
+			        				<span style="margin: auto; color: #dc3545; text-align: center;">${trangThai}</span>
+			        			</c:if>
+			        			<c:if test="${item.soLuongSanPhamConLai == 0}">
+			        				<c:set var="trangThai" value='<%="Vượt quá số lượng trong kho"%>'/>
+			        				<span style="margin: auto; color: #dc3545; text-align: center;">${trangThai}</span>
 			        			</c:if>
 		        			</div>
 		        			
@@ -167,7 +175,7 @@
 	
 					<div class="nut-thao-tac-dieu-huong__gio-hang">
 						<a href="./home" class="quay-lai-trang-chu__gio-hang chuyen-huong__gio-hang"><span style="margin: auto;">Trở lại trang chủ</span></a>
-						<a href="./gio-hang?cap-nhat-gio-hang=1" class="cap-nhat-gio-hang__gio-hang chuyen-huong__gio-hang"><span style="margin: auto;">Cập nhật giỏ hàng</span></a>
+						<a href="./gio-hang" class="cap-nhat-gio-hang__gio-hang chuyen-huong__gio-hang"><span style="margin: auto;">Cập nhật giỏ hàng</span></a>
 					</div>
 									
 					<div class="don-hang__gio-hang">
@@ -188,14 +196,44 @@
    	<jsp:include page="./footer.jsp"/>
    	<script src="./js/utils.js"></script>
     <script src="./js/common.js"></script>
-    <script src="./js/gio_hang.js"></script>
-  	
+    
+    <c:if test="${soLuongSanPhamTrongGioHang > 0}">
+	    <script src="./js/gio_hang.js"></script>
+    </c:if>
+    
+    <c:if test="${loiGioHang == 1}">
+	    <script type="text/javascript">
+	    	document.querySelector('.thanh-toan__gio-hang').onclick = () => {
+	    		themCookie('flag', 0, 3600000 * 24, 60, '/fruitshop/gio-hang');
+	    	}
+	    </script>
+    </c:if>
+    
     <script type="text/javascript">
+    	var flag = layCookie('flag', 0);
     	setTimeout(() => {
 			document.querySelector('.load-truoc-khi-vao-trang').remove();
 			document.querySelector('.than-website').style.display = 'flex';
 			window.scrollTo(0, 0);
 		}, 1200);
     </script>
+    
+    <c:if test="${loiGioHang == 1}">
+    	<script type="text/javascript">
+    		setTimeout(() => {
+    			document.querySelector('.thong-bao-mini').style.borderLeft = '5px solid #f00';
+    			document.querySelector('.icon-thong-bao-mini').innerHTML = '<i class="fa-sharp fa-solid fa-circle-xmark" id="infomini-icon"></i>';
+    			document.querySelector('#infomini-icon').style.color = '#f00';
+    			document.querySelector('.icon-thong-bao-mini').style.color = '#f00';
+    			document.querySelector('.noi-dung-thong-bao-mini-1').innerText = 'Thất bại';
+    			document.querySelector('.noi-dung-thong-bao-mini-2').innerText = 'Sản phẩm ${tenSanPham} bạn chọn có số lượng không hợp lý';
+    		}, 1200);
+    	</script>
+    	<script src="./js/thong_bao_mini.js"></script>
+    </c:if>
+    
+    <%
+    	session.removeAttribute("loiGioHang");
+    %>
 </body>
 </html>

@@ -36,13 +36,19 @@ public class XuLyGioHang extends HttpServlet {
 		int soLuong = (int) session.getAttribute("soLuong");
 		SanPham sanPham = sanPhamDao.getSanPhamById(idSanPham);
 		System.out.println(idSanPham + " " + url + " " + soLuong);
-		if (sanPham.getSoLuongNhap() - sanPham.getSoLuongBan() <= 0) {
+		if (sanPham.getSoLuongNhap() - sanPham.getSoLuongBan() == 0) {
 			session.setAttribute("themGioHangStatus", 1);
 			resp.sendRedirect(url);
 			return;
 		}
+		
+		if (sanPham.getSoLuongNhap() - sanPham.getSoLuongBan() - soLuong < 0) {
+			session.setAttribute("themGioHangStatus", 2);
+			resp.sendRedirect(url);
+			return;
+		}
 		session.setAttribute("tenSanPham", sanPham.getTen());
-		session.setAttribute("themGioHangStatus", 2);
+		session.setAttribute("themGioHangStatus", 3);
 		// Cập nhật số lượng 1 sản phẩm cụ thể có trong giỏ hàng
 		SanPhamTrongGioHang sanPhamTrongGioHang = sanPhamTrongGioHangDao.getSanPhamTrongGioHangByIdUserAndIdSanPham(currentUser.getId(), idSanPham);
 		if (sanPhamTrongGioHang == null) {

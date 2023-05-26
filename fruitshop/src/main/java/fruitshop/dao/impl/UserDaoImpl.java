@@ -111,6 +111,7 @@ public class UserDaoImpl implements UserDao {
 					user.setAnh("./img_user/fb-no-img.png");
 				}
 				user.setVaiTro(res.getString("vai_tro"));
+				user.setTrangThai(res.getInt("trang_thai"));
 				return user;
 			}
 		}
@@ -125,7 +126,7 @@ public class UserDaoImpl implements UserDao {
 		try {
 			PreparedStatement ppst = conn.prepareStatement(
 				"update user\r\n"
-				+ "set ten = ?, mat_khau = ?, anh = ?\r\n"
+				+ "set ten = ?, mat_khau = ?, anh = ?, trang_thai = ?\r\n"
 				+ "where email = ?;"
 			);
 			ppst.setString(1, user.getTen());
@@ -136,7 +137,8 @@ public class UserDaoImpl implements UserDao {
 			else {
 				ppst.setNull(3, java.sql.Types.VARCHAR);
 			}
-			ppst.setString(4, user.getEmail());
+			ppst.setInt(4, user.getTrangThai());
+			ppst.setString(5, user.getEmail());
 			ppst.executeUpdate();
 		}
 		catch (Exception e) {

@@ -29,6 +29,10 @@
 <body>
 	<jsp:include page="header.jsp"/>
 	<jsp:include page="load_page.jsp"/>
+	
+	<c:if test="${themGioHangStatus == 1 || themGioHangStatus == 2 || themGioHangStatus == 3}">	
+	   	<jsp:include page="thong_bao_mini.jsp"/>
+	</c:if>
 
     <!-- than website -->
     <div class="than-website">
@@ -98,14 +102,13 @@
 			    <div class="so-luong-tieu-de">Số lượng</div>
 			    <div class="thao-tac-voi-san-pham">
 			    	<div id="tang-giam-so-luong">
+			    		<div class="so-luong-san-pham-con-lai" style="display: none;"><%=sanPham.getSoLuongNhap() - sanPham.getSoLuongBan()%></div>
+			    		<div class="so-luong" style="display: none;">1</div>
 			    		<div class="nut-tang-giam-so-luong tru"><p style="margin: auto">-</p></div>
-			    		<div id="so-luong"><p style="margin: auto">1</p></div>
+			    		<div id="so-luong-hien-thi" title="1"><p style="margin: auto">1</p></div>
 			    		<div class="nut-tang-giam-so-luong cong"><p style="margin: auto">+</p></div>
 			    	</div>
-			    	<form action="./them-vao-gio-hang?id=<%=sanPham.getId()%>" method="post" style="display: flex; margin-left: auto; margin-right: auto;">
-				    	<input type="hidden" name="so-luong" value="1">
-				    	<button class="them-vao-gio-hang"><p style="margin: auto">Thêm vào giỏ</p></button>
-				    </form>
+				    <a class="them-vao-gio-hang" href="./xu-ly-gio-hang?id=<%=sanPham.getId()%>"><p style="margin: auto">Thêm vào giỏ</p></a>
 			    	<a id="mua-ngay" href="#"><p style="margin: auto;">Mua ngay</p></a>
 			    </div>
 		    </div>
@@ -343,6 +346,7 @@
 	<jsp:include page="footer.jsp"/>
     <script src="./js/common.js"></script>
     <script src="./js/chi_tiet_san_pham.js"></script>
+    <script src="./js/xu_ly_gio_hang.js"></script>
     
     <c:if test="${forcusDanhGia == 1}">
     	<script type="text/javascript">
@@ -372,6 +376,61 @@
 		}, 1200);
     	</script>
     </c:if>
+    
+    <script type="text/javascript">
+    	var flag = layCookie('flag', 0);
+    </script>
+    
+    <c:if test="${themGioHangStatus == 1 || themGioHangStatus == 2 || themGioHangStatus == 3}">
+    	<script type="text/javascript">
+    		setTimeout(() => {
+	    		document.querySelector('.noi-dung-thong-bao-mini-2').innerText = 'Đã thêm sản phẩm ${tenSanPham} vào giỏ hàng';
+		    	window.scrollTo(<%=session.getAttribute("x")%>, <%=session.getAttribute("y")%>);
+	    	}, 1200);
+    	</script>
+    </c:if>
+    
+ 	<c:if test="${themGioHangStatus == 1}">
+ 		<script type="text/javascript">
+    		setTimeout(() => {
+    			document.querySelector('.thong-bao-mini').style.borderLeft = '5px solid #f00';
+    			document.querySelector('.icon-thong-bao-mini').innerHTML = '<i class="fa-sharp fa-solid fa-circle-xmark" id="infomini-icon"></i>';
+    			document.querySelector('#infomini-icon').style.color = '#f00';
+    			document.querySelector('.icon-thong-bao-mini').style.color = '#f00';
+    			document.querySelector('.noi-dung-thong-bao-mini-1').innerText = 'Thất bại';
+    			document.querySelector('.noi-dung-thong-bao-mini-2').innerText = 'Sản phẩm ${tenSanPham} đã hết hàng';
+    		}, 1200);
+    	</script>
+ 	</c:if>
+ 	
+ 	<c:if test="${themGioHangStatus == 2}">
+ 		<script type="text/javascript">
+    		setTimeout(() => {
+    			document.querySelector('.thong-bao-mini').style.borderLeft = '5px solid #f00';
+    			document.querySelector('.icon-thong-bao-mini').innerHTML = '<i class="fa-sharp fa-solid fa-circle-xmark" id="infomini-icon"></i>';
+    			document.querySelector('#infomini-icon').style.color = '#f00';
+    			document.querySelector('.icon-thong-bao-mini').style.color = '#f00';
+    			document.querySelector('.noi-dung-thong-bao-mini-1').innerText = 'Thất bại';
+    			document.querySelector('.noi-dung-thong-bao-mini-2').innerText = 'Sản phẩm ${tenSanPham} bạn chọn có số lượng vượt quá số lượng trong kho';
+    		}, 1200);
+    	</script>
+ 	</c:if>
+    
+    <c:if test="${themGioHangStatus == 1 || themGioHangStatus == 2 || themGioHangStatus == 3}">
+    	<script src="./js/thong_bao_mini.js"></script>
+    </c:if>
+
+    <c:if test='<%=session.getAttribute("themGioHangStatus") == null%>'>
+	    <script type="text/javascript">
+	    	setTimeout(() => {
+	    		window.scrollTo(0, 0);
+	    	}, 1200);
+    	</script>
+    </c:if>
+ 
+    <%
+    	session.removeAttribute("themGioHangStatus");
+    %>
 
 </body>
 </html>

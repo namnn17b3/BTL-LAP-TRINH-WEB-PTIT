@@ -7,16 +7,18 @@ public class User {
 	private String matKhau;
 	private String anh;
 	private String vaiTro;
+	private int trangThai;
 	
 	public User() {}
 
-	public User(int id, String ten, String email, String matKhau, String anh, String vaiTro) {
+	public User(int id, String ten, String email, String matKhau, String anh, String vaiTro, int trangThai) {
 		this.id = id;
 		this.ten = ten;
 		this.email = email;
 		this.matKhau = matKhau;
 		this.anh = anh;
 		this.vaiTro = vaiTro;
+		this.trangThai = trangThai;
 	}
 
 	public int getId() {
@@ -65,5 +67,13 @@ public class User {
 
 	public void setVaiTro(String vaiTro) {
 		this.vaiTro = vaiTro;
+	}
+
+	public int getTrangThai() {
+		return trangThai;
+	}
+
+	public void setTrangThai(int trangThai) {
+		this.trangThai = trangThai;
 	}
 }

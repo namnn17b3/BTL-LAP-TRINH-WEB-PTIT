@@ -50,6 +50,7 @@ public class SanPhamTrongGioHangDaoImpl implements SanPhamTrongGioHangDao {
 				+ "	group by dh.id_sp\r\n"
 				+ ") as a2\r\n"
 				+ "where a1.id_sp = a2.id_sp\r\n"
+				+ "order by ngay_them desc\r\n"
 				+ "limit ?, 5;"
 			);
 			ppst.setInt(1, idUser);
@@ -125,12 +126,14 @@ public class SanPhamTrongGioHangDaoImpl implements SanPhamTrongGioHangDao {
 	public void capNhatSanPhamTrongGioHang(SanPhamTrongGioHang sanPhamTrongGioHang) {
 		try {
 			PreparedStatement ppst = conn.prepareStatement(
-				"update sanphamtronggiohang set id_user = ?, id_sp = ?, so_luong = ?, ngay_them = ?;"
+				"update sanphamtronggiohang\r\n"
+				+ "set so_luong = ?, ngay_them = ?\r\n"
+				+ "where id_user = ? and id_sp = ?;"
 			);
-			ppst.setInt(1, sanPhamTrongGioHang.getIdUser());
-			ppst.setInt(2, sanPhamTrongGioHang.getIdSanPham());
-			ppst.setInt(3, sanPhamTrongGioHang.getSoLuong());
-			ppst.setTimestamp(4, new java.sql.Timestamp(new Date().getTime()));
+			ppst.setInt(1, sanPhamTrongGioHang.getSoLuong());
+			ppst.setTimestamp(2, new java.sql.Timestamp(sanPhamTrongGioHang.getNgayThem().getTime()));
+			ppst.setInt(3, sanPhamTrongGioHang.getIdUser());
+			ppst.setInt(4, sanPhamTrongGioHang.getIdSanPham());
 			ppst.execute();
 		} catch (Exception e) {
 			e.printStackTrace();

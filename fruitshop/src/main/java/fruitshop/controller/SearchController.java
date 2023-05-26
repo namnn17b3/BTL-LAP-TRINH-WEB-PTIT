@@ -56,7 +56,7 @@ public class SearchController extends HttpServlet {
 		session.setAttribute("listSanPham", listSanPham);
 		session.setAttribute("page", page);
 		session.setAttribute("soLuongSanPhamAll", soLuongSanPhamAll);
-		session.setAttribute("tenSanPham", tenSanPham);
+		session.setAttribute("tenSanPhamTimKiem", tenSanPham);
 		req.getRequestDispatcher("./ket_qua_tim_kiem.jsp").forward(req, resp);
 	}
 }

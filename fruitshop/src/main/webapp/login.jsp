@@ -45,6 +45,10 @@
                 </div>
                 
                 <c:if test="${dangNhapKhongThanhCong == 1}">
+	                <div class="loi-dang-nhap">Erorr: Tài khoản đang được đăng nhập ở nơi khác</div>                
+                </c:if>
+                
+                <c:if test="${dangNhapKhongThanhCong == 2}">
 	                <div class="loi-dang-nhap">Erorr: Thông tin đăng nhập không chính xác</div>                
                 </c:if>
                 

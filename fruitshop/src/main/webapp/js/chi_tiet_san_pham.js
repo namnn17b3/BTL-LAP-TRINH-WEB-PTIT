@@ -65,3 +65,48 @@ nutPhanLoais.forEach(item => {
 });
 
 //console.log(moTaChiTietSanPham.offsetHeight);
+
+var nutTru = document.querySelector('.tru');
+var nutCong = document.querySelector('.cong');
+var hienThiSoLuong = document.querySelector('#so-luong-hien-thi p');
+var soLuongHidden = document.querySelector('.so-luong');
+
+nutTru.onmouseover = () => {
+	var preSoLuong = parseInt(soLuongHidden.innerText);
+	var soLuong = preSoLuong - 1;
+	if (soLuong <= 0) {
+		nutTru.style.cursor = 'not-allowed';
+	}
+	else {
+		nutTru.style.cursor = 'pointer';
+	}
+}
+
+nutTru.onclick = () => {
+	var preSoLuong = parseInt(soLuongHidden.innerText);
+	var soLuong = preSoLuong - 1;
+	if (soLuong > 0) {
+		hienThiSoLuong.innerText = soLuong.toString();
+		soLuongHidden.innerText = soLuong.toString();
+		hienThiSoLuong.title = soLuong.toString();
+		hienThiSoLuong.parentElement.title = soLuong.toString();
+	}
+	else {
+		nutTru.style.cursor = 'not-allowed';
+	}
+}
+
+nutCong.onclick = () => {
+	nutTru.style.cursor = 'pointer';
+	var preSoLuong = parseInt(soLuongHidden.innerText);
+	var soLuong = preSoLuong + 1;
+	if (soLuong > 99) {
+		hienThiSoLuong.innerText = '99+';
+	}
+	else {
+		hienThiSoLuong.innerText = soLuong.toString();
+	}
+	soLuongHidden.innerText = soLuong.toString();
+	hienThiSoLuong.title = soLuong.toString();
+	hienThiSoLuong.parentElement.title = soLuong.toString();
+}

@@ -23,11 +23,12 @@
 	</style>
 </head>
 <body>
-	<%
-		
-	%>
 	<jsp:include page="./header.jsp"/>
 	<jsp:include page="./load_page.jsp"/>
+	
+	<c:if test="${themGioHangStatus == 1 || themGioHangStatus == 2 || themGioHangStatus == 3}">	
+	   	<jsp:include page="thong_bao_mini.jsp"/>
+	</c:if>
 	
     <!-- Than website -->    
     <div class="than-website">
@@ -98,11 +99,69 @@
     <script src="./js/common.js"></script>
     <script src="./js/san_pham.js"></script>
     <script src="./js/danh_sach_san_pham.js"></script>
+    <script src="./js/xu_ly_gio_hang.js"></script>
+    
     <script type="text/javascript">
     	setTimeout(() => {
 			document.querySelector('.load-truoc-khi-vao-trang').remove();
 			document.querySelector('.than-website').style.display = 'flex';
 		}, 1200);
     </script>
+    
+    <script type="text/javascript">
+    	var flag = layCookie('flag', 0);
+    </script>
+    
+    <c:if test="${themGioHangStatus == 1 || themGioHangStatus == 2 || themGioHangStatus == 3}">
+    	<script type="text/javascript">
+    		setTimeout(() => {
+	    		document.querySelector('.noi-dung-thong-bao-mini-2').innerText = 'Đã thêm sản phẩm ${tenSanPham} vào giỏ hàng';
+		    	window.scrollTo(<%=session.getAttribute("x")%>, <%=session.getAttribute("y")%>);
+	    	}, 1200);
+    	</script>
+    </c:if>
+    
+ 	<c:if test="${themGioHangStatus == 1}">
+ 		<script type="text/javascript">
+    		setTimeout(() => {
+    			document.querySelector('.thong-bao-mini').style.borderLeft = '5px solid #f00';
+    			document.querySelector('.icon-thong-bao-mini').innerHTML = '<i class="fa-sharp fa-solid fa-circle-xmark" id="infomini-icon"></i>';
+    			document.querySelector('#infomini-icon').style.color = '#f00';
+    			document.querySelector('.icon-thong-bao-mini').style.color = '#f00';
+    			document.querySelector('.noi-dung-thong-bao-mini-1').innerText = 'Thất bại';
+    			document.querySelector('.noi-dung-thong-bao-mini-2').innerText = 'Sản phẩm ${tenSanPham} đã hết hàng';
+    		}, 1200);
+    	</script>
+ 	</c:if>
+ 	
+ 	<c:if test="${themGioHangStatus == 2}">
+ 		<script type="text/javascript">
+    		setTimeout(() => {
+    			document.querySelector('.thong-bao-mini').style.borderLeft = '5px solid #f00';
+    			document.querySelector('.icon-thong-bao-mini').innerHTML = '<i class="fa-sharp fa-solid fa-circle-xmark" id="infomini-icon"></i>';
+    			document.querySelector('#infomini-icon').style.color = '#f00';
+    			document.querySelector('.icon-thong-bao-mini').style.color = '#f00';
+    			document.querySelector('.noi-dung-thong-bao-mini-1').innerText = 'Thất bại';
+    			document.querySelector('.noi-dung-thong-bao-mini-2').innerText = 'Sản phẩm ${tenSanPham} bạn chọn có số lượng vượt quá số lượng trong kho';
+    		}, 1200);
+    	</script>
+ 	</c:if>
+    
+    <c:if test="${themGioHangStatus == 1 || themGioHangStatus == 2 || themGioHangStatus == 3}">
+    	<script src="./js/thong_bao_mini.js"></script>
+    </c:if>
+
+    <c:if test='<%=session.getAttribute("themGioHangStatus") == null%>'>
+	    <script type="text/javascript">
+	    	setTimeout(() => {
+	    		window.scrollTo(0, 0);
+	    	}, 1200);
+    	</script>
+    </c:if>
+ 
+    <%
+    	session.removeAttribute("themGioHangStatus");
+    %>
+    
 </body>
 </html>

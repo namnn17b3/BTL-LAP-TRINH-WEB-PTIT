@@ -1,4 +1,4 @@
-if (flagClickThemVaoGioHang == 0) {
+if (flag == 0) {
 	setTimeout(() => {
 		var styleElement = document.createElement('style');
 		styleElement.type = 'text/css';
@@ -28,14 +28,14 @@ if (flagClickThemVaoGioHang == 0) {
 		var body = document.querySelector('body').insertAdjacentElement('afterbegin', styleElement);
 		thongBaoMini.style.animation = 'truotTuPhaiSang-thongBaoMini 0.8s ease forwards';
 		nutHuyThongBaoMini.onclick = () => {
-			themCookie('flagClickThemVaoGioHang', 1, 3600000 * 24, 60, '/fruitshop' + url.slice(url.lastIndexOf('/')));
+			themCookie('flag', 1, 3600000 * 24, 60, '/fruitshop' + url.slice(url.lastIndexOf('/')));
 			thongBaoMini.style.animation = 'truotTuTraiSang-thongBaoMini 0.8s ease forwards';
 			setTimeout(() => {
 				thongBaoMini.style.display = 'none';
 			}, 800);
 		}
 		setTimeout(() => {
-			themCookie('flagClickThemVaoGioHang', 1, 3600000 * 24, 60, '/fruitshop' + url.slice(url.lastIndexOf('/')));
+			themCookie('flag', 1, 3600000 * 24, 60, '/fruitshop' + url.slice(url.lastIndexOf('/')));
 			try {
 				thongBaoMini.style.animation = 'truotTuTraiSang-thongBaoMini 0.8s ease forwards';
 				setTimeout(() => {

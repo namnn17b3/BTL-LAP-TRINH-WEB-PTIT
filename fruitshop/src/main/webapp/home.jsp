@@ -53,9 +53,10 @@
 	</c:if>
 	
 <!-- 	<div style="display: flex;"> -->
-	<c:if test="${themGioHangStatus == 1 || themGioHangStatus == 2}">	
+	<c:if test="${themGioHangStatus == 1 || themGioHangStatus == 2 || themGioHangStatus == 3}">	
 	   	<jsp:include page="thong_bao_mini.jsp"/>
 	</c:if>
+   
     <!-- than website -->
     <div class="than-website than-website-duoc-hien-thi">
         <div class="than-website anh-truot">
@@ -188,8 +189,17 @@
     </c:if>
     
     <script type="text/javascript">
-    	var flagClickThemVaoGioHang = layCookie('flagClickThemVaoGioHang', 0);
+    	var flag = layCookie('flag', 0);
     </script>
+    
+    <c:if test="${themGioHangStatus == 1 || themGioHangStatus == 2 || themGioHangStatus == 3}">
+    	<script type="text/javascript">
+    		setTimeout(() => {
+	    		document.querySelector('.noi-dung-thong-bao-mini-2').innerText = 'Đã thêm sản phẩm ${tenSanPham} vào giỏ hàng';
+		    	window.scrollTo(<%=session.getAttribute("x")%>, <%=session.getAttribute("y")%>);
+	    	}, 1200);
+    	</script>
+    </c:if>
     
  	<c:if test="${themGioHangStatus == 1}">
  		<script type="text/javascript">
@@ -203,17 +213,21 @@
     		}, 1200);
     	</script>
  	</c:if>
-	
-    <c:if test="${themGioHangStatus == 1 || themGioHangStatus == 2}">
-    	<script type="text/javascript">
+ 	
+ 	<c:if test="${themGioHangStatus == 2}">
+ 		<script type="text/javascript">
     		setTimeout(() => {
-	    		document.querySelector('.noi-dung-thong-bao-mini-2').innerText = 'Đã thêm sản phẩm ${tenSanPham} vào giỏ hàng';
-		    	window.scrollTo(<%=session.getAttribute("x")%>, <%=session.getAttribute("y")%>);
-	    	}, 1200);
+    			document.querySelector('.thong-bao-mini').style.borderLeft = '5px solid #f00';
+    			document.querySelector('.icon-thong-bao-mini').innerHTML = '<i class="fa-sharp fa-solid fa-circle-xmark" id="infomini-icon"></i>';
+    			document.querySelector('#infomini-icon').style.color = '#f00';
+    			document.querySelector('.icon-thong-bao-mini').style.color = '#f00';
+    			document.querySelector('.noi-dung-thong-bao-mini-1').innerText = 'Thất bại';
+    			document.querySelector('.noi-dung-thong-bao-mini-2').innerText = 'Sản phẩm ${tenSanPham} bạn chọn có số lượng vượt quá số lượng trong kho';
+    		}, 1200);
     	</script>
-    </c:if>
+ 	</c:if>
     
-    <c:if test="${themGioHangStatus == 1 || themGioHangStatus == 2}">
+    <c:if test="${themGioHangStatus == 1 || themGioHangStatus == 2 || themGioHangStatus == 3}">
     	<script src="./js/thong_bao_mini.js"></script>
     </c:if>
 
