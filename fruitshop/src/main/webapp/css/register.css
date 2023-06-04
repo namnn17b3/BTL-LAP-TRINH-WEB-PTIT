@@ -218,6 +218,27 @@ body {
     position: relative;
 }
 
+.so-tai-khoan-nguoi-chuyen {
+	width: 100%;
+    height: 66px;
+    margin-bottom: 24px;
+    position: relative;
+}
+
+.ngan-hang-nguoi-chuyen {
+	width: 100%;
+    height: 66px;
+    margin-bottom: 24px;
+    position: relative;
+}
+
+.ngay-chuyen-khoan {
+	width: 100%;
+    height: 66px;
+    margin-bottom: 24px;
+    position: relative;
+}
+
 input[type=password]::-ms-reveal,
 input[type=password]::-ms-clear
 {
@@ -241,7 +262,10 @@ input[type=password]::-ms-clear
 input[id="ten"],
 input[id="email"],
 input[id="mat-khau"],
-input[id="nhap-lai-mat-khau"]
+input[id="nhap-lai-mat-khau"],
+input[id="so-tai-khoan-nguoi-chuyen"],
+input[id="ngan-hang-nguoi-chuyen"],
+input[id="ngay-chuyen-khoan"]
 {
     padding: 6px 12px;
     width: 100%;
@@ -255,7 +279,10 @@ input[id="nhap-lai-mat-khau"]
 input[id="ten"]:hover,
 input[id="email"]:hover,
 input[id="mat-khau"]:hover,
-input[id="nhap-lai-mat-khau"]:hover
+input[id="nhap-lai-mat-khau"]:hover,
+input[id="so-tai-khoan-nguoi-chuyen"]:hover,
+input[id="ngan-hang-nguoi-chuyen"]:hover,
+input[id="ngay-chuyen-khoan"]:hover
 {
     border: 3px solid rgba(26, 102, 255, 0.5);
     border-radius: 6px;

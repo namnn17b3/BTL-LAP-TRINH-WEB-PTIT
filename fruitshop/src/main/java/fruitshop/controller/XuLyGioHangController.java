@@ -19,7 +19,7 @@ import fruitshop.model.SanPhamTrongGioHang;
 import fruitshop.model.User;
 
 @WebServlet("/xu-ly-gio-hang")
-public class XuLyGioHang extends HttpServlet {
+public class XuLyGioHangController extends HttpServlet {
 	/**
 	 * 
 	 */
@@ -57,7 +57,7 @@ public class XuLyGioHang extends HttpServlet {
 			sanPhamTrongGioHang.setIdUser(currentUser.getId());
 			sanPhamTrongGioHang.setTenSanPham(sanPham.getTen());
 			sanPhamTrongGioHang.setTienTrenDonVi(sanPham.getTienTrenDonVi());
-			sanPhamTrongGioHang.setSoLuong(1);
+			sanPhamTrongGioHang.setSoLuong(soLuong);
 			sanPhamTrongGioHang.setNgayThem(new Date());
 			sanPhamTrongGioHangDao.themSanPhamTrongGioHang(sanPhamTrongGioHang);
 		}

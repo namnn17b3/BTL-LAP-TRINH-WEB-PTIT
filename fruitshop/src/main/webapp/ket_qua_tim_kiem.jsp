@@ -96,6 +96,8 @@
     </div>
     
 	<jsp:include page="./footer.jsp"/>
+	<script src="./js/utils.js"></script>
+	<script src="./js/mua_ngay.js"></script>
     <script src="./js/common.js"></script>
     <script src="./js/san_pham.js"></script>
     <script src="./js/danh_sach_san_pham.js"></script>
@@ -160,7 +162,12 @@
     </c:if>
  
     <%
-    	session.removeAttribute("themGioHangStatus");
+	    session.removeAttribute("themGioHangStatus");
+		session.removeAttribute("soLuong");
+		session.removeAttribute("x");
+		session.removeAttribute("y");
+		session.removeAttribute("url");
+		session.removeAttribute("id");
     %>
     
 </body>

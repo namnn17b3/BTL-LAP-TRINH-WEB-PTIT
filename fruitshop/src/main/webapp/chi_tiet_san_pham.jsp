@@ -22,6 +22,7 @@
 	<style type="text/css">
  		.than-website {
  			display: none;
+ 			margin-top: 25px;
  		}
 	</style>
 
@@ -91,25 +92,26 @@
 				    <div class="so-sao-va-luot-ban"><%=sanPham.getSoSaoVote()%><i class="fa-solid fa-star" id="sao"></i>(<%=soLuongTatCa%> đánh giá) | Đã bán <%=sanPham.getSoLuongBan() %></div>
 			    </c:if>
 			    <c:if test="<%=soLuongTatCa == 0%>">
-				    <div class="so-sao-va-luot-ban">Chưa có đánh giá | Đã bán <%=sanPham.getSoLuongBan() %></div>
+				    <div class="so-sao-va-luot-ban">Chưa có đánh giá | Đã bán <%=sanPham.getSoLuongBan()%></div>
 			    </c:if>
 			    <div class="mo-ta-ngan-gon-san-pham">
 			    	<div class="thong-tin-ngan-gon" style="flex: 2">Đơn vị:<p style="color: #28a745; display: inline;"><%=sanPham.getDonVi()%></p></div>
-			    	<div class="thong-tin-ngan-gon" style="flex: 3">Nguồn gốc:<p style="color: #28a745; display: inline;"><%=sanPham.getNguonGoc()%></p></div>
+			    	<div class="thong-tin-ngan-gon" style="flex: <%=sanPham.getNguonGoc().equals("New Zealand") ? 3.5 : 3%>">Nguồn gốc:<p style="color: #28a745; display: inline;"><%=sanPham.getNguonGoc()%></p></div>
 			    	<div class="thong-tin-ngan-gon" style="flex: 3">Tình trạng:<p style="color: #28a745; display: inline;"><%=tinhTrang%></p></div>
 			    </div>
-			    <h3 id="gia"><%=sanPham.getTienTrenDonVi()%> VNĐ<p style="display: inline; color: #3d464d">/<%=sanPham.getDonVi()%></p></h3>
+			    <div class="gia-san-pham-hidden" style="display: none;"><%=sanPham.getTienTrenDonVi()%></div>
+			    <h3 id="gia"><span class="tien-format"><%=sanPham.getTienTrenDonVi()%></span> VNĐ<p style="display: inline; color: #3d464d">/<%=sanPham.getDonVi()%></p></h3>
 			    <div class="so-luong-tieu-de">Số lượng</div>
 			    <div class="thao-tac-voi-san-pham">
 			    	<div id="tang-giam-so-luong">
 			    		<div class="so-luong-san-pham-con-lai" style="display: none;"><%=sanPham.getSoLuongNhap() - sanPham.getSoLuongBan()%></div>
 			    		<div class="so-luong" style="display: none;">1</div>
 			    		<div class="nut-tang-giam-so-luong tru"><p style="margin: auto">-</p></div>
-			    		<div id="so-luong-hien-thi" title="1"><p style="margin: auto">1</p></div>
+			    		<div id="so-luong-hien-thi" title="1"><p style="margin: auto"><%=session.getAttribute("soLuong") != null ? session.getAttribute("soLuong") : 1%></p></div>
 			    		<div class="nut-tang-giam-so-luong cong"><p style="margin: auto">+</p></div>
 			    	</div>
 				    <a class="them-vao-gio-hang" href="./xu-ly-gio-hang?id=<%=sanPham.getId()%>"><p style="margin: auto">Thêm vào giỏ</p></a>
-			    	<a id="mua-ngay" href="#"><p style="margin: auto;">Mua ngay</p></a>
+			    	<a class="mua-ngay" href="./thanh-toan"><p style="margin: auto;">Mua ngay</p></a>
 			    </div>
 		    </div>
    		</div>
@@ -272,7 +274,7 @@
 				    							<div class="anh-nguoi-danh-gia_ten-nguoi-danh-gia_so-sao-danh-gia_ngay-danh-gia">
 				    								<img alt="" src="${item.anhUser}" class="anh-nguoi-danh-gia">
 				    								<div style="margin-left: 10px;margin-bottom: 10px">
-				    									<h4 class="ten-nguoi-danh-gia">${item.tenUser}</h4>
+				    									<h4 class="ten-nguoi-danh-gia"><c:out value="${item.tenUser}"/></h4>
 				    									<c:forEach begin="1" end="${item.soSaoVote}">
 				    										<i class="fa-solid fa-star" style="color: #fdd836; font-size: 11px"></i>
 				    									</c:forEach>
@@ -284,7 +286,7 @@
 				    									</div>
 				    								</div>
 				    							</div>
-				    							<div class="noi-dung-danh-gia">${item.noiDungBinhLuan}</div>
+				    							<div class="noi-dung-danh-gia"><c:out value="${item.noiDungBinhLuan}"/></div>
 		    								</div>   							
 		    							</c:forEach>
 		    						</div>
@@ -344,6 +346,9 @@
    		</div>
 	</div>
 	<jsp:include page="footer.jsp"/>
+	
+	<script src="./js/utils.js"></script>
+	<script src="./js/mua_ngay.js"></script>
     <script src="./js/common.js"></script>
     <script src="./js/chi_tiet_san_pham.js"></script>
     <script src="./js/xu_ly_gio_hang.js"></script>
@@ -420,7 +425,7 @@
     	<script src="./js/thong_bao_mini.js"></script>
     </c:if>
 
-    <c:if test='<%=session.getAttribute("themGioHangStatus") == null%>'>
+    <c:if test='<%=session.getAttribute("themGioHangStatus") == null && request.getAttribute("forcusDanhGia") == null%>'>
 	    <script type="text/javascript">
 	    	setTimeout(() => {
 	    		window.scrollTo(0, 0);
@@ -430,6 +435,7 @@
  
     <%
     	session.removeAttribute("themGioHangStatus");
+    	session.removeAttribute("soLuong");
     %>
 
 </body>

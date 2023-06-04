@@ -33,7 +33,7 @@
                 <div class="chi-tiet-cua-hang"><i class="fa-sharp fa-solid fa-location-dot"></i> &nbsp;&nbsp;Cơ sở đào tạo tại Hà Nội: Km10, Đường Nguyễn Trãi, Q.Hà Đông, Hà Nội<br/></div>
                 <div class="chi-tiet-cua-hang"><i class="fa-solid fa-phone"></i> &nbsp;&nbsp;Phone: 123.456.7890<br/></div>
                 <div class="chi-tiet-cua-hang"><i class="fa-regular fa-envelope"></i> &nbsp;&nbsp;Mail: baitaplon@ptit.fruitshop.vn<br/></div>
-                <div class="chi-tiet-cua-hang"><i class="fa-solid fa-money-check-dollar"></i> &nbsp;&nbsp;Bank account: ABCXYZBank - CTK: Tốc Biến Vào Trụ - STK: 9999999999999</div>
+                <div class="chi-tiet-cua-hang"><i class="fa-solid fa-money-check-dollar"></i> &nbsp;&nbsp;Bank account: TechcomBank - CTK: Nguyễn Ngọc Nam - STK: 19036749148018</div>
             </div>
         </div>
     </div>

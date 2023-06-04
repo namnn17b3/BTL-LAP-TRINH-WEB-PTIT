@@ -13,5 +13,4 @@
 	<div class="nut-huy-thong-bao-mini thanh-phan-thong-bao-mini">
 		<i class="fas fa-times"></i>
 	</div>
-	<div></div>
 </div>

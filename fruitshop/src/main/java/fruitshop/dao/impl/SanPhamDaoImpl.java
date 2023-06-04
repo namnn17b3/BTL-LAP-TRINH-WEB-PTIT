@@ -8,20 +8,26 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.zaxxer.hikari.HikariDataSource;
+
 import fruitshop.dao.SanPhamDao;
 import fruitshop.model.SanPham;
 
 public class SanPhamDaoImpl implements SanPhamDao {
-	private Connection conn = JDBCConnection.getConnection();
+	
 	private static String[] tmp = {"Nam Phi", "Chile", "Hàn Quốc", "Úc", "New Zealand", "Mỹ", "Nhiều nước"};
 	private static List<String> loaiTraiCayTheoNguonGoc = Arrays.asList(tmp);
 	
 	public SanPhamDaoImpl() {}
+	
+	private static HikariDataSource poolConnection = PoolConnection.getPoolConnection();
 
 	@Override
 	public List<SanPham> getSanPhamOrderBySoLuongBan(int limit) {
 		List<SanPham> list = new ArrayList<>();
+		Connection conn = null;
 		try {
+			conn = poolConnection.getConnection();
 			PreparedStatement ppstm = conn.prepareStatement(
 			    "select a1.*, a2.so_sao_vote\r\n"
 			    + "from \r\n"
@@ -65,13 +71,22 @@ public class SanPhamDaoImpl implements SanPhamDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		finally {
+			try {
+				conn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
 		return list;
 	}
 
 	@Override
 	public List<SanPham> getSanPhamOrderBySoSao(int limit) {
 		List<SanPham> list = new ArrayList<>();
+		Connection conn = null;
 		try {
+			conn = poolConnection.getConnection();
 			PreparedStatement ppstm = conn.prepareStatement(
 			    "select a1.*, a2.so_sao_vote\r\n"
 			    + "from \r\n"
@@ -115,13 +130,22 @@ public class SanPhamDaoImpl implements SanPhamDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		finally {
+		    try {
+		        conn.close();
+		    } catch (Exception e2) {
+		        e2.printStackTrace();
+		    }
+		}
 		return list;
 	}
 	
 	@Override
 	public SanPham getSanPhamById(int id) {
 		SanPham sanPham = new SanPham();
+		Connection conn = null;
 		try {
+			conn = poolConnection.getConnection();
 			PreparedStatement ppst = conn.prepareStatement(
 				"select a1.*, a2.so_sao_vote\r\n"
 				+ "from \r\n"
@@ -173,6 +197,13 @@ public class SanPhamDaoImpl implements SanPhamDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		finally {
+		    try {
+		        conn.close();
+		    } catch (Exception e2) {
+		        e2.printStackTrace();
+		    }
+		}
 		return sanPham;
 	}
 
@@ -181,7 +212,9 @@ public class SanPhamDaoImpl implements SanPhamDao {
 		List<SanPham> list = new ArrayList<>();
 		boolean tonTaiLoaiSanPham = false;
 		PreparedStatement ppst = null;
+		Connection conn = null;
 		try {
+			conn = poolConnection.getConnection();
 			if (loai.equals("Tất cả")) {
 				tonTaiLoaiSanPham = true;
 				ppst = conn.prepareStatement(
@@ -279,6 +312,13 @@ public class SanPhamDaoImpl implements SanPhamDao {
 		catch (Exception e) {
 			e.printStackTrace();
 		}
+		finally {
+		    try {
+		        conn.close();
+		    } catch (Exception e2) {
+		        e2.printStackTrace();
+		    }
+		}
 		if (tonTaiLoaiSanPham == false) return null;
 		return list;
 	}
@@ -287,7 +327,9 @@ public class SanPhamDaoImpl implements SanPhamDao {
 	public int getSoLuongSanPhamByLoai(String loai) {
 		int soLuong = 0;
 		PreparedStatement ppst = null;
+		Connection conn = null;
 		try {
+			conn = poolConnection.getConnection();
 			if (loai.equals("Tất cả")) {
 				ppst = conn.prepareStatement(
 					"select count(*) as so_luong from sanpham;"
@@ -318,13 +360,22 @@ public class SanPhamDaoImpl implements SanPhamDao {
 		catch (Exception e) {
 			e.printStackTrace();
 		}
+		finally {
+		    try {
+		        conn.close();
+		    } catch (Exception e2) {
+		        e2.printStackTrace();
+		    }
+		}
 		return soLuong;
 	}
 	
 	@Override
 	public int getSoLuongSanPhamByName(String tenSanPham) {
 		int soLuong = 0;
+		Connection conn = null;
 		try {
+			conn = poolConnection.getConnection();
 			PreparedStatement ppst = conn.prepareStatement(
 				"select count(*) as so_luong\r\n"
 				+ "from sanpham sp\r\n"
@@ -338,13 +389,22 @@ public class SanPhamDaoImpl implements SanPhamDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		finally {
+		    try {
+		        conn.close();
+		    } catch (Exception e2) {
+		        e2.printStackTrace();
+		    }
+		}
 		return soLuong;
 	}
 	
 	@Override
 	public List<SanPham> searchSanPhamByName(String tenSanPham, int page) {
 		List<SanPham> listSanPham = new ArrayList<>();
+		Connection conn = null;
 		try {
+			conn = poolConnection.getConnection();
 			PreparedStatement ppst = conn.prepareStatement(
 				"select a1.*, a2.so_sao_vote\r\n"
 				+ "from \r\n"
@@ -387,6 +447,13 @@ public class SanPhamDaoImpl implements SanPhamDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}
+		finally {
+		    try {
+		        conn.close();
+		    } catch (Exception e2) {
+		        e2.printStackTrace();
+		    }
 		}
 		return listSanPham;
 	}

@@ -2,21 +2,24 @@ package fruitshop.dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+//import java.sql.ResultSet;
+//import java.sql.SQLException;
+//import java.util.ArrayList;
+//import java.util.Date;
+//import java.util.List;
+
+import com.zaxxer.hikari.HikariDataSource;
 
 import fruitshop.dao.DonHangDao;
 import fruitshop.model.DonHang;
 
 public class DonHangDaoImpl implements DonHangDao {
-	private Connection conn = JDBCConnection.getConnection();
 	
 	public DonHangDaoImpl() {}
 	
-	@Override
+	private static HikariDataSource poolConnection = PoolConnection.getPoolConnection();
+	
+	/*@Override
 	public List<DonHang> getAllDanhGiaChoSanPhamById(int idSanPham, int choose) {
 		List<DonHang> list = new ArrayList<>();
 		try {
@@ -195,7 +198,7 @@ public class DonHangDaoImpl implements DonHangDao {
 		}
 		return map;*/
 		
-		int soLuong = 0;
+		/*int soLuong = 0;
 		try {
 			PreparedStatement ppst = conn.prepareStatement(
 				"select count(*) as so_luong from (\r\n"
@@ -331,143 +334,61 @@ public class DonHangDaoImpl implements DonHangDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 	
 	@Override
 	public void themDonHang(DonHang donHang) {
+		Connection conn = null;
 		try {
+			conn = poolConnection.getConnection();
 			PreparedStatement ppst = conn.prepareStatement(
-				"insert into donhang(id_sp, id_user, ten_nguoi_nhan, so_luong, dia_chi_nguoi_nhan, so_dien_thoai_nguoi_nhan, trang_thai, ghi_chu, ngay_xuat, noi_dung_binh_luan, ngay_binh_luan, so_sao_vote, thanh_toan)\r\n"
-				+ "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
+				"insert into donhang(\r\n"
+				+ "id_sp,\r\n"
+				+ "id_dsdh, so_luong)\r\n"
+				+ "values(?, ?, ?);"
 			);
 			ppst.setInt(1, donHang.getIdSanPham());
-			ppst.setInt(2, donHang.getIdUser());
-			if (donHang.getTenNguoiNhan() == null) {
-				ppst.setNull(3, java.sql.Types.VARCHAR);
-			}
-			else {
-				ppst.setString(3,  donHang.getTenNguoiNhan());
-			}
-			ppst.setInt(4, donHang.getSoLuong());
-			if (donHang.getDiaChiNguoiNhan() == null) {
-				ppst.setNull(5, java.sql.Types.VARCHAR);
-			}
-			else {
-				ppst.setString(5, donHang.getDiaChiNguoiNhan());
-			}
-			if (donHang.getSoDienThoaiNguoiNhan() == null) {
-				ppst.setNull(6, java.sql.Types.VARCHAR);
-			}
-			else {
-				ppst.setString(6, donHang.getSoDienThoaiNguoiNhan());
-			}
-			ppst.setString(7, donHang.getTrangThai());
-			if (donHang.getGhiChu() == null) {
-				ppst.setNull(8, java.sql.Types.VARCHAR);
-			}
-			else {
-				ppst.setString(8, donHang.getGhiChu());
-			}
-			ppst.setTimestamp(9, new java.sql.Timestamp(donHang.getNgayXuat().getTime()));
-			if (donHang.getNoiDungBinhLuan() == null) {
-				ppst.setNull(10, java.sql.Types.VARCHAR);
-			}
-			else {
-				ppst.setString(10, donHang.getNoiDungBinhLuan());
-			}
-			if (donHang.getNgayBinhLuan() == null) {
-				ppst.setNull(11, java.sql.Types.TIMESTAMP);
-			}
-			else {
-				ppst.setTimestamp(11, new java.sql.Timestamp(donHang.getNgayBinhLuan().getTime()));
-			}
-			if (donHang.getSoSaoVote() == -1) {
-				ppst.setNull(12, java.sql.Types.INTEGER);
-			}
-			else {
-				ppst.setInt(12, donHang.getSoSaoVote());
-			}
-			if (donHang.getThanhToan() == null) {
-				ppst.setNull(13, java.sql.Types.VARCHAR);
-			}
-			else {
-				ppst.setString(13, donHang.getThanhToan());
-			}
+			ppst.setInt(2,  donHang.getIdDanhSachDonHang());
+			ppst.setInt(3, donHang.getSoLuong());
 			ppst.execute();
 		}
 		catch (Exception e) {
 			e.printStackTrace();
+		}
+		finally {
+			try {
+				conn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
 		}
 	}
 
 	@Override
 	public void capNhatDonHang(DonHang donHang) {
+		Connection conn = null;
 		try {
+			conn = poolConnection.getConnection();
 			PreparedStatement ppst = conn.prepareStatement(
 				"update donhang\r\n"
-				+ "set id_sp = ?, id_user = ?, ten_nguoi_nhan = ?, so_luong = ?,\r\n"
-				+ "dia_chi_nguoi_nhan = ?, so_dien_thoai_nguoi_nhan = ?, trang_thai = ?, ghi_chu = ?, ngay_xuat = ?, noi_dung_binh_luan = ?,\r\n"
-				+ "ngay_binh_luan = ?, so_sao_vote = ?, thanh_toan = ?\r\n"
+				+ "set id_sp = ?, id_dsdh = ?, so_luong = ?\r\n"
 				+ "where id = ?;"
 			);
 			ppst.setInt(1, donHang.getIdSanPham());
-			ppst.setInt(2, donHang.getIdUser());
-			if (donHang.getTenNguoiNhan() == null) {
-				ppst.setNull(3, java.sql.Types.VARCHAR);
-			}
-			else {
-				ppst.setString(3,  donHang.getTenNguoiNhan());
-			}
-			ppst.setInt(4, donHang.getSoLuong());
-			if (donHang.getDiaChiNguoiNhan() == null) {
-				ppst.setNull(5, java.sql.Types.VARCHAR);
-			}
-			else {
-				ppst.setString(5, donHang.getDiaChiNguoiNhan());
-			}
-			if (donHang.getSoDienThoaiNguoiNhan() == null) {
-				ppst.setNull(6, java.sql.Types.VARCHAR);
-			}
-			else {
-				ppst.setString(6, donHang.getSoDienThoaiNguoiNhan());
-			}
-			ppst.setString(7, donHang.getTrangThai());
-			if (donHang.getGhiChu() == null) {
-				ppst.setNull(8, java.sql.Types.VARCHAR);
-			}
-			else {
-				ppst.setString(8, donHang.getGhiChu());
-			}
-			ppst.setTimestamp(9, new java.sql.Timestamp(donHang.getNgayXuat().getTime()));
-			if (donHang.getNoiDungBinhLuan() == null) {
-				ppst.setNull(10, java.sql.Types.VARCHAR);
-			}
-			else {
-				ppst.setString(10, donHang.getNoiDungBinhLuan());
-			}
-			if (donHang.getNgayBinhLuan() == null) {
-				ppst.setNull(11, java.sql.Types.TIMESTAMP);
-			}
-			else {
-				ppst.setTimestamp(11, new java.sql.Timestamp(donHang.getNgayBinhLuan().getTime()));
-			}
-			if (donHang.getSoSaoVote() == -1) {
-				ppst.setNull(12, java.sql.Types.INTEGER);
-			}
-			else {
-				ppst.setInt(12, donHang.getSoSaoVote());
-			}
-			if (donHang.getThanhToan() == null) {
-				ppst.setNull(13, java.sql.Types.VARCHAR);
-			}
-			else {
-				ppst.setString(13, donHang.getThanhToan());
-			}
-			ppst.setInt(14, donHang.getId());
+			ppst.setInt(2, donHang.getIdDanhSachDonHang());
+			ppst.setInt(3, donHang.getSoLuong());
+			ppst.setInt(4, donHang.getId());
 			ppst.execute();
 		}
 		catch (Exception e) {
 			e.printStackTrace();
+		}
+		finally {
+			try {
+				conn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
 		}
 	}
 }

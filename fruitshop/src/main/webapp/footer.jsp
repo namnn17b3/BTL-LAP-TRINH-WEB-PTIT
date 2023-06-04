@@ -12,7 +12,7 @@
 				<i class="fa-regular fa-envelope"></i> baitaplon@ptit.fruitshop.vn
 			</div>
 			<div class="thong-tin-muc-con-ket-thuc">
-				<i class="fa-solid fa-phone"></i> 123.456.7890
+				<i class="fa-solid fa-phone"></i> 097.796.3450
 			</div>
 			<img src="./img/bct_dathongbao.png" alt=""
 				class="thong-tin-muc-con-ket-thuc"

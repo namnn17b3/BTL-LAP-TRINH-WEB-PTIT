@@ -517,6 +517,7 @@ html {
 
 .chuc-nang-cua-user {
 	position: relative;
+	z-index: 10;
 }
 
 .anh-dai-dien-cua-user {

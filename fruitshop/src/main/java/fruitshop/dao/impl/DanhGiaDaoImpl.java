@@ -7,18 +7,23 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.zaxxer.hikari.HikariDataSource;
+
 import fruitshop.dao.DanhGiaDao;
 import fruitshop.model.DanhGia;
 
 public class DanhGiaDaoImpl implements DanhGiaDao {
-private Connection conn = JDBCConnection.getConnection();
 	
 	public DanhGiaDaoImpl() {}
+	
+	private static HikariDataSource poolConnection = PoolConnection.getPoolConnection();
 	
 	@Override
 	public List<DanhGia> getAllDanhGiaChoSanPhamById(int idSanPham, int choose) {
 		List<DanhGia> list = new ArrayList<>();
+		Connection conn = null;
 		try {
+			conn = poolConnection.getConnection();
 			PreparedStatement ppst = null;
 			if (choose == -1) {
 				ppst = conn.prepareStatement(
@@ -59,8 +64,14 @@ private Connection conn = JDBCConnection.getConnection();
 				list.add(danhGia);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		finally {
+			try {
+				conn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
 		}
 		return list;
 	}
@@ -68,7 +79,9 @@ private Connection conn = JDBCConnection.getConnection();
 	@Override
 	public int getAllSoLuongDanhGiaChoSanPhamByIdAndStar(int idSanPham, int choose) {
 		int soLuong = 0;
+		Connection conn = null;
 		try {
+			conn = poolConnection.getConnection();
 			PreparedStatement ppst = null;
 			if (choose == -1) {
 				ppst = conn.prepareStatement(
@@ -97,13 +110,22 @@ private Connection conn = JDBCConnection.getConnection();
 			// TODO: handle exception
 			e.printStackTrace();
 		}
+		finally {
+			try {
+				conn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
 		return soLuong;
 	}
 	
 	@Override
 	public List<DanhGia> getDanhGiaChoSanPhamByIdAndPageChoose(int idSanPham, int choose, int page) {
 		List<DanhGia> list = new ArrayList<>();
+		Connection conn = null;
 		try {
+			conn = poolConnection.getConnection();
 			PreparedStatement ppst = null;
 			if (choose == -1) {
 				ppst = conn.prepareStatement(
@@ -151,7 +173,13 @@ private Connection conn = JDBCConnection.getConnection();
 		catch (Exception e) {
 			e.printStackTrace();
 		}
+		finally {
+			try {
+				conn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
 		return list;
 	}
-
 }

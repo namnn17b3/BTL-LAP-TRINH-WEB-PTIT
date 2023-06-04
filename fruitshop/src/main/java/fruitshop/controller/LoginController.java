@@ -52,6 +52,8 @@ public class LoginController extends HttpServlet {
 			session.setMaxInactiveInterval(3600 * 24);
 			Integer clickThemVaoGioHang = (Integer) session.getAttribute("clickThemVaoGioHang");
 			Integer clickGioHang = (Integer) session.getAttribute("clickGioHang");
+			Integer clickMuaNgay = (Integer) session.getAttribute("clickMuaNgay");
+			Integer clickTienHanhThanhToan = (Integer) session.getAttribute("clickTienHanhThanhToan");
 			if (clickThemVaoGioHang != null && clickThemVaoGioHang == 1) {
 				System.out.println("line 52 login controller");
 				resp.sendRedirect("./xu-ly-gio-hang");
@@ -59,6 +61,15 @@ public class LoginController extends HttpServlet {
 			}
 			if (clickGioHang != null && clickGioHang == 1) {
 				resp.sendRedirect("./gio-hang");
+				return;
+			}
+			if (clickMuaNgay != null && clickMuaNgay == 1) {
+				System.out.println("line 67 login controller");
+				resp.sendRedirect("./thanh-toan");
+				return;
+			}
+			if (clickTienHanhThanhToan != null && clickTienHanhThanhToan == 1) {
+				resp.sendRedirect("./thanh-toan");
 				return;
 			}
 			System.out.println("line 60 login controller");

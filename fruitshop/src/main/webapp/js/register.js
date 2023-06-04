@@ -52,12 +52,12 @@ function hasUnicode (str) {
     return false;
 }
 
-function hasUnicode (str) {
-    for (var i = 0; i < str.length; i++) {
-        if (str.charCodeAt(i) > 127) return true;
-    }
-    return false;
-}
+//function hasUnicode (str) {
+//    for (var i = 0; i < str.length; i++) {
+//        if (str.charCodeAt(i) > 127) return true;
+//    }
+//    return false;
+//}
 
 var button = document.querySelector('.nut-dang-ki');
 button.onclick = (e) => {
@@ -68,9 +68,9 @@ button.onclick = (e) => {
 	// e.preventDefault();
     var listItem = [document.querySelector('.ten'), document.querySelector('.email'), document.querySelector('.mat-khau'), document.querySelector('.nhap-lai-mat-khau')];
     var listString = [ten.value, email.value, matKhau.value, nhapLaiMatKhau.value];
-    var listRegex = [/[a-zA-Z0-9]/, /([a-zA-Z0-9\.]+)@([a-zA-H0-9\.].+)/, /.{6,}/, new RegExp(matKhau.value)];
+    var listRegex = [/.+/, /([a-zA-Z0-9\.]+)@([a-zA-H0-9\.].+)/, /.{6,}/, new RegExp(matKhau.value)];
     for (var i = 0; i < 4; i++) {
-        if (listRegex[i].test(listString[i]) == false || (i != 0 && hasUnicode(listString[i]) == true)) {
+        if (listRegex[i].exec(listString[i]) == null || listRegex[i].exec(listString[i])[0] != listString[i] || (i != 0 && hasUnicode(listString[i]) == true)) {
             e.preventDefault();
             listItem[i].insertAdjacentHTML('beforeend', 
                 `<div class="canh-bao-invalid">

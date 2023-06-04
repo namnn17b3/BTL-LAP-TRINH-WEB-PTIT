@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
-import javax.mail.Session;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -216,7 +215,12 @@ public class RegisterController extends HttpServlet {
 			}
 			session.setAttribute("coThongBao", 1);
 			session.setAttribute("user", user);
-			// Email.sendMail(user.getEmail(), (String) session.getAttribute("code"));
+			// Nội dung
+			// String noiDung = 
+			// "<h3>Cảm ơn bạn đã đăng kí tài khoản tại Fruit Shop</h3>"
+			// +"<div>Mã code xác nhận đăng kí tài khoản: "+code+"</div>"
+			// +"<div style='color: red'><i>Chú ý: Đây là mail tự động! Vui lòng không reply!</i></div>";
+			// Email.sendMail(user.getEmail(), noiDung);
 			System.out.println("add session success " + session.getAttribute("code") + " " + user.getEmail());
 			req.getRequestDispatcher("./register.jsp").forward(req, resp);
 		} catch (Exception e) {

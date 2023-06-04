@@ -65,6 +65,7 @@ public class GioHangFilter implements Filter {
 			else {
 				System.out.println("line 60 giohang filter");
 				session.removeAttribute("clickThemVaoGioHang");
+				session.setAttribute("forcusDanhGia", 1);
 				// session.removeAttribute("clickGioHang");
 				chain.doFilter(req, resp);
 				return;

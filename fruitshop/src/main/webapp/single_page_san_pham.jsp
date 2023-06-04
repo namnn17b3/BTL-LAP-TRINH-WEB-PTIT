@@ -23,14 +23,15 @@
         		<c:if test="${sp.soSaoVote >= 0}">
         			<div class="so-sao-va-so-luong-da-ban">${sp.soSaoVote}<i class="fa-solid fa-star" id="sao"></i> | Đã bán ${sp.soLuongBan}</div>
         		</c:if>
-        		<h3 class="gia-san-pham">${sp.tienTrenDonVi} VNĐ<p style="color: #3d464d; display: inline">/${sp.donVi}</p></h3>
+        		<div class="gia-san-pham-hidden" style="display: none;">${sp.tienTrenDonVi}</div>
+        		<h3 class="gia-san-pham"><span class="tien-format">${sp.tienTrenDonVi}</span> VNĐ<p style="color: #3d464d; display: inline">/${sp.donVi}</p></h3>
 	        	<div class="tuy-chon-san-pham">
 	        		<!-- <form action="./them-vao-gio-hang?id=${sp.id}" method="post" style="display: flex; margin-left: auto; margin-right: auto;">
 	        			<input type="hidden" name="so-luong" value="1">
 	        			<button class="them-vao-gio-hang"><p style="margin: auto">Thêm vào giỏ</p></button>
 	        		</form>-->
 	        		<a class="them-vao-gio-hang" href="./xu-ly-gio-hang?id=${sp.id}"><p style="margin: auto">Thêm vào giỏ</p></a>
-	        		<a class="mua-ngay" href="./mua-ngay"><p style="margin: auto">Mua ngay</p></a>
+	        		<a class="mua-ngay" href="./thanh-toan"><p style="margin: auto">Mua ngay</p></a>
 	        	</div>
        		</div>
        	</c:forEach>

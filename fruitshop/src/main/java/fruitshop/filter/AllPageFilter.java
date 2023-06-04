@@ -31,9 +31,13 @@ public class AllPageFilter implements Filter {
 		session.setAttribute("soLuongSanPhamTrongGioHang", 0);
 		if (session.getAttribute("currentUser") != null) {
 			User currentUser = (User) session.getAttribute("currentUser");
+			System.out.println("line 34 all page filter");
 			session.setAttribute("soLuongSanPhamTrongGioHang", sanPhamTrongGioHangDao.getSoLuongSanPhamTrongGioHangByIdUser(currentUser.getId()));
 		}
+//		System.out.println("line 36 " + session.getAttribute("clickMuaNgay"));
+//		System.out.println("line 37 " + session.getAttribute("lanDauTruyCap"));
 		if (req.getServletPath().indexOf("/gio-hang") < 0
+				&& req.getServletPath().indexOf("/thanh-toan") < 0
 				&& req.getServletPath().indexOf("/login") < 0
 				&& req.getServletPath().indexOf("/img") < 0
 				&& req.getServletPath().indexOf("/img_user") < 0
@@ -41,8 +45,70 @@ public class AllPageFilter implements Filter {
 				&& req.getServletPath().indexOf("/css") < 0
 				&& req.getServletPath().indexOf("/js") < 0
 				&& session.getAttribute("clickGioHang") != null) {
+			
 			session.removeAttribute("clickGioHang");
 		}
+		
+		if (req.getServletPath().indexOf("/thanh-toan") < 0
+				&& req.getServletPath().indexOf("/login") < 0
+				&& req.getServletPath().indexOf("/img") < 0
+				&& req.getServletPath().indexOf("/img_user") < 0
+				&& req.getServletPath().indexOf("/img_sp") < 0
+				&& req.getServletPath().indexOf("/css") < 0
+				&& req.getServletPath().indexOf("/js") < 0
+				&& session.getAttribute("clickMuaNgay") != null) {
+			
+			session.removeAttribute("clickMuaNgay");
+		}
+		
+		if (req.getServletPath().indexOf("/thanh-toan") < 0
+				&& req.getServletPath().indexOf("/login") < 0
+				&& req.getServletPath().indexOf("/img") < 0
+				&& req.getServletPath().indexOf("/img_user") < 0
+				&& req.getServletPath().indexOf("/img_sp") < 0
+				&& req.getServletPath().indexOf("/css") < 0
+				&& req.getServletPath().indexOf("/js") < 0
+				&& session.getAttribute("clickTienHanhThanhToan") != null) {
+			
+			session.removeAttribute("clickTienHanhThanhToan");
+		}
+		
+		if (req.getServletPath().indexOf("/thanh-toan") < 0
+				&& req.getServletPath().indexOf("/login") < 0
+				&& req.getServletPath().indexOf("/img") < 0
+				&& req.getServletPath().indexOf("/img_user") < 0
+				&& req.getServletPath().indexOf("/img_sp") < 0
+				&& req.getServletPath().indexOf("/css") < 0
+				&& req.getServletPath().indexOf("/js") < 0
+				&& session.getAttribute("clickTienHanhThanhToan") != null) {
+			
+			session.removeAttribute("clickTienHanhThanhToan");
+		}
+		
+		if (req.getServletPath().indexOf("/thanh-toan") < 0
+				&& req.getServletPath().indexOf("/login") < 0
+				&& req.getServletPath().indexOf("/img") < 0
+				&& req.getServletPath().indexOf("/img_user") < 0
+				&& req.getServletPath().indexOf("/img_sp") < 0
+				&& req.getServletPath().indexOf("/css") < 0
+				&& req.getServletPath().indexOf("/js") < 0
+				&& session.getAttribute("lanDauTruyCap") != null) {
+			
+			session.removeAttribute("lanDauTruyCap");
+		}
+		
+		if (req.getServletPath().indexOf("/thanh-toan") < 0
+				&& req.getServletPath().indexOf("/login") < 0
+				&& req.getServletPath().indexOf("/img") < 0
+				&& req.getServletPath().indexOf("/img_user") < 0
+				&& req.getServletPath().indexOf("/img_sp") < 0
+				&& req.getServletPath().indexOf("/css") < 0
+				&& req.getServletPath().indexOf("/js") < 0
+				&& session.getAttribute("thanhToanThanhCong") != null) {
+			
+			session.removeAttribute("thanhToanThanhCong");
+		}
+		
 		chain.doFilter(req, resp);
 	}
 }

@@ -94,7 +94,7 @@ public class GioHangController extends HttpServlet {
 		
 		int tongTien = sanPhamTrongGioHangDao.getTongTienByIdUser(currentUser.getId());
 		List<SanPhamTrongGioHang> listSanPhamTrongGioHang = sanPhamTrongGioHangDao.getSanPhamTrongGioHangByPage(currentUser.getId(), page);
-		req.setAttribute("tongTien", tongTien);
+		session.setAttribute("tongTien", tongTien);
 		req.setAttribute("listSanPhamTrongGioHang", listSanPhamTrongGioHang);
 		req.setAttribute("page", page);
 		req.getRequestDispatcher("./gio_hang.jsp").forward(req, resp);

@@ -14,7 +14,7 @@
 				<b>Uy tín chất lượng được chúng tôi đặt lên hàng đầu</b>
 			</div>
 			<div class="goi">
-				<i class="fa-solid fa-phone"></i> <b>123.456.7890</b>
+				<i class="fa-solid fa-phone"></i> <b>097.796.3450</b>
 			</div>
 		</div>
 	</div>
@@ -151,14 +151,15 @@
 
 				<%
 					String soLuongSanPhamTrongGioHangString = "0";
+					int soLuongSanPhamTrongGioHang = 0;
 					if (session.getAttribute("soLuongSanPhamTrongGioHang") != null) {						
-						int soLuongSanPhamTrongGioHang = (int) session.getAttribute("soLuongSanPhamTrongGioHang");
-						soLuongSanPhamTrongGioHangString = (soLuongSanPhamTrongGioHang == 0) ? "0" : (soLuongSanPhamTrongGioHang > 99 ? "99+" : String.valueOf(soLuongSanPhamTrongGioHang));
+						soLuongSanPhamTrongGioHang = (int) session.getAttribute("soLuongSanPhamTrongGioHang");
+						soLuongSanPhamTrongGioHangString = soLuongSanPhamTrongGioHang > 99 ? "99+" : String.valueOf(soLuongSanPhamTrongGioHang);
 					}
 				%>
 				<div class="lua-chon-khac gio-hang">
 					<a href="./gio-hang"></a>
-					<div class="vong-tron-so-luong"><%=soLuongSanPhamTrongGioHangString%></div>
+					<div class="vong-tron-so-luong" title="<%=soLuongSanPhamTrongGioHang%>"><%=soLuongSanPhamTrongGioHangString%></div>
 					<div class="gio-hang-hieu-ung-mo"></div>
 					<div class="gio-hang-icon">
 						<i class="fa-solid fa-cart-shopping"></i>

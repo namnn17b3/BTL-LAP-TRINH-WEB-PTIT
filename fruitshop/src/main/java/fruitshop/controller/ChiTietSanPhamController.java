@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import fruitshop.dao.DanhGiaDao;
 import fruitshop.dao.SanPhamDao;
@@ -25,6 +26,7 @@ public class ChiTietSanPhamController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		HttpSession session = req.getSession();
 		int choose = -1;
 		int id = 0;
 		SanPham sanPham = null;
@@ -85,7 +87,7 @@ public class ChiTietSanPhamController extends HttpServlet {
 				}
 			}
 			if (req.getParameter("choose") != null && req.getParameter("page") != null) {
-				req.setAttribute("forcusDanhGia", 1);
+				req.setAttribute("forcusDanhGia", session.getAttribute("forcusDanhGia") == null ? 1 : 0);
 			}
 			else {
 				req.setAttribute("forcusDanhGia", 0);
@@ -96,6 +98,7 @@ public class ChiTietSanPhamController extends HttpServlet {
 			return;
 		}
 		
+		session.removeAttribute("forcusDanhGia");
 		req.setAttribute("sanPham", sanPham);		
 		List<DanhGia> currentListDanhGia = danhGiaDao.getDanhGiaChoSanPhamByIdAndPageChoose(id, choose, page);
 		req.setAttribute("soLuongTatCa", soLuongTatCa);

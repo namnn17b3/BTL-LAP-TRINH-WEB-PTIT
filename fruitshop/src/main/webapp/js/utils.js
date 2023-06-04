@@ -25,3 +25,8 @@ function layCookie(name, defaultValue) {
 	}
 	return defaultValue;
 }
+
+document.querySelectorAll('.tien-format').forEach(item => {
+	var gia = parseInt(item.innerText).toLocaleString();
+	item.innerText = gia.replaceAll(',', '.');
+});

@@ -69,7 +69,7 @@
         			<div class="danh-sach-de-muc-gio-hang">        			
 	        			<div class="hinh-anh-san-pham__gio-hang de-muc-gio-hang"><span>Hình ảnh</span></div>
 	        			<div class="ten-san-pham__gio-hang de-muc-gio-hang"><span>Tên sản phẩm</span></div>
-	        			<div class="gia-san-pham__gio-hang de-muc-gio-hang"><span>Giá</span></div>
+	        			<div class="gia-san-pham__gio-hang de-muc-gio-hang"><span>Đơn giá</span></div>
 	        			<div class="so-luong-san-pham__gio-hang de-muc-gio-hang"><span>Số lượng</span></div>
 	        			<div class="trang-thai-san-pham__gio-hang de-muc-gio-hang"><span>Trạng thái</span></div>
 	        			<div class="tong-tien-san-pham__gio-hang de-muc-gio-hang"><span>Tổng tiền</span> </div>
@@ -86,7 +86,7 @@
 	        			<div class="dong-gio-hang">
 	        				<div class="hinh-anh-san-pham hinh-anh-san-pham__gio-hang chung-cua-cac-thong-tin-san-pham__gio-hang"><img src="${item.anh}" width="80px" height="80px"/></div>
 		        			<div class="ten-san-pham ten-san-pham__gio-hang chung-cua-cac-thong-tin-san-pham__gio-hang"><span style="margin: auto; text-align: center;">${item.tenSanPham}</span></div>
-		        			<div class="gia-san-pham gia-san-pham__gio-hang chung-cua-cac-thong-tin-san-pham__gio-hang"><span style="margin: auto; font-weight: 600"><span style="color: #ff2626;" class="gia-san-pham">${item.tienTrenDonVi}</span> VNĐ</span></div>
+		        			<div class="gia-san-pham gia-san-pham__gio-hang chung-cua-cac-thong-tin-san-pham__gio-hang"><span style="margin: auto; font-weight: 600"><span style="color: #ff2626;" class="gia-san-pham tien-format">${item.tienTrenDonVi}</span> VNĐ</span></div>
 		        			
         					<div class="so-luong-san-pham-hidden" style="display: none;">${item.soLuong}</div>
         					<div class="so-luong-san-pham-con-lai" style="display: none;">${item.soLuongSanPhamConLai}</div>
@@ -123,7 +123,7 @@
 			        			</c:if>
 		        			</div>
 		        			
-		        			<div class="tong-tien-san-pham tong-tien-san-pham__gio-hang chung-cua-cac-thong-tin-san-pham__gio-hang"><span style="margin: auto; font-weight: 600"><span style="color: #ff2626;">${item.tienTrenDonVi * item.soLuong}</span> VNĐ</span></div>
+		        			<div class="tong-tien-san-pham tong-tien-san-pham__gio-hang chung-cua-cac-thong-tin-san-pham__gio-hang"><span style="margin: auto; font-weight: 600"><span class="tien-format" style="color: #ff2626;">${item.tienTrenDonVi * item.soLuong}</span> VNĐ</span></div>
 		        			
 		        			<div class="thoi-gian-them-san-pham thoi-gian-them-san-pham__gio-hang chung-cua-cac-thong-tin-san-pham__gio-hang"><span style="margin: auto; text-align: center;"><fmt:formatDate pattern="dd/MM/yyyy HH:mm:ss" value="${item.ngayThem}"/></span></div>
 		        			
@@ -182,7 +182,7 @@
 						<div style="font-size: 28px; font-weight: 600; margin-bottom: 28px;">Đơn hàng</div>
 						<div style="display: flex; justify-content: space-between; margin-bottom: 48px;">				
 							<div style="font-size: 24px; font-weight: 600;">Thành tiền</div>
-							<div style="font-size: 24px; font-weight: 600;"><span style="color: #ff2626;" id="thanh-tien">${tongTien}</span> VNĐ</div>
+							<div style="font-size: 24px; font-weight: 600;"><span style="color: #ff2626;" class="tien-format" id="thanh-tien">${tongTien}</span> VNĐ</div>
 						</div>
 						<div>Phí trên bao gồm 5% VAT</div>
 						<a href="./thanh-toan" class="thanh-toan__gio-hang"><span style="margin: auto;">Tiến hành thanh toán</span></a>

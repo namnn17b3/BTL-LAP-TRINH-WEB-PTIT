@@ -9,6 +9,10 @@ document.querySelector('.cap-nhat-gio-hang__gio-hang').onclick = () => {
 	themCookie('clickCapNhatGioHang', 1, 3600000 * 24, 60, '/fruitshop/gio-hang');
 };
 
+document.querySelector('.thanh-toan__gio-hang').onclick = () => {
+	themCookie('clickTienHanhThanhToan', 1, 3600000 * 24, 60, '/fruitshop/thanh-toan');
+}
+
 var listDongGioHang = document.querySelectorAll('.dong-gio-hang');
 var listNutTru = document.querySelectorAll('.nut-tru');
 var listNutCong = document.querySelectorAll('.nut-cong');
@@ -20,7 +24,8 @@ var listTrangThaiSanPham = document.querySelectorAll('.trang-thai-san-pham span'
 var listIdSanPham = document.querySelectorAll('.id-san-pham');
 var listNutLoaiBoSanPham = document.querySelectorAll('.nut-loai-bo-san-pham');
 var listGiaSanPham = document.querySelectorAll('span.gia-san-pham');
-var thanhTien = parseInt(document.querySelector('#thanh-tien').innerText);
+var listTongTien = document.querySelectorAll('.tong-tien-san-pham span span');
+var thanhTien = parseInt(document.querySelector('#thanh-tien').innerText.replaceAll('.', ''));
 var vongTronSoLuong = document.querySelector('.vong-tron-so-luong');
 var phanTrangVaDonHang = document.querySelector('.phantrang-donhang');
 
@@ -77,8 +82,9 @@ listNutTru.forEach((item, index) => {
 			listSoLuongSanPham[index].innerText = '1';
 			listNutTru[index].style.cursor = 'not-allowed';
 		}
-		thanhTien = thanhTien + (soLuong - soLuongPre) * parseInt(listGiaSanPham[index].innerText);
-		document.querySelector('#thanh-tien').innerText = thanhTien.toString();
+		listTongTien[index].innerText = (soLuong * parseInt(listGiaSanPham[index].innerText.replaceAll('.', ''))).toLocaleString().replaceAll(',', '.');
+		thanhTien = thanhTien + (soLuong - soLuongPre) * parseInt(listGiaSanPham[index].innerText.replaceAll('.', ''));
+		document.querySelector('#thanh-tien').innerText = thanhTien.toLocaleString().replaceAll(',', '.');
 		listHienThiSoLuong[index].title = soLuong.toString();
 		themCookie(listIdSanPham[index].innerText, soLuong, 3600000 * 24, 60, '/fruitshop/gio-hang');
 	}
@@ -109,9 +115,9 @@ listNutCong.forEach((item, index) => {
 		else {
 			listHienThiSoLuong[index].innerText = '99+';
 		}
-		
-		thanhTien = thanhTien + (soLuong - soLuongPre) * parseInt(listGiaSanPham[index].innerText);
-		document.querySelector('#thanh-tien').innerText = thanhTien.toString();
+		listTongTien[index].innerText = (soLuong * parseInt(listGiaSanPham[index].innerText.replaceAll('.', ''))).toLocaleString().replaceAll(',', '.');
+		thanhTien = thanhTien + (soLuong - soLuongPre) * parseInt(listGiaSanPham[index].innerText.replaceAll('.', ''));
+		document.querySelector('#thanh-tien').innerText = thanhTien.toLocaleString().replaceAll(',', '.');
 		listSoLuongSanPham[index].innerText = soLuong.toString();
 		listHienThiSoLuong[index].title = soLuong.toString();
 		themCookie(listIdSanPham[index].innerText, soLuong, 3600000 * 24, 60, '/fruitshop/gio-hang');
@@ -121,8 +127,8 @@ listNutCong.forEach((item, index) => {
 listNutLoaiBoSanPham.forEach((item, index) => {
 	item.onclick = () => {
 		var soLuong = parseInt(listSoLuongSanPham[index].innerText);
-		thanhTien = thanhTien - soLuong * parseInt(listGiaSanPham[index].innerText);
-		document.querySelector('#thanh-tien').innerText = thanhTien.toString();
+		thanhTien = thanhTien - soLuong * parseInt(listGiaSanPham[index].innerText.replaceAll('.', ''));
+		document.querySelector('#thanh-tien').innerText = thanhTien.toLocaleString().replaceAll(',', '.');
 		
 		listDongGioHang[index].classList.add('hieu-ung-dong-gio-hang');
 		setTimeout(() => {

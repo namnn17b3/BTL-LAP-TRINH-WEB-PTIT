@@ -17,7 +17,7 @@ public class Email {
 	static final String from = "anhnam2730@gmail.com";
 	static final String password = "zgcmjkclyspyvtvo";
 	
-	public static void sendMail(String to, String code) {
+	public static void sendMail(String to, String noiDung) {
 		// Properties: khai báo các thuộc tính
 		Properties properties = new Properties();
 		properties.put("mail.smtp.host", "smtp.gmail.com"); // smtp host
@@ -57,11 +57,6 @@ public class Email {
 			// Quy định email nhận phản hồi
 			// msg.setReplyTo(InternetAddress.parse(from, false));
 			
-			// Nội dung
-			String noiDung = 
-			"<h3>Cảm ơn bạn đã đăng kí tài khoản tại Fruit Shop</h3>"
-			+"<div>Mã code xác nhận đăng kí tài khoản: "+code+"</div>"
-			+"<div style='color: red'><i>Chú ý: Đây là mail tự động! Vui lòng không reply!</i></div>";
 			msg.setContent(noiDung, "text/html; charset=UTF-8");
 		
 			Transport.send(msg);

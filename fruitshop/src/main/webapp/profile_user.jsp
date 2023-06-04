@@ -55,7 +55,7 @@
                 	<div class="phan-thong-tin">
 		                <div class="ten">
 		                    <div class="ten-input">Tên <span style="color: #f61d1d">(*)</span></div>
-		                    <input value="<%=currentUser.getTen()%>" placeholder="Tên" type="text" name="ten" id="ten"/>
+		                    <input value="<c:out value='<%=currentUser.getTen()%>'/>" placeholder="Tên" type="text" name="ten" id="ten"/>
 		                    <!-- <div class="canh-bao-invalid">
 		                        <div class="canh-bao">
 		                            <i class="fa-solid fa-circle-exclamation"></i>
@@ -65,17 +65,17 @@
 		                </div>
 		                <div class="email">
 		                    <div class="ten-input">Email <span style="color: #f61d1d">(*)</span></div>
-		                    <input value="<%=currentUser.getEmail()%>" type="text" name="email" id="email" readonly style="cursor: not-allowed; user-select: none; caret-color: transparent; background-color: #efece8; color: #c6c3bd;"/>
+		                    <input value="<c:out value='<%=currentUser.getEmail()%>'/>" type="text" name="email" id="email" readonly style="cursor: not-allowed; user-select: none; caret-color: transparent; background-color: #efece8; color: #c6c3bd;"/>
 		                </div>
 		                <div class="mat-khau">
 		                    <div class="ten-input">Mật khẩu <span style="color: #f61d1d">(*)</span></div>
-		                    <input value="<%=currentUser.getMatKhau()%>" placeholder="Mật khẩu" type="password" name="mat-khau" id="mat-khau" />
+		                    <input value="<c:out value='<%=currentUser.getMatKhau()%>'/>" placeholder="Mật khẩu" type="password" name="mat-khau" id="mat-khau" />
 		                    <i class="fa-solid fa-eye" id="con-mat-1"></i>
 		                    <div style="font-size: 16px; margin-top: 4px; color: #3D464D">Mật khẩu phải có ít nhất 6 kí tự.</div>
 		                </div>
 		                <div class="nhap-lai-mat-khau">
 		                    <div class="ten-input">Nhập lại mật khẩu <span style="color: #f61d1d">(*)</span></div>
-		                    <input value="<%=currentUser.getMatKhau()%>" placeholder="Nhập lại mật khẩu" type="password" name="nhap-lai-mat-khau" id="nhap-lai-mat-khau" />
+		                    <input value="<c:out value='<%=currentUser.getMatKhau()%>'/>" placeholder="Nhập lại mật khẩu" type="password" name="nhap-lai-mat-khau" id="nhap-lai-mat-khau" />
 		                    <i class="fa-solid fa-eye" style="top: 53%" id="con-mat-2"></i>
 		                </div>
                 	</div>
@@ -85,7 +85,7 @@
                 	<div class="phan-anh">
                 		<div class="anh-dai-dien">
 	                		<input type="file" name="anh" style="display: none" id="upload-file" accept="image/*"/>
-	                		<img alt="" src="<%=currentUser.getAnh()%>" id="anh-upload"/>
+	                		<img alt="" src="<c:out value='<%=currentUser.getAnh()%>'/>" id="anh-upload"/>
 	                		<div class="doi-anh-dai-dien"><span style="margin: auto">Đổi ảnh đại diện</span></div>
                 		</div>
                 		<div class="go-anh-dai-dien"><span style="margin: auto">Gỡ ảnh đại diện</span></div>
