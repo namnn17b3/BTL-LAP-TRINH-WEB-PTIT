@@ -117,19 +117,19 @@ public class XuatFileExcelDonHang extends HttpServlet {
 		cell = row.createCell(0);
 		cell.setCellValue("Số tài khoản người chuyển");
 		cell = row.createCell(1);
-		cell.setCellValue(danhSachChuyenKhoan.getSoTaiKhoanNguoiChuyen());
+		cell.setCellValue(danhSachChuyenKhoan == null ? "Invalid" : danhSachChuyenKhoan.getSoTaiKhoanNguoiChuyen());
 		
 		row = sheet.createRow(9);
 		cell = row.createCell(0);
 		cell.setCellValue("Ngân hàng người chuyển");
 		cell = row.createCell(1);
-		cell.setCellValue(danhSachChuyenKhoan.getTenNganHangNguoiChuyen());
+		cell.setCellValue(danhSachChuyenKhoan == null ? "Invalid" : danhSachChuyenKhoan.getTenNganHangNguoiChuyen());
 		
 		row = sheet.createRow(10);
 		cell = row.createCell(0);
 		cell.setCellValue("Ngày chuyển khoản");
 		cell = row.createCell(1);
-		cell.setCellValue(danhSachChuyenKhoan.getNgayChuyenKhoan() == null ? "Invalid" : format.format(danhSachChuyenKhoan.getNgayChuyenKhoan()));
+		cell.setCellValue(danhSachChuyenKhoan == null ? "Invalid" : format.format(danhSachChuyenKhoan.getNgayChuyenKhoan()));
 		
 		row = sheet.createRow(11);
 		cell = row.createCell(0);
