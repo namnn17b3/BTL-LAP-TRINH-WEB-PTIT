@@ -42,7 +42,7 @@
 	            <div class="tieu-de-thong-bao"><h1 style="margin: auto;"><i class="fa-solid fa-circle-info" id="info-icon"></i> Thông báo</h1></div>
 	            <div class="noi-dung-thong-bao">
 	                <div class="doan-van-thong-bao" style="margin-bottom: 20px">
-	                    <p class="chi-tiet-doan-van-thong-bao">Bạn đã cập nhật thông tin thành công</p>
+	                    <p class="chi-tiet-doan-van-thong-bao">Bạn đã đăng kí tài khoản thành công</p>
 	                </div>
 	                <div class="bang-nut-thao-tac">
 	                    <div id="nut-ok" style="display: flex;"><h3 style="margin: auto;">OK</h3></div>
@@ -52,7 +52,6 @@
 	    </div>
 	</c:if>
 	
-<!-- 	<div style="display: flex;"> -->
 	<c:if test="${themGioHangStatus == 1 || themGioHangStatus == 2 || themGioHangStatus == 3}">	
 	   	<jsp:include page="thong_bao_mini.jsp"/>
 	</c:if>

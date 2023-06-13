@@ -63,11 +63,11 @@
                 </div>
                 <div class="mat-khau" style="height: 66px;">
                     <div class="ten-input">Địa chỉ nhận hàng <span style="color: #ff0020">(*)</span></div>
-                    <input placeholder="Địa chỉ nhận hàng" type="text" name="dia-chi-nguoi-nhan" id="mat-khau" />
+                    <input placeholder="Địa chỉ nhận hàng" type="text" name="dia-chi-nguoi-nhan" id="dia-chi-nguoi-nhan" />
                 </div>
                 <div class="nhap-lai-mat-khau">
                     <div class="ten-input">Số điện thoại người nhận <span style="color: #ff0020">(*)</span></div>
-                    <input placeholder="Số điện thoại người nhận" type="text" name="so-dien-thoai-nguoi-nhan" id="nhap-lai-mat-khau" />
+                    <input placeholder="Số điện thoại người nhận" type="text" name="so-dien-thoai-nguoi-nhan" id="so-dien-thoai-nguoi-nhan" />
                 </div>
                 <div style="margin-bottom: 24px;">
                 	<div class="ten-input" style="margin-bottom: 4px;">Hình thức thanh toán <span style="color: #ff0020">(*)</span></div>

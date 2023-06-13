@@ -67,6 +67,17 @@
 	</div>
 </div>
 <div>
-	<a href="#" class="nut-len-dau-trang"><i
-		class="fa-solid fa-circle-chevron-up"></i></a>
+	<a href="#" class="nut-len-dau-trang"><i class="fa-solid fa-circle-chevron-up"></i></a>
+</div>
+
+<div class="phan-lien-he">
+	<div>
+		<a href="https://www.facebook.com/messages/t/100055669932496/" target="_blank" class="lien-he-shop">
+			<img alt="" src="./img/icon_messenger.svg" width="60px" height="60px">
+		</a>
+	</div>
+		
+	<div class="chat-voi-chung-toi">
+		<span id="chat-voi-chung-toi">Chat với chúng tôi</span>
+	</div>
 </div>

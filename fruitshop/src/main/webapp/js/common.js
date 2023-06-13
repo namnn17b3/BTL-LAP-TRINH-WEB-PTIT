@@ -192,3 +192,27 @@ try {
 	});
 }
 catch(e) {}
+
+var chatVoiChungToi = document.querySelector('.chat-voi-chung-toi');
+var lienHeShop = document.querySelector('.lien-he-shop');
+var phanLienHe = document.querySelector('.phan-lien-he');
+
+setTimeout(() => {
+	phanLienHe.style.display = 'block';
+}, 1200);
+
+chatVoiChungToi.onclick = () => {
+	lienHeShop.click();
+}
+
+lienHeShop.onmousemove = () => {
+	chatVoiChungToi.style.display = 'flex';
+	chatVoiChungToi.style.animation = 'tuPhaiQua 0.8s ease ';
+}
+
+phanLienHe.onmouseleave = () => {
+	chatVoiChungToi.style.animation = 'tuTraiQua 0.8s ease';
+	setTimeout(() => {
+		chatVoiChungToi.style.display = 'none';
+	}, 800);
+}

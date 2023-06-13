@@ -47,7 +47,9 @@ public class DanhGiaDaoImpl implements DanhGiaDao {
 			ResultSet res = ppst.executeQuery();
 			while (res.next()) {
 				DanhGia danhGia = new DanhGia();
-				danhGia.setTenUser(res.getString("ten"));
+				danhGia.setId(res.getInt("id"));
+				danhGia.setIdUser(res.getInt("id_user"));
+				danhGia.setIdSanPham(res.getInt("id_sp"));
 				if (choose == -1) {
 					danhGia.setSoSaoVote(res.getInt("so_sao_vote"));
 				}
@@ -152,22 +154,25 @@ public class DanhGiaDaoImpl implements DanhGiaDao {
 			}
 			ResultSet res = ppst.executeQuery();
 			while(res.next()) {
-				DanhGia DanhGia = new DanhGia();
-				DanhGia.setTenUser(res.getString("ten"));
+				DanhGia danhGia = new DanhGia();
+				danhGia.setId(res.getInt("id"));
+				danhGia.setIdUser(res.getInt("id_user"));
+				danhGia.setIdSanPham(res.getInt("id_sp"));
+				danhGia.setTenUser(res.getString("ten"));
 				if (choose == -1) {
-					DanhGia.setSoSaoVote(res.getInt("so_sao_vote"));
+					danhGia.setSoSaoVote(res.getInt("so_sao_vote"));
 				}
 				else {
-					DanhGia.setSoSaoVote(choose);
+					danhGia.setSoSaoVote(choose);
 				}
-				DanhGia.setNoiDungBinhLuan(res.getString("noi_dung_binh_luan"));
+				danhGia.setNoiDungBinhLuan(res.getString("noi_dung_binh_luan"));
 				String anhUser = res.getString("anh");
 				if (anhUser == null) {
 					anhUser = "./img/fb-no-img.png";
 				}
-				DanhGia.setAnhUser(anhUser);
-				DanhGia.setNgayBinhLuan(res.getTimestamp("ngay_binh_luan"));
-				list.add(DanhGia);
+				danhGia.setAnhUser(anhUser);
+				danhGia.setNgayBinhLuan(res.getTimestamp("ngay_binh_luan"));
+				list.add(danhGia);
 			}
 		}
 		catch (Exception e) {
@@ -181,5 +186,118 @@ public class DanhGiaDaoImpl implements DanhGiaDao {
 			}
 		}
 		return list;
+	}
+	
+	@Override
+	public DanhGia getDanhGiaByIdUserIdSanPhamIdDanhSachDonHang(int idUser, int idSanPham, int idDanhSachDonHang) {
+		Connection conn = null;
+		DanhGia danhGia = null;
+		try {
+			conn = poolConnection.getConnection();
+			PreparedStatement ppst = conn.prepareStatement(
+				"select dg.*\r\n"
+				+ "from danhsachdonhang dsdh, danhgia dg\r\n"
+				+ "where dg.id_user = ? and dg.id_sp = ? and dsdh.id = ?;"
+			);
+			ppst.setInt(1, idUser);
+			ppst.setInt(2, idSanPham);
+			ppst.setInt(3, idDanhSachDonHang);
+			ResultSet res = ppst.executeQuery();
+			if (res.next()) {
+				danhGia = new DanhGia();
+				danhGia.setId(res.getInt("id"));
+				danhGia.setIdUser(res.getInt("id_user"));
+				danhGia.setIdSanPham(res.getInt("id_sp"));
+				danhGia.setSoSaoVote(res.getInt("so_sao_vote"));
+				danhGia.setNoiDungBinhLuan(res.getString("noi_dung_binh_luan"));
+				danhGia.setNgayBinhLuan(res.getTimestamp("ngay_binh_luan"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				conn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return danhGia;
+	}
+	
+	@Override
+	public void themDanhGia(DanhGia danhGia) {
+		Connection conn = null;
+		try {
+			conn = poolConnection.getConnection();
+			PreparedStatement ppst = conn.prepareStatement(
+				"insert into danhgia(id_user, id_sp, noi_dung_binh_luan, so_sao_vote, ngay_binh_luan)\r\n"
+				+ "values(?, ?, ?, ?, ?);"
+			);
+			ppst.setInt(1, danhGia.getIdUser());
+			ppst.setInt(2, danhGia.getIdSanPham());
+			ppst.setString(3, danhGia.getNoiDungBinhLuan().replaceAll("\r\n", "\\\\n"));
+			ppst.setInt(4, danhGia.getSoSaoVote());
+			ppst.setTimestamp(5, new java.sql.Timestamp(danhGia.getNgayBinhLuan().getTime()));
+			ppst.execute();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				conn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+	}
+	
+	@Override
+	public void capNhatDanhGia(DanhGia danhGia) {
+		Connection conn = null;
+		try {
+			conn = poolConnection.getConnection();
+			PreparedStatement ppst = conn.prepareStatement(
+				"update danhgia\r\n"
+				+ "set so_sao_vote = ?, noi_dung_binh_luan = ?, ngay_binh_luan = ?\r\n"
+				+ "where id = ?;"
+			);
+			ppst.setInt(1, danhGia.getSoSaoVote());
+			ppst.setString(2, danhGia.getNoiDungBinhLuan().replaceAll("\r\n", "\\\\n"));
+			ppst.setTimestamp(3, new java.sql.Timestamp(danhGia.getNgayBinhLuan().getTime()));
+			ppst.setInt(4, danhGia.getId());
+			ppst.execute();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				conn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+	}
+	
+	@Override
+	public void xoaDanhGia(DanhGia danhGia) {
+		Connection conn = null;
+		try {
+			conn = poolConnection.getConnection();
+			PreparedStatement ppst = conn.prepareStatement(
+				"delete from danhgia where id = ?;"
+			);
+			ppst.setInt(1, danhGia.getId());
+			ppst.execute();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				conn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
 	}
 }

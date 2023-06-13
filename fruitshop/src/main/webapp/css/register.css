@@ -265,7 +265,9 @@ input[id="mat-khau"],
 input[id="nhap-lai-mat-khau"],
 input[id="so-tai-khoan-nguoi-chuyen"],
 input[id="ngan-hang-nguoi-chuyen"],
-input[id="ngay-chuyen-khoan"]
+input[id="ngay-chuyen-khoan"],
+input[id="dia-chi-nguoi-nhan"],
+input[id="so-dien-thoai-nguoi-nhan"]
 {
     padding: 6px 12px;
     width: 100%;
@@ -282,7 +284,9 @@ input[id="mat-khau"]:hover,
 input[id="nhap-lai-mat-khau"]:hover,
 input[id="so-tai-khoan-nguoi-chuyen"]:hover,
 input[id="ngan-hang-nguoi-chuyen"]:hover,
-input[id="ngay-chuyen-khoan"]:hover
+input[id="ngay-chuyen-khoan"]:hover,
+input[id="dia-chi-nguoi-nhan"]:hover,
+input[id="so-dien-thoai-nguoi-nhan"]:hover
 {
     border: 3px solid rgba(26, 102, 255, 0.5);
     border-radius: 6px;

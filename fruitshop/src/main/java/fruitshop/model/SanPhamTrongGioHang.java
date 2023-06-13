@@ -12,11 +12,12 @@ public class SanPhamTrongGioHang {
 	private int soLuong;
 	private int soLuongSanPhamConLai;
 	private String anh;
+	private String donVi;
 	
 	public SanPhamTrongGioHang() {}
 
 	public SanPhamTrongGioHang(int id, int idUser, int idSanPham, Date ngayThem, String tenSanPham,
-			int tienTrenDonVi, int soLuong, int soLuongSanPhamConLai, String anh) {
+			int tienTrenDonVi, int soLuong, int soLuongSanPhamConLai, String anh, String donVi) {
 		super();
 		this.id = id;
 		this.idUser = idUser;
@@ -27,6 +28,7 @@ public class SanPhamTrongGioHang {
 		this.soLuong = soLuong;
 		this.soLuongSanPhamConLai = soLuongSanPhamConLai;
 		this.anh = anh;
+		this.donVi = donVi;
 	}
 
 	public int getId() {
@@ -99,5 +101,13 @@ public class SanPhamTrongGioHang {
 
 	public void setAnh(String anh) {
 		this.anh = anh;
+	}
+
+	public String getDonVi() {
+		return donVi;
+	}
+
+	public void setDonVi(String donVi) {
+		this.donVi = donVi;
 	}
 }

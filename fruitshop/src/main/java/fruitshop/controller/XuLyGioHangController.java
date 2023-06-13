@@ -35,6 +35,10 @@ public class XuLyGioHangController extends HttpServlet {
 		String url = (String) session.getAttribute("url");
 		int soLuong = (int) session.getAttribute("soLuong");
 		SanPham sanPham = sanPhamDao.getSanPhamById(idSanPham);
+		if (sanPham == null) {
+			req.getRequestDispatcher("./khong_tim_thay_san_pham.jsp").forward(req, resp);
+			return;
+		}
 		System.out.println(idSanPham + " " + url + " " + soLuong);
 		if (sanPham.getSoLuongNhap() - sanPham.getSoLuongBan() == 0) {
 			session.setAttribute("themGioHangStatus", 1);

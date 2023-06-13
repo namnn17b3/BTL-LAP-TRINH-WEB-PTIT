@@ -25,6 +25,9 @@ public class SearchController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
+		req.setCharacterEncoding("UTF-8");
+		String tenSanPham = req.getParameter("ten-san-pham");
+		session.setAttribute("tenSanPhamTimKiem", tenSanPham);
 		if (session.getAttribute("listSanPham") == null) {
 			req.getRequestDispatcher("./khong_tim_thay_san_pham.jsp").forward(req, resp);
 			return;
@@ -34,8 +37,11 @@ public class SearchController extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		HttpSession session = req.getSession();
 		req.setCharacterEncoding("UTF-8");
 		String tenSanPham = req.getParameter("ten-san-pham");
+		System.out.println(tenSanPham);
+		session.setAttribute("tenSanPhamTimKiem", tenSanPham);
 		// System.out.println(tenSanPham);
 		int page = 1;
 		if (req.getParameter("page") != null) {
@@ -51,12 +57,10 @@ public class SearchController extends HttpServlet {
 			req.getRequestDispatcher("./khong_tim_thay_san_pham.jsp").forward(req, resp);
 			return;
 		}
-		HttpSession session = req.getSession();
 		int soLuongSanPhamAll = sanPhamDao.getSoLuongSanPhamByName(tenSanPham);
 		session.setAttribute("listSanPham", listSanPham);
 		session.setAttribute("page", page);
 		session.setAttribute("soLuongSanPhamAll", soLuongSanPhamAll);
-		session.setAttribute("tenSanPhamTimKiem", tenSanPham);
 		req.getRequestDispatcher("./ket_qua_tim_kiem.jsp").forward(req, resp);
 	}
 }

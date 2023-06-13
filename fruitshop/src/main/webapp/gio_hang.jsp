@@ -1,11 +1,10 @@
 <%@page import="fruitshop.model.SanPhamTrongGioHang"%>
-<%@page import="java.util.Map"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
-<%@page import="java.util.HashMap"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,6 +57,7 @@
 	            	</a>
 	            </div>
         	</c:if>
+        	
         	<c:if test="${soLuongSanPhamTrongGioHang > 0}">
         		<style>
         			.thong-tin-gio-hang {
@@ -76,17 +76,13 @@
 	        			<div class="thoi-gian-them-san-pham__gio-hang de-muc-gio-hang"><span>Thời gian</span></div>
 	        			<div class="loai-bo-san-pham__gio-hang de-muc-gio-hang"><span>   </span></div>
         			</div>
-        			<%
-        				List<SanPhamTrongGioHang> listSanPhamTrongGioHang = (List<SanPhamTrongGioHang>) session.getAttribute("listSanPhamTrongGioHang");
-        			%>
-        			<c:set var="listDonHang" value="<%=listSanPhamTrongGioHang%>"/>
         			
         			<c:forEach items="${listSanPhamTrongGioHang}" var="item" varStatus="index">
         				<div class="id-san-pham" style="display: none;">${item.idSanPham}</div>
 	        			<div class="dong-gio-hang">
 	        				<div class="hinh-anh-san-pham hinh-anh-san-pham__gio-hang chung-cua-cac-thong-tin-san-pham__gio-hang"><img src="${item.anh}" width="80px" height="80px"/></div>
-		        			<div class="ten-san-pham ten-san-pham__gio-hang chung-cua-cac-thong-tin-san-pham__gio-hang"><span style="margin: auto; text-align: center;">${item.tenSanPham}</span></div>
-		        			<div class="gia-san-pham gia-san-pham__gio-hang chung-cua-cac-thong-tin-san-pham__gio-hang"><span style="margin: auto; font-weight: 600"><span style="color: #ff2626;" class="gia-san-pham tien-format">${item.tienTrenDonVi}</span> VNĐ</span></div>
+		        			<div class="ten-san-pham ten-san-pham__gio-hang chung-cua-cac-thong-tin-san-pham__gio-hang"><a class="go-to-chi-tiet-san-pham" href="./chi-tiet-san-pham?id=${item.idSanPham}">${item.tenSanPham}</a></div>
+		        			<div class="gia-san-pham gia-san-pham__gio-hang chung-cua-cac-thong-tin-san-pham__gio-hang"><span style="margin: auto; font-weight: 600"><span style="color: #ff2626;" class="gia-san-pham tien-format">${item.tienTrenDonVi}</span> <span style="color: #ff2626;">VNĐ</span>/${item.donVi}</span></div>
 		        			
         					<div class="so-luong-san-pham-hidden" style="display: none;">${item.soLuong}</div>
         					<div class="so-luong-san-pham-con-lai" style="display: none;">${item.soLuongSanPhamConLai}</div>
@@ -220,20 +216,17 @@
     
     <c:if test="${loiGioHang == 1}">
     	<script type="text/javascript">
+    		var url = window.location.href;
     		setTimeout(() => {
     			document.querySelector('.thong-bao-mini').style.borderLeft = '5px solid #f00';
     			document.querySelector('.icon-thong-bao-mini').innerHTML = '<i class="fa-sharp fa-solid fa-circle-xmark" id="infomini-icon"></i>';
     			document.querySelector('#infomini-icon').style.color = '#f00';
     			document.querySelector('.icon-thong-bao-mini').style.color = '#f00';
     			document.querySelector('.noi-dung-thong-bao-mini-1').innerText = 'Thất bại';
-    			document.querySelector('.noi-dung-thong-bao-mini-2').innerText = 'Sản phẩm ${tenSanPham} bạn chọn có số lượng không hợp lý';
+    			document.querySelector('.noi-dung-thong-bao-mini-2').innerText = 'Sản phẩm ${tenSanPhamBiLoi} bạn chọn có số lượng không hợp lý';
     		}, 1200);
     	</script>
     	<script src="./js/thong_bao_mini.js"></script>
     </c:if>
-    
-    <%
-    	session.removeAttribute("loiGioHang");
-    %>
 </body>
 </html>

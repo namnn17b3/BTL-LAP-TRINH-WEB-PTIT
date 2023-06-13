@@ -13,8 +13,9 @@ public class PoolConnection implements ServletContextListener {
 	
 	@Override
 	public void contextInitialized(ServletContextEvent event) {
-		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+		dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
 		dataSource.setJdbcUrl("jdbc:mysql://localhost:3306/fruitshop");
+		dataSource.addDataSourceProperty("characterEncoding", "UTF-8");
 		dataSource.setUsername("root");
 		dataSource.setPassword("17195802");
 	}

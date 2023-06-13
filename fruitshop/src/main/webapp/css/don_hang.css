@@ -1,0 +1,176 @@
+.dieu-huong-va-tieu-de {
+	padding: 0px 15px 32px;
+	font-size: 14px;
+}
+
+.tieu-de-cua-hang {
+	padding-top: 10px;
+	font-size: 25.6px;
+}
+
+.nut-quay-lai-trang-chu_don-hang {
+	display: flex;
+	text-decoration: none;
+	cursor: pointer;
+	width: 85px;
+	height: 32px;
+	margin-top: 24px;
+	background: #ffd333;
+	color: #3d464d;
+	border-radius: 6px;
+}
+
+.tieu-de-don-hang {
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 17px;
+}
+
+.thong-tin-chi-tiet-don-hang {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.ket-thuc-website {
+	margin-top: 50px;
+}
+
+.nut-quay-lai-trang-chu_don-hang {
+	display: flex;
+	text-decoration: none;
+	cursor: pointer;
+	width: 85px;
+	height: 32px;
+	margin-top: 24px;
+	background: #ffd333;
+	color: #3d464d;
+	border-radius: 6px;
+}
+
+.nut-quay-lai-trang-chu_don-hang:hover {
+	background: #3d464d;
+	color: #fff;
+}
+
+.dong-don-hang + .dong-don-hang {
+	margin-top: 30px;
+}
+
+.dong-don-hang {
+	display: flex;
+	border: 3px #ebebeb solid;
+	margin-left: auto;
+	margin-right: auto;
+	width: 85%;
+	padding: 20px;
+	border-radius: 5px;
+}
+
+.dong-don-hang:hover {
+	border-color: orange;
+}
+
+.tieu-de-bang-don-hang {
+	font-weight: 600;
+	line-height: 25px;
+	font-size: 16px;
+}
+
+.thong-tin-chi-tiet-tung-muc {
+	font-size: 16px;
+	font-weight: 300;
+}
+
+.thong-tin-invalid {
+	font-size: 16px;
+	font-weight: 300;
+	color: #ff2626;
+}
+
+.thong-tin-don-hang {
+	border-right: 3px #ebebeb solid;
+	flex: 8;
+}
+
+.user-don-hang {
+	padding-left: 20px;
+	flex: 2;
+	display: flex;
+	flex-direction: column;
+}
+
+.anh-user {
+	width: 100%;
+	border-radius: 50%;
+	border: 3px orange solid;
+}
+
+.chi-tiet-don-hang__don-hang {
+	display: block;
+	text-decoration: none;
+	color: #3d464d;
+	background: #ffd333;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 30px;
+	width: 100%;
+	height: 40px;
+	display: flex;
+	border-radius: 6px;
+}
+
+.chi-tiet-don-hang__don-hang:hover {
+	color: #fff;
+	background: #3d464d;
+}
+
+.huy-don-hang__don-hang {
+	display: block;
+	text-decoration: none;
+	color: #fff;
+	background: #f30000;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 30px;
+	width: 100%;
+	height: 40px;
+	display: flex;
+	border-radius: 6px;
+}
+
+.huy-don-hang__don-hang:hover {
+	opacity: 0.8;
+}
+
+.vo-hieu-hoa {
+	opacity: 0.6;
+	cursor: not-allowed;
+}
+
+.vo-hieu-hoa:hover {
+	opacity: 0.6;
+}
+
+.thanh-phan-loai-don-hang {
+	width: 85%;
+	display: flex;
+	margin: 0px auto 30px auto;
+	justify-content: space-around;
+	background-color: #f7f7f7;
+	border-radius: 6px;
+}
+
+.phan-loai-don-hang {
+	display: flex;
+	text-decoration: none;
+	color: #3d464d;
+	font-size: 25px;
+	font-weight: 600;
+	flex: 1;
+	height: 50px;
+	border-radius: 6px;
+}
+
+.phan-loai-don-hang:hover {
+	border: 1px solid orange;
+}

@@ -7,6 +7,9 @@ import java.sql.PreparedStatement;
 //import java.util.ArrayList;
 //import java.util.Date;
 //import java.util.List;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.zaxxer.hikari.HikariDataSource;
 
@@ -390,5 +393,201 @@ public class DonHangDaoImpl implements DonHangDao {
 				e2.printStackTrace();
 			}
 		}
+	}
+	
+	@Override
+	public void xoaDonHangByIdDanhSachDonHang(int idDanhSachDonHang) {
+		Connection conn = null;
+		try {
+			conn = poolConnection.getConnection();
+			PreparedStatement ppst = conn.prepareStatement(
+				"delete from donhang where id_dsdh = ?;"
+			);
+			ppst.setInt(1, idDanhSachDonHang);
+			ppst.execute();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				conn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+	}
+	
+	@Override
+	public int getSoLuongDonHangByIdDanhSachDonHang(int idDanhSachDonHang) {
+		int soLuong = 0;
+		Connection conn = null;
+		try {
+			conn = poolConnection.getConnection();
+			PreparedStatement ppst = conn.prepareStatement(
+				"select count(*) as so_luong from donhang where id_dsdh = ?;"
+			);
+			ppst.setInt(1, idDanhSachDonHang);
+			ResultSet res = ppst.executeQuery();
+			if (res.next()) {
+				soLuong = res.getInt("so_luong");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				conn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return soLuong;
+	}
+	
+	@Override
+	public List<DonHang> getListDonHangByIdDanhSachDonHang(int idDanhSachDonHang, int page) {
+		List<DonHang> listDonHang = new ArrayList<>();
+		Connection conn = null;
+		try {
+			conn = poolConnection.getConnection();
+			PreparedStatement ppst = conn.prepareStatement(
+				"select dh.id_sp, sp.ten, sp.anh, sp.tien_tren_don_vi as don_gia, sp.don_vi, dh.so_luong\r\n"
+				+ "from donhang dh, sanpham sp\r\n"
+				+ "where dh.id_sp = sp.id and dh.id_dsdh = ?\r\n"
+				+ "limit ?, 5;"
+			);
+			ppst.setInt(1, idDanhSachDonHang);
+			ppst.setInt(2, (page - 1) * 5);
+			ResultSet res = ppst.executeQuery();
+			while (res.next()) {
+				DonHang donHang = new DonHang();
+				donHang.setIdDanhSachDonHang(idDanhSachDonHang);
+				donHang.setIdSanPham(res.getInt("id_sp"));
+				donHang.setTenSanPham(res.getString("ten"));
+				donHang.setAnh(res.getString("anh"));
+				donHang.setDonGia(res.getInt("don_gia"));
+				donHang.setSoLuong(res.getInt("so_luong"));
+				donHang.setDonVi(res.getString("don_vi"));
+				listDonHang.add(donHang);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				conn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return listDonHang;
+	}
+	
+	@Override
+	public List<DonHang> getAllDonHangByIdDanhSachDonHang(int idDanhSachDonHang) {
+		List<DonHang> listDonHang = new ArrayList<>();
+		Connection conn = null;
+		try {
+			conn = poolConnection.getConnection();
+			PreparedStatement ppst = conn.prepareStatement(
+				"select dh.id_sp, sp.ten, sp.anh, sp.tien_tren_don_vi as don_gia, sp.don_vi, dh.so_luong\r\n"
+				+ "from donhang dh, sanpham sp\r\n"
+				+ "where dh.id_sp = sp.id and dh.id_dsdh = ?;"
+			);
+			ppst.setInt(1, idDanhSachDonHang);
+			ResultSet res = ppst.executeQuery();
+			while (res.next()) {
+				DonHang donHang = new DonHang();
+				donHang.setIdDanhSachDonHang(idDanhSachDonHang);
+				donHang.setIdSanPham(res.getInt("id_sp"));
+				donHang.setTenSanPham(res.getString("ten"));
+				donHang.setAnh(res.getString("anh"));
+				donHang.setDonGia(res.getInt("don_gia"));
+				donHang.setSoLuong(res.getInt("so_luong"));
+				donHang.setDonVi(res.getString("don_vi"));
+				listDonHang.add(donHang);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				conn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return listDonHang;
+	}
+	
+	@Override
+	public int tonTaiDanhGiaDonHang(int idUser, int idSanPham, int idDanSachDonHang) {
+		int ok = 0;
+		Connection conn = null;
+		try {
+			conn = poolConnection.getConnection();
+			PreparedStatement ppst = conn.prepareStatement(
+				"select count(*) as so_luong\r\n"
+				+ "from danhsachdonhang dsdh, danhgia dg\r\n"
+				+ "where dg.id_user = ? and dg.id_sp = ? and dsdh.id = ?;"
+			);
+			ppst.setInt(1, idUser);
+			ppst.setInt(2, idSanPham);
+			ppst.setInt(3, idDanSachDonHang);
+			ResultSet res = ppst.executeQuery();
+			if (res.next()) {
+				ok = res.getInt("so_luong");
+			}
+			if (ok > 0) {
+				ok = 1;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				conn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return ok;
+	}
+	
+	@Override
+	public DonHang getDonHangByIdSanPhamIdDanhDonHang(int idSanPham, int idDanhSachDonHang) {
+		DonHang donHang = null;
+		Connection conn = null;
+		try {
+			conn = poolConnection.getConnection();
+			PreparedStatement ppst = conn.prepareStatement(
+				"select dh.id_sp, sp.ten, sp.anh, sp.tien_tren_don_vi as don_gia, sp.don_vi, dh.so_luong\r\n"
+				+ "from donhang dh, sanpham sp\r\n"
+				+ "where dh.id_sp = sp.id and dh.id_sp = ? and dh.id_dsdh = ?;"
+			);
+			ppst.setInt(1, idSanPham);
+			ppst.setInt(2, idDanhSachDonHang);
+			ResultSet res = ppst.executeQuery();
+			if (res.next()) {
+				donHang = new DonHang();
+				donHang.setIdDanhSachDonHang(idDanhSachDonHang);
+				donHang.setIdSanPham(res.getInt("id_sp"));
+				donHang.setTenSanPham(res.getString("ten"));
+				donHang.setAnh(res.getString("anh"));
+				donHang.setDonGia(res.getInt("don_gia"));
+				donHang.setSoLuong(res.getInt("so_luong"));
+				donHang.setDonVi(res.getString("don_vi"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				conn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return donHang;
 	}
 }

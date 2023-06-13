@@ -853,7 +853,7 @@ iframe {
 
 .nut-len-dau-trang {
     position: fixed;
-    bottom: 90px;
+    bottom: 130px;
     right: 30px;
     font-size: 45px;
     border-radius: 50%;
@@ -873,6 +873,65 @@ iframe {
 .hien-nut-len-dau-trang {
     opacity: 1;
     visibility: visible;
+}
+
+.lien-he-shop {
+	position: fixed;
+	display: block;
+    bottom: 51px;
+    right: 22px;
+    cursor: pointer;
+    z-index: 100;
+}
+
+#chat-voi-chung-toi {
+	width: 300px;
+	font-size: 20px;
+	font-weight: 600;
+	color: #f30000;
+	margin-top: auto;
+	margin-bottom: auto;
+	padding-left: 41px;
+	white-space: nowrap;
+	overflow: hidden;
+	width: 100%;
+}
+
+.chat-voi-chung-toi {
+	width: 300px;
+	height: 60px;
+	background-color: #fff;
+	position: fixed;
+	bottom: 55px;
+	right: 22px;
+	z-index: 50;
+	border-radius: 60px;
+	display: none;
+	box-shadow: 0 0 5px #888;
+	animation: tuPhaiQua 0.8s ease;
+}
+
+@keyframes tuPhaiQua {
+	from {
+		width: 60px;
+	}
+	to {
+		width: 300px;
+	}
+}
+
+@keyframes tuTraiQua {
+	from {
+		width: 300px;
+	}
+	to {
+		width: 60px;
+	}
+}
+
+.phan-lien-he {
+	display: none;
+	cursor: pointer;
 }
 
 #link-to-trang-chu {

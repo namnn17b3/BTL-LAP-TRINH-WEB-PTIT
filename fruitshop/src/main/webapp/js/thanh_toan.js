@@ -1,15 +1,22 @@
 var body = document.querySelector('body');
 var ten = document.querySelector('#ten');
 var email = document.querySelector('#email');
-var matKhau = document.querySelector('#mat-khau');
-var nhapLaiMatKhau = document.querySelector('#nhap-lai-mat-khau');
+var diaChiNguoiNhan = document.querySelector('#dia-chi-nguoi-nhan');
+var soDienThoaiNguoiNhan = document.querySelector('#so-dien-thoai-nguoi-nhan');
 var soTaiKhoanNguoiChuyen = document.querySelector('#so-tai-khoan-nguoi-chuyen');
 var nganHangNguoiChuyen = document.querySelector('#ngan-hang-nguoi-chuyen');
 var ngayChuyenKhoan = document.querySelector('#ngay-chuyen-khoan');
 
 var phanTuHienTai = null;
 body.onclick = (e) => {
-    if (e.target == email || e.target == matKhau || e.target == ten || e.target == nhapLaiMatKhau || e.target == soTaiKhoanNguoiChuyen || e.target == nganHangNguoiChuyen || e.target == ngayChuyenKhoan) {
+    if (e.target == email ||
+    	e.target == diaChiNguoiNhan ||
+    	e.target == ten ||
+    	e.target == soDienThoaiNguoiNhan ||
+    	e.target == soTaiKhoanNguoiChuyen ||
+    	e.target == nganHangNguoiChuyen ||
+    	e.target == ngayChuyenKhoan) {
+		
         if (phanTuHienTai == null || phanTuHienTai == e.target) {
             e.target.style.border = '3px solid rgba(26, 102, 255, 0.5)';
             phanTuHienTai = e.target;
@@ -35,15 +42,16 @@ button.onclick = (e) => {
     var listItem = [
 		document.querySelector('.ten'),
 		document.querySelector('.email'),
-		document.querySelector('.mat-khau'),
-		document.querySelector('.nhap-lai-mat-khau'),
+		document.querySelector('.dia-chi-nguoi-nhan'),
+		document.querySelector('.so-dien-thoai-nguoi-nhan'),
 		document.querySelector('.so-tai-khoan-nguoi-chuyen'),
 		document.querySelector('.ngan-hang-nguoi-chuyen'),
 		document.querySelector('.ngay-chuyen-khoan')
 	];
-    var listString = [ten.value, email.value, matKhau.value, nhapLaiMatKhau.value, soTaiKhoanNguoiChuyen.value, nganHangNguoiChuyen.value, ngayChuyenKhoan.value];
+    var listString = [ten.value, email.value, diaChiNguoiNhan.value, soDienThoaiNguoiNhan.value, soTaiKhoanNguoiChuyen.value, nganHangNguoiChuyen.value, ngayChuyenKhoan.value];
     var listRegex = [/.+/, /([a-zA-Z0-9\.]+)@([a-zA-H0-9\.].+)/, /.+/, /\d+/, /\d{8,15}/, /.+/, /\d{2}\/\d{2}\/\d{4} \d{2}:\d{2}:\d{2}/];
-    for (var i = 0; i < listString.length; i++) {
+    var length = chuyenKhoan.style.display == '' ? 4 : listString.length;
+    for (var i = 0; i < length; i++) {
         if (listRegex[i].exec(listString[i]) == null || listRegex[i].exec(listString[i])[0] != listString[i]) {
             e.preventDefault();
             listItem[i].insertAdjacentHTML('beforeend', 
@@ -76,6 +84,9 @@ hinhThucThanhToan.forEach((item, index) => {
 		if (index == 1) {
 			chuyenKhoan.style.display = 'block';
 			chuyenKhoan.style.animation = 'chayTuTrenXuong ease 0.5s forwards';
+			setTimeout(() => {
+				chuyenKhoan.style.overflow = 'visible';
+			}, 500);
 		}
 		else {
 			chuyenKhoan.style.animation = 'chayTuDuoiLen ease 0.5s forwards';

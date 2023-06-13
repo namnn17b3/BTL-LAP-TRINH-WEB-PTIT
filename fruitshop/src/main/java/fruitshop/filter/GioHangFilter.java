@@ -29,22 +29,27 @@ public class GioHangFilter implements Filter {
 		}
 		for (Cookie c : cookies) {
 			if (c.getName().equals("clickThemVaoGioHang")) {
-				String[] data = c.getValue().split("_");
-				System.out.println(c.getValue());
-				double x = Double.parseDouble(data[0].split("==")[1]);
-				double y = Double.parseDouble(data[1].split("==")[1]);
-				int soLuong = Integer.parseInt(data[2].split("==")[1]);
-				String url = data[3].split("==")[1];
-				int id = Integer.parseInt(data[4].split("==")[1]);
-				session.setAttribute("x", x);
-				session.setAttribute("y", y);
-				session.setAttribute("url", url);
-				session.setAttribute("id", id);
-				session.setAttribute("soLuong", soLuong);
-				session.setAttribute("clickThemVaoGioHang", 1);
-				c.setPath("/fruitshop/xu-ly-gio-hang");
-				c.setMaxAge(0);
-				resp.addCookie(c);
+				try {					
+					String[] data = c.getValue().split("_");
+					System.out.println(c.getValue());
+					double x = Double.parseDouble(data[0].split("==")[1]);
+					double y = Double.parseDouble(data[1].split("==")[1]);
+					int soLuong = Integer.parseInt(data[2].split("==")[1]);
+					String url = data[3].split("==")[1];
+					int id = Integer.parseInt(data[4].split("==")[1]);
+					session.setAttribute("x", x);
+					session.setAttribute("y", y);
+					session.setAttribute("url", url);
+					session.setAttribute("id", id);
+					session.setAttribute("soLuong", soLuong);
+					session.setAttribute("clickThemVaoGioHang", 1);
+					c.setPath("/fruitshop/xu-ly-gio-hang");
+					c.setMaxAge(0);
+					resp.addCookie(c);
+				} catch (Exception e) {
+					req.getRequestDispatcher("./khong_tim_thay_san_pham.jsp").forward(req, resp);
+					return;
+				}
 			}
 			else if (c.getName().equals("clickGioHang")) {
 				session.setAttribute("clickGioHang", 1);

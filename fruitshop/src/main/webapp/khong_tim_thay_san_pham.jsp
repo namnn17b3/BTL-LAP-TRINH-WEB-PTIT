@@ -37,7 +37,6 @@
 	<jsp:include page="footer.jsp"/>
     
     <script src="./js/common.js"></script>
-    <script src="./js/home.js"></script>
     <script src="./js/san_pham.js"></script>
     <script type="text/javascript">
 	   	setTimeout(() => {

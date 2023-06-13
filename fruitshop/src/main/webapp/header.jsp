@@ -166,7 +166,7 @@
 					</div>
 				</div>
 				<form action="./search" method="post" class="nhap-ten-san-pham">
-					<input type="text" placeholder="Tên sản phẩm..." class="o-nhap-ten-san-pham" name="ten-san-pham" value="${tenSanPhamTimKiem}">
+					<input type="text" placeholder="Tên sản phẩm..." class="o-nhap-ten-san-pham" name="ten-san-pham" value='<c:out value="${tenSanPhamTimKiem}"/>'>
 					<div id="tim-kiem-icon">
 						<i class="fa-solid fa-magnifying-glass" style="margin: auto;"></i>
 						<button style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; bottom: 0; right: 0; opacity: 0; cursor: pointer">1</button>

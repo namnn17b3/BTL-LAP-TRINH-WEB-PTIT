@@ -33,8 +33,8 @@ public class SanPhamDaoImpl implements SanPhamDao {
 			    + "from \r\n"
 			    + "(\r\n"
 			    + "	select sp.id, sp.ten, sp.tien_tren_don_vi, sp.anh, sum(dh.so_luong) as so_luong_ban, sp.don_vi\r\n"
-			    + "	from donhang dh, sanpham sp\r\n"
-			    + "	where dh.id_sp = sp.id\r\n"
+			    + "	from donhang dh, sanpham sp, danhsachdonhang dsdh\r\n"
+			    + "	where dh.id_sp = sp.id and dh.id_dsdh = dsdh.id and dsdh.huy = 0\r\n"
 			    + "	group by sp.id\r\n"
 			    + ") as a1\r\n"
 			    + "left join\r\n"
@@ -68,7 +68,6 @@ public class SanPhamDaoImpl implements SanPhamDao {
 				list.add(sanPham);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		finally {
@@ -92,8 +91,8 @@ public class SanPhamDaoImpl implements SanPhamDao {
 			    + "from \r\n"
 			    + "(\r\n"
 			    + "	select sp.id, sp.ten, sp.tien_tren_don_vi, sp.anh, sum(dh.so_luong) as so_luong_ban, sp.don_vi\r\n"
-			    + "	from donhang dh, sanpham sp\r\n"
-			    + "	where dh.id_sp = sp.id\r\n"
+			    + "	from donhang dh, sanpham sp, danhsachdonhang dsdh\r\n"
+			    + "	where dh.id_sp = sp.id and dh.id_dsdh = dsdh.id and dsdh.huy = 0\r\n"
 			    + "	group by sp.id\r\n"
 			    + ") as a1\r\n"
 			    + "left join\r\n"
@@ -127,7 +126,6 @@ public class SanPhamDaoImpl implements SanPhamDao {
 				list.add(sanPham);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		finally {
@@ -142,7 +140,7 @@ public class SanPhamDaoImpl implements SanPhamDao {
 	
 	@Override
 	public SanPham getSanPhamById(int id) {
-		SanPham sanPham = new SanPham();
+		SanPham sanPham = null;
 		Connection conn = null;
 		try {
 			conn = poolConnection.getConnection();
@@ -151,8 +149,8 @@ public class SanPhamDaoImpl implements SanPhamDao {
 				+ "from \r\n"
 				+ "(\r\n"
 				+ "	select sp.*, sum(dh.so_luong) as so_luong_ban\r\n"
-				+ "	from donhang dh, sanpham sp\r\n"
-				+ "	where dh.id_sp = sp.id\r\n"
+				+ "	from donhang dh, sanpham sp, danhsachdonhang dsdh\r\n"
+			    + "	where dh.id_sp = sp.id and dh.id_dsdh = dsdh.id and dsdh.huy = 0\r\n"
 				+ "	group by sp.id\r\n"
 				+ ") as a1\r\n"
 				+ "left join\r\n"
@@ -162,17 +160,13 @@ public class SanPhamDaoImpl implements SanPhamDao {
 				+ "	group by dg.id_sp\r\n"
 				+ ") as a2\r\n"
 				+ "on a1.id = a2.id_sp\r\n"
-				+ "where a1.id = ?\r\n"
-				+ "order by so_luong_ban desc, so_sao_vote desc;"
+				+ "where a1.id = ?\r\n;"
 			);
 			ppst.setInt(1, id);
 			ResultSet res = ppst.executeQuery();
-			while (res.next()) {
-				res.getInt("id");
-				if (res.wasNull()) {
-					return null;
-				}
-				sanPham.setId(id);
+			if (res.next()) {
+				sanPham = new SanPham();
+				sanPham.setId(res.getInt("id"));
 				sanPham.setTen(res.getString("ten"));
 				sanPham.setDonVi(res.getString("don_vi"));
 				sanPham.setTienTrenDonVi(res.getInt("tien_tren_don_vi"));
@@ -194,7 +188,6 @@ public class SanPhamDaoImpl implements SanPhamDao {
 				}
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		finally {
@@ -222,8 +215,8 @@ public class SanPhamDaoImpl implements SanPhamDao {
 					+ "from \r\n"
 					+ "(\r\n"
 					+ "	select sp.*, sum(dh.so_luong) as so_luong_ban\r\n"
-					+ "	from donhang dh, sanpham sp\r\n"
-					+ "	where dh.id_sp = sp.id\r\n"
+					+ "	from donhang dh, sanpham sp, danhsachdonhang dsdh\r\n"
+				    + "	where dh.id_sp = sp.id and dh.id_dsdh = dsdh.id and dsdh.huy = 0\r\n"
 					+ "	group by sp.id\r\n"
 					+ ") as a1\r\n"
 					+ "left join\r\n"
@@ -246,8 +239,8 @@ public class SanPhamDaoImpl implements SanPhamDao {
 					+ "from \r\n"
 					+ "(\r\n"
 					+ "	select sp.id, sp.ten, sp.tien_tren_don_vi, sp.anh, sp.phan_loai, sum(dh.so_luong) as so_luong_ban, sp.don_vi\r\n"
-					+ "	from donhang dh, sanpham sp\r\n"
-					+ "	where dh.id_sp = sp.id\r\n"
+					+ "	from donhang dh, sanpham sp, danhsachdonhang dsdh\r\n"
+				    + "	where dh.id_sp = sp.id and dh.id_dsdh = dsdh.id and dsdh.huy = 0\r\n"
 					+ "	group by sp.id\r\n"
 					+ ") as a1\r\n"
 					+ "left join\r\n"
@@ -271,8 +264,8 @@ public class SanPhamDaoImpl implements SanPhamDao {
 					+ "from \r\n"
 					+ "(\r\n"
 					+ "	select sp.id, sp.ten, sp.tien_tren_don_vi, sp.anh, sp.nguon_goc, sum(dh.so_luong) as so_luong_ban, sp.don_vi\r\n"
-					+ "	from donhang dh, sanpham sp\r\n"
-					+ "	where dh.id_sp = sp.id\r\n"
+					+ "	from donhang dh, sanpham sp, danhsachdonhang dsdh\r\n"
+				    + "	where dh.id_sp = sp.id and dh.id_dsdh = dsdh.id and dsdh.huy = 0\r\n"
 					+ "	group by sp.id\r\n"
 					+ ") as a1\r\n"
 					+ "left join\r\n"
@@ -410,8 +403,8 @@ public class SanPhamDaoImpl implements SanPhamDao {
 				+ "from \r\n"
 				+ "(\r\n"
 				+ "	select sp.id, sp.ten, sp.tien_tren_don_vi, sp.anh, sum(dh.so_luong) as so_luong_ban, sp.don_vi\r\n"
-				+ "	from donhang dh, sanpham sp\r\n"
-				+ "	where dh.id_sp = sp.id and match(sp.ten) against(? in natural language mode)\r\n"
+				+ "	from donhang dh, sanpham sp, danhsachdonhang dsdh\r\n"
+				+ "	where dh.id_sp = sp.id and dh.id_dsdh = dsdh.id and dsdh.huy = 0 and match(sp.ten) against(? in natural language mode)\r\n"
 				+ "	group by sp.id\r\n"
 				+ ") as a1\r\n"
 				+ "left join\r\n"

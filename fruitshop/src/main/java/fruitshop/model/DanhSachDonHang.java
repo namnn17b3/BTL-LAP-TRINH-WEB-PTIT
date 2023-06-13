@@ -13,11 +13,13 @@ public class DanhSachDonHang {
 	private Date ngayXuat;
 	private int tongTien;
 	private String thanhToan;
+	private int soLuongSanPham;
+	private int huy = 0;
 	
 	public DanhSachDonHang() {}
 	
 	public DanhSachDonHang(int id, String tenNguoiNhan, String diaChiNguoiNhan, String soDienThoaiNguoiNhan,
-			Date ngayGui, Date ngayNhan, Date ngayXuat, int tongTien, String thanhToan, int idUser) {
+			Date ngayGui, Date ngayNhan, Date ngayXuat, int tongTien, String thanhToan, int idUser, int soLuongSanPham, int huy) {
 		super();
 		this.id = id;
 		this.tenNguoiNhan = tenNguoiNhan;
@@ -29,6 +31,16 @@ public class DanhSachDonHang {
 		this.thanhToan = thanhToan;
 		this.idUser = idUser;
 		this.ngayXuat = ngayXuat;
+		this.soLuongSanPham = soLuongSanPham;
+		this.huy = huy;
+	}
+
+	public int getSoLuongSanPham() {
+		return soLuongSanPham;
+	}
+
+	public void setSoLuongSanPham(int soLuongSanPham) {
+		this.soLuongSanPham = soLuongSanPham;
 	}
 
 	public int getId() {
@@ -109,5 +121,13 @@ public class DanhSachDonHang {
 
 	public void setNgayXuat(Date ngayXuat) {
 		this.ngayXuat = ngayXuat;
+	}
+
+	public int getHuy() {
+		return huy;
+	}
+
+	public void setHuy(int huy) {
+		this.huy = huy;
 	}
 }

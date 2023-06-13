@@ -82,6 +82,7 @@ public class ThanhToanController extends HttpServlet {
 		danhSachDonHang.setTenNguoiNhan(ten);
 		danhSachDonHang.setDiaChiNguoiNhan(diaChiNguoiNhan);
 		danhSachDonHang.setSoDienThoaiNguoiNhan(soDienThoaiNguoiNhan);
+		danhSachDonHang.setSoLuongSanPham(session.getAttribute("clickMuaNgay") != null ? 1 : sanPhamTrongGioHangDao.getSoLuongSanPhamTrongGioHangByIdUser(currentUser.getId()));
 		danhSachDonHang.setNgayXuat(new Date());
 		danhSachDonHang.setTongTien(Integer.parseInt(String.valueOf(session.getAttribute("tongTien"))));
 		danhSachDonHang.setThanhToan(hinhThucThanhToan.equals("1") ? "Chuyển khoản" : "Tiền mặt");
@@ -135,7 +136,7 @@ public class ThanhToanController extends HttpServlet {
 		// gui email thanh cong
 		// String noiDung = 
 		// "<h3>Cảm ơn bạn đã tin tưởng mua sản phẩm của chúng tôi</h3>"
-		// +"<div>Mã đơn hàng của bạn: "+idDanhSachDonHang+"</div>"
+		// +"<div>Mã đơn hàng của bạn: "+"FSDH"+idDanhSachDonHang+"</div>"
 		// +"<div>Ngày đặt đơn: "+new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(danhSachDonHang.getNgayXuat())+"</div>"
 		// +"<div>Tổng tiền: "+danhSachDonHang.getTongTien()+"</div>"
 		// + "<div>Hãy theo dõi đơn hàng của bạn nhé!</div>"
@@ -144,6 +145,7 @@ public class ThanhToanController extends HttpServlet {
 		session.removeAttribute("clickMuaNgay");
 		session.removeAttribute("clickTienHanhThanhToan");
 		session.setAttribute("thanhToanThanhCong", 1);
+		session.setAttribute("soLuongSanPhamTrongGioHang", 0);
 		req.getRequestDispatcher("./thanh_toan_thanh_cong.jsp").forward(req, resp);
 	}
 }

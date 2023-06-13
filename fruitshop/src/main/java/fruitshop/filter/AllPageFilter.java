@@ -109,6 +109,19 @@ public class AllPageFilter implements Filter {
 			session.removeAttribute("thanhToanThanhCong");
 		}
 		
+		if (req.getServletPath().indexOf("/chi-tiet-don-hang") < 0
+				&& req.getServletPath().indexOf("/danh-gia") < 0
+				&& req.getServletPath().indexOf("/login") < 0
+				&& req.getServletPath().indexOf("/img") < 0
+				&& req.getServletPath().indexOf("/img_user") < 0
+				&& req.getServletPath().indexOf("/img_sp") < 0
+				&& req.getServletPath().indexOf("/css") < 0
+				&& req.getServletPath().indexOf("/js") < 0
+				&& session.getAttribute("thanhToanThanhCong") != null) {
+			
+			session.removeAttribute("danhSachDonHang");
+		}
+		
 		chain.doFilter(req, resp);
 	}
 }

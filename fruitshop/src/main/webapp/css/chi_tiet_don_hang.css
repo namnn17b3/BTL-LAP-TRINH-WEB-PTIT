@@ -1,0 +1,190 @@
+.dieu-huong-va-tieu-de {
+	padding: 0px 15px 32px;
+	font-size: 14px;
+}
+
+.tieu-de-cua-hang {
+	padding-top: 10px;
+	font-size: 25.6px;
+}
+
+.link-to-page {
+    text-decoration: none;
+    color: #3D464D;
+}
+
+.link-to-page:hover {
+	color: rgb(0, 132, 203);
+}
+
+.thong-tin-chi-tiet-don-hang {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.bang-chi-tiet-don-hang {
+	margin: auto;
+	margin-bottom: 40px;
+}
+
+.danh-sach-de-muc-chi-tiet-don-hang {
+	display: flex;
+}
+
+.de-muc-chi-tiet-don-hang {
+	font-weight: 600;
+	font-size: 16px;
+	padding: 12px 18px;
+	display: flex;
+	background-color: #f7f7f7;
+	border-top: 1px solid #ebebeb;
+	border-bottom: 1px solid #ebebeb;
+}
+
+.de-muc-chi-tiet-don-hang span {
+	margin: auto;
+}
+
+.hinh-anh-san-pham__chi-tiet-don-hang {
+	width: 116.8px;
+	height: 47.3px;
+	border-left: 1px solid #ebebeb;
+}
+
+.ten-san-pham__chi-tiet-don-hang {
+	width: 350px;
+	height: 47.3px;
+}
+
+.go-to-chi-tiet-san-pham {
+	margin: auto;
+	text-align: center;
+	color: #3d464d;
+	text-decoration: none;
+}
+
+.go-to-chi-tiet-san-pham:hover {
+	color: #007bff;
+}
+
+.gia-san-pham__chi-tiet-don-hang {
+	width: 180px;
+	height: 47.3px;
+}
+
+.so-luong-san-pham__chi-tiet-don-hang {
+	width: 167.6px;
+	height: 47.3px;
+}
+
+.tong-tien-san-pham__chi-tiet-don-hang {
+	width: 180px;
+	height: 47.3px;
+}
+
+.thao-tac-san-pham__chi-tiet-don-hang {
+	width: 115.6px;
+	height: 47.3px;
+	border-right: 1px solid #ebebeb;
+	display: flex;
+}
+
+.dong-chi-tiet-don-hang {
+	font-size: 16px;
+	display: flex;
+	margin: auto;
+	border-bottom: 1px solid #ebebeb;
+}
+
+.dong-chi-tiet-don-hang:hover {
+	border: 1px solid #ffd333;
+}
+
+.chung-cua-cac-thong-tin-san-pham__chi-tiet-don-hang {
+	height: 116.8px;
+	display: flex;
+	line-height: 20px;
+}
+
+.hinh-anh-san-pham {
+	padding: 18px;
+}
+
+.khong-the-danh-gia {
+	display: flex;
+	font-weight: 600;
+	width: 100px;
+	height: 40px;
+	background-color: orange;
+	color: #fff;
+	border-radius: 6px;
+	margin: auto;
+	justify-content: space-between;
+	cursor: not-allowed;
+	opacity: 0.7;
+}
+
+.xem-danh-gia {
+	display: flex;
+	font-weight: 600;
+	width: 100px;
+	height: 40px;
+	background-color: #28a745;
+	color: #fff;
+	border-radius: 6px;
+	margin: auto;
+	justify-content: space-between;
+	text-decoration: none;
+}
+
+.sua-danh-gia {
+	display: flex;
+	font-weight: 600;
+	width: 100px;
+	height: 40px;
+	background-color: #2e89ff;
+	color: #fff;
+	border-radius: 6px;
+	margin: auto;
+	justify-content: space-between;
+	text-decoration: none;
+}
+
+.co-the-danh-gia {
+	display: flex;
+	font-weight: 600;
+	width: 100px;
+	height: 40px;
+	background-color: orange;
+	color: #fff;
+	border-radius: 6px;
+	margin: auto;
+	justify-content: space-between;
+	text-decoration: none;
+}
+
+.co-the-click:hover {
+	opacity: 0.7;
+}
+
+.dowload-file-excel {
+	display: flex;
+	font-weight: 600;
+	width: 145px;
+	height: 40px;
+	justify-content: space-between;
+	text-decoration: none;
+	border-radius: 6px;
+	color: #fff;
+	background-color: #ff2626;
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+.dowload-file-excel:hover {
+	opacity: 0.8;
+}
+
+.ket-thuc-website {
+	margin-top: 50px;
+}

@@ -287,7 +287,7 @@
 				    								</div>
 				    							</div>
 				    							<div class="noi-dung-danh-gia"><c:out value="${item.noiDungBinhLuan}"/></div>
-		    								</div>   							
+		    								</div>
 		    							</c:forEach>
 		    						</div>
 		    						
@@ -370,8 +370,8 @@
         		}, 0);
     		}, 1200);
     	</script>
-   
     </c:if>
+    
     <c:if test="${forcusDanhGia == 0}">
     	<script type="text/javascript">
     	setTimeout(() => {
@@ -383,6 +383,9 @@
     </c:if>
     
     <script type="text/javascript">
+    	document.querySelectorAll('.noi-dung-danh-gia').forEach(item => {
+    		item.innerHTML = item.innerText.replaceAll('\\n', '<br/>');
+    	});
     	var flag = layCookie('flag', 0);
     </script>
     

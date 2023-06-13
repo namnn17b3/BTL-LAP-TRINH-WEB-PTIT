@@ -81,6 +81,17 @@
 	height: 47.3px;
 }
 
+.go-to-chi-tiet-san-pham {
+	margin: auto;
+	text-align: center;
+	color: #3d464d;
+	text-decoration: none;
+}
+
+.go-to-chi-tiet-san-pham:hover {
+	color: #007bff;
+}
+
 .gia-san-pham__gio-hang {
 	width: 130px;
 	height: 47.3px;
