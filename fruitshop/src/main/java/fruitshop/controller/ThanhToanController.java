@@ -47,6 +47,7 @@ public class ThanhToanController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
 		HttpSession session = req.getSession();
 		if (session.getAttribute("lanDauTruyCap") == null) {
 			resp.setHeader("Refresh", "300;URL=./home");
@@ -66,8 +67,8 @@ public class ThanhToanController extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		HttpSession session = req.getSession();
 		req.setCharacterEncoding("UTF-8");
+		HttpSession session = req.getSession();
 		User currentUser = (User) session.getAttribute("currentUser");
 		String ten = (String) req.getParameter("ten");
 		String email = (String) req.getParameter("email");
@@ -134,14 +135,15 @@ public class ThanhToanController extends HttpServlet {
 		}
 		
 		// gui email thanh cong
-		// String noiDung = 
-		// "<h3>Cảm ơn bạn đã tin tưởng mua sản phẩm của chúng tôi</h3>"
-		// +"<div>Mã đơn hàng của bạn: "+"FSDH"+idDanhSachDonHang+"</div>"
-		// +"<div>Ngày đặt đơn: "+new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(danhSachDonHang.getNgayXuat())+"</div>"
-		// +"<div>Tổng tiền: "+danhSachDonHang.getTongTien()+"</div>"
-		// + "<div>Hãy theo dõi đơn hàng của bạn nhé!</div>"
-		// +"<div style='color: red'><i>Chú ý: Đây là mail tự động! Vui lòng không reply!</i></div>";
-		// Email.sendMail(email, noiDung);
+		String noiDung = 
+		"<h3>Cảm ơn bạn đã tin tưởng mua sản phẩm của chúng tôi</h3>"
+		+"<div>Mã đơn hàng của bạn: "+"FSDH"+idDanhSachDonHang+"</div>"
+		+"<div>Ngày đặt đơn: "+new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(danhSachDonHang.getNgayXuat())+"</div>"
+		+"<div>Tổng tiền: "+danhSachDonHang.getTongTien()+"</div>"
+		+"<div>Hãy theo dõi đơn hàng của bạn nhé!</div>"
+		+"<div style='color: red'><i>Chú ý: Đây là mail tự động! Vui lòng không reply!</i></div>";
+		Email.sendMail(email, noiDung);
+		
 		session.removeAttribute("clickMuaNgay");
 		session.removeAttribute("clickTienHanhThanhToan");
 		session.setAttribute("thanhToanThanhCong", 1);

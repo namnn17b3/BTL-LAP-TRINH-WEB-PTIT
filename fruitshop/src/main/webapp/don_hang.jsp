@@ -218,14 +218,15 @@
     <jsp:include page="./footer.jsp"/>
     <script src="./js/common.js"></script>
     <script src="./js/utils.js"></script>
-    <script src="./js/don_hang.js"></script>
+    
+    <c:if test="${soLuongDanhSachDonHang > 0}">
+    	<script src="./js/don_hang.js"></script>
+    </c:if>
+    
     <script type="text/javascript">
     	setTimeout(() => {
 			document.querySelector('.load-truoc-khi-vao-trang').remove();
 			document.querySelector('.than-website').style.display = 'flex';
-	    	document.querySelectorAll('.anh-user').forEach(item => {
-	    		item.height = document.querySelector('.anh-user').width;
-	    	});
 		}, 1200);
     </script>
     
@@ -241,6 +242,7 @@
     
     <script type="text/javascript">
     	var flag = layCookie('flag', 0);
+    	var url = window.location.href;
     </script>
     
     <c:if test="${huyDonHangStatus == 1 || huyDonHangStatus == 2}">

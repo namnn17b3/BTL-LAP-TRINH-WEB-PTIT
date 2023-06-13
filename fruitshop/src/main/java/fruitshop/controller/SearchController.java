@@ -40,7 +40,6 @@ public class SearchController extends HttpServlet {
 		HttpSession session = req.getSession();
 		req.setCharacterEncoding("UTF-8");
 		String tenSanPham = req.getParameter("ten-san-pham");
-		System.out.println(tenSanPham);
 		session.setAttribute("tenSanPhamTimKiem", tenSanPham);
 		// System.out.println(tenSanPham);
 		int page = 1;

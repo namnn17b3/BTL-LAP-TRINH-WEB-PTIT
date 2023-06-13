@@ -1,4 +1,3 @@
-<%@page import="org.apache.poi.xssf.usermodel.XSSFWorkbook"%>
 <%@page import="java.util.Date"%>
 <%@page import="fruitshop.model.SanPhamTrongGioHang"%>
 <%@page import="java.util.ArrayList"%>
@@ -62,7 +61,7 @@
         
         <div style="width: 100%; display: flex; justify-content: space-between; margin-bottom: 30px;">        
 	        <div style="margin-top: auto; font-size: 14px; font-weight: 600; margin-bottom: auto;"><i><span style="color: #f61d1d;">(*)</span> Lưu ý: Bạn có 7 ngày kể từ ngày nhận hàng để đánh giá sản phẩm</i></div>
-	        <a class="dowload-file-excel" href="./xuat-don-hang" target="_blank">
+	        <a class="dowload-file-excel" href="./xuat-don-hang">
 	        	<i class="fa-solid fa-download" style="margin-left: auto; margin-top: auto; margin-bottom: auto;"></i>
 	        	<span style="margin: auto auto auto 5px;">Xuất file excel</span>
 	        </a>
@@ -283,6 +282,11 @@
 	    	}, 1200);
     	</script>
     </c:if>
-
+    
+    <%
+    	session.removeAttribute("danhGiaStatus");
+    	session.removeAttribute("tenSanPhamDanhGia");
+    %>
+    
 </body>
 </html>

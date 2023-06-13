@@ -1,3 +1,4 @@
+<%@page import="fruitshop.model.User"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="fruitshop.model.SanPham"%>
 <%@page import="java.util.List"%>

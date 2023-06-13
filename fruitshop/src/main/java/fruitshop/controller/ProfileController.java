@@ -30,11 +30,13 @@ public class ProfileController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
 		req.getRequestDispatcher("./profile_user.jsp").forward(req, resp);
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
 		HttpSession session = req.getSession();
 		User currentUser = (User) session.getAttribute("currentUser");
 		DiskFileItemFactory diskFileItemFactory = new DiskFileItemFactory();
@@ -48,7 +50,7 @@ public class ProfileController extends HttpServlet {
 			for (FileItem item : fileItems) {
 				if (item.isFormField()) {
 					if (item.getFieldName().equals("ten")) {
-						currentUser.setTen(item.getString());
+						currentUser.setTen(new String(item.getString().getBytes("ISO-8859-1"), "UTF-8"));
 					}
 					else if (item.getFieldName().equals("mat-khau")) {
 						currentUser.setMatKhau(item.getString());

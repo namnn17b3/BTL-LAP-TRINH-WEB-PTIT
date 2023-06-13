@@ -7,6 +7,7 @@ document.querySelectorAll('.thanh-phan-phan-trang').forEach(item => {
 
 document.querySelector('.cap-nhat-gio-hang__gio-hang').onclick = () => {
 	themCookie('clickCapNhatGioHang', 1, 3600000 * 24, 60, '/fruitshop/gio-hang');
+	themCookie('flag', 0, 3600000 * 24, 60, '/fruitshop/gio-hang');
 };
 
 document.querySelector('.thanh-toan__gio-hang').onclick = () => {

@@ -78,7 +78,8 @@ public class GioHangController extends HttpServlet {
 					}
 					SanPhamTrongGioHang sanPhamTrongGioHang = sanPhamTrongGioHangDao.getSanPhamTrongGioHangByIdUserAndIdSanPham(currentUser.getId(), idSanPham);
 					if (sanPhamTrongGioHang.getSoLuongSanPhamConLai() < soLuong) {
-						req.setAttribute("loiGioHang", 1);
+						System.out.println("line 81 gio hang controller " + sanPhamTrongGioHang.getSoLuongSanPhamConLai() + " " + soLuong);
+						req.setAttribute("giHangStatus", 1);
 						req.setAttribute("tenSanPhamBiLoi", sanPhamTrongGioHang.getTenSanPham());
 					}
 					/*if (sanPhamTrongGioHang == null) {
@@ -87,11 +88,12 @@ public class GioHangController extends HttpServlet {
 					sanPhamTrongGioHang.setSoLuong(soLuong);
 					sanPhamTrongGioHang.setNgayThem(new Date());
 					// System.out.println(sanPhamTrongGioHang.getIdSanPham() + " line 54 gio hang controller");
-					if (soLuong > 0) {
-						System.out.println("line 55 gio hang controller");
+					// System.out.println("line 91 gio hang controller " + sanPhamTrongGioHang.getSoLuongSanPhamConLai() + " " + soLuong);
+					if (soLuong > 0 && soLuong <= sanPhamTrongGioHang.getSoLuongSanPhamConLai()) {
+						// System.out.println("line 55 gio hang controller");
 						sanPhamTrongGioHangDao.capNhatSanPhamTrongGioHang(sanPhamTrongGioHang);
 					}
-					else {
+					else if (soLuong == 0) {
 						sanPhamTrongGioHangDao.xoaSanPhamTrongGioHangByIdUserAndIdSanPham(currentUser.getId(), idSanPham);
 						session.setAttribute("soLuongSanPhamTrongGioHang", (int) session.getAttribute("soLuongSanPhamTrongGioHang") - 1);
 					}
@@ -112,6 +114,10 @@ public class GioHangController extends HttpServlet {
 					continue;
 				}
 			}
+		}
+		
+		if (req.getAttribute("gioHangStatus") == null) {
+			req.setAttribute("gioHangStatus", 2);
 		}
 		
 		int tongTien = sanPhamTrongGioHangDao.getTongTienByIdUser(currentUser.getId());

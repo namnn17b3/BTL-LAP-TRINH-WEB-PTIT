@@ -45,13 +45,13 @@ public class MissingPassword extends HttpServlet {
 		String matKhauMoi = Sha1.encryptThisString(RanDomCode.randomCode());
 		
 		// Nội dung
-		// String noiDung = 
-		// "<h3>Lấy lại mật khẩu từ Fruit Shop</h3>"
-		// +"<div>Mật khẩu mới của bạn: "+matKhauMoi+"</div>"
-		// + "<div>Bạn hãy đăng nhập lại và đổi mật khẩu mới</div>"
-		// +"<div style='color: red'><i>Chú ý: Đây là mail tự động! Vui lòng không reply!</i></div>";
-		// Email.sendMail(email, noiDung);
-		System.out.println(matKhauMoi);
+		String noiDung = 
+		"<h3>Lấy lại mật khẩu từ Fruit Shop</h3>"
+		+"<div>Mật khẩu mới của bạn: "+matKhauMoi+"</div>"
+		+ "<div>Bạn hãy đăng nhập lại và đổi mật khẩu mới</div>"
+		+"<div style='color: red'><i>Chú ý: Đây là mail tự động! Vui lòng không reply!</i></div>";
+		Email.sendMail(email, noiDung);
+		// System.out.println(matKhauMoi);
 		User user = userDao.getUserByEmail(email);
 		user.setMatKhau(matKhauMoi);
 		userDao.upDateUserByEmail(user);

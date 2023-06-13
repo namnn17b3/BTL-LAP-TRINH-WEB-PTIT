@@ -100,7 +100,8 @@
 }
 
 .anh-user {
-	width: 100%;
+	width: 175px;
+	height: 175px;
 	border-radius: 50%;
 	border: 3px orange solid;
 }

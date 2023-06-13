@@ -89,9 +89,10 @@ hinhThucThanhToan.forEach((item, index) => {
 			}, 500);
 		}
 		else {
+			chuyenKhoan.style.overflow = 'hidden';
 			chuyenKhoan.style.animation = 'chayTuDuoiLen ease 0.5s forwards';
 			setTimeout(() => {				
-				chuyenKhoan.style.display = 'none';
+				chuyenKhoan.style.display = '';
 			}, 500);
 		}
 	}

@@ -74,7 +74,7 @@ public class Email {
 		return null;
 	}
 	
-	public static void main(String[] args) {
-		sendMail("wayluanmtp@gmail.com", RanDomCode.randomCode());
-	}
+//	public static void main(String[] args) {
+//		sendMail("wayluanmtp@gmail.com", RanDomCode.randomCode());
+//	}
 }

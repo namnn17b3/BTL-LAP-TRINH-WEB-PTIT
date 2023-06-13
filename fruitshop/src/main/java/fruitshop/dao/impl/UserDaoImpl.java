@@ -75,33 +75,6 @@ public class UserDaoImpl implements UserDao {
 	}
 	
 	@Override
-	public long getNextUserId() {
-		long id = 0;
-		Connection conn = null;
-		try {
-			conn = poolConnection.getConnection();
-			PreparedStatement ppst = conn.prepareStatement(
-				"select count(*) as so_luong from user;"
-			);
-			ResultSet res = ppst.executeQuery();
-			if (res.next()) {
-				id = res.getInt("so_luong") + 1;
-			}
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
-		finally {
-			try {
-				conn.close();
-			} catch (Exception e2) {
-				e2.printStackTrace();
-			}
-		}
-		return id;
-	}
-	
-	@Override
 	public boolean tonTaiUser(String email, String password) {
 		Connection conn = null;
 		try {

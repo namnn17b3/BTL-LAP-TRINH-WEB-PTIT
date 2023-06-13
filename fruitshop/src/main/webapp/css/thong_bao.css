@@ -7,7 +7,7 @@
     bottom: 0;
     left: 0;
     background-color: rgba(0, 0, 0, 0.3);
-    z-index: 3;
+    z-index: 1005;
     display: flex;
     animation: truotTuTrenXuong linear 0.5s;
     will-change: opacity, transform;

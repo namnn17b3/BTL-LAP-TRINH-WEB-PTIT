@@ -159,9 +159,21 @@ public class SanPhamTrongGioHangDaoImpl implements SanPhamTrongGioHangDao {
 		try {
 			conn = poolConnection.getConnection();
 			PreparedStatement ppst = conn.prepareStatement(
-				"select sptgh.*, sp.don_vi\r\n"
-				+ "from sanphamtronggiohang sptgh, sanpham sp\r\n"
-				+ "where sptgh.id_user = ? and sptgh.id_sp = ?;"
+					"select a1.*, a2.so_luong_ban\r\n"
+					+ "from\r\n"
+					+ "(\r\n"
+					+ "	select sptgh.*, sp.ten as ten_sp, sp.tien_tren_don_vi, sp.anh, sp.so_luong_nhap, sp.don_vi\r\n"
+					+ "	from sanphamtronggiohang sptgh, sanpham sp\r\n"
+					+ "	where sptgh.id_user = ? and sptgh.id_sp = sp.id\r\n"
+					+ ") as a1,\r\n"
+					+ "(\r\n"
+					+ "	select dh.id_sp, sum(dh.so_luong) as so_luong_ban\r\n"
+					+ "	from donhang dh, danhsachdonhang dsdh\r\n"
+					+ " where dh.id_dsdh = dsdh.id and dh.id_sp = ? and dsdh.huy = 0\r\n"
+					+ "	group by dh.id_sp\r\n"
+					+ ") as a2\r\n"
+					+ "where a1.id_sp = a2.id_sp\r\n"
+					+ "order by ngay_them desc;"
 			);
 			ppst.setInt(1, idUser);
 			ppst.setInt(2, idSanPham);
@@ -171,8 +183,13 @@ public class SanPhamTrongGioHangDaoImpl implements SanPhamTrongGioHangDao {
 				sanPhamTrongGioHang.setId(res.getInt("id"));
 				sanPhamTrongGioHang.setIdSanPham(res.getInt("id_sp"));
 				sanPhamTrongGioHang.setIdUser(res.getInt("id_user"));
+				sanPhamTrongGioHang.setTenSanPham(res.getString("ten_sp"));
+				sanPhamTrongGioHang.setTienTrenDonVi(res.getInt("tien_tren_don_vi"));
 				sanPhamTrongGioHang.setSoLuong(res.getInt("so_luong"));
+				sanPhamTrongGioHang.setAnh(res.getString("anh"));
 				sanPhamTrongGioHang.setNgayThem(new Date(res.getTimestamp("ngay_them").getTime()));
+				sanPhamTrongGioHang.setSoLuongSanPhamConLai(res.getInt("so_luong_nhap") - res.getInt("so_luong_ban"));
+				sanPhamTrongGioHang.setDonVi(res.getString("don_vi"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -299,6 +316,7 @@ public class SanPhamTrongGioHangDaoImpl implements SanPhamTrongGioHangDao {
 			PreparedStatement ppst = conn.prepareStatement(
 				"insert into sanphamtronggiohang(id_user, id_sp, so_luong, ngay_them) values(?, ?, ?, ?);"
 			);
+			System.out.println("line 302 san pham trong gio hang dao impl " + sanPhamTrongGioHang.getIdUser());
 			ppst.setInt(1, sanPhamTrongGioHang.getIdUser());
 			ppst.setInt(2, sanPhamTrongGioHang.getIdSanPham());
 			ppst.setInt(3, sanPhamTrongGioHang.getSoLuong());

@@ -37,7 +37,7 @@
    	<jsp:include page="./header.jsp"/>
 	<jsp:include page="./load_page.jsp"/>
 	
-	<c:if test="${loiGioHang == 1}">	
+	<c:if test="${gioHangStatus == 1 || gioHangStatus == 2}">	
 	   	<jsp:include page="thong_bao_mini.jsp"/>
 	</c:if>
 	
@@ -197,26 +197,19 @@
 	    <script src="./js/gio_hang.js"></script>
     </c:if>
     
-    <c:if test="${loiGioHang == 1}">
-	    <script type="text/javascript">
-	    	document.querySelector('.thanh-toan__gio-hang').onclick = () => {
-	    		themCookie('flag', 0, 3600000 * 24, 60, '/fruitshop/gio-hang');
-	    	}
-	    </script>
-    </c:if>
-    
     <script type="text/javascript">
-    	var flag = layCookie('flag', 0);
     	setTimeout(() => {
 			document.querySelector('.load-truoc-khi-vao-trang').remove();
 			document.querySelector('.than-website').style.display = 'flex';
 			window.scrollTo(0, 0);
 		}, 1200);
+    	
+    	var flag = layCookie('flag', 0);
+    	var url = window.location.href;
     </script>
     
-    <c:if test="${loiGioHang == 1}">
+    <c:if test="${gioHangStatus == 1}">
     	<script type="text/javascript">
-    		var url = window.location.href;
     		setTimeout(() => {
     			document.querySelector('.thong-bao-mini').style.borderLeft = '5px solid #f00';
     			document.querySelector('.icon-thong-bao-mini').innerHTML = '<i class="fa-sharp fa-solid fa-circle-xmark" id="infomini-icon"></i>';
@@ -226,6 +219,17 @@
     			document.querySelector('.noi-dung-thong-bao-mini-2').innerText = 'Sản phẩm ${tenSanPhamBiLoi} bạn chọn có số lượng không hợp lý';
     		}, 1200);
     	</script>
+    </c:if>
+    
+    <c:if test="${gioHangStatus == 2}">
+    	<script type="text/javascript">
+    		setTimeout(() => {
+    			document.querySelector('.noi-dung-thong-bao-mini-2').innerText = 'Cập nhật giỏ hàng thành công';
+    		}, 1200);
+    	</script>
+    </c:if>
+    
+    <c:if test="${gioHangStatus == 1 || gioHangStatus == 2}">
     	<script src="./js/thong_bao_mini.js"></script>
     </c:if>
 </body>

@@ -27,6 +27,7 @@ if (flag == 0) {
 		styleElement.innerHTML = keyframes;
 		var body = document.querySelector('body').insertAdjacentElement('afterbegin', styleElement);
 		thongBaoMini.style.animation = 'truotTuPhaiSang-thongBaoMini 0.8s ease forwards';
+		
 		nutHuyThongBaoMini.onclick = () => {
 			themCookie('flag', 1, 3600000 * 24, 60, '/fruitshop' + url.slice(url.lastIndexOf('/')));
 			thongBaoMini.style.animation = 'truotTuTraiSang-thongBaoMini 0.8s ease forwards';
@@ -34,15 +35,13 @@ if (flag == 0) {
 				thongBaoMini.style.display = 'none';
 			}, 800);
 		}
+		
 		setTimeout(() => {
 			themCookie('flag', 1, 3600000 * 24, 60, '/fruitshop' + url.slice(url.lastIndexOf('/')));
-			try {
-				thongBaoMini.style.animation = 'truotTuTraiSang-thongBaoMini 0.8s ease forwards';
-				setTimeout(() => {
-					thongBaoMini.style.display = 'none';
-				}, 800);
-			}
-			catch (e) {}
+			thongBaoMini.style.animation = 'truotTuTraiSang-thongBaoMini 0.8s ease forwards';
+			setTimeout(() => {
+				thongBaoMini.style.display = 'none';
+			}, 800);
 		}, 5000);
 	}, 1200);
 }

@@ -1,4 +1,3 @@
-var url = window.location.href;
 var maDonHang = document.querySelectorAll('.ma-don-hang');
 document.querySelectorAll('.huy-don-hang__don-hang').forEach((item, index) => {	
 	item.onclick = () => {

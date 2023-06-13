@@ -31,7 +31,7 @@
 	            <div class="tieu-de-thong-bao"><h1 style="margin: auto;"><i class="fa-solid fa-circle-info" id="info-icon"></i> Thông báo</h1></div>
 	            <div class="noi-dung-thong-bao">
 	                <div class="doan-van-thong-bao" style="margin-bottom: 20px">
-	                    <p class="chi-tiet-doan-van-thong-bao">chúng tôi đã gửi mật khẩu mới tới email của bạn</p>
+	                    <p class="chi-tiet-doan-van-thong-bao">Chúng tôi đã gửi mật khẩu mới tới email của bạn</p>
 	                    <p class="chi-tiet-doan-van-thong-bao">Bạn hãy đăng nhập và đổi lại mật khẩu</p>
 	                </div>
 	                <div class="bang-nut-thao-tac">

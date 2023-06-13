@@ -34,6 +34,7 @@ public class RegisterController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// System.out.println("register get");
+		req.setCharacterEncoding("UTF-8");
 		HttpSession session = req.getSession();
 		if (session.getAttribute("thongBaoXacNhan") != null && session.getAttribute("thongBaoXacNhan").equals("1")) {
 			// System.out.println("ok else get");
@@ -53,6 +54,7 @@ public class RegisterController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// System.out.println("register post");
+		req.setCharacterEncoding("UTF-8");
 		HttpSession session = req.getSession();
 		String daHuyBo = req.getParameter("da-huy-bo");
 		String daDongYDangKiLai = req.getParameter("dong-y-dang-nhap-lai");
@@ -121,6 +123,7 @@ public class RegisterController extends HttpServlet {
 				User user = (User) session.getAttribute("user");
 				FileItem fileItem = (FileItem) session.getAttribute("fileItem");
 				userDao.addUser(user);
+				user = userDao.getUserByEmail(user.getEmail());
 				// có tồn tại ảnh upload
 				if (fileItem != null) {
 					try {
@@ -160,7 +163,7 @@ public class RegisterController extends HttpServlet {
 				// Kiểm tra xem là text hay là file
 				if (item.isFormField()) {
 					if (item.getFieldName().equals("ten")) {
-						user.setTen(item.getString());
+						user.setTen(new String(item.getString().getBytes("ISO-8859-1"), "UTF-8"));
 					}
 					else if (item.getFieldName().equals("email")) {
 						user.setEmail(item.getString());
@@ -216,11 +219,11 @@ public class RegisterController extends HttpServlet {
 			session.setAttribute("coThongBao", 1);
 			session.setAttribute("user", user);
 			// Nội dung
-			 String noiDung = 
-			 "<h3>Cảm ơn bạn đã đăng kí tài khoản tại Fruit Shop</h3>"
-			 +"<div>Mã code xác nhận đăng kí tài khoản: "+session.getAttribute("code")+"</div>"
-			 +"<div style='color: red'><i>Chú ý: Đây là mail tự động! Vui lòng không reply!</i></div>";
-			 Email.sendMail(user.getEmail(), noiDung);
+			String noiDung = 
+			"<h3>Cảm ơn bạn đã đăng kí tài khoản tại Fruit Shop</h3>"
+			+"<div>Mã code xác nhận đăng kí tài khoản: "+session.getAttribute("code")+"</div>"
+			+"<div style='color: red'><i>Chú ý: Đây là mail tự động! Vui lòng không reply!</i></div>";
+			Email.sendMail(user.getEmail(), noiDung);
 			System.out.println("add session success " + session.getAttribute("code") + " " + user.getEmail());
 			req.getRequestDispatcher("./register.jsp").forward(req, resp);
 		} catch (Exception e) {
