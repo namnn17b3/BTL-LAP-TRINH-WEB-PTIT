@@ -1,0 +1,99 @@
+.webcam {
+	position: fixed;
+	width: 800px;
+	border-radius: 6px; 
+	margin: auto;
+	z-index: 20;
+	left: 50%;
+  	top: 50%;
+  	transform: translate(-50%, -50%);
+  	transform-origin: center;
+  	display: none;
+}
+
+.header-webcam {
+	display: flex;
+	background-image: linear-gradient(0, #50a01c, #7be03a);
+	color: #fffac2;
+	height: 60px;
+	border-radius: 6px 6px 0px 0px;
+}
+
+.tat-webcam {
+	position: absolute;
+	top: 0;
+	right: 0;
+	background-color: #ff2626;
+	color: #fff;
+	cursor: pointer;
+	display: flex;
+	border-radius: 6px 6px 0px 6px;
+	font-size: 28px;
+	width: 60px;
+	height: 60px;
+}
+
+tat-webcam:hover {
+	opacity: 0.8;
+}
+
+video {
+	border: 3px solid #d8dee2;
+	width: 800px;
+	height: 600px;
+}
+
+canvas {
+	display: none;
+	width: 800px;
+	height: 600px;
+}
+
+.footer-webcam {
+	display: flex;
+	background-image: linear-gradient(0, #50a01c, #7be03a);
+	color: #fffac2;
+	height: 60px;
+	border-radius: 0px 0px 6px 6px;
+}
+
+.dowload-photo {
+	width: 100px;
+	height: 40px;
+	background-color: orange;
+	text-decoration: none;
+	color: #fff;
+	display: flex;
+	border-radius: 6px;
+	font-size: 20px;
+	cursor: pointer;
+}
+
+.dowload-photo:hover {
+	opacity: 0.8;
+}
+
+.chup-lai-anh {
+	width: 100px;
+	height: 40px;
+	background-color: #2e89ff;
+	color: #fff;
+	margin-left: 15px;
+	border-radius: 6px;
+	display: flex;
+	font-size: 20px;
+	cursor: pointer;
+}
+
+.chup-lai-anh:hover {
+	opacity: 0.8;
+}
+
+@keyframes diTuTamVao {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(0);
+    }
+}

@@ -45,7 +45,7 @@ public class SearchController extends HttpServlet {
 		int page = 1;
 		if (req.getParameter("page") != null) {
 			try {
-				page = Integer.parseInt(req.getParameter("page"));				
+				page = Integer.parseInt(req.getParameter("page"));
 			} catch (Exception e) {
 				req.getRequestDispatcher("./khong_tim_thay_san_pham.jsp").forward(req, resp);
 				return;

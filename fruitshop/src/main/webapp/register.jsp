@@ -70,6 +70,9 @@
 			<input type="hidden" name="dong-y-dang-nhap-lai" id="dong-y-dang-nhap-lai" value="1"/>
 	    </form>
     </c:if>
+    
+    <!-- Webcam -->
+    <jsp:include page="./webcam.jsp"/>
 
 	<jsp:include page="./header.jsp"/>
 
@@ -118,6 +121,10 @@
 	                		<div class="doi-anh-dai-dien"><span style="margin: auto">Đổi ảnh đại diện</span></div>
                 		</div>
                 		<div class="go-anh-dai-dien"><span style="margin: auto">Gỡ ảnh đại diện</span></div>
+                		<div class="chup-anh">
+                			<i class="fa-solid fa-camera" style="margin: auto"></i>
+                			<span style="margin: auto">Chụp ảnh</span>
+                		</div>
                 	</div>
                 </div>
                 <button class="nut-dang-ki">Đăng kí</button>
@@ -131,6 +138,8 @@
     <script src="./js/utils.js"></script>
     <script src="./js/common.js"></script>
     <script src="./js/register.js"></script>
+    <script src="./js/webcam.js"></script>
+	<script src="./js/webcam_utils.js"></script>
     
     <c:if test="${thongBaoXacNhan == 1}">
     	<script type="text/javascript">

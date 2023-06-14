@@ -1,6 +1,7 @@
-package fruitshop.controller;
+package fruitshop.api.user;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,71 +10,71 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
+
 import fruitshop.dao.UserDao;
 import fruitshop.dao.impl.UserDaoImpl;
 import fruitshop.model.User;
 
-@WebServlet("/login")
-public class LoginController extends HttpServlet {
+@WebServlet("/api/user/login")
+public class LoginAPI extends HttpServlet {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private static final UserDao userDao = new UserDaoImpl();
-
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setAttribute("dangNhapKhongThanhCong", 0);
-		req.getRequestDispatcher("./login.jsp").forward(req, resp);
-	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
+		PrintWriter writer = resp.getWriter();
+		resp.setContentType("application/json");
+		
+		Gson gon = new Gson();
+		
+		if (session.getAttribute("currentUser") != null) {
+			writer.println(gon.toJson("not allowed"));
+			return;
+		}
 		String email = req.getParameter("email");
 		String password = req.getParameter("mat-khau");
 		if (userDao.tonTaiUser(email, password) == true) {
 			User currentUser = userDao.getUserByEmail(email);
 			if (currentUser.getTrangThai() == 1) {
-				req.setAttribute("dangNhapKhongThanhCong", 1);
-				req.getRequestDispatcher("./login.jsp").forward(req, resp);
+				writer.println(gon.toJson("Tài khoản đang được đăng nhập ở nơi khác"));
 				return;
 			}
 			currentUser.setTrangThai(1);
 			userDao.upDateUserByEmail(currentUser);
-			// System.out.println("login controller line 38 " + currentUser.getAnh());
 			session.setAttribute("currentUser", currentUser);
-			// session.setAttribute("gioHang", donHangDao.getGioHangByIdUser(currentUser.getId()));
 			session.setMaxInactiveInterval(3600 * 24);
 			Integer clickThemVaoGioHang = (Integer) session.getAttribute("clickThemVaoGioHang");
 			Integer clickGioHang = (Integer) session.getAttribute("clickGioHang");
 			Integer clickMuaNgay = (Integer) session.getAttribute("clickMuaNgay");
 			Integer clickTienHanhThanhToan = (Integer) session.getAttribute("clickTienHanhThanhToan");
 			if (clickThemVaoGioHang != null && clickThemVaoGioHang == 1) {
-				System.out.println("line 52 login controller");
-				resp.sendRedirect("./xu-ly-gio-hang");
+				writer.println(gon.toJson("./fruitshop/xu-ly-gio-hang"));
 				return;
 			}
 			if (clickGioHang != null && clickGioHang == 1) {
-				resp.sendRedirect("./gio-hang");
+				writer.println(gon.toJson("./fruitshop/gio-hang"));
 				return;
 			}
 			if (clickMuaNgay != null && clickMuaNgay == 1) {
-				System.out.println("line 67 login controller");
-				resp.sendRedirect("./thanh-toan");
+				writer.println(gon.toJson("./fruitshop/thanh-toan"));
 				return;
 			}
 			if (clickTienHanhThanhToan != null && clickTienHanhThanhToan == 1) {
-				resp.sendRedirect("./thanh-toan");
+				writer.println(gon.toJson("./fruitshop/thanh-toan"));
 				return;
 			}
-			System.out.println("line 60 login controller");
-			resp.sendRedirect("./home");
+			writer.println(gon.toJson("./fruitshop/home"));
+			return;
 		}
 		else {
-			req.setAttribute("dangNhapKhongThanhCong", 2);
-			req.getRequestDispatcher("./login.jsp").forward(req, resp);
+			writer.println(gon.toJson("Tài khoản hoặc mật khẩu không đúng"));
+			return;
 		}
 	}
 }

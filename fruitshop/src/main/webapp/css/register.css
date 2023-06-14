@@ -449,3 +449,19 @@ input[id="so-dien-thoai-nguoi-nhan"]:hover
 	background-color: #3d464d;
 	color: #fff;
 }
+
+.chup-anh {
+	margin: 20px auto 0px auto;
+	width: 115px;
+	height: 40px;
+	font-weight: 600;
+	background-color: #ffd333;
+	display: flex;
+	border-radius: 6px;
+	cursor: pointer; 
+}
+
+.chup-anh:hover {
+	background-color: #3d464d;
+	color: #fff;
+}
