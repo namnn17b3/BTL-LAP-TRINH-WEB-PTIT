@@ -1,0 +1,33 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    font-family: sans-serif;
+    background-color: #fff;
+    --scrollbar-width: 15px;
+    color: #3D464D;
+}
+
+body::-webkit-scrollbar {
+    width: var(--scrollbar-width);
+    background-color: #f1f1f1;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: lightgray;
+    border-radius: 10px;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background-color: #c1c1c1;
+}
+
+html {
+    scroll-behavior: smooth;
+}

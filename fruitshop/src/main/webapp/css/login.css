@@ -15,7 +15,7 @@ body {
 
 .form-dang-nhap {
     width: 540px;
-    height: 445px;
+    height: auto;
     background-color: #f6e4e4;
     margin: auto;
     padding: 32px;

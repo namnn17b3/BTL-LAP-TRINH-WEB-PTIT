@@ -9,6 +9,7 @@
   	transform: translate(-50%, -50%);
   	transform-origin: center;
   	display: none;
+  	box-shadow: -5px 0px 5px rgba(0, 0, 0, 0.08), 5px 0px 8px rgba(0, 0, 0, 0.08), 0px 5px 8px rgba(0, 0, 0, 0.08), 0px -5px 8px rgba(0, 0, 0, 0.08);
 }
 
 .header-webcam {

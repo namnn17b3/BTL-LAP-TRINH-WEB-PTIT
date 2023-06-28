@@ -590,4 +590,32 @@ public class DonHangDaoImpl implements DonHangDao {
 		}
 		return donHang;
 	}
+	
+	@Override
+	public int getSoLuongSanPhamDaBan() {
+		int soLuongSanPhamDaBan = 0;
+		Connection conn = null;
+		try {
+			conn = poolConnection.getConnection();
+			PreparedStatement ppst = conn.prepareStatement(
+				"select sum(dh.so_luong) as so_luong_san_pham_da_ban\r\n"
+				+ "from donhang dh, danhsachdonhang dsdh\r\n"
+				+ "where dh.id_dsdh = dsdh.id and dsdh.ngay_xuat is not null;"
+			);
+			ResultSet res = ppst.executeQuery();
+			if (res.next()) {
+				soLuongSanPhamDaBan = res.getInt("so_luong_san_pham_da_ban");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				conn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return soLuongSanPhamDaBan;
+	}
 }

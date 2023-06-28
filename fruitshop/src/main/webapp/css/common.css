@@ -525,6 +525,7 @@ html {
     height: 40px;
     border-radius: 50%;
     margin: auto;
+    object-fit: cover;
 }
 
 .bang-chuc-nang-cua-user {

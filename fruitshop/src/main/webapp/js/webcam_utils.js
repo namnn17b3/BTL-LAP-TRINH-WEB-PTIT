@@ -25,12 +25,12 @@ dowLoadAnh.onclick = () => {
 	var anh = webcam.snap();
 	dowLoadAnh.href = anh;
 	canvas.style.display = 'block';
-	video.style.display = '';
+	video.style.display = 'none';
 	webcam.stop();
 }
 
 chupLaiAnh.onclick = () => {
-	canvas.style.display = '';
+	canvas.style.display = 'none';
 	video.style.display = 'block';
 	webcam.start();
 }
@@ -38,7 +38,7 @@ chupLaiAnh.onclick = () => {
 tatWebcam.onclick = () => {
 	fruishopWebcam.style.animation = 'diTuTamVao ease 0.5s';
 	setTimeout(() => {
-		fruishopWebcam.style.display = '';
+		fruishopWebcam.style.display = 'none';
 		fruishopWebcam.style.animation = '';
 		fruishopWebcam.style.left = '50%';
 		fruishopWebcam.style.top = '50%';

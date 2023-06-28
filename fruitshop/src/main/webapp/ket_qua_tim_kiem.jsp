@@ -60,7 +60,7 @@
 						<form action="./search" method="post" class="nut-thao-tac-voi-trang thanh-phan-phan-trang">
 							<button style="display: none;"></button>
 							<i class="fa-solid fa-chevron-left" style="margin: auto"></i>
-							<input type="hidden" name="ten-san-pham" value="${tenSanPham}">
+							<input type="hidden" name="ten-san-pham" value="${tenSanPhamTimKiem}">
 							<input type="hidden" name="page" value="<%=prePage%>">
 						</form>
 					</c:if>
@@ -68,7 +68,7 @@
 						<c:if test="${index == currentPage}">
 							<form action="./search" method="post" class="trang-hien-tai thanh-phan-phan-trang">
 								<button style="display: none;"></button>
-								<input type="hidden" name="ten-san-pham" value="${tenSanPham}">
+								<input type="hidden" name="ten-san-pham" value="${tenSanPhamTimKiem}">
 								<input type="hidden" name="page" value="${index}">
 								<p style="margin: auto; font-weight: 600">${index}</p>
 							</form>
@@ -76,7 +76,7 @@
 						<c:if test="${index != currentPage}">
 							<form action="./search" method="post" class="khong-phai-trang-hien-tai thanh-phan-phan-trang">								
 								<button style="display: none;"></button>
-								<input type="hidden" name="ten-san-pham" value="${tenSanPham}">
+								<input type="hidden" name="ten-san-pham" value="${tenSanPhamTimKiem}">
 								<input type="hidden" name="page" value="${index}">
 								<p style="margin: auto; font-weight: 600">${index}</p>
 							</form>
@@ -86,7 +86,7 @@
 						<form action="./search" method="post" class="nut-thao-tac-voi-trang thanh-phan-phan-trang">
 							<button style="display: none;"></button>
 							<i class="fa-solid fa-chevron-right" style="margin: auto"></i>
-							<input type="hidden" name="ten-san-pham" value="${tenSanPham}">
+							<input type="hidden" name="ten-san-pham" value="${tenSanPhamTimKiem}">
 							<input type="hidden" name="page" value="<%=nextPage%>">
 						</form>
 					</c:if>

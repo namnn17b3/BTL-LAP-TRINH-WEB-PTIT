@@ -1,0 +1,78 @@
+body {
+	flex-direction: row;
+}
+
+.main-grid {
+	display: grid;
+	grid-template-columns: 500px 500px;
+	margin: 40px auto auto auto;
+	grid-column-gap: 20px;
+	grid-row-gap: 20px;
+	grid-auto-rows: 90px;
+}
+
+.thanh-phan-grid {
+	user-select: none;
+	background-color: #fff;
+	font-size: 20px;
+	display: flex;
+	border-radius: 6px;
+	box-shadow: -2px 0px 1px rgba(0, 0, 0, 0.1), 2px 0px 1px rgba(0, 0, 0, 0.1), 0px 5px 8px rgba(0, 0, 0, 0.1);
+}
+
+.thanh-phan-grid:hover {
+	animation: hieuUngScale 0.2s ease forwards;
+}
+
+@keyframes hieuUngScale {
+	from {
+		transform: scale(1);
+	}
+	to {
+		transform: scale(1.008);	
+	}
+}
+
+.icon-thanh-phan-grid {
+	width: 50px;
+	height: 50px;
+	font-size: 36px;
+	margin-left: 15px;
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+.icon-thanh-phan-grid::before {
+	margin: auto;
+}
+
+.tong-tien {
+	color: #9400D3;
+}
+
+.so-san-pham {
+	color: #D2691E;
+}
+
+.so-danh-gia {
+	color: #fea408;
+}
+
+.so-user {
+	color: #f84859;
+}
+
+.so-luot-dang-truy-cap {
+	color: #31a24c;
+}
+
+.so-san-pham-da-ban {
+	color: #2e89ff;
+}
+
+.noi-dung-thanh-phan-grid {
+	margin-left: 15px;
+	margin-top: auto;
+	margin-bottom: auto;
+	color: #3d464d !important;
+}

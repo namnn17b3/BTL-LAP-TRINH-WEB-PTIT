@@ -37,7 +37,7 @@ public class DanhSachDonHangDaoImpl implements DanhSachDonHangDao {
 			ppst.setTimestamp(6, new java.sql.Timestamp(danhSachDonHang.getNgayXuat().getTime()));
 			ppst.setNull(7, java.sql.Types.TIMESTAMP);
 			ppst.setNull(8, java.sql.Types.TIMESTAMP);
-			ppst.setInt(9, danhSachDonHang.getTongTien());
+			ppst.setLong(9, (long) danhSachDonHang.getTongTien());
 			ppst.setString(10, danhSachDonHang.getThanhToan());
 			
 			ppst.execute();
@@ -344,5 +344,91 @@ public class DanhSachDonHangDaoImpl implements DanhSachDonHangDao {
 				e2.printStackTrace();
 			}
 		}
+	}
+	
+	@Override
+	public long getTongDoanhThu() {
+		long tongDoanhThu = 0;
+		Connection conn = null;
+		try {
+			conn = poolConnection.getConnection();
+			PreparedStatement ppst = conn.prepareStatement(
+				"select sum(tong_tien) as tong_doanh_thu\r\n"
+				+ "from danhsachdonhang\r\n"
+				+ "where ngay_nhan is not null;"
+			);
+			ResultSet res = ppst.executeQuery();
+			if (res.next()) {
+				tongDoanhThu = res.getLong("tong_doanh_thu");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				conn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return tongDoanhThu;
+	}
+	
+	public long getDoanhThuTheoNgay(Date date) {
+		long doanhThuTheoNgay = 0;
+		Connection conn = null;
+		try {
+			conn = poolConnection.getConnection();
+			PreparedStatement ppst = conn.prepareStatement(
+				"select sum(tong_tien) as doanh_thu_theo_ngay\r\n"
+				+ "from danhsachdonhang\r\n"
+				+ "where date(ngay_nhan) = ?;"
+			);
+			ppst.setDate(1, new java.sql.Date(date.getTime()));
+			ResultSet res = ppst.executeQuery();
+			if (res.next()) {
+				doanhThuTheoNgay = res.getLong("doanh_thu_theo_ngay");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				conn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return doanhThuTheoNgay;
+	}
+	
+	@Override
+	public long getDoanhThuTheoThang(int nam, int thang) {
+		long doanhThuTheoThang = 0;
+		Connection conn = null;
+		try {
+			conn = poolConnection.getConnection();
+			PreparedStatement ppst = conn.prepareStatement(
+				"select sum(tong_tien) as doanh_thu_theo_thang\r\n"
+				+ "from danhsachdonhang\r\n"
+				+ "where year(ngay_nhan) = ? and month(ngay_nhan) = ?;"
+			);
+			ppst.setInt(1, nam);
+			ppst.setInt(2, thang);
+			ResultSet res = ppst.executeQuery();
+			if (res.next()) {
+				doanhThuTheoThang = res.getLong("doanh_thu_theo_thang");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				conn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return doanhThuTheoThang;
 	}
 }

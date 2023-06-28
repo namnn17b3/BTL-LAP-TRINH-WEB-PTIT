@@ -31,7 +31,7 @@ public class AllPageFilter implements Filter {
 		session.setAttribute("soLuongSanPhamTrongGioHang", 0);
 		if (session.getAttribute("currentUser") != null) {
 			User currentUser = (User) session.getAttribute("currentUser");
-			System.out.println("line 34 all page filter");
+//			System.out.println("line 34 all page filter");
 			session.setAttribute("soLuongSanPhamTrongGioHang", sanPhamTrongGioHangDao.getSoLuongSanPhamTrongGioHangByIdUser(currentUser.getId()));
 		}
 //		System.out.println("line 36 " + session.getAttribute("clickMuaNgay"));

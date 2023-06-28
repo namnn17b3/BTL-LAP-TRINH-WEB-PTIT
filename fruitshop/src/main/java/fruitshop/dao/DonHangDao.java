@@ -21,6 +21,7 @@ public interface DonHangDao {
 	public List<DonHang> getListDonHangByIdDanhSachDonHang(int idDanhSachDonHang, int page);
 	public int tonTaiDanhGiaDonHang(int idUser, int idSanPham, int idDanSachDonHang);
 	public DonHang getDonHangByIdSanPhamIdDanhDonHang(int idSanPham, int idDanhSachDonHang);
+	public int getSoLuongSanPhamDaBan();
 //	public int getTongTienByIdUser(int idUser);
 //	public void xoaDonHangByIdUserAndIdSanPham(int idUser, int idSanPham);
 }

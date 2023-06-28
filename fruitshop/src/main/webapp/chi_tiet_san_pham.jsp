@@ -106,9 +106,9 @@
 			    	<div id="tang-giam-so-luong">
 			    		<div class="so-luong-san-pham-con-lai" style="display: none;"><%=sanPham.getSoLuongNhap() - sanPham.getSoLuongBan()%></div>
 			    		<div class="so-luong" style="display: none;">1</div>
-			    		<div class="nut-tang-giam-so-luong tru"><p style="margin: auto">-</p></div>
-			    		<div id="so-luong-hien-thi" title="1"><p style="margin: auto"><%=session.getAttribute("soLuong") != null ? session.getAttribute("soLuong") : 1%></p></div>
-			    		<div class="nut-tang-giam-so-luong cong"><p style="margin: auto">+</p></div>
+			    		<div class="nut-tang-giam-so-luong tru"><p style="margin: auto; user-select:none;">-</p></div>
+			    		<div id="so-luong-hien-thi" title="1"><p style="margin: auto; user-select:none;"><%=session.getAttribute("soLuong") != null ? session.getAttribute("soLuong") : 1%></p></div>
+			    		<div class="nut-tang-giam-so-luong cong"><p style="margin: auto; user-select:none;">+</p></div>
 			    	</div>
 				    <a class="them-vao-gio-hang" href="./xu-ly-gio-hang?id=<%=sanPham.getId()%>"><p style="margin: auto">Thêm vào giỏ</p></a>
 			    	<a class="mua-ngay" href="./thanh-toan"><p style="margin: auto;">Mua ngay</p></a>
@@ -117,8 +117,8 @@
    		</div>
    		<div class="phan-2">
    			<div class="thanh-lua-chon-item">
-   				<div class="item item-mo-ta"><p style="margin: auto; font-size: 20px; font-weight: 600">Mô tả</p></div>
-   				<div class="item item-danh-gia"><p style="margin: auto; font-size: 20px; font-weight: 600">Đánh giá</p></div>
+   				<div class="item item-mo-ta"><p style="margin: auto; font-size: 20px; font-weight: 600; user-select:none;">Mô tả</p></div>
+   				<div class="item item-danh-gia"><p style="margin: auto; font-size: 20px; font-weight: 600; user-select:none;">Đánh giá</p></div>
    				<div class="thanh-gach-chan-item"></div>
    			</div>
    			<div class="mo-ta-chi-tiet-san-pham">

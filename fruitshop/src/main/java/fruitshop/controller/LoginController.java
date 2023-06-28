@@ -37,6 +37,7 @@ public class LoginController extends HttpServlet {
 			User currentUser = userDao.getUserByEmail(email);
 			if (currentUser.getTrangThai() == 1) {
 				req.setAttribute("dangNhapKhongThanhCong", 1);
+				req.setAttribute("email", email);
 				req.getRequestDispatcher("./login.jsp").forward(req, resp);
 				return;
 			}
@@ -45,7 +46,7 @@ public class LoginController extends HttpServlet {
 			// System.out.println("login controller line 38 " + currentUser.getAnh());
 			session.setAttribute("currentUser", currentUser);
 			// session.setAttribute("gioHang", donHangDao.getGioHangByIdUser(currentUser.getId()));
-			session.setMaxInactiveInterval(3600 * 24);
+			session.setMaxInactiveInterval(86400); // 1 ngày
 			Integer clickThemVaoGioHang = (Integer) session.getAttribute("clickThemVaoGioHang");
 			Integer clickGioHang = (Integer) session.getAttribute("clickGioHang");
 			Integer clickMuaNgay = (Integer) session.getAttribute("clickMuaNgay");
@@ -73,6 +74,7 @@ public class LoginController extends HttpServlet {
 		}
 		else {
 			req.setAttribute("dangNhapKhongThanhCong", 2);
+			req.setAttribute("email", email);
 			req.getRequestDispatcher("./login.jsp").forward(req, resp);
 		}
 	}

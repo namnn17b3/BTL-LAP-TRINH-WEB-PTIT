@@ -131,6 +131,12 @@
 								<a href="./don-hang" style="text-decoration: none; color: #212529; width: 50%; margin: auto 0px auto auto">Đơn hàng</a>
 								<i class="fa-solid fa-list" style="color: #3D464D; font-size: 20px; paddng-top: 0; margin: auto"></i>
 							</div>
+							<c:if test='<%=currentUser.getVaiTro().equals("a")%>'>
+								<div class="thanh-phan-bang-chuc-nang-user logout">
+									<a href="./admin" style="text-decoration: none; color: #212529; width: 50%; margin: auto 0px auto auto">Dashboard</a>
+									<i class="fa-solid fa-gauge" style="color: #3D464D; font-size: 20px; paddng-top: 0; margin: auto"></i>
+								</div>
+							</c:if>
 							<div class="thanh-phan-bang-chuc-nang-user logout">
 								<a href="./logout" style="text-decoration: none; color: #212529; width: 50%; margin: auto 0px auto auto">Đăng xuất</a>
 								<i class="fa-solid fa-right-from-bracket" style="color: #3D464D; font-size: 20px; paddng-top: 0; margin: auto"></i>

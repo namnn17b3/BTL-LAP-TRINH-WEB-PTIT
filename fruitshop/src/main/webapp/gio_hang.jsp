@@ -89,18 +89,18 @@
 		        			
 		        			<div class="so-luong-san-pham so-luong-san-pham__gio-hang chung-cua-cac-thong-tin-san-pham__gio-hang">
 		        				<div class="o-nhap-so-luong">
-		        					<div class="nut-tru thanh-phan-o-nhap-so-luong nut-tang-giam-so-luong" style="flex: 2; padding-left: 6px;"><span style="margin: auto">-</span></div>
+		        					<div class="nut-tru thanh-phan-o-nhap-so-luong nut-tang-giam-so-luong" style="flex: 2; padding-left: 6px;"><span style="margin: auto; user-select:none;">-</span></div>
 		        					
 		        					<div class="hien-thi-so-luong thanh-phan-o-nhap-so-luong" style="flex: 6" title="${item.soLuong}">
 		        						<c:if test="${item.soLuong <= 99}">
-		        							<span style="margin: auto; color: #3d464d;">${item.soLuong}</span>
+		        							<span style="margin: auto; color: #3d464d; user-select:none;">${item.soLuong}</span>
 		        						</c:if>
 		        						<c:if test="${item.soLuong > 99}">
-		        							<span style="margin: auto; color: #3d464d;">99+</span>
+		        							<span style="margin: auto; color: #3d464d; user-select:none;">99+</span>
 		        						</c:if>
 		        					</div>
 		        					
-		        					<div class="nut-cong thanh-phan-o-nhap-so-luong nut-tang-giam-so-luong" style="flex: 2; padding-right: 6px;"><span style="margin: auto">+</span></div>
+		        					<div class="nut-cong thanh-phan-o-nhap-so-luong nut-tang-giam-so-luong" style="flex: 2; padding-right: 6px;"><span style="margin: auto; user-select:none;">+</span></div>
 		        				</div>
 		        			</div>
 		        			
@@ -204,7 +204,7 @@
 			window.scrollTo(0, 0);
 		}, 1200);
     	
-    	var flag = layCookie('flag', 0);
+    	var flag = layCookie('flag', 1);
     	var url = window.location.href;
     </script>
     

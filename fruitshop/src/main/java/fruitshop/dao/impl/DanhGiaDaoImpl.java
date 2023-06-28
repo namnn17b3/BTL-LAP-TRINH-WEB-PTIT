@@ -300,4 +300,31 @@ public class DanhGiaDaoImpl implements DanhGiaDao {
 			}
 		}
 	}
+	
+	@Override
+	public int getSoLuongDanhGia() {
+		int soLuongDanhGia = 0;
+		Connection conn = null;
+		try {
+			conn = poolConnection.getConnection();
+			PreparedStatement ppst = conn.prepareStatement(
+				"select count(*) as so_luong_danh_gia\r\n"
+				+ "from danhgia;"
+			);
+			ResultSet res = ppst.executeQuery();
+			if (res.next()) {
+				soLuongDanhGia = res.getInt("so_luong_danh_gia");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				conn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return soLuongDanhGia;
+	}
 }

@@ -1,0 +1,104 @@
+.tieu-de-chuc-nang {
+	font-size: 30px;
+	font-weight: 600;
+	display: flex;
+	height: 60px;
+	width: 100%;
+	border-bottom: 3px solid #d8dee2;
+	user-select: none;
+}
+
+.chon-thang-nam {
+	font-weight: 600;
+	display: flex;
+	padding-left: 60%;
+	margin-top: 50px;
+	user-select: none;
+}
+
+.truong-gia-tri + .truong-gia-tri {
+	margin-left: 15px;
+}
+
+.truong-gia-tri {
+	position: relative; 
+}
+
+.ten-truong {
+	display: flex;
+	width: 120px;
+	height: 30px;
+	background-color: #fff;
+	border: 2px solid #3d464d;
+	border-radius: 6px;
+	justify-content: space-between;
+	padding: 5px 5px 5px 15px;
+}
+
+.chon-icon {
+	cursor: pointer;
+}
+
+.bang-gia-tri {
+	border: 2px solid #3d464d;
+	border-radius: 6px;
+	width: 120px;
+	top: 33px;
+	left: 0;
+	position: absolute;
+	z-index: 2;
+	display: none;
+	background-color: #fff;
+	height: 150px;
+	overflow-y: scroll;
+}
+
+.bang-gia-tri::-webkit-scrollbar {
+	background-color: #fff;
+	width: 5px;
+	border-radius: 6px;
+}
+
+.bang-gia-tri::-webkit-scrollbar-thumb {
+	background-color: lightgray;
+	border-radius: 10px;
+}
+
+.bang-gia-tri::-webkit-scrollbar-thumb:hover {
+	background-color: #c1c1c1;
+}
+
+.gia-tri {
+	padding: 5px 5px 5px 15px;
+	width: 100%;
+	height: 30px;
+	cursor: pointer;
+	border-radius: 6px;
+}
+
+.gia-tri:hover {
+	background-color: #f0f2f4;
+}
+
+.nut-tao-bieu-do {
+	border-radius: 6px;
+	width: 120px;
+	height: 30px;
+	background-color: ffd333;
+	display: flex;
+	cursor: pointer;
+	margin-left: 15px;
+}
+
+.nut-tao-bieu-do:hover {
+	background: #3d464d;
+	color: #fff;
+}
+
+canvas {
+	width: 800px;
+	height: 400px;
+	margin: 70px auto auto auto;
+	position: relative;
+	z-index: 1;
+}

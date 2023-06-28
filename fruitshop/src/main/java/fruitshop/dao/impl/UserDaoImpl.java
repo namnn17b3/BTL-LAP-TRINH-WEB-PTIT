@@ -174,4 +174,61 @@ public class UserDaoImpl implements UserDao {
 			}
 		}
 	}
+	
+	@Override
+	public int getSoLuongUserOnline() {
+		int soLuongUserOnline = 0;
+		Connection conn = null;
+		try {
+			conn = poolConnection.getConnection();
+			PreparedStatement ppst = conn.prepareStatement(
+				"select count(*) as so_luong_user_online\r\n"
+				+ "from user\r\n"
+				+ "where trang_thai = 1;"
+			);
+			ResultSet res = ppst.executeQuery();
+			if (res.next()) {
+				soLuongUserOnline = res.getInt("so_luong_user_online");
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				conn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return soLuongUserOnline;
+	}
+	
+	@Override
+	public int getSoLuongUser() {
+		int soLuongUser = 0;
+		Connection conn = null;
+		try {
+			conn = poolConnection.getConnection();
+			PreparedStatement ppst = conn.prepareStatement(
+				"select count(*) as so_luong_user\r\n"
+				+ "from user;"
+			);
+			ResultSet res = ppst.executeQuery();
+			if (res.next()) {
+				soLuongUser = res.getInt("so_luong_user");
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				conn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return soLuongUser;
+	}
 }

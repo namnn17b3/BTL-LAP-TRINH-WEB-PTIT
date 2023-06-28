@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chi tiết sản phẩm | Fruit Shop</title>
+    <title>Lỗi | Fruit Shop</title>
     <link rel="stylesheet" href="./css/common.css">
     <link rel="stylesheet" href="./css/home.css">
     <link rel="stylesheet" href="./css/san_pham.css">
@@ -37,7 +37,6 @@
 	<jsp:include page="footer.jsp"/>
     
     <script src="./js/common.js"></script>
-    <script src="./js/san_pham.js"></script>
     <script type="text/javascript">
 	   	setTimeout(() => {
 			document.querySelector('.load-truoc-khi-vao-trang').style.display = 'none';

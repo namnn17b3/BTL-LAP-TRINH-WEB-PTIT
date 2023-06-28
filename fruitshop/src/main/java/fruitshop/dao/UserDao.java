@@ -8,4 +8,6 @@ public interface UserDao {
 	public boolean tonTaiUser(String email, String password);
 	public User getUserByEmail(String email);
 	public void upDateUserByEmail(User user);
+	public int getSoLuongUserOnline();
+	public int getSoLuongUser();
 }

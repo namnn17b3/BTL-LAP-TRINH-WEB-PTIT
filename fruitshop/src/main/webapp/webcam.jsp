@@ -4,7 +4,7 @@
 
 <div class="webcam">
  	<div class="header-webcam">
- 		<span style="margin: auto; font-size: 24px; font-weight: 600;">FruitShop Camera</span>
+ 		<span style="margin: auto; font-size: 24px; font-weight: 600; cursor: default; user-select: none;">FruitShop Camera</span>
  		<div class="tat-webcam">
  			<i class="fa-solid fa-xmark" style="margin: auto;"></i>
  		</div>

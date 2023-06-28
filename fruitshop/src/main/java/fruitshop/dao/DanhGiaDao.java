@@ -12,4 +12,5 @@ public interface DanhGiaDao {
 	public void themDanhGia(DanhGia danhGia);
 	public void capNhatDanhGia(DanhGia danhGia);
 	public void xoaDanhGia(DanhGia danhGia);
+	public int getSoLuongDanhGia();
 }

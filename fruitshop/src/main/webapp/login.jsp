@@ -29,7 +29,7 @@
                 <h3 class="ten-form">Đăng nhập</h3>
                 <div class="email">
                     <div class="ten-input">Email</div>
-                    <input placeholder="Email" type="text" name="email" id="email"/>
+                    <input placeholder="Email" type="text" name="email" value='<%=request.getParameter("email") == null ? "" : request.getParameter("email")%>' id="email"/>
                     <!-- <div class="canh-bao-invalid-email">
                         <div class="canh-bao">
                             <i class="fa-solid fa-circle-exclamation"></i>

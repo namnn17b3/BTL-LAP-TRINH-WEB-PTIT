@@ -2,6 +2,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
   <display-name>fruitshop</display-name>
   <welcome-file-list>
+  	<welcome-file>home</welcome-file>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.jsp</welcome-file>
     <welcome-file>index.htm</welcome-file>
@@ -9,4 +10,19 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
+  
+  <error-page>
+	<error-code>404</error-code>
+	<location>/not-found-page</location>
+  </error-page>
+  
+  <session-config>
+    <session-timeout>1440</session-timeout> <!-- Thời gian hết hạn của phiên làm việc (phút) -->
+    <cookie-config>
+      <name>JSESSIONID</name> <!-- Tên của cookie JSESSIONID -->
+      <max-age>86400</max-age> <!-- Giá trị expires của cookie JSESSIONID (giây) -->
+      <!-- Các thuộc tính khác cho cookie -->
+    </cookie-config>
+  </session-config>
+  
 </web-app>
