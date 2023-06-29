@@ -1,5 +1,7 @@
 package fruitshop.dao;
 
+import java.util.List;
+
 import fruitshop.model.User;
 
 public interface UserDao {
@@ -10,4 +12,6 @@ public interface UserDao {
 	public void upDateUserByEmail(User user);
 	public int getSoLuongUserOnline();
 	public int getSoLuongUser();
+	public List<User> getListTop5KhachHangTheoTongChiTieu();
+	public List<User> getListTop5KhachHangTheoSoLuongMua();
 }

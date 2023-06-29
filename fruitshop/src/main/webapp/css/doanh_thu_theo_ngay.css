@@ -86,13 +86,9 @@
 	height: 30px;
 	background-color: ffd333;
 	display: flex;
-	cursor: pointer;
+	cursor: not-allowed;
 	margin-left: 15px;
-}
-
-.nut-tao-bieu-do:hover {
-	background: #3d464d;
-	color: #fff;
+	opacity: 0.5;
 }
 
 canvas {

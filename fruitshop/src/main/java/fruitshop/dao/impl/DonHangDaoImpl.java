@@ -600,7 +600,7 @@ public class DonHangDaoImpl implements DonHangDao {
 			PreparedStatement ppst = conn.prepareStatement(
 				"select sum(dh.so_luong) as so_luong_san_pham_da_ban\r\n"
 				+ "from donhang dh, danhsachdonhang dsdh\r\n"
-				+ "where dh.id_dsdh = dsdh.id and dsdh.ngay_xuat is not null;"
+				+ "where dh.id_dsdh = dsdh.id and dsdh.ngay_nhan is not null;"
 			);
 			ResultSet res = ppst.executeQuery();
 			if (res.next()) {

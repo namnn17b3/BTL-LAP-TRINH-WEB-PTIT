@@ -52,13 +52,13 @@
                     <i class="fa-solid fa-user icon-chuc-nang"></i>
                     <span class="ten-chuc-nang">Quản lý tài khoản</span>
                 </div>
-                <div class="chuc-nang top-5-khach-hang">
-                    <i class="fa-solid fa-user icon-chuc-nang"></i>
-                    <span class="ten-chuc-nang">Top 5 khách hàng</span>
-                </div>
                 <div class="chuc-nang top-10-san-pham">
                     <i class="fa-solid fa-shoe-prints icon-chuc-nang"></i>
                     <span class="ten-chuc-nang">Top 10 sản phẩm</span>
+                </div>
+                <div class="chuc-nang top-5-khach-hang">
+                    <i class="fa-solid fa-user icon-chuc-nang"></i>
+                    <span class="ten-chuc-nang">Top 5 khách hàng</span>
                 </div>
                 <div class="chuc-nang quay-lai-home">
                     <i class="fa-solid fa-house icon-chuc-nang"></i>

@@ -44,11 +44,26 @@ listGiaTri.forEach(item => {
 		var value = parseInt(item.innerText);
 		if (value >= 2018 && value <= 2023) {
 			listGiaTriDuocChon[0].innerText = value;
-			return;
 		}
 		if (value >= 1 && value <= 12) {
 			listGiaTriDuocChon[1].innerText = value;
-			return;
+		}
+		var nam = parseInt(listGiaTriDuocChon[0].innerText);
+		var thang = parseInt(listGiaTriDuocChon[1].innerText);
+		if (isNaN(nam) == false && isNaN(thang) == false) {
+			var styleElement = document.createElement('style');
+			styleElement.type = 'text/css';
+			styleElement.innerHTML = `
+				.nut-tao-bieu-do {
+					cursor: pointer;
+					opacity: 1;
+				}
+				.nut-tao-bieu-do:hover {
+					background-color: #3d464d;
+					color: #fff;
+				}
+			`;
+			body.insertAdjacentElement('afterbegin', styleElement);
 		}
 	}
 });
@@ -106,10 +121,10 @@ function veBieuDoTron(data, thang, nam) {
 }
 
 nutTaoBieuDo.onclick = () => {
-	if (nam != NaN && thang != NaN) {		
-		var xhr = new XMLHttpRequest();		
-		var nam = parseInt(listGiaTriDuocChon[0].innerText);
-		var thang = parseInt(listGiaTriDuocChon[1].innerText);
+	var nam = parseInt(listGiaTriDuocChon[0].innerText);
+	var thang = parseInt(listGiaTriDuocChon[1].innerText);
+	if (isNaN(nam) == false && isNaN(thang) == false) {		
+		var xhr = new XMLHttpRequest();
 		xhr.onreadystatechange = () => {
 			if (xhr.readyState == 4 && xhr.status == 200) {
 				var data = JSON.parse(xhr.responseText);

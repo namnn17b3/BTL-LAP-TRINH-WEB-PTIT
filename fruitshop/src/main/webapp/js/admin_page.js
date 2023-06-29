@@ -1,6 +1,6 @@
 var phanTuHienTai = null;
 var listAdminChucNang = document.querySelectorAll('.chuc-nang');
-var link = ['./admin/main', './admin/doanh-thu-theo-ngay', './admin/doanh-thu-theo-thang', './admin/quan-ly-don-hang', './admin/quan-ly-san-pham', './admin/quan-ly-tai-khoan', './admin/top-5-khach-hang', './admin/top-10-san-pham'];
+var link = ['./admin/main', './admin/doanh-thu-theo-ngay', './admin/doanh-thu-theo-thang', './admin/quan-ly-don-hang', './admin/quan-ly-san-pham', './admin/quan-ly-tai-khoan', './admin/top-10-san-pham', './admin/top-5-khach-hang'];
 var iframe = document.querySelector('iframe');
 listAdminChucNang.forEach((item, index) => {
     hieuUngClickChuot =

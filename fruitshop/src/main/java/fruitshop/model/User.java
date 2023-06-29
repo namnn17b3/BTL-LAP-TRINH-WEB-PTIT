@@ -8,10 +8,14 @@ public class User {
 	private String anh;
 	private String vaiTro;
 	private int trangThai;
+	private int soLuongDaMua;
+	private long tongChiTieu;
 	
 	public User() {}
 
-	public User(int id, String ten, String email, String matKhau, String anh, String vaiTro, int trangThai) {
+	public User(int id, String ten, String email, String matKhau, String anh, String vaiTro, int trangThai,
+			int soLuongDaMua, long tongChiTieu) {
+		super();
 		this.id = id;
 		this.ten = ten;
 		this.email = email;
@@ -19,6 +23,8 @@ public class User {
 		this.anh = anh;
 		this.vaiTro = vaiTro;
 		this.trangThai = trangThai;
+		this.soLuongDaMua = soLuongDaMua;
+		this.tongChiTieu = tongChiTieu;
 	}
 
 	public int getId() {
@@ -75,5 +81,21 @@ public class User {
 
 	public void setTrangThai(int trangThai) {
 		this.trangThai = trangThai;
+	}
+
+	public int getSoLuongDaMua() {
+		return soLuongDaMua;
+	}
+
+	public void setSoLuongDaMua(int soLuongDaMua) {
+		this.soLuongDaMua = soLuongDaMua;
+	}
+
+	public long getTongChiTieu() {
+		return tongChiTieu;
+	}
+
+	public void setTongChiTieu(long tongChiTieu) {
+		this.tongChiTieu = tongChiTieu;
 	}
 }

@@ -34,7 +34,7 @@ public class SanPhamDaoImpl implements SanPhamDao {
 			    + "(\r\n"
 			    + "	select sp.id, sp.ten, sp.tien_tren_don_vi, sp.anh, sum(dh.so_luong) as so_luong_ban, sp.don_vi\r\n"
 			    + "	from donhang dh, sanpham sp, danhsachdonhang dsdh\r\n"
-			    + "	where dh.id_sp = sp.id and dh.id_dsdh = dsdh.id and dsdh.huy = 0\r\n"
+			    + "	where dh.id_sp = sp.id and dh.id_dsdh = dsdh.id and dsdh.ngay_nhan is not null\r\n"
 			    + "	group by sp.id\r\n"
 			    + ") as a1\r\n"
 			    + "left join\r\n"
@@ -92,7 +92,7 @@ public class SanPhamDaoImpl implements SanPhamDao {
 			    + "(\r\n"
 			    + "	select sp.id, sp.ten, sp.tien_tren_don_vi, sp.anh, sum(dh.so_luong) as so_luong_ban, sp.don_vi\r\n"
 			    + "	from donhang dh, sanpham sp, danhsachdonhang dsdh\r\n"
-			    + "	where dh.id_sp = sp.id and dh.id_dsdh = dsdh.id and dsdh.huy = 0\r\n"
+			    + "	where dh.id_sp = sp.id and dh.id_dsdh = dsdh.id and dsdh.ngay_nhan is not null\r\n"
 			    + "	group by sp.id\r\n"
 			    + ") as a1\r\n"
 			    + "left join\r\n"
@@ -150,7 +150,7 @@ public class SanPhamDaoImpl implements SanPhamDao {
 				+ "(\r\n"
 				+ "	select sp.*, sum(dh.so_luong) as so_luong_ban\r\n"
 				+ "	from donhang dh, sanpham sp, danhsachdonhang dsdh\r\n"
-			    + "	where dh.id_sp = sp.id and dh.id_dsdh = dsdh.id and dsdh.huy = 0\r\n"
+			    + "	where dh.id_sp = sp.id and dh.id_dsdh = dsdh.id and dsdh.ngay_nhan is not null\r\n"
 				+ "	group by sp.id\r\n"
 				+ ") as a1\r\n"
 				+ "left join\r\n"
@@ -216,7 +216,7 @@ public class SanPhamDaoImpl implements SanPhamDao {
 					+ "(\r\n"
 					+ "	select sp.*, sum(dh.so_luong) as so_luong_ban\r\n"
 					+ "	from donhang dh, sanpham sp, danhsachdonhang dsdh\r\n"
-				    + "	where dh.id_sp = sp.id and dh.id_dsdh = dsdh.id and dsdh.huy = 0\r\n"
+				    + "	where dh.id_sp = sp.id and dh.id_dsdh = dsdh.id and dsdh.ngay_nhan is not null\r\n"
 					+ "	group by sp.id\r\n"
 					+ ") as a1\r\n"
 					+ "left join\r\n"
@@ -240,7 +240,7 @@ public class SanPhamDaoImpl implements SanPhamDao {
 					+ "(\r\n"
 					+ "	select sp.id, sp.ten, sp.tien_tren_don_vi, sp.anh, sp.phan_loai, sum(dh.so_luong) as so_luong_ban, sp.don_vi\r\n"
 					+ "	from donhang dh, sanpham sp, danhsachdonhang dsdh\r\n"
-				    + "	where dh.id_sp = sp.id and dh.id_dsdh = dsdh.id and dsdh.huy = 0\r\n"
+				    + "	where dh.id_sp = sp.id and dh.id_dsdh = dsdh.id and dsdh.ngay_nhan is not null\r\n"
 					+ "	group by sp.id\r\n"
 					+ ") as a1\r\n"
 					+ "left join\r\n"
@@ -265,7 +265,7 @@ public class SanPhamDaoImpl implements SanPhamDao {
 					+ "(\r\n"
 					+ "	select sp.id, sp.ten, sp.tien_tren_don_vi, sp.anh, sp.nguon_goc, sum(dh.so_luong) as so_luong_ban, sp.don_vi\r\n"
 					+ "	from donhang dh, sanpham sp, danhsachdonhang dsdh\r\n"
-				    + "	where dh.id_sp = sp.id and dh.id_dsdh = dsdh.id and dsdh.huy = 0\r\n"
+				    + "	where dh.id_sp = sp.id and dh.id_dsdh = dsdh.id and dsdh.ngay_nhan is not null\r\n"
 					+ "	group by sp.id\r\n"
 					+ ") as a1\r\n"
 					+ "left join\r\n"
@@ -404,7 +404,7 @@ public class SanPhamDaoImpl implements SanPhamDao {
 				+ "(\r\n"
 				+ "	select sp.id, sp.ten, sp.tien_tren_don_vi, sp.anh, sum(dh.so_luong) as so_luong_ban, sp.don_vi\r\n"
 				+ "	from donhang dh, sanpham sp, danhsachdonhang dsdh\r\n"
-				+ "	where dh.id_sp = sp.id and dh.id_dsdh = dsdh.id and dsdh.huy = 0 and match(sp.ten) against(? in natural language mode)\r\n"
+				+ "	where dh.id_sp = sp.id and dh.id_dsdh = dsdh.id and dsdh.ngay_nhan is not null and match(sp.ten) against(? in natural language mode)\r\n"
 				+ "	group by sp.id\r\n"
 				+ ") as a1\r\n"
 				+ "left join\r\n"
@@ -447,6 +447,82 @@ public class SanPhamDaoImpl implements SanPhamDao {
 		    } catch (Exception e2) {
 		        e2.printStackTrace();
 		    }
+		}
+		return listSanPham;
+	}
+	
+	@Override
+	public List<SanPham> getListTop10SanPhamTheoDoanhThu() {
+		List<SanPham> listSanPham = new ArrayList<>();
+		Connection conn = null;
+		try {
+			conn = poolConnection.getConnection();
+			PreparedStatement ppst = conn.prepareStatement(
+				"select sp.id, sp.anh, sp.ten, sp.tien_tren_don_vi, sp.don_vi, sum(dh.so_luong) as so_luong_ban\r\n"
+				+ "from sanpham sp, donhang dh, danhsachdonhang dsdh\r\n"
+				+ "where sp.id = dh.id_sp and dh.id_dsdh = dsdh.id and dsdh.ngay_nhan is not null\r\n"
+				+ "group by sp.id\r\n"
+				+ "order by so_luong_ban * sp.tien_tren_don_vi desc\r\n"
+				+ "limit 10;"
+			);
+			ResultSet res = ppst.executeQuery();
+			while (res.next()) {
+				SanPham sanPham = new SanPham();
+				sanPham.setId(res.getInt("id"));
+				sanPham.setAnh("." + res.getString("anh"));
+				sanPham.setTen(res.getString("ten"));
+				sanPham.setTienTrenDonVi(res.getInt("tien_tren_don_vi"));
+				sanPham.setDonVi(res.getString("don_vi"));
+				sanPham.setSoLuongBan(res.getInt("so_luong_ban"));
+				listSanPham.add(sanPham);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				conn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return listSanPham;
+	}
+	
+	@Override
+	public List<SanPham> getListTop10SanPhamTheoSoLuong() {
+		List<SanPham> listSanPham = new ArrayList<>();
+		Connection conn = null;
+		try {
+			conn = poolConnection.getConnection();
+			PreparedStatement ppst = conn.prepareStatement(
+				"select sp.id, sp.anh, sp.ten, sp.tien_tren_don_vi, sp.don_vi, sum(dh.so_luong) as so_luong_ban\r\n"
+				+ "from sanpham sp, donhang dh, danhsachdonhang dsdh\r\n"
+				+ "where sp.id = dh.id_sp and dh.id_dsdh = dsdh.id and dsdh.ngay_nhan is not null\r\n"
+				+ "group by sp.id\r\n"
+				+ "order by so_luong_ban desc\r\n"
+				+ "limit 10;"
+			);
+			ResultSet res = ppst.executeQuery();
+			while (res.next()) {
+				SanPham sanPham = new SanPham();
+				sanPham.setId(res.getInt("id"));
+				sanPham.setAnh("." + res.getString("anh"));
+				sanPham.setTen(res.getString("ten"));
+				sanPham.setTienTrenDonVi(res.getInt("tien_tren_don_vi"));
+				sanPham.setDonVi(res.getString("don_vi"));
+				sanPham.setSoLuongBan(res.getInt("so_luong_ban"));
+				listSanPham.add(sanPham);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				conn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
 		}
 		return listSanPham;
 	}

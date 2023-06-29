@@ -13,4 +13,6 @@ public interface SanPhamDao {
 	public List<SanPham> getListSanPhamByLoai(String loai, int page);
 	public List<SanPham> searchSanPhamByName(String tenSanPham, int page);
 	public int getSoLuongSanPhamByName(String tenSanPham);
+	public List<SanPham> getListTop10SanPhamTheoDoanhThu();
+	public List<SanPham> getListTop10SanPhamTheoSoLuong();
 }

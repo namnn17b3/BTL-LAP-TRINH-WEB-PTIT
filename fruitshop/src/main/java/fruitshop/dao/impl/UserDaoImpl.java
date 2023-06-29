@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.zaxxer.hikari.HikariDataSource;
 
@@ -230,5 +232,93 @@ public class UserDaoImpl implements UserDao {
 			}
 		}
 		return soLuongUser;
+	}
+	
+	@Override
+	public List<User> getListTop5KhachHangTheoTongChiTieu() {
+		List<User> listUser = new ArrayList<>();
+		Connection conn = null;
+		try {
+			conn = poolConnection.getConnection();
+			PreparedStatement ppst = conn.prepareStatement(
+				"select u.id, u.anh, u.ten, u.email, sum(dsdh.tong_tien) as tong_chi_tieu\r\n"
+				+ "from user u, danhsachdonhang dsdh\r\n"
+				+ "where u.id = dsdh.id_user and dsdh.ngay_nhan is not null\r\n"
+				+ "group by u.id\r\n"
+				+ "order by tong_chi_tieu desc\r\n"
+				+ "limit 5;"
+			);
+			ResultSet res = ppst.executeQuery();
+			while (res.next()) {
+				User user = new User();
+				user.setId(res.getInt("id"));
+				user.setAnh(res.getString("anh"));
+				user.setTen(res.getString("ten"));
+				if (user.getAnh() == null) {
+					user.setAnh("../img_user/fb-no-img.png");
+				}
+				else {
+					user.setAnh("." + user.getAnh());
+				}
+				user.setEmail(res.getString("email"));
+				user.setTongChiTieu(res.getLong("tong_chi_tieu"));
+				listUser.add(user);
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				conn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return listUser;
+	}
+	
+	@Override
+	public List<User> getListTop5KhachHangTheoSoLuongMua() {
+		List<User> listUser = new ArrayList<>();
+		Connection conn = null;
+		try {
+			conn = poolConnection.getConnection();
+			PreparedStatement ppst = conn.prepareStatement(
+				"select u.id, u.anh, u.ten, u.email, sum(dh.so_luong) as so_luong_da_mua\r\n"
+				+ "from user u, danhsachdonhang dsdh, donhang dh\r\n"
+				+ "where u.id = dsdh.id_user and dh.id_dsdh = dsdh.id and dsdh.ngay_nhan is not null\r\n"
+				+ "group by u.id\r\n"
+				+ "order by so_luong_da_mua desc\r\n"
+				+ "limit 5;"
+			);
+			ResultSet res = ppst.executeQuery();
+			while (res.next()) {
+				User user = new User();
+				user.setId(res.getInt("id"));
+				user.setAnh(res.getString("anh"));
+				user.setTen(res.getString("ten"));
+				if (user.getAnh() == null) {
+					user.setAnh("../img_user/fb-no-img.png");
+				}
+				else {
+					user.setAnh("." + user.getAnh());
+				}
+				user.setEmail(res.getString("email"));
+				user.setSoLuongDaMua(res.getInt("so_luong_da_mua"));
+				listUser.add(user);
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				conn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return listUser;
 	}
 }
