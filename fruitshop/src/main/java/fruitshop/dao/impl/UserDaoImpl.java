@@ -7,11 +7,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import com.zaxxer.hikari.HikariDataSource;
 
 import fruitshop.dao.UserDao;
 import fruitshop.model.User;
-import fruitshop.utils.AES;
 
 public class UserDaoImpl implements UserDao {
 	
@@ -29,7 +30,7 @@ public class UserDaoImpl implements UserDao {
 			);
 			ppst.setString(1, user.getTen());
 			ppst.setString(2, user.getEmail());
-			ppst.setString(3, AES.encryptAES(user.getMatKhau()));
+			ppst.setString(3, BCrypt.hashpw(user.getMatKhau(), BCrypt.gensalt(12)));
 			if (user.getAnh().equals("./img_user/fb-no-img.png")) {
 				ppst.setNull(4, java.sql.Types.VARCHAR);
 			}
@@ -82,13 +83,13 @@ public class UserDaoImpl implements UserDao {
 		try {
 			conn = poolConnection.getConnection();
 			PreparedStatement ppst = conn.prepareStatement(
-				"select * from user where email = binary ? and mat_khau = binary ?;"
+				"select mat_khau from user where email = binary ?;"
 			);
 			ppst.setString(1, email);
-			ppst.setString(2, AES.encryptAES(password));
 			ResultSet res = ppst.executeQuery();
 			if (res.next()) {
-				return true;
+				String passwordDataBase = res.getString("mat_khau");
+				return BCrypt.checkpw(password, passwordDataBase);
 			}
 		}
 		catch (Exception e) {
@@ -120,7 +121,7 @@ public class UserDaoImpl implements UserDao {
 				user.setId(res.getInt("id"));
 				user.setTen(res.getString("ten"));
 				user.setEmail(res.getString("email"));
-				user.setMatKhau(AES.decryptAES(res.getString("mat_khau")));
+				user.setMatKhau(res.getString("mat_khau"));
 				user.setAnh(res.getString("anh"));
 				if (user.getAnh() == null) {
 					user.setAnh("./img_user/fb-no-img.png");
@@ -151,10 +152,10 @@ public class UserDaoImpl implements UserDao {
 			PreparedStatement ppst = conn.prepareStatement(
 				"update user\r\n"
 				+ "set ten = ?, mat_khau = ?, anh = ?, trang_thai = ?\r\n"
-				+ "where email = ?;"
+				+ "where email = binary ?;"
 			);
 			ppst.setString(1, user.getTen());
-			ppst.setString(2, AES.encryptAES(user.getMatKhau()));
+			ppst.setString(2, BCrypt.hashpw(user.getMatKhau(), BCrypt.gensalt(12)));
 			if (user.getAnh().equals("./img_user/fb-no-img.png") == false) {
 				ppst.setString(3, user.getAnh());
 			}

@@ -113,7 +113,7 @@
 	        				</c:if>
 
 	        				<!-- khong the danh gia -->
-	        				<c:if test="${danhSachDonHang.huy == 0 && danhSachDonHang.ngayNhan != null && danhSachDonHang.ngayNhan.getTime() - now > 7 * 3600000 * 24 && item.danhGia == 0}">
+	        				<c:if test="${danhSachDonHang.huy == 0 && danhSachDonHang.ngayNhan != null && now - danhSachDonHang.ngayNhan.getTime() > 7 * 3600000 * 24 && item.danhGia == 0}">
 	        					<div class="khong-the-danh-gia thao-tac-don-hang" title="Quá thời hạn cho phép đánh giá">
 		        					<i class="fa-regular fa-pen-to-square" style="margin-left: auto; margin-top: auto; margin-bottom: auto;"></i>
 	        						<span style="margin: auto auto auto 5px;">Đánh giá</span>
@@ -197,6 +197,7 @@
    	<jsp:include page="./footer.jsp"/>
    	<script src="./js/utils.js"></script>
     <script src="./js/common.js"></script>
+    <script src="./js/chi_tiet_don_hang.js"></script>
     <script type="text/javascript">
     	setTimeout(() => {
 			document.querySelector('.load-truoc-khi-vao-trang').remove();

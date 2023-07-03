@@ -123,7 +123,7 @@ public class RegisterController extends HttpServlet {
 				User user = (User) session.getAttribute("user");
 				FileItem fileItem = (FileItem) session.getAttribute("fileItem");
 				userDao.addUser(user);
-				user = userDao.getUserByEmail(user.getEmail());
+				user.setId(userDao.getUserByEmail(user.getEmail()).getId());
 				// có tồn tại ảnh upload
 				if (fileItem != null) {
 					try {

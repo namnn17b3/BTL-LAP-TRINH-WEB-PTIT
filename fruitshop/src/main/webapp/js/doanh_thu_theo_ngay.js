@@ -1,3 +1,5 @@
+var url = window.location.href;
+var csrfToken = url.substring(url.lastIndexOf('csrf-token=') + 11, url.length);
 var listChonIcon = document.querySelectorAll('.chon-icon');
 var listCountClick = [0, 0];
 var listBangGiaTri = document.querySelectorAll('.bang-gia-tri');
@@ -131,7 +133,7 @@ nutTaoBieuDo.onclick = () => {
 				veBieuDoTron(data, thang, nam);
 			}
 		}
-		xhr.open('GET', `../api/admin/doanh-thu-theo-ngay?nam=${nam}&thang=${thang}`, true);
+		xhr.open('GET', `../api/admin/doanh-thu-theo-ngay?nam=${nam}&thang=${thang}&csrf-token=${csrfToken}`, true);
 		xhr.send();
 	}
 }

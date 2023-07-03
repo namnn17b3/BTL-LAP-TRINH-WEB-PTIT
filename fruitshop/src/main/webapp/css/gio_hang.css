@@ -130,10 +130,6 @@
 	border-bottom: 1px solid #ebebeb;
 }
 
-.dong-gio-hang:hover {
-	border: 1px solid #ffd333;
-}
-
 .chung-cua-cac-thong-tin-san-pham__gio-hang {
 	height: 116.8px;
 	display: flex;

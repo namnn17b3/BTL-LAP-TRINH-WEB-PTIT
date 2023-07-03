@@ -35,5 +35,8 @@
 
 <canvas></canvas>
 
+<div id="csrf-token" style="display: none;"><%=session.getAttribute("csrfToken")%></div>
+
 <script src="../js/chart.js"></script>
 <script src="../js/doanh_thu_theo_ngay.js"></script>
+<script src="../js/csrf_token.js"></script>

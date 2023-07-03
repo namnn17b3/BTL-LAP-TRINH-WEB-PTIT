@@ -1,6 +1,7 @@
 package fruitshop.controller;
 
 import java.io.IOException;
+import java.util.Base64;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import fruitshop.dao.UserDao;
 import fruitshop.dao.impl.UserDaoImpl;
 import fruitshop.model.User;
+import fruitshop.utils.Sha256;
 
 @WebServlet("/login")
 public class LoginController extends HttpServlet {
@@ -42,11 +44,21 @@ public class LoginController extends HttpServlet {
 				return;
 			}
 			currentUser.setTrangThai(1);
+			currentUser.setMatKhau(password);
 			userDao.upDateUserByEmail(currentUser);
 			// System.out.println("login controller line 38 " + currentUser.getAnh());
 			session.setAttribute("currentUser", currentUser);
 			// session.setAttribute("gioHang", donHangDao.getGioHangByIdUser(currentUser.getId()));
 			session.setMaxInactiveInterval(86400); // 1 ngày
+			
+			String jsessionIDEncodedBase64 = Base64.getEncoder().encodeToString(session.getId().getBytes("UTF-8"));
+			String currentUserIDEncodedBase64 = Base64.getEncoder().encodeToString(String.valueOf(currentUser.getId()).getBytes("UTF-8"));
+			String salt = (String) this.getServletContext().getAttribute("salt");
+			String signature = Sha256.sha256(jsessionIDEncodedBase64 + "." + currentUserIDEncodedBase64 + salt);
+			String csrfToken = jsessionIDEncodedBase64 + "." + currentUserIDEncodedBase64 + "." + signature;
+			session.setAttribute("csrfToken", csrfToken); // client đăng nhập, server render 1 csrf token và trả lại cho client
+			session.setAttribute("sendCSRFTokenToClient", 1);
+			
 			Integer clickThemVaoGioHang = (Integer) session.getAttribute("clickThemVaoGioHang");
 			Integer clickGioHang = (Integer) session.getAttribute("clickGioHang");
 			Integer clickMuaNgay = (Integer) session.getAttribute("clickMuaNgay");

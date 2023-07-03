@@ -3,6 +3,7 @@ package fruitshop.api.admin.doanhthutheongay;
 import java.io.IOException;
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +35,11 @@ public class DoanhThuTheoNgayAPI extends HttpServlet {
 		try {
 			nam = Integer.parseInt(req.getParameter("nam"));
 			thang = Integer.parseInt(req.getParameter("thang"));
+			int namHienTai = LocalDate.now().getYear();
+			if (nam > namHienTai || thang > 12) {
+				resp.sendError(400, "invalid parameter!");
+				return;
+			}
 			if (nam % 400 == 0 || (nam % 100 != 0 && nam % 4 == 0)) {
 				soNgayTrongThang[2] = 29;
 			}
@@ -55,7 +61,7 @@ public class DoanhThuTheoNgayAPI extends HttpServlet {
 			return;
 		}
 		catch (Exception e) {
-			resp.sendError(500, "invalid parameter!");
+			resp.sendError(400, "invalid parameter!");
 			return;
 		}
 	}

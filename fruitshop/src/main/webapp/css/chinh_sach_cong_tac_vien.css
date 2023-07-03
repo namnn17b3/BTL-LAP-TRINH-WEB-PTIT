@@ -30,6 +30,7 @@
     height: 800px;
     padding: 85px 200px 120px;
     box-shadow: -5px 0px 8px rgba(0, 0, 0, 0.08), 5px 0px 8px rgba(0, 0, 0, 0.08), 0px 5px 8px rgba(0, 0, 0, 0.08), 0px -5px 8px rgba(0, 0, 0, 0.08);
+	border-radius: 6px;
 }
 
 .tieu-de-chinh-sach-cong-tac-vien {

@@ -139,7 +139,7 @@ public class DanhGiaController extends HttpServlet {
 			danhGiaDao.xoaDanhGia(danhGia);
 			session.setAttribute("danhGiaStatus", 4);
 			session.setAttribute("tenSanPhamDanhGia", donHang.getTenSanPham());
-			resp.sendRedirect("./chit-tiet-don-hang?id="+danhSachDonHang.getId());
+			resp.sendRedirect("./chi-tiet-don-hang?id="+danhSachDonHang.getId());
 			return;
 		}
 	}

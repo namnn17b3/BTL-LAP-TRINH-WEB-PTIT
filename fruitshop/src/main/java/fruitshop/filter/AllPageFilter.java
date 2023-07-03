@@ -122,6 +122,50 @@ public class AllPageFilter implements Filter {
 			session.removeAttribute("danhSachDonHang");
 		}
 		
-		chain.doFilter(req, resp);
+		resp.addHeader("Content-Security-Policy", "frame-ancestors 'self'");
+		resp.addHeader("X-Frame-Options", "SAMEORIGIN");
+		
+		// cho chép cái link tới file css, img, js qua
+		if (req.getServletPath().indexOf("/img") >= 0
+				|| req.getServletPath().indexOf("/img_user") >= 0
+				|| req.getServletPath().indexOf("/img_sp") >= 0
+				|| req.getServletPath().indexOf("/css") >= 0
+				|| req.getServletPath().indexOf("/js") >= 0) {
+			
+			chain.doFilter(req, resp);
+			return;
+		}
+		
+		// cho phép đi qua nếu csrf token chưa được gửi cho client
+		if (session.getAttribute("sendCSRFTokenToClient") != null) {
+			session.removeAttribute("sendCSRFTokenToClient");
+			chain.doFilter(req, resp);
+			return;
+		}
+		
+		// đã đăng nhập => cần csrf token để xác thực
+		if (session.getAttribute("currentUser") != null) {
+			String csrfTokenParameter = req.getParameter("csrf-token");
+			if (csrfTokenParameter == null) {
+				resp.sendError(401, "error authentication!");
+				return;
+			}
+			String csrfToken = (String) session.getAttribute("csrfToken");
+			// System.out.println(csrfToken);
+			// System.out.println(csrfTokenParameter);
+			if (csrfTokenParameter.equals(csrfToken)) {
+				chain.doFilter(req, resp);
+				return;
+			}
+			else {
+				resp.sendError(401, "error authentication!");
+				return;
+			}
+		}
+		// chưa đăng nhập => ok
+		else {
+			chain.doFilter(req, resp);
+			return;
+		}
 	}
 }

@@ -1,5 +1,7 @@
 package fruitshop.dao.impl;
 
+import java.util.Properties;
+
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
@@ -9,15 +11,32 @@ import com.zaxxer.hikari.HikariDataSource;
 @WebListener
 public class PoolConnection implements ServletContextListener {
 	
+	/**
+	 * 
+	 */
 	private static HikariDataSource dataSource = new HikariDataSource();
+	private static String pathToPropertiesFile = "/WEB-INF/properties/application.properties";
 	
 	@Override
 	public void contextInitialized(ServletContextEvent event) {
-		dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-		dataSource.setJdbcUrl("jdbc:mysql://localhost:3306/fruitshop");
-		dataSource.addDataSourceProperty("characterEncoding", "UTF-8");
-		dataSource.setUsername("root");
-		dataSource.setPassword("17195802");
+		try {
+			Properties properties = new Properties();
+			properties.load(event.getServletContext().getResourceAsStream(pathToPropertiesFile));
+			String driver = properties.getProperty("driver");
+			String url = properties.getProperty("url");
+			String username = properties.getProperty("username");
+			String password = properties.getProperty("password");
+			String salt = properties.getProperty("salt");
+			event.getServletContext().setAttribute("salt", salt);
+			
+			dataSource.setDriverClassName(driver);
+			dataSource.setJdbcUrl(url);
+			dataSource.addDataSourceProperty("characterEncoding", "UTF-8");
+			dataSource.setUsername(username);
+			dataSource.setPassword(password);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public static HikariDataSource getPoolConnection() {

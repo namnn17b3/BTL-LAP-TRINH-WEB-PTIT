@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -68,10 +69,14 @@
             </div>
         </div>
         <div class="noi-dung-show-wapper">
-            <iframe class="noi-dung-show" src="./admin/main"></iframe>
+            <iframe class="noi-dung-show"></iframe>
         </div>
     </div>
 
+    
+	<div id="csrf-token" style="display: none;"><%=session.getAttribute("csrfToken")%></div>
     <script src="./js/admin_page.js"></script>
+	<script src="./js/csrf_token.js"></script>
+
 </body>
 </html>

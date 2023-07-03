@@ -1,3 +1,5 @@
+var url = window.location.href;
+var csrfToken = url.substring(url.lastIndexOf('csrf-token=') + 11, url.length);
 var listChonIcon = document.querySelectorAll('.chon-icon');
 var listCountClick = [0];
 var listBangGiaTri = document.querySelectorAll('.bang-gia-tri');
@@ -41,7 +43,7 @@ function taoBangDuLieu(choose) {
 			for (var i = 0; i < data.length; i++) {
 				var dongData = 
 				`
-				<tr class="dong-du-lieu">
+				<tr class="dong-du-lieu" ${i % 2 == 1 ? 'style="background-color: #f0f0f0;"' : ''}>
 					<td>
 						<div class="chi-tiet-du-lieu">
 							<span style="color: #3d464d; font-weight: 600">${i + 1}</span>
@@ -54,7 +56,7 @@ function taoBangDuLieu(choose) {
 					</td>
 					<td>
 						<div class="chi-tiet-du-lieu">				
-							<span><img src="${data[i].anh}" style="width: 80px; height: 80px; border-radius: 50%;"/></span>
+							<span><img src="${data[i].anh}" style="width: 80px; height: 80px; border-radius: 50%; border: 3px solid orange;"/></span>
 						</div>
 					</td>
 					<td>
@@ -89,7 +91,7 @@ function taoBangDuLieu(choose) {
 			});
 		}
 	}
-	xhr.open('GET', `../api/admin/top-5-khach-hang?choose=${choose}`, true);
+	xhr.open('GET', `../api/admin/top-5-khach-hang?choose=${choose}&csrf-token=${csrfToken}`, true);
 	xhr.send();
 }
 

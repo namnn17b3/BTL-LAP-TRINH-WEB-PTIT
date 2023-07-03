@@ -143,7 +143,7 @@
     </c:if>
     
     <!-- xem -->
-    <c:if test="${danhSachDonHang.huy == 0 && danhSachDonHang.ngayNhan != null && now - danhSachDonHang.ngayNhan.getTime() > 7 * 3600000 * 24 && item.danhGia == 1}">
+    <c:if test="${danhSachDonHang.huy == 0 && danhSachDonHang.ngayNhan != null && now - danhSachDonHang.ngayNhan.getTime() > 7 * 3600000 * 24 && donHang.danhGia == 1}">
     	<script src="./js/danh_gia.js"></script>
     </c:if>
 

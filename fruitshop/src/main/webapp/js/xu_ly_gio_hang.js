@@ -1,7 +1,8 @@
 var url = window.location.href;
 document.querySelectorAll('.them-vao-gio-hang').forEach((item) => {	
 	item.onclick = () => {
-		var id = item.href.slice(item.href.lastIndexOf('=') + 1);
+		var src = item.href;
+		var id = src.split('?')[1].split('&')[0].split('=')[1];
 		var soLuong = 1;
 		try {
 			soLuong = parseInt(document.querySelector('.so-luong').innerText);

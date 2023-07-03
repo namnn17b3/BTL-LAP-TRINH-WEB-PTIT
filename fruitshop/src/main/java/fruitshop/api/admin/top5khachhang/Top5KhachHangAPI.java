@@ -49,12 +49,12 @@ public class Top5KhachHangAPI extends HttpServlet {
 				resp.getWriter().println(json);
 			}
 			else {
-				resp.sendError(500, "invalid parameter!");
+				resp.sendError(400, "invalid parameter!");
 				return;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			resp.sendError(500, "invalid parameter!");
+			resp.sendError(400, "invalid parameter!");
 			return;
 		}
 	}

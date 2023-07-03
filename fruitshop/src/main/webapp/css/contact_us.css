@@ -35,7 +35,7 @@
 .thong-tin-lien-he {
     width: 1000px;
     height: 250px;
-    /* background-color: bisque; */
+    border-radius: 6px;
     margin: auto;
     margin-top: 0;
     padding: 32px;

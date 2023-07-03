@@ -25,8 +25,7 @@ public class SearchController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
-		req.setCharacterEncoding("UTF-8");
-		String tenSanPham = req.getParameter("ten-san-pham");
+		String tenSanPham = new String(req.getParameter("ten-san-pham").getBytes("ISO-8859-1"), "UTF-8");
 		session.setAttribute("tenSanPhamTimKiem", tenSanPham);
 		if (session.getAttribute("listSanPham") == null) {
 			req.getRequestDispatcher("./khong_tim_thay_san_pham.jsp").forward(req, resp);
@@ -38,8 +37,7 @@ public class SearchController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
-		req.setCharacterEncoding("UTF-8");
-		String tenSanPham = req.getParameter("ten-san-pham");
+		String tenSanPham = new String(req.getParameter("ten-san-pham").getBytes("ISO-8859-1"), "UTF-8");
 		session.setAttribute("tenSanPhamTimKiem", tenSanPham);
 		// System.out.println(tenSanPham);
 		int page = 1;

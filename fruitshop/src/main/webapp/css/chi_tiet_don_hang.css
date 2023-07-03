@@ -96,10 +96,6 @@
 	border-bottom: 1px solid #ebebeb;
 }
 
-.dong-chi-tiet-don-hang:hover {
-	border: 1px solid #ffd333;
-}
-
 .chung-cua-cac-thong-tin-san-pham__chi-tiet-don-hang {
 	height: 116.8px;
 	display: flex;

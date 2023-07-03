@@ -1,6 +1,7 @@
 package fruitshop.api.admin.doanhthutheothang;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +30,11 @@ public class DoanhThuTheoThangAPI extends HttpServlet {
 		int nam = -1;
 		try {
 			nam = Integer.parseInt(req.getParameter("nam"));
+			int namHienTai = LocalDate.now().getYear();
+			if (nam > namHienTai) {
+				resp.sendError(400, "invalid parameter!");
+				return;
+			}
 			List<Long> list = new ArrayList<>();
 			for (int thang = 1; thang <= 12; thang++) {
 				long doanhThuTheoThang = danhSachDonHangDao.getDoanhThuTheoThang(nam, thang);
@@ -42,7 +48,7 @@ public class DoanhThuTheoThangAPI extends HttpServlet {
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			resp.sendError(500, "invalid parameter!");
+			resp.sendError(400, "invalid parameter!");
 			return;
 		}
 	}

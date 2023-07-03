@@ -1,3 +1,9 @@
+document.querySelectorAll('.dong-gio-hang').forEach((item, index) => {
+	if (index % 2 == 1) {
+		item.style.backgroundColor = 'rgba(240, 240, 240, 0.38)';
+	}
+});
+
 document.querySelectorAll('.thanh-phan-phan-trang').forEach(item => {
 	item.onclick = () => {
 		themCookie('clickGioHang', 1, 3600000 * 24, 60, '/fruitshop/gio-hang');

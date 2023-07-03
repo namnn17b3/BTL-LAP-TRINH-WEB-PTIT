@@ -1,5 +1,6 @@
 var url = window.location.href;
-url = url.substring(0, url.indexOf('/fruitshop')) + '/fruitshop/api/admin/main';
+var csrfToken = url.substring(url.lastIndexOf('csrf-token=') + 11, url.length);
+url = url.substring(0, url.indexOf('/fruitshop')) + `/fruitshop/api/admin/main?csrf-token=${csrfToken}`;
 if (url.indexOf('http') >= 0) {
 	url = url.replace('http', 'ws');
 }

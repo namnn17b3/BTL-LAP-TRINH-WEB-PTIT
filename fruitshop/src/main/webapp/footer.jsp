@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <div class="ket-thuc-website">
 	<div class="ket-thuc-website-noi-dung-chinh">
 		<div class="muc-con-ket-thuc lien-he-ket-thuc">
@@ -81,3 +81,8 @@
 		<span id="chat-voi-chung-toi">Chat với chúng tôi</span>
 	</div>
 </div>
+
+<c:if test='<%=session.getAttribute("csrfToken") != null%>'>
+	<div id="csrf-token" style="display: none;"><%=session.getAttribute("csrfToken")%></div>
+	<script src="./js/csrf_token.js"></script>
+</c:if>

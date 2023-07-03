@@ -36,4 +36,7 @@
 	<tbody></tbody>
 </table>
 
+<div id="csrf-token" style="display: none;"><%=session.getAttribute("csrfToken")%></div>
+
 <script src="../js/top_10_san_pham.js"></script>
+<script src="../js/csrf_token.js"></script>

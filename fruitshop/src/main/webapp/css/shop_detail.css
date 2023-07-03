@@ -33,6 +33,7 @@
     width: 1140px;
     padding: 32px;
     box-shadow: -5px 0px 8px rgba(0, 0, 0, 0.08), 5px 0px 8px rgba(0, 0, 0, 0.08), 0px 5px 8px rgba(0, 0, 0, 0.08), 0px -5px 8px rgba(0, 0, 0, 0.08);
+	border-radius: 6px;
 }
 
 .tieu-de-cua-hang {
