@@ -31,7 +31,7 @@
             <div class="tap-hop-cac-chuc-nang">
                 <div class="chuc-nang main">
                     <i class="fa-solid fa-gauge icon-chuc-nang"></i>
-                    <span class="ten-chuc-nang">Main</span>
+                    <span class="ten-chuc-nang">Main DashBoard</span>
                 </div>
                 <div class="chuc-nang doanh-thu-theo-ngay">
                     <i class="fa-solid fa-chart-pie icon-chuc-nang"></i>
@@ -69,10 +69,11 @@
             </div>
         </div>
         <div class="noi-dung-show-wapper">
-            <iframe class="noi-dung-show"></iframe>
+        	<iframe class="noi-dung-show"></iframe>
         </div>
     </div>
 
+	<div id="chuc-nang"><%=request.getAttribute("chucNang")%></div>
     
 	<div id="csrf-token" style="display: none;"><%=session.getAttribute("csrfToken")%></div>
     <script src="./js/admin_page.js"></script>

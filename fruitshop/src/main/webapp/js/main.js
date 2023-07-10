@@ -34,3 +34,7 @@ connection.onclose = () => {
 connection.onerror = (error) => {
 	console.log('Lỗi: ' + error);
 }
+
+window.addEventListener('beforeunload', () => {
+	connection.close();
+});

@@ -18,6 +18,16 @@ public class AdminController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String chucNang = "";
+		try {
+			int chucNangInt = Integer.parseInt(req.getParameter("chuc-nang"));
+			if (chucNangInt >= 0 && chucNangInt <= 8) {
+				req.setAttribute("chucNang", chucNang);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		req.setAttribute("chucNang", chucNang);
 		req.getRequestDispatcher("./admin_page.jsp").forward(req, resp);
 	}
 }

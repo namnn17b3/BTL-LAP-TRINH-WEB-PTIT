@@ -12,8 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import fruitshop.dao.UserDao;
 import fruitshop.dao.impl.UserDaoImpl;
@@ -27,6 +25,22 @@ public class ProfileController extends HttpServlet {
 	 */
 	private static final long serialVersionUID = 1L;
 	private static final UserDao userDao = new UserDaoImpl();
+	
+	private int statusValidation(String ten, String email, String emailNotChange, String matKhau, String nhapLaiMatKhau) {
+		if (ten.matches("^.{1,50}$") == false) {
+			return 1;
+		}
+		if (email.equals(emailNotChange) == false) {
+			return 2;
+		}
+		if (matKhau.matches("^.{8,}$") == false) {
+			return 3;
+		}
+		if (nhapLaiMatKhau.equals(matKhau) == false) {
+			return 4;
+		}
+		return 0;
+	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -39,21 +53,28 @@ public class ProfileController extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		HttpSession session = req.getSession();
 		User currentUser = (User) session.getAttribute("currentUser");
-		DiskFileItemFactory diskFileItemFactory = new DiskFileItemFactory();
-		String pathGoc = super.getServletContext().getRealPath("./img_user");
-		diskFileItemFactory.setRepository(new File(pathGoc));
+		String pathGoc = req.getServletContext().getRealPath("./img_user");
 		
-		ServletFileUpload fileUpload = new ServletFileUpload(diskFileItemFactory);
+		String ten = "";
+		String email = "";
+		String matKhau = "";
+		String nhapLaiMatKhau = "";
 		String coYeuCauXoaAnh = "";
 		try {
-			List<FileItem> fileItems = fileUpload.parseRequest(req);
+			List<FileItem> fileItems = (List<FileItem>) req.getAttribute("listFileItem");
 			for (FileItem item : fileItems) {
 				if (item.isFormField()) {
 					if (item.getFieldName().equals("ten")) {
-						currentUser.setTen(new String(item.getString().getBytes("ISO-8859-1"), "UTF-8"));
+						ten = new String(item.getString().getBytes("ISO-8859-1"), "UTF-8");
+					}
+					else if (item.getFieldName().equals("email")) {
+						email = item.getString();
 					}
 					else if (item.getFieldName().equals("mat-khau")) {
-						currentUser.setMatKhau(item.getString());
+						matKhau = item.getString();
+					}
+					else if (item.getFieldName().equals("nhap-lai-mat-khau")) {
+						nhapLaiMatKhau = item.getString();
 					}
 					else if (item.getFieldName().equals("co-yeu-cau-xoa-anh")) {
 						// System.out.println("profile controller line 57");
@@ -85,10 +106,20 @@ public class ProfileController extends HttpServlet {
 				}
 				// System.out.println("profile controller line 82 " + coYeuCauXoaAnh);
 			}
+			
+			// Validate data từ client gửi lên
+			int sttValidation = statusValidation(ten, email, currentUser.getEmail(), matKhau, nhapLaiMatKhau);
+			if (sttValidation != 0) {
+				req.setAttribute("sttValidation", sttValidation);
+				req.getRequestDispatcher("./profile_user.jsp").forward(req, resp);
+				return;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		// System.out.println("profile controller line 88 " + currentUser.getAnh());
+		currentUser.setTen(ten);
+		currentUser.setMatKhau(matKhau);
 		userDao.upDateUserByEmail(currentUser);
 		session.setAttribute("currentUser", currentUser);
 		req.setAttribute("thongBaoCapNhatThanhCong", 1);

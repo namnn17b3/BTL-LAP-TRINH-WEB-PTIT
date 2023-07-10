@@ -43,6 +43,7 @@
     <!-- Than website -->
     <div class="than-website" style="height: auto;">
         <form action="./thanh-toan" class="form-dang-ki" method="post" style="height: auto; width: 700px; margin-top: 25px; margin-bottom: 25px;">
+            <input type="hidden" name="csrf-token" value="${csrfToken}">
             <div class="noi-dung">
             	<div style="display: flex;">
 	                <h3 class="ten-form">Hóa đơn</h3>
@@ -108,6 +109,27 @@
                 </div>
                 <div style="font-size: 24px; font-weight: 600; margin-bottom: 24px;">Tổng tiền: <span style="color: #ff2626;" id="thanh-tien" class="tien-format">${tongTien}</span> VNĐ</div>
                 <div style="margin-bottom: 24px; font-size: 14px; font-weight: 600"><i><span style="color: #f61d1d;">(*)</span> Lưu ý: Điền đầy đủ thông tin để chúng tôi xác minh đơn hàng cho bạn</i></div>
+                <c:if test="${sttValidation == 1}">
+                	<div style="font-size: 16px; margin-bottom: 24px; color: #f61d1d">Tên không được để trống</div>
+                </c:if>
+                <c:if test="${sttValidation == 2}">
+                	<div style="font-size: 16px; margin-bottom: 24px; color: #f61d1d">Không được thay đổi email sau khi đã đăng kí</div>
+                </c:if>
+                <c:if test="${sttValidation == 3}">
+                	<div style="font-size: 16px; margin-bottom: 24px; color: #f61d1d">Địa chỉ người nhận không được để trống</div>
+                </c:if>
+                <c:if test="${sttValidation == 4}">
+                	<div style="font-size: 16px; margin-bottom: 24px; color: #f61d1d">Số điện thoạicó định dạng không đúng</div>
+                </c:if>
+                <c:if test="${sttValidation == 5}">
+                	<div style="font-size: 16px; margin-bottom: 24px; color: #f61d1d">Số tài khoản người chuyển có định dạng không đúng</div>
+                </c:if>
+                <c:if test="${sttValidation == 6}">
+                	<div style="font-size: 16px; margin-bottom: 24px; color: #f61d1d">Tên ngân hàng người chuyển không được để trống</div>
+                </c:if>
+                <c:if test="${sttValidation == 7}">
+                	<div style="font-size: 16px; margin-bottom: 24px; color: #f61d1d">Sai định dạng ngày tháng</div>
+                </c:if>
                 <button class="nut-dang-ki">Thanh toán</button>
             </div>
         </form>

@@ -1,7 +1,10 @@
 package fruitshop.api.admin.main;
 
 import java.util.Arrays;
+//import java.util.Collections;
 import java.util.List;
+//import java.util.Set;
+//import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -54,6 +57,8 @@ public class MainAPI extends HttpServlet {
 	private static final DanhSachDonHangDao danhSachDonHangDao = new DanhSachDonHangDaoImpl();
 	private static final DonHangDao donHangDao = new DonHangDaoImpl();
 	
+//	private static Set<Session> set = Collections.newSetFromMap(new ConcurrentHashMap<Session, Boolean>());
+	
 	@OnMessage
 	public void onMessage(String message, Session userSession) {
 //		HttpSession session = (HttpSession) userSession.getUserProperties().get(HttpSession.class.getName());
@@ -83,15 +88,15 @@ public class MainAPI extends HttpServlet {
 	}
 	
 	@OnOpen
-	public void onOpen() {
+	public void onOpen(Session curentSession) { // có thể không có tham số
+//		set.add(curentSession);
 //		System.out.println("Open connection...");
-		return;
 	}
 	
 	@OnClose
-	public void onClose() {
+	public void onClose(Session curentSession) { // có thể không có tham số
+//		set.remove(curentSession);
 //		System.out.println("Close connection...");
-		return;
 	}
 	
 	@OnError

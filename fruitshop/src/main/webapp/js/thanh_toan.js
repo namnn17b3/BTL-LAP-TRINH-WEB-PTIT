@@ -32,6 +32,51 @@ body.onclick = (e) => {
     }
 }
 
+function namNhuan(nam) {
+	if (nam % 400 == 0) {
+		return true;
+	}
+	if (nam % 100 == 0) {
+		return false;
+	}
+	if (nam % 4 == 0) {
+		return true;
+	}
+	return false;
+}
+
+function checkDateFormat(dateString, regxString) {
+	var thangTrongNam = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+	var namHienTai = new Date().getFullYear();
+	var res = dateString.match(regxString);
+	
+	var ngay = parseInt(res.groups.ngay);
+	var thang = parseInt(res.groups.thang);
+	var nam = parseInt(res.groups.nam);
+	
+	var gio = parseInt(res.groups.gio);
+	var phut = parseInt(res.groups.phut);
+	var giay = parseInt(res.groups.giay);
+	
+	if (thang > 12 || thang == 0 || ngay == 0 || namHienTai - nam > 1) {
+		return false;
+	}
+	if (thang != 2 && ngay > thangTrongNam[thang]) {
+		return false;
+	}
+	if (thang == 2 && namNhuan(nam) == true && ngay > 29) {
+		return false;
+	}
+	if (thang == 2 && namNhuan(nam) == false && ngay > 28) {
+		return false;
+	}
+	
+	if (gio > 23 || phut > 59 || giay > 59) {
+		return false;
+	}
+	return true;
+}
+
 var button = document.querySelector('.nut-dang-ki');
 button.onclick = (e) => {
 	// console.log('line 64');
@@ -49,10 +94,10 @@ button.onclick = (e) => {
 		document.querySelector('.ngay-chuyen-khoan')
 	];
     var listString = [ten.value, email.value, diaChiNguoiNhan.value, soDienThoaiNguoiNhan.value, soTaiKhoanNguoiChuyen.value, nganHangNguoiChuyen.value, ngayChuyenKhoan.value];
-    var listRegex = [/.+/, /([a-zA-Z0-9\.]+)@([a-zA-H0-9\.].+)/, /.+/, /\d+/, /\d{8,15}/, /.+/, /\d{2}\/\d{2}\/\d{4} \d{2}:\d{2}:\d{2}/];
+    var listRegex = [/.{1,50}/, /([a-zA-Z0-9\.]+)@([a-zA-H0-9\.].+)/, /.{1,50}/, /\d{10,15}/, /\d{8,15}/, /.{1,50}/, /(?<ngay>\d{2})\/(?<thang>\d{2})\/(?<nam>\d{4}) (?<gio>\d{2}):(?<phut>\d{2}):(?<giay>\d{2})/];
     var length = chuyenKhoan.style.display == '' ? 4 : listString.length;
     for (var i = 0; i < length; i++) {
-        if (listRegex[i].exec(listString[i]) == null || listRegex[i].exec(listString[i])[0] != listString[i]) {
+        if (listRegex[i].exec(listString[i]) == null || listRegex[i].exec(listString[i])[0] != listString[i] || (i == 6 && checkDateFormat(listString[i], listRegex[i]) == false)) {
             e.preventDefault();
             listItem[i].insertAdjacentHTML('beforeend', 
                 `<div class="canh-bao-invalid">

@@ -49,7 +49,8 @@
 
     <!-- Than website -->
     <div class="than-website">
-        <form action="./profile" class="form-dang-ki" method="post" enctype="multipart/form-data" style="height: 550px">
+        <form action="./profile" class="form-dang-ki" method="post" enctype="multipart/form-data">
+        	<input type="hidden" name="csrf-token" value="${csrfToken}">
             <div class="noi-dung">
                 <div style="display: flex">
                 	<h3 class="ten-form">Hồ sơ</h3>
@@ -98,6 +99,18 @@
                 		</div>
                 	</div>
                 </div>
+                <c:if test="${sttValidation == 1}">
+                	<div style="font-size: 16px; margin-bottom: 24px; color: #f61d1d">Tên không được để trống</div>
+                </c:if>
+                <c:if test="${sttValidation == 2}">
+                	<div style="font-size: 16px; margin-bottom: 24px; color: #f61d1d">Không được thay đổi email sau khi đã đăng kí</div>
+                </c:if>
+                <c:if test="${sttValidation == 3}">
+                	<div style="font-size: 16px; margin-bottom: 24px; color: #f61d1d">Mật khẩu phải có ít nhất 8 kí tự</div>
+                </c:if>
+                <c:if test="${sttValidation == 4}">
+                	<div style="font-size: 16px; margin-bottom: 24px; color: #f61d1d">Mật khẩu nhập lại không khớp</div>
+                </c:if>
                 <div style="display: flex">
 	                <button class="nut-dang-ki">Cập nhật</button>
 	                <div class="quay-lai-trang-chu">

@@ -47,6 +47,8 @@
         </div>
         
         <form action="./danh-gia?id=${donHang.idSanPham}" method="post" accept-charset="utf-8" class="boc-input-danh-gia">
+        	<input type="hidden" name="csrf-token" value="${csrfToken}">
+            
             <div class="tieu-de-cua-hang" style="margin: 0px auto 20px auto; padding-top: 0px"><h4>Đánh giá sản phẩm</h4></div>
             
             <c:if test="${danhSachDonHang.huy == 0 && danhSachDonHang.ngayNhan != null && now - danhSachDonHang.ngayNhan.getTime() > 7 * 3600000 * 24 && donHang.danhGia == 1}">

@@ -30,6 +30,22 @@ public class RegisterController extends HttpServlet {
 	 */
 	private static final long serialVersionUID = 1L;
 	private static final UserDao userDao = new UserDaoImpl();
+	
+	private int statusValidation(User user, String nhapLaiMatKhau) {
+		if (user.getTen().matches("^.{1,50}$") == false) {
+			return 1;
+		}
+		if (user.getEmail().matches("^([a-zA-Z0-9\\.]+)@([a-zA-H0-9\\.].+)$") == false) {
+			return 2;
+		}
+		if (user.getMatKhau().matches("^.{8,}$") == false) {
+			return 3;
+		}
+		if (nhapLaiMatKhau.equals(user.getMatKhau()) == false) {
+			return 4;
+		}
+		return 0;
+	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -48,6 +64,7 @@ public class RegisterController extends HttpServlet {
 				session.setAttribute("timeOut", 59 - timeOut);
 			}
 		}
+		req.setAttribute("sttValidation", 0);
 		req.getRequestDispatcher("./register.jsp").forward(req, resp);
 	}
 	
@@ -145,6 +162,7 @@ public class RegisterController extends HttpServlet {
 		User user = new User();
 		user.setAnh("./img_user/fb-no-img.png");
 		user.setVaiTro("u");
+		String nhapLaiMatKhau = "";
 		try {
 			// tạo đối tượng để lưu tạm thời file upload lên
 			DiskFileItemFactory diskFileItemFactory = new DiskFileItemFactory();
@@ -176,6 +194,9 @@ public class RegisterController extends HttpServlet {
 					else if (item.getFieldName().equals("mat-khau")) {
 						user.setMatKhau(item.getString());
 					}
+					else if (item.getFieldName().equals("nhap-lai-mat-khau")) {
+						nhapLaiMatKhau = item.getString();
+					}
 				}
 				else {
 					// tồn tại file upload
@@ -191,13 +212,22 @@ public class RegisterController extends HttpServlet {
 					}
 				}
 			}
+			
+			// validate dữ liệu từ client gửi lên
+			int sttValidation = statusValidation(user, nhapLaiMatKhau);
+			if (sttValidation != 0) {
+				req.setAttribute("sttValidation", sttValidation);
+				req.getRequestDispatcher("./register.jsp").forward(req, resp);
+				return;
+			}
+			
 			// Lần đầu hiện thông báo xác nhận (lần đầu tiên luôn là phương thức post)
 			if (session.getAttribute("thoiDiemTaoCode") == null) {
 				// System.out.println("ok if post");
 				session.setAttribute("thoiDiemTaoCode", new Date());
 				session.setAttribute("timeOut", 59);
 				String code = RanDomCode.randomCode();
-				session.setAttribute("userRegister", user);
+				// session.setAttribute("userRegister", user);
 				session.setAttribute("thongBaoXacNhan", "1");
 				session.setAttribute("soLanXacNhan", 0);
 				session.setAttribute("code", code);
@@ -227,7 +257,6 @@ public class RegisterController extends HttpServlet {
 			System.out.println("add session success " + session.getAttribute("code") + " " + user.getEmail());
 			req.getRequestDispatcher("./register.jsp").forward(req, resp);
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 		}
 	}

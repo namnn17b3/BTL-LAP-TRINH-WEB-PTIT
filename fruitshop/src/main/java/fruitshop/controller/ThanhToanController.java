@@ -3,6 +3,7 @@ package fruitshop.controller;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -44,6 +45,85 @@ public class ThanhToanController extends HttpServlet {
 	private static final SanPhamTrongGioHangDao sanPhamTrongGioHangDao = new SanPhamTrongGioHangDaoImpl();
 	private static final DanhSachDonHangDao danhSachDonHangDao = new DanhSachDonHangDaoImpl();
 	private static final DanhSachChuyenKhoanDao danhSachChuyenKhoanDao = new DanhSachChuyenKhoanDaoImpl();
+	private static final int[] thangTrongNam = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+	
+	private boolean namNhuan(int nam) {
+		if (nam % 400 == 0) {
+			return true;
+		}
+		if (nam % 100 == 0) {
+			return false;
+		}
+		if (nam % 4 == 0) {
+			return true;
+		}
+		return false;
+	}
+	
+	private boolean checkDateFormat(String ngayChuyenKhoan) {
+		String[] date = ngayChuyenKhoan.split(" ");
+		String[] date1 = date[0].split("/");
+		String[] date2 = date[1].split(":");
+		int namHienTai = LocalDate.now().getYear();
+		
+		int ngay = Integer.parseInt(date1[0]);
+		int thang = Integer.parseInt(date1[1]);
+		int nam = Integer.parseInt(date1[2]);
+		
+		int gio = Integer.parseInt(date2[0]);
+		int phut = Integer.parseInt(date2[1]);
+		int giay = Integer.parseInt(date2[2]);
+		
+		if (thang > 12 || thang == 0 || ngay == 0 || namHienTai - nam > 1) {
+			return false;
+		}
+		if (thang != 2 && ngay > thangTrongNam[thang]) {
+			return false;
+		}
+		if (thang == 2 && namNhuan(nam) == true && ngay > 29) {
+			return false;
+		}
+		if (thang == 2 && namNhuan(nam) == false && ngay > 28) {
+			return false;
+		}
+		
+		if (gio > 23 || phut > 59 || giay > 59) {
+			return false;
+		}
+		return true;
+	}
+	
+	private int statusValidationChuyenKhoan(String soTaiKhoanNguoiChuyen, String nganHangNguoiChuyen, String ngayChuyenKhoan) {
+		if (soTaiKhoanNguoiChuyen.matches("^\\d{8,15}$") == false) {
+			return 5;
+		}
+		if (nganHangNguoiChuyen.matches("^.{1,50}$") == false) {
+			return 6;
+		}
+		if (nganHangNguoiChuyen.matches("^\\d{2}\\/\\d{2}\\/\\d{4} \\d{2}:\\d{2}:\\d{2}$") == false) {
+			return 7;
+		}
+		if (nganHangNguoiChuyen.matches("^\\d{2}\\/\\d{2}\\/\\d{4} \\d{2}:\\d{2}:\\d{2}$") == true && checkDateFormat(ngayChuyenKhoan) == false) {
+			return 7;
+		}
+		return 0;
+	}
+	
+	private int statusValidation(String ten, String email, String diaChiNguoiNhan, String soDienThoaiNguoiNhan) {
+		if (ten.matches("^.{1,50}$") == false) {
+			return 1;
+		}
+		if (email.matches("^([a-zA-Z0-9\\.]+)@([a-zA-H0-9\\.].+)$") == false) {
+			return 2;
+		}
+		if (diaChiNguoiNhan.matches("^.{1,50}$") == false) {
+			return 3;
+		}
+		if (soDienThoaiNguoiNhan.matches("^\\d{10,15}$") == false) {
+			return 4;
+		}
+		return 0;
+	}
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -75,9 +155,30 @@ public class ThanhToanController extends HttpServlet {
 		String diaChiNguoiNhan = (String) req.getParameter("dia-chi-nguoi-nhan");
 		String soDienThoaiNguoiNhan = (String) req.getParameter("so-dien-thoai-nguoi-nhan");
 		String hinhThucThanhToan = (String) req.getParameter("hinh-thuc-thanh-toan");
+		
+		int sttValidation = statusValidation(ten, email, diaChiNguoiNhan, soDienThoaiNguoiNhan);
+		
 		String soTaiKhoanNguoiChuyen = null;
 		String nganHangNguoiChuyen = null;
 		String ngayChuyenKhoan = null;
+		req.setAttribute("hinhThucThanhToan", 0);
+		
+		if (hinhThucThanhToan.equals("1")) {
+			req.setAttribute("hinhThucThanhToan", 1);
+			soTaiKhoanNguoiChuyen = (String) req.getParameter("so-tai-khoan-nguoi-chuyen");
+			nganHangNguoiChuyen = (String) req.getParameter("ngan-hang-nguoi-chuyen");
+			ngayChuyenKhoan = (String) req.getParameter("ngay-chuyen-khoan");
+			if (sttValidation == 0) {
+				sttValidation = statusValidationChuyenKhoan(soTaiKhoanNguoiChuyen, nganHangNguoiChuyen, ngayChuyenKhoan);
+			}
+		}
+		
+		if (sttValidation != 0) {
+			req.setAttribute("sttValidation", sttValidation);
+			req.getRequestDispatcher("./thanh_toan_thanh_cong.jsp").forward(req, resp);
+			return;
+		}
+		
 		DanhSachDonHang danhSachDonHang = new DanhSachDonHang();
 		danhSachDonHang.setIdUser(currentUser.getId());
 		danhSachDonHang.setTenNguoiNhan(ten);
@@ -91,9 +192,9 @@ public class ThanhToanController extends HttpServlet {
 		int idDanhSachDonHang = danhSachDonHangDao.getIdLastDanhSachDonHang();
 		
 		if (hinhThucThanhToan.equals("1")) {
-			soTaiKhoanNguoiChuyen = (String) req.getParameter("so-tai-khoan-nguoi-chuyen");
-			nganHangNguoiChuyen = (String) req.getParameter("ngan-hang-nguoi-chuyen");
-			ngayChuyenKhoan = (String) req.getParameter("ngay-chuyen-khoan");
+//			soTaiKhoanNguoiChuyen = (String) req.getParameter("so-tai-khoan-nguoi-chuyen");
+//			nganHangNguoiChuyen = (String) req.getParameter("ngan-hang-nguoi-chuyen");
+//			ngayChuyenKhoan = (String) req.getParameter("ngay-chuyen-khoan");
 
 			DanhSachChuyenKhoan danhSachChuyenKhoan = new DanhSachChuyenKhoan();
 			danhSachChuyenKhoan.setIdDanhSachDonHang(idDanhSachDonHang);
@@ -122,7 +223,7 @@ public class ThanhToanController extends HttpServlet {
 			donHang.setSoLuong(soLuong);
 			donHangDao.themDonHang(donHang);
 		}
-		else {	
+		else {
 			List<SanPhamTrongGioHang> listSanPhamTrongGioHang = sanPhamTrongGioHangDao.getAllSanPhamTrongGioHang(currentUser.getId());
 			for (SanPhamTrongGioHang sanPhamTrongGioHang : listSanPhamTrongGioHang) {
 				DonHang donHang = new DonHang();

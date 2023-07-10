@@ -81,8 +81,3 @@
 		<span id="chat-voi-chung-toi">Chat với chúng tôi</span>
 	</div>
 </div>
-
-<c:if test='<%=session.getAttribute("csrfToken") != null%>'>
-	<div id="csrf-token" style="display: none;"><%=session.getAttribute("csrfToken")%></div>
-	<script src="./js/csrf_token.js"></script>
-</c:if>

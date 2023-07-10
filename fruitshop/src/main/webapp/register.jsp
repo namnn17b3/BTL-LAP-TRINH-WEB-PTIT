@@ -106,7 +106,7 @@
 		                    <div class="ten-input">Mật khẩu <span style="color: #f61d1d">(*)</span></div>
 		                    <input placeholder="Mật khẩu" type="password" name="mat-khau" id="mat-khau" />
 		                    <i class="fa-solid fa-eye" id="con-mat-1"></i>
-		                    <div style="font-size: 16px; margin-top: 4px; color: #3D464D">Mật khẩu phải có ít nhất 6 kí tự.</div>
+		                    <div style="font-size: 16px; margin-top: 4px; color: #f61d1d">Mật khẩu phải có ít nhất 8 kí tự.</div>
 		                </div>
 		                <div class="nhap-lai-mat-khau">
 		                    <div class="ten-input">Nhập lại mật khẩu <span style="color: #f61d1d">(*)</span></div>
@@ -127,6 +127,18 @@
                 		</div>
                 	</div>
                 </div>
+                <c:if test="${sttValidation == 1}">
+                	<div style="font-size: 16px; margin-bottom: 24px; color: #f61d1d">Tên không được để trống</div>
+                </c:if>
+                <c:if test="${sttValidation == 2}">
+                	<div style="font-size: 16px; margin-bottom: 24px; color: #f61d1d">Email sai định dạng</div>
+                </c:if>
+                <c:if test="${sttValidation == 3}">
+                	<div style="font-size: 16px; margin-bottom: 24px; color: #f61d1d">Mật khẩu phải có ít nhất 8 kí tự</div>
+                </c:if>
+                <c:if test="${sttValidation == 4}">
+                	<div style="font-size: 16px; margin-bottom: 24px; color: #f61d1d">Mật khẩu nhập lại không khớp</div>
+                </c:if>
                 <button class="nut-dang-ki">Đăng kí</button>
                 <div style="font-size: 16px; color: #3D464D">Đã có tài khoản?</div>
                 <div style="margin-top: 12px;"><a href="./login" style="width: 100%; text-decoration: none; color: #1A66FF; font-size: 12.8px;">Đăng nhập</a></div>

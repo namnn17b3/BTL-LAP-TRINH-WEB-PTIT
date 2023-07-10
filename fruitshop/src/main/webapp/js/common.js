@@ -93,7 +93,7 @@ function xuatHienMenuChon(tenClassCha, tenBangMenuCon) {
     mucCha.onmousemove = () => {
         bangMenuCon.style.display = 'block';
     }
-    mucCha.onmouseleave = (e) => {
+    mucCha.onmouseleave = () => {
         bangMenuCon.style.display = 'none';
     }
 }
