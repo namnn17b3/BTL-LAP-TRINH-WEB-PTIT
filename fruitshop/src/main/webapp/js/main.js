@@ -10,6 +10,7 @@ else {
 var connection = new WebSocket(url);
 
 connection.onopen = () => {
+	console.log('Connected to server...');
 	connection.send('');
 	setInterval(() => {		
 		connection.send('');

@@ -2,8 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<link rel="stylesheet" href="../css/common_admin.css">
-<link rel="stylesheet" href="../css/doanh_thu_theo_ngay.css">
+<link rel="stylesheet" href="../../css/common_admin.css">
+<link rel="stylesheet" href="../../css/doanh_thu_theo_ngay.css">
 <link rel="icon" type="image/x-icon" href="../img/shop_icon.ico">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
@@ -37,6 +37,5 @@
 
 <div id="csrf-token" style="display: none;"><%=session.getAttribute("csrfToken")%></div>
 
-<script src="../js/chart.js"></script>
-<script src="../js/doanh_thu_theo_ngay.js"></script>
-<script src="../js/csrf_token.js"></script>
+<script src="../../js/chart.js"></script>
+<script src="../../js/doanh_thu_theo_ngay.js"></script>

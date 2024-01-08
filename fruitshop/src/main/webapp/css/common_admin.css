@@ -31,3 +31,56 @@ body::-webkit-scrollbar-thumb:hover {
 html {
     scroll-behavior: smooth;
 }
+
+.wapper-phan-trang {	
+	margin-bottom: 40px;
+	display: none;
+}
+
+.phan-trang {
+	display: flex;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.nut-phan-trang + .nut-phan-trang {
+	margin-left: 10px;
+}
+
+.nut-phan-trang {
+	display: flex;
+	width: 36px;
+	height: 36px;
+	border-radius: 50px;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.nut-phan-trang span {
+	margin: auto;
+}
+
+.nut-phan-trang i {
+	margin: auto;
+}
+
+.nut-next, .nut-prev {
+	color: #c4c4cf;
+}
+
+.nut-next:hover, .nut-prev:hover {
+	color: #3d464d;
+}
+
+.none-active {
+	background-color: #f5f5fa;
+}
+
+.none-active:hover {
+	background-color: rgba(255, 211, 51, 0.3);
+}
+
+.active {
+	background-color: orange;
+	color: #fff;
+}

@@ -30,3 +30,35 @@ document.querySelectorAll('.tien-format').forEach(item => {
 	var gia = parseInt(item.innerText).toLocaleString();
 	item.innerText = gia.replaceAll(',', '.');
 });
+
+function callAPI(apiUrl, method, data=null, handler) {
+    if (data instanceof FormData) {
+        console.log(data.get('jsonData'));
+    }
+    accessToken = localStorage.getItem('accessToken') ? localStorage.getItem('accessToken') : 'abcxyz';
+
+    const xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
+
+    xhr.addEventListener("readystatechange", handler);
+
+    xhr.open(method, apiUrl, true);
+    xhr.setRequestHeader("Authorization", `Bearer ${accessToken}`);
+    xhr.send(data);
+}
+
+function callAPIDowload(url, method,  data=null, handler) {
+    apiUrl = `${prefixUrl}${url}`;
+    accessToken = localStorage.getItem('accessToken') ? localStorage.getItem('accessToken') : 'abcxyz';
+
+    const xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
+
+    xhr.addEventListener("load", handler);
+
+    xhr.open(method, apiUrl, true);
+    xhr.responseType = 'blob';
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.setRequestHeader("Authorization", `Bearer ${accessToken}`);
+    xhr.send(data);
+}

@@ -30,7 +30,7 @@
         <div class="page-not-found">Page Not Found</div>
         <p class="chi-tiet-loi-404">Chúng tôi không thể tìm thấy trang mà bạn yêu cầu</p>
         <p class="chi-tiet-loi-404">Trở lại trang chủ và thử yêu cầu một trang khác</p>
-        <a href="./home.html" class="nut-tro-lai-trang-chu">Trở lại trang chủ</a>
+        <a href="./home" class="nut-tro-lai-trang-chu">Trở lại trang chủ</a>
     </div>
 
     <jsp:include page="./footer.jsp"/>

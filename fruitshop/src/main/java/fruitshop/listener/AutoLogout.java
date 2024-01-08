@@ -21,6 +21,7 @@ public class AutoLogout implements HttpSessionListener {
 
     @Override
     public void sessionDestroyed(HttpSessionEvent se) {
+    	System.out.println("line 24 auto logout");
         HttpSession session = se.getSession();
         User currentUser = (User) session.getAttribute("currentUser");
         try {

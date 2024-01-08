@@ -1,0 +1,162 @@
+.tieu-de-chuc-nang {
+	font-size: 30px;
+	font-weight: 600;
+	display: flex;
+	height: 60px;
+	width: 100%;
+	border-bottom: 3px solid #d8dee2;
+	user-select: none;
+}
+
+.tim-kiem-user {
+	font-weight: 600;
+	display: flex;
+	padding-left: 45%;
+	margin-top: 50px;
+	user-select: none;
+}
+
+.truong-gia-tri {
+	display: flex;
+	width: 250px;
+	height: 30px;
+	background-color: #fff;
+	border: 3px solid #d8dee2;
+	border-radius: 6px;
+	justify-content: space-between;
+	padding-left: 5px;
+	font-family: sans-serif;
+	font-size: 16px;
+}
+
+.truong-gia-tri:is(:focus, :hover) {
+	border-color: #1a66ff80;
+	outline: none;
+}
+
+.nut-tim-kiem-user {
+	border-radius: 6px;
+	width: 120px;
+	height: 30px;
+	background-color: #ffd333;
+	display: flex;
+	cursor: pointer;
+	margin-left: 15px;
+}
+
+.nut-tim-kiem-user:hover {
+	background-color: #3d464d;
+	color: #fff;
+}
+
+.nut-them-user {
+	border-radius: 6px;
+	width: 120px;
+	height: 30px;
+	background-color: #28a745;;
+	display: flex;
+	cursor: pointer;
+	margin-left: 15px;
+	color: #fff;
+}
+
+.nut-them-user:hover {
+	opacity: 0.8;
+}
+
+.thong-tin-thong-ke {
+	font-weight: 600;
+	display: none;
+	padding-left: 68%;
+	margin-top: 50px;
+	user-select: none;
+	flex-direction: column;
+}
+
+.bang-ket-qua {
+	border-collapse: collapse;
+	border: 2px solid #ebebeb;
+	font-size: 16px;
+	width: 1100px;
+	margin: 20px auto 50px auto;
+	border-radius: 6px;
+	display: none;
+}
+
+thead {
+	height: 47.3px;
+	background-color: #f7f7f7;
+	width: 100%;
+	border-bottom: 2px solid #ebebeb;
+}
+
+.tieu-de-stt {
+	width: 50px;
+}
+
+.tieu-de-id {
+	width: 50px;
+}
+
+.tieu-de-hinh-anh {
+	width: 130px;
+}
+
+.tieu-de-ten {
+	width: 370px;
+}
+
+.tieu-de-email {
+	width: 200px;
+}
+
+.tieu-de-thao-tac {
+	width: 200px;
+}
+
+.dong-du-lieu {
+	height: 116.8px;
+	border-bottom: 2px solid #ebebeb;
+}
+
+.chi-tiet-du-lieu {
+	width: 100%;
+	height: 100%;
+	display: flex;
+}
+
+.chi-tiet-du-lieu span {
+	margin: auto;
+	text-align: center;
+}
+
+.table-edit {
+	margin: auto 0px auto auto;	
+	background-color: #0866ff;
+}
+
+.table-delete {	
+	margin: auto auto auto 10px;
+	background-color: #f00;
+}
+
+.table-edit, .table-delete {
+	height: 25px;
+	width: 80px;
+	color: #fff;
+	border-radius: 6px;
+	display: flex;
+}
+
+.table-edit i, .table-delete i {	
+	margin: auto 0px auto auto;
+}
+
+.table-edit span, .table-delete span {
+	margin: auto auto auto 5px;
+}
+
+.table-edit:hover, .table-delete:hover {
+	opacity: 0.8;
+	cursor: pointer;
+}

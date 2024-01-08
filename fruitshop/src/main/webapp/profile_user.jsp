@@ -75,7 +75,7 @@
 		                    <div class="ten-input">Mật khẩu <span style="color: #f61d1d">(*)</span></div>
 		                    <input value="<c:out value='<%=currentUser.getMatKhau()%>'/>" placeholder="Mật khẩu" type="password" name="mat-khau" id="mat-khau" />
 		                    <i class="fa-solid fa-eye" id="con-mat-1"></i>
-		                    <div style="font-size: 16px; margin-top: 4px; color: #3D464D">Mật khẩu phải có ít nhất 6 kí tự.</div>
+		                    <div style="font-size: 16px; margin-top: 4px; color: #f61d1d">Mật khẩu phải có ít nhất 8 kí tự.</div>
 		                </div>
 		                <div class="nhap-lai-mat-khau">
 		                    <div class="ten-input">Nhập lại mật khẩu <span style="color: #f61d1d">(*)</span></div>

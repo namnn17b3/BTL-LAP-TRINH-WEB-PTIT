@@ -56,7 +56,7 @@ function taoBangDuLieu(choose) {
 					</td>
 					<td>
 						<div class="chi-tiet-du-lieu">				
-							<span><img src="${data[i].anh}" style="width: 80px; height: 80px; border-radius: 50%; border: 3px solid orange;"/></span>
+							<span><img src="../${data[i].anh}" style="width: 80px; height: 80px; border-radius: 50%; border: 3px solid orange;"/></span>
 						</div>
 					</td>
 					<td>
@@ -80,7 +80,7 @@ function taoBangDuLieu(choose) {
 			}
 			tBody.insertAdjacentHTML('afterbegin', html);
 			if (choose == 0) {
-				tieuDeTieuChi.innerText = 'Tổng chi tiết';
+				tieuDeTieuChi.innerText = 'Tổng chi tiêu';
 			}
 			else {
 				tieuDeTieuChi.innerText = 'Số lượng đã mua';
@@ -91,7 +91,7 @@ function taoBangDuLieu(choose) {
 			});
 		}
 	}
-	xhr.open('GET', `../api/admin/top-5-khach-hang?choose=${choose}&csrf-token=${csrfToken}`, true);
+	xhr.open('GET', `../../api/admin/top-5-khach-hang?choose=${choose}`, true);
 	xhr.send();
 }
 

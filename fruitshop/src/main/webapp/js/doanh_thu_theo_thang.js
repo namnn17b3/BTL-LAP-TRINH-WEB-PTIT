@@ -126,7 +126,7 @@ nutTaoBieuDo.onclick = () => {
 				veBieuDoTron(data, nam);
 			}
 		}
-		xhr.open('GET', `../api/admin/doanh-thu-theo-thang?nam=${nam}&csrf-token=${csrfToken}`, true);
+		xhr.open('GET', `../../api/admin/doanh-thu-theo-thang?nam=${nam}`, true);
 		xhr.send();
 	}
 }

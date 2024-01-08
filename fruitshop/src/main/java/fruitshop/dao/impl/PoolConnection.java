@@ -23,7 +23,7 @@ public class PoolConnection implements ServletContextListener {
 			Properties properties = new Properties();
 			properties.load(event.getServletContext().getResourceAsStream(pathToPropertiesFile));
 			String driver = properties.getProperty("driver");
-			String url = properties.getProperty("url");
+			String url = properties.getProperty("url");	
 			String username = properties.getProperty("username");
 			String password = properties.getProperty("password");
 			String salt = properties.getProperty("salt");

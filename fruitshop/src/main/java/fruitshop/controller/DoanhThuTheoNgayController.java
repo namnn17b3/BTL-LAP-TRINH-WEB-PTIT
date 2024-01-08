@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/admin/doanh-thu-theo-ngay")
+@WebServlet("/admin/if/doanh-thu-theo-ngay")
 public class DoanhThuTheoNgayController extends HttpServlet {
 
 	/**

@@ -56,7 +56,7 @@ function taoBangDuLieu(choose) {
 					</td>
 					<td>
 						<div class="chi-tiet-du-lieu">				
-							<span><img src="${data[i].anh}" style="width: 80px; height: 80px;"/></span>
+							<span><img src="../${data[i].anh}" style="width: 80px; height: 80px;"/></span>
 						</div>
 					</td>
 					<td>
@@ -93,7 +93,7 @@ function taoBangDuLieu(choose) {
 			});
 		}
 	}
-	xhr.open('GET', `../api/admin/top-10-san-pham?choose=${choose}&csrf-token=${csrfToken}`, true);
+	xhr.open('GET', `../../api/admin/top-10-san-pham?choose=${choose}`, true);
 	xhr.send();
 }
 

@@ -160,7 +160,7 @@ public class SanPhamDaoImpl implements SanPhamDao {
 				+ "	group by dg.id_sp\r\n"
 				+ ") as a2\r\n"
 				+ "on a1.id = a2.id_sp\r\n"
-				+ "where a1.id = ?\r\n;"
+				+ "where a1.id = ?;\r\n"
 			);
 			ppst.setInt(1, id);
 			ResultSet res = ppst.executeQuery();

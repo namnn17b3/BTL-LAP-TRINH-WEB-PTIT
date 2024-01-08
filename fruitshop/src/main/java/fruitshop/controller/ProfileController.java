@@ -92,7 +92,7 @@ public class ProfileController extends HttpServlet {
 						if (file.exists() == true) {
 							file.delete();
 						}
-						item.write(new File(pathGoc + File.separator + anh));
+						item.write(file);
 					}
 					// Không tải upload ảnh nhưng mà tên ảnh != ./img_uer/fb-no-img.png
 					// -> đã tồn tại ảnh
